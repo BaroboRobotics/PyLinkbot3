@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import asyncio
+import functools
 import logging
 import os
 import ribbonbridge as rb
@@ -52,6 +53,61 @@ class _SfpProxy(rb.Proxy):
 
     async def rb_emit_to_server(self, bytestring):
         self._protocol.write(bytestring)
+
+class AsyncLinkbot(rb.Proxy):
+    def __init__(self, *args, **kw):
+        super().__init__(*args, **kw)
+
+    @classmethod
+    async def create(cls, serial_id):
+        logging.info('Creating async Linkbot handle to ID:{}'.format(serial_id))
+        self = cls( os.path.join(_dirname, 'robot_pb2.py'))
+        self.__daemon = _SfpProxy(
+                os.path.join(_dirname, 'daemon_pb2.py'))
+
+        loop = asyncio.get_event_loop()
+        logging.info('Creating tcp connection to daemon...')
+        (transport, protocol) = await loop.create_connection(
+                functools.partial(
+                    sfp.asyncio.SfpProtocol,
+                    self.__daemon.rb_deliver,
+                    loop),
+                'localhost', '42000' )
+        logging.info('Daemon TCP connection established.')
+
+        logging.info('Setting daemon protocol...')
+        self.__daemon.set_protocol(protocol)
+        logging.info('Initiating daemon handshake...')
+        await asyncio.sleep(1)
+        await self.__daemon.rb_connect()
+        logging.info('Daemon handshake finished.')
+
+        logging.info('Resolving serial id...')
+        args = self.__daemon.rb_get_args_obj('resolveSerialId')
+        args.serialId.value = serial_id
+        result_fut = await self.__daemon.resolveSerialId(args)
+        tcp_endpoint = await result_fut
+        logging.info('Connecting to robot endpoint...')
+        (linkbot_transport, linkbot_protocol) = \
+            await loop.create_connection(
+                    functools.partial(
+                        sfp.asyncio.SfpProtocol,
+                        self.rb_deliver,
+                        loop),
+                    tcp_endpoint.endpoint.address,
+                    str(tcp_endpoint.endpoint.port) )
+        logging.info('Connected to robot endpoint.')
+        self._linkbot_transport = linkbot_transport
+        self._linkbot_protocol = linkbot_protocol
+        logging.info('Sending connect request to robot...')
+        await asyncio.sleep(1)
+        await self.rb_connect()
+        logging.info('Done sending connect request to robot.')
+        return self
+
+    async def rb_emit_to_server(self, bytestring):
+        logging.info('Emitting bytestring to protocol layer...')
+        self._linkbot_protocol.write(bytestring)
 
 class Linkbot(rb.Proxy):
     def __init__(self, serial_id):

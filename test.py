@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 
-import linkbot as linkbotproxy
+import linkbot 
 import logging
-#logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
+import asyncio
+logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 
-l = linkbotproxy.Linkbot('LOCL')
-print(l.getEncoderValues().result())
+async def task():
+    l = await linkbot.AsyncLinkbot.create('LOCL')
+    fut = await l.getEncoderValues()
+    print(await fut)
 
-l2 = linkbotproxy.Linkbot('ZVT7')
-print(l2.getEncoderValues().result())
+loop = asyncio.get_event_loop()
+loop.run_until_complete(task())
 
