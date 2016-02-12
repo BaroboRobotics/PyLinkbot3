@@ -176,7 +176,7 @@ class Motor:
     async def accel(self):
         # Get the acceleration setting of a motor
         return await self.__get_motor_controller_attribute(
-                'getMotorControllerAccelI',
+                'getMotorControllerAlphaI',
                 conv=_rad2deg
                 )
 
@@ -209,16 +209,28 @@ class Motor:
             values.insert(1, 0.0)
         user_fut.set_result(values[self._index])
 
-    async def set_accel(self):
-        args_obj = self.__create_motor_controller_args
+    async def set_accel(self, value):
+        return await self.__set_motor_controller_attribute(
+                'setMotorControllerAlphaI',
+                _deg2rad(value)
+                )
 
-    def __create_motor_controller_args(self, name, mask, values):
+    async def __set_motor_controller_attribute(self, name, value):
         args_obj = self._proxy.rb_get_args_obj(name)
-        args_obj.mask = mask
-        for v in values:
-            arg_value = args_obj.values.add()
-            arg_value = v
-        return args_obj
+        args_obj.mask = 1<<self._index
+        args_obj.values.append(value)
+        fut = await getattr(self._proxy, name)(args_obj)
+        user_fut = asyncio.Future()
+        fut.add_done_callback(
+                functools.partial(
+                    self.__handle_set_attribute,
+                    user_fut
+                    )
+                )
+        return user_fut
+
+    def __handle_set_attribute(self, user_fut, fut):
+        user_fut.set_result( fut.result() )
 
 class Motors:
     def __init__(self, proxy):
