@@ -54,7 +54,7 @@ class _SfpProxy(rb.Proxy):
     async def rb_emit_to_server(self, bytestring):
         self._protocol.write(bytestring)
 
-class AsyncLinkbot(rb.Proxy):
+class _AsyncLinkbot(rb.Proxy):
     def __init__(self, *args, **kw):
         super().__init__(*args, **kw)
 
@@ -78,7 +78,7 @@ class AsyncLinkbot(rb.Proxy):
         logging.info('Setting daemon protocol...')
         self.__daemon.set_protocol(protocol)
         logging.info('Initiating daemon handshake...')
-        await asyncio.sleep(1)
+        await asyncio.sleep(0.5)
         await self.__daemon.rb_connect()
         logging.info('Daemon handshake finished.')
 
@@ -100,66 +100,44 @@ class AsyncLinkbot(rb.Proxy):
         self._linkbot_transport = linkbot_transport
         self._linkbot_protocol = linkbot_protocol
         logging.info('Sending connect request to robot...')
-        await asyncio.sleep(1)
+        await asyncio.sleep(0.5)
         await self.rb_connect()
         logging.info('Done sending connect request to robot.')
         return self
+
+    def close(self):
+        self._linkbot_transport.close()
 
     async def rb_emit_to_server(self, bytestring):
         logging.info('Emitting bytestring to protocol layer...')
         self._linkbot_protocol.write(bytestring)
 
-class Linkbot(rb.Proxy):
+class _Linkbot():
     def __init__(self, serial_id):
         self.__iocore = _IoCore()
 
-        super().__init__(
-                os.path.join(_dirname, 'robot_pb2.py'),
+        self._proxy = asyncio.run_coroutine_threadsafe(
+                AsyncLinkbot.create(serial_id),
                 self.__iocore.get_event_loop()
                 )
 
-        self.__daemon = _SfpProxy(
-                os.path.join(_dirname, 'daemon_pb2.py'),
-                self.__iocore.get_event_loop()
+    def __getattr__(self, name):
+        if name not in self._proxy.rb_procedures():
+            raise AttributeError('{} is not a Linkbot member function.'
+                    .format(name) )
+        return functools.partial(
+                self._handle_rpc, name
                 )
 
-        # Connect TCP to daemon
-        coro = self.__iocore.get_event_loop().create_connection(
-                sfp.asyncio.SfpProtocol,
-                'localhost', '42000' )
-        fut = asyncio.run_coroutine_threadsafe( 
-                coro,
-                self.__iocore.get_event_loop() )
-        (transport, protocol) = fut.result()
-        self.__daemon.set_protocol(protocol)
-        protocol.deliver = self.__daemon.rb_deliver
-        self.__daemon.rb_connect()
-    
-        args = self.__daemon.rb_get_args_obj('resolveSerialId')
-        args.serialId.value = serial_id
-        tcp_endpoint = self.__daemon.resolveSerialId(args).result()
-        print(tcp_endpoint)
-        # Close the connection to the daemon, start a connection to the robot
-        transport.close()
-        logging.info('Connecting to robot endpoint...')
-        coro = self.__iocore.get_event_loop().create_connection(
-                sfp.asyncio.SfpProtocol,
-                tcp_endpoint.endpoint.address,
-                str(tcp_endpoint.endpoint.port) )
+    def _handle_rpc(self, name, args_obj=None, **kw):
+        if not args_obj:
+            args_obj = self._proxy.rb_get_args_obj()
+            for k,v in kw.items():
+                setattr(args_obj, k, v)
         fut = asyncio.run_coroutine_threadsafe(
-                coro, self.__iocore.get_event_loop() )
-        (linkbot_transport, linkbot_protocol) = fut.result()
-        logging.info('Connected to robot endpoint.')
-        self._linkbot_transport = linkbot_transport
-        self._linkbot_protocol = linkbot_protocol
-        self._linkbot_protocol.deliver = self.rb_deliver
-        logging.info('Sending connect request to robot...')
-        self.rb_connect()
-        logging.info('Done sending connect request to robot.')
-
-    async def rb_emit_to_server(self, bytestring):
-        self._linkbot_protocol.write(bytestring)
-         
-
+                getattr(self._proxy, name)(args_obj),
+                self.__iocore.get_event_loop()
+                )
+        return fut
 
 
