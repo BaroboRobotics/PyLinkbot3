@@ -180,6 +180,13 @@ class Motor:
                 conv=_rad2deg
                 )
 
+    async def decel(self):
+        # Get the deceleration setting of a motor
+        return await self.__get_motor_controller_attribute(
+                'getMotorControllerAlphaF',
+                conv=_rad2deg
+                )
+
     async def omega(self):
         # Get the rotational velocity setting of a motor
         return await self.__get_motor_controller_attribute(
@@ -212,6 +219,18 @@ class Motor:
     async def set_accel(self, value):
         return await self.__set_motor_controller_attribute(
                 'setMotorControllerAlphaI',
+                _deg2rad(value)
+                )
+
+    async def set_decel(self, value):
+        return await self.__set_motor_controller_attribute(
+                'setMotorControllerAlphaF',
+                _deg2rad(value)
+                )
+
+    async def set_omega(self, value):
+        return await self.__set_motor_controller_attribute(
+                'setMotorControllerOmega',
                 _deg2rad(value)
                 )
 
