@@ -112,6 +112,32 @@ class _AsyncLinkbot(rb.Proxy):
         logging.info('Emitting bytestring to protocol layer...')
         self._linkbot_protocol.write(bytestring)
 
+class AsyncLinkbot():
+    @classmethod
+    async def create(cls, serial_id):
+        self = cls()
+        self._proxy = await _AsyncLinkbot.create(serial_id)
+        self.rb_add_broadcast_handler = self._proxy.rb_add_broadcast_handler
+        self.close = self._proxy.close
+        self.enableButtonEvent = self._proxy.enableButtonEvent
+        return self
+        
+    async def get_joint_angles(self):
+        fut = await self._proxy.getEncoderValues()
+        user_fut = asyncio.Future()
+        fut.add_done_callback(
+                functools.partial(
+                    self._get_joint_angles, user_fut)
+                )
+        return user_fut
+
+    def _get_joint_angles(self, user_fut, fut):
+        results_obj = fut.result()
+        results = (results_obj.timestamp,)
+        for angle in results_obj.values:
+            results = results + (angle,)
+        user_fut.set_result(results)
+
 class _Linkbot():
     def __init__(self, serial_id):
         self.__iocore = _IoCore()

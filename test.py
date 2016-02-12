@@ -8,8 +8,9 @@ async def bcast_handler(payload):
     print(payload)
 
 async def task():
-    l = await linkbot._AsyncLinkbot.create('LOCL')
-    fut = await l.getEncoderValues()
+    l = await linkbot.AsyncLinkbot.create('LOCL')
+
+    fut = await l.get_joint_angles()
     print(await fut)
 
     l.rb_add_broadcast_handler('buttonEvent', bcast_handler)
@@ -19,7 +20,6 @@ async def task():
     await asyncio.sleep(5)
     l.close()
 
-logging.warning('test')
 loop = asyncio.get_event_loop()
 loop.run_until_complete(task())
 import time
