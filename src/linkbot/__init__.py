@@ -136,10 +136,21 @@ class Motor:
         MOVING = 2
         ERROR = 4
 
-    def __init__(self, index, proxy):
+    @classmethod
+    async def create(cls, index, proxy):
+        self = cls()
         self._controller = self.Controller.CONST_VEL
         self._index = index
         self._proxy = proxy
+        if (index == 1) and (self._proxy.form_factor == FormFactor.I):
+            self._state = Motor.State.COAST
+        elif (index == 2) and (self._proxy.form_factor == FormFactor.L):
+            self._state = Motor.State.COAST
+        else:
+            fut = await self.__get_motor_controller_attribute(
+                    'getJointStates' )
+            self._state = await fut
+        return self
 
     async def controller(self):
         '''The movement controller.
@@ -252,9 +263,14 @@ class Motor:
         user_fut.set_result( fut.result() )
 
 class Motors:
-    def __init__(self, proxy):
+    @classmethod
+    async def create(cls, proxy):
+        self = cls()
         self._proxy = proxy
-        self.motors = [Motor(i, proxy) for i in range(3)]
+        self.motors = []
+        for i in range(3):
+            self.motors.append( await Motor.create(i, proxy) )
+        return self
 
     def __getitem__(self, key):
         return self.motors[key]
@@ -312,8 +328,15 @@ class AsyncLinkbot():
         self.rb_add_broadcast_handler = self._proxy.rb_add_broadcast_handler
         self.close = self._proxy.close
         self.enableButtonEvent = self._proxy.enableButtonEvent
-        self.motors = Motors(self._proxy)
+        self.motors = await Motors.create(self._proxy)
+
+        # Enable joint events TODO
+
         return self
+
+    async def __joint_event(payload):
+        pass
+        
 
 class _Linkbot():
     def __init__(self, serial_id):
