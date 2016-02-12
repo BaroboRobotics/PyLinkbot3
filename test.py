@@ -10,8 +10,17 @@ async def bcast_handler(payload):
 async def task():
     l = await linkbot.AsyncLinkbot.create('LOCL')
 
-    fut = await l.get_joint_angles()
+    fut = await l.motors.angles()
     print(await fut)
+
+    #fut = await l.motors.set_angles([90, 90, 90], 7, relative=True)
+    #await fut
+    fut = await l.motors[0].omega()
+    print(await fut)
+
+    await l.motors[0].set_controller(linkbot.Motor.Controller.SMOOTH)
+    fut = await l.motors.set_angles([90, 90, 90], 7, relative=True)
+    await fut
 
     l.rb_add_broadcast_handler('buttonEvent', bcast_handler)
     fut = await l.enableButtonEvent(enable=True)
