@@ -142,14 +142,10 @@ class Motor:
         self._controller = self.Controller.CONST_VEL
         self._index = index
         self._proxy = proxy
-        if (index == 1) and (self._proxy.form_factor == FormFactor.I):
-            self._state = Motor.State.COAST
-        elif (index == 2) and (self._proxy.form_factor == FormFactor.L):
-            self._state = Motor.State.COAST
-        else:
-            fut = await self.__get_motor_controller_attribute(
-                    'getJointStates' )
-            self._state = await fut
+        self._state = Motor.State.COAST
+        await self._poll_state()
+        # List of futures that should be set when this joint is done moving
+        self._move_waiters = []
         return self
 
     async def controller(self):
@@ -204,6 +200,16 @@ class Motor:
                 'getMotorControllerOmega',
                 conv=_rad2deg
                 )
+
+    async def _poll_state(self):
+        if (self._index == 1) and (self._proxy.form_factor == FormFactor.I):
+            self._state = Motor.State.COAST
+        elif (self._index == 2) and (self._proxy.form_factor == FormFactor.L):
+            self._state = Motor.State.COAST
+        else:
+            fut = await self.__get_motor_controller_attribute(
+                    'getJointStates' )
+            self._state = await fut
 
     async def __get_motor_controller_attribute(self, name, conv=lambda x: x):
         # 'conv' is a conversion function, in case the returned values need to
@@ -261,6 +267,34 @@ class Motor:
 
     def __handle_set_attribute(self, user_fut, fut):
         user_fut.set_result( fut.result() )
+
+    def is_moving(self):
+        if self._state in [self.State.COAST, self.State.HOLD]:
+            return False
+        else:
+            return True
+
+    @property
+    def state(self):
+        return self._state
+    @state.setter
+    def state(self, value):
+        assert(value in self.State.__dict__.values())
+        self._state = value
+        if not self.is_moving():
+            for fut in self._move_waiters:
+                fut.set_result(self._state)
+
+    async def move_wait(self):
+        await self._poll_state()
+        fut = asyncio.Future()
+        # If we are aready not moving, just return a completed future
+        print('State is: {}'.format(self.state))
+        if not self.is_moving():
+            fut.set_result(self.state)
+        else:
+            self._move_waiters.append(fut)
+        return fut
 
 class Motors:
     @classmethod
@@ -330,13 +364,14 @@ class AsyncLinkbot():
         self.enableButtonEvent = self._proxy.enableButtonEvent
         self.motors = await Motors.create(self._proxy)
 
-        # Enable joint events TODO
-
+        # Enable joint events
+        await self._proxy.enableJointEvent(enable=True)
+        self._proxy.rb_add_broadcast_handler('jointEvent', self.__joint_event)
         return self
 
-    async def __joint_event(payload):
-        pass
-        
+    async def __joint_event(self, payload):
+        # Update the motor states
+        self.motors[payload.joint].state = payload.event
 
 class _Linkbot():
     def __init__(self, serial_id):
