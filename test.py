@@ -16,14 +16,18 @@ async def task():
     #fut = await l.motors.set_angles([90, 90, 90], 7, relative=True)
     #await fut
     fut = await l.motors[0].omega()
-    print(await fut)
+    print('Omega: ', await fut)
     fut = await l.motors[0].accel()
-    print(await fut)
+    print('AlphaI: ', await fut)
 
     await l.motors[0].set_accel(20)
     await l.motors[0].set_decel(20)
     await l.motors[0].set_controller(linkbot.Motor.Controller.SMOOTH)
-    fut = await l.motors.set_angles([90, 90, 90], 7, relative=True)
+    #await l.motors.set_angles([90, 90, 90], 7, relative=True)
+    #await fut
+    #fut = await l.motors[0].move_wait()
+    #await fut
+    fut = await l.motors[0].move_accel(5)
     await fut
     fut = await l.motors[0].move_wait()
     await fut
