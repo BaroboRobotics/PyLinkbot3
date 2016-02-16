@@ -3,7 +3,7 @@
 import linkbot 
 import logging
 import asyncio
-logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
+#logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 async def bcast_handler(payload):
     print(payload)
 
@@ -19,6 +19,15 @@ async def task():
     print('Omega: ', await fut)
     fut = await l.motors[0].accel()
     print('AlphaI: ', await fut)
+
+    fut = await l.accelerometer.values()
+    print('Accel: ', await fut)
+    fut = await l.accelerometer.x()
+    print('x: ', await fut)
+    fut = await l.accelerometer.y()
+    print('y: ', await fut)
+    fut = await l.accelerometer.z()
+    print('z: ', await fut)
 
     await l.motors[0].set_accel(20)
     await l.motors[0].set_decel(20)

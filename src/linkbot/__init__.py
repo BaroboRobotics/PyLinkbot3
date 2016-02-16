@@ -124,6 +124,70 @@ class _AsyncLinkbot(rb.Proxy):
         logging.info('Emitting bytestring to protocol layer...')
         self._linkbot_protocol.write(bytestring)
 
+class Accelerometer():
+    @classmethod
+    async def create(cls, proxy):
+        self = cls()
+        self._proxy = proxy
+        return self
+
+    async def values(self):
+        fut = await self._proxy.getAccelerometerData()
+        user_fut = asyncio.Future()
+        fut.add_done_callback(
+                functools.partial(
+                    self.__values,
+                    user_fut )
+                )
+        return user_fut
+
+    def __values(self, user_fut, fut):
+        user_fut.set_result(
+                ( fut.result().x, fut.result().y, fut.result().z )
+                )
+
+    async def x(self):
+        fut = await self.values()
+        user_fut = asyncio.Future()
+        fut.add_done_callback(
+                functools.partial(
+                    self.__get_index,
+                    0,
+                    user_fut )
+                )
+        return user_fut
+
+    async def y(self):
+        fut = await self.values()
+        user_fut = asyncio.Future()
+        fut.add_done_callback(
+                functools.partial(
+                    self.__get_index,
+                    1,
+                    user_fut )
+                )
+        return user_fut
+
+    async def z(self):
+        fut = await self.values()
+        user_fut = asyncio.Future()
+        fut.add_done_callback(
+                functools.partial(
+                    self.__get_index,
+                    2,
+                    user_fut )
+                )
+        return user_fut
+
+    def __get_index(self, index, user_fut, fut):
+        user_fut.set_result( fut.result()[index] )
+
+class FormFactor():
+    I = 0
+    L = 1
+    T = 2
+    DONGLE = 3
+
 class Motor:
     class Controller:
         PID = 1
@@ -373,9 +437,10 @@ class Motors:
 
     def __angles(self, user_fut, fut):
         results_obj = fut.result()
-        results = (results_obj.timestamp,)
+        results = ()
         for angle in results_obj.values:
-            results = results + (_rad2deg(angle),)
+            results += (_rad2deg(angle),)
+        results += (results_obj.timestamp,)
         user_fut.set_result(results)
 
     async def set_angles(self, angles, mask, relative=False, timeouts=None,
@@ -401,12 +466,6 @@ class Motors:
         fut = await self._proxy.move(args_obj)
         return fut
 
-class FormFactor():
-    I = 0
-    L = 1
-    T = 2
-    DONGLE = 3
-
 class AsyncLinkbot():
     @classmethod
     async def create(cls, serial_id):
@@ -422,6 +481,7 @@ class AsyncLinkbot():
         self.close = self._proxy.close
         self.enableButtonEvent = self._proxy.enableButtonEvent
         self._motors = await Motors.create(self._proxy)
+        self._accelerometer = await Accelerometer.create(self._proxy)
 
         # Enable joint events
         await self._proxy.enableJointEvent(enable=True)
@@ -440,6 +500,15 @@ class AsyncLinkbot():
         or similar. Also see :class:`Motor`
         """
         return self._motors
+
+    @property
+    def accelerometer(self):
+        """
+        The Linkbot accelerometer.
+
+        see :class:`Accelerometer`.
+        """
+        return self._accelerometer
 
     async def __joint_event(self, payload):
         # Update the motor states
