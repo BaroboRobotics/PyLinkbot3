@@ -297,7 +297,7 @@ class Motor:
                 fut.set_result(self._state)
             self._move_waiters.clear()
 
-    async def move_accel(self, timeout, v0 = 0.0, state_on_timeout=State.COAST):
+    async def begin_accel(self, timeout, v0 = 0.0, state_on_timeout=State.COAST):
         mask = 1<<self._index
         args_obj = self._proxy.rb_get_args_obj('move')
         names = ['motorOneGoal', 'motorTwoGoal', 'motorThreeGoal']
@@ -306,6 +306,25 @@ class Motor:
                 getattr(args_obj,name).type = self._MoveType.INFINITE
                 getattr(args_obj,name).goal = v0
                 getattr(args_obj,name).controller = self.Controller.ACCEL
+                getattr(args_obj,name).timeout = timeout
+                getattr(args_obj,name).modeOnTimeout = state_on_timeout
+
+        fut = await self._proxy.move(args_obj)
+        return fut
+
+    async def begin_move(self, timeout = 0, forward=True, state_on_timeout=State.COAST):
+        mask = 1<<self._index
+        args_obj = self._proxy.rb_get_args_obj('move')
+        names = ['motorOneGoal', 'motorTwoGoal', 'motorThreeGoal']
+        if forward:
+            goal = 1
+        else:
+            goal = -1
+        for i,name in enumerate(names):
+            if mask&(1<<i):
+                getattr(args_obj,name).type = self._MoveType.INFINITE
+                getattr(args_obj,name).goal = goal
+                getattr(args_obj,name).controller = self.Controller.CONST_VEL
                 getattr(args_obj,name).timeout = timeout
                 getattr(args_obj,name).modeOnTimeout = state_on_timeout
 

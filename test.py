@@ -3,7 +3,7 @@
 import linkbot 
 import logging
 import asyncio
-#logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
+logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 async def bcast_handler(payload):
     print(payload)
 
@@ -27,8 +27,9 @@ async def task():
     #await fut
     #fut = await l.motors[0].move_wait()
     #await fut
-    fut = await l.motors[0].move_accel(5)
-    await fut
+    #fut = await l.motors[0].move_accel(5, state_on_timeout=linkbot.Motor.State.HOLD)
+    #await fut
+    await l.motors[0].begin_move(timeout=5)
     fut = await l.motors[0].move_wait()
     await fut
 
