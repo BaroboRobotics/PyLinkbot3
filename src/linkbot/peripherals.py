@@ -10,6 +10,13 @@ class Accelerometer():
         return self
 
     async def values(self):
+        '''
+        Get the current accelerometer values.
+
+        :rtype: asyncio.Future . The future's result type is (float, float,
+            float) representing the x, y, and z axes, respectively. The 
+            units of each value are in Earth gravitational units (a.k.a. G's).
+        '''
         fut = await self._proxy.getAccelerometerData()
         user_fut = asyncio.Future()
         fut.add_done_callback(
@@ -25,6 +32,12 @@ class Accelerometer():
                 )
 
     async def x(self):
+        '''
+        Get the current x axis value.
+
+        :rtype: asyncio.Future. The future's result type is "float", in units of
+            Earth gravitational units (a.k.a. G's)
+        '''
         fut = await self.values()
         user_fut = asyncio.Future()
         fut.add_done_callback(
@@ -36,6 +49,12 @@ class Accelerometer():
         return user_fut
 
     async def y(self):
+        '''
+        Get the current y axis value.
+
+        :rtype: asyncio.Future. The future's result type is "float", in units of
+            Earth gravitational units (a.k.a. G's)
+        '''
         fut = await self.values()
         user_fut = asyncio.Future()
         fut.add_done_callback(
@@ -47,6 +66,12 @@ class Accelerometer():
         return user_fut
 
     async def z(self):
+        '''
+        Get the current z axis value.
+
+        :rtype: asyncio.Future. The future's result type is "float", in units of
+            Earth gravitational units (a.k.a. G's)
+        '''
         fut = await self.values()
         user_fut = asyncio.Future()
         fut.add_done_callback(
@@ -112,6 +137,13 @@ class Button():
         return self
 
     async def values(self):
+        '''
+        Get the current button values
+
+        :rtype: asyncio.Future . Result type is (int, int, int), indicating the
+            button state for the power, A, and B buttons, respectively. The button
+            state is one of either Button.UP or Button.DOWN.
+        '''
         fut = await self._proxy.getButtonState()
         user_fut = asyncio.Future()
         fut.add_done_callback(
@@ -129,6 +161,11 @@ class Button():
         user_fut.set_result( (pwr, a, b) )
 
     async def pwr(self):
+        '''
+        Get the current state of the power button.
+
+        :rtype: either Button.UP or Button.DOWN
+        '''
         fut = await self._proxy.getButtonState()
         user_fut = asyncio.Future()
         fut.add_done_callback(
@@ -141,6 +178,11 @@ class Button():
         return user_fut
 
     async def a(self):
+        '''
+        Get the current state of the 'A' button.
+
+        :rtype: either Button.UP or Button.DOWN
+        '''
         fut = await self._proxy.getButtonState()
         user_fut = asyncio.Future()
         fut.add_done_callback(
@@ -153,6 +195,11 @@ class Button():
         return user_fut
 
     async def b(self):
+        '''
+        Get the current state of the 'B' button.
+
+        :rtype: either Button.UP or Button.DOWN
+        '''
         fut = await self._proxy.getButtonState()
         user_fut = asyncio.Future()
         fut.add_done_callback(
@@ -206,6 +253,12 @@ class Led():
         return self
 
     async def color(self):
+        '''
+        Get the current LED color.
+
+        :rtype: (int, int, int) indicating the intensity of the red, green,
+            and blue channels. Each intensity is a value between [0,255].
+        '''
         fut = await self._proxy.getLedColor()
         user_fut = asyncio.Future()
         fut.add_done_callback(
@@ -224,6 +277,13 @@ class Led():
         user_fut.set_result( (r,g,b) )
 
     async def set_color(self, r, g, b):
+        '''
+        Set the current LED color.
+
+        :type r: int [0,255]
+        :type g: int [0,255]
+        :type b: int [0,255]
+        '''
         word = b | (g<<8) | (r<<16)
         fut = await self._proxy.setLedColor(value=word)
         return fut
