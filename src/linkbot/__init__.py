@@ -8,6 +8,7 @@ import os
 import ribbonbridge as rb
 import sfp.asyncio
 import threading
+import linkbot.peripherals as peripherals
 
 _dirname = os.path.dirname(os.path.realpath(__file__))
 
@@ -123,64 +124,6 @@ class _AsyncLinkbot(rb.Proxy):
     async def rb_emit_to_server(self, bytestring):
         logging.info('Emitting bytestring to protocol layer...')
         self._linkbot_protocol.write(bytestring)
-
-class Accelerometer():
-    @classmethod
-    async def create(cls, proxy):
-        self = cls()
-        self._proxy = proxy
-        return self
-
-    async def values(self):
-        fut = await self._proxy.getAccelerometerData()
-        user_fut = asyncio.Future()
-        fut.add_done_callback(
-                functools.partial(
-                    self.__values,
-                    user_fut )
-                )
-        return user_fut
-
-    def __values(self, user_fut, fut):
-        user_fut.set_result(
-                ( fut.result().x, fut.result().y, fut.result().z )
-                )
-
-    async def x(self):
-        fut = await self.values()
-        user_fut = asyncio.Future()
-        fut.add_done_callback(
-                functools.partial(
-                    self.__get_index,
-                    0,
-                    user_fut )
-                )
-        return user_fut
-
-    async def y(self):
-        fut = await self.values()
-        user_fut = asyncio.Future()
-        fut.add_done_callback(
-                functools.partial(
-                    self.__get_index,
-                    1,
-                    user_fut )
-                )
-        return user_fut
-
-    async def z(self):
-        fut = await self.values()
-        user_fut = asyncio.Future()
-        fut.add_done_callback(
-                functools.partial(
-                    self.__get_index,
-                    2,
-                    user_fut )
-                )
-        return user_fut
-
-    def __get_index(self, index, user_fut, fut):
-        user_fut.set_result( fut.result()[index] )
 
 class FormFactor():
     I = 0
@@ -481,7 +424,7 @@ class AsyncLinkbot():
         self.close = self._proxy.close
         self.enableButtonEvent = self._proxy.enableButtonEvent
         self._motors = await Motors.create(self._proxy)
-        self._accelerometer = await Accelerometer.create(self._proxy)
+        self._accelerometer = await peripherals.Accelerometer.create(self._proxy)
 
         # Enable joint events
         await self._proxy.enableJointEvent(enable=True)
