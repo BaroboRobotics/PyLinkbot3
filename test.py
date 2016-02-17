@@ -28,6 +28,12 @@ async def task():
     print('y: ', await fut)
     fut = await l.accelerometer.z()
     print('z: ', await fut)
+    fut = await l.led.color()
+    print('led: ', await fut)
+    fut = await l.led.set_color(255, 255, 0)
+    await fut
+    fut = await l.led.color()
+    print('led: ', await fut)
 
     await l.motors[0].set_accel(20)
     await l.motors[0].set_decel(20)
