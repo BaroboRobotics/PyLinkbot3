@@ -4,11 +4,14 @@ import linkbot
 import logging
 import asyncio
 #logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
-async def bcast_handler(payload):
-    print(payload)
+#async def bcast_handler(payload):
+#    print(payload)
 
 async def accel_handler(x, y, z, timestamp):
     print("Accel event: ", x, y, z, timestamp)
+
+async def button_handler(button, down, timestamp):
+    print('Button: ', button, down, timestamp)
 
 async def task():
     l = await linkbot.AsyncLinkbot.create('LOCL')
@@ -37,6 +40,14 @@ async def task():
     await fut
     fut = await l.led.color()
     print('led: ', await fut)
+    fut = await l.button.values()
+    print('buttons: ', await fut)
+    fut = await l.button.pwr()
+    print('PWR: ', await fut)
+    fut = await l.button.a()
+    print('A: ', await fut)
+    fut = await l.button.b()
+    print('B: ', await fut)
 
     await l.motors[0].set_accel(20)
     await l.motors[0].set_decel(20)
@@ -51,11 +62,12 @@ async def task():
     fut = await l.motors[0].move_wait()
     await fut
 
-    l.rb_add_broadcast_handler('buttonEvent', bcast_handler)
-    fut = await l.enableButtonEvent(enable=True)
+    fut = await l.button.set_event_handler(button_handler)
     await fut
     print('Try pressing some buttons.')
     await asyncio.sleep(5)
+    fut = await l.button.set_event_handler(None)
+    await fut
 
     fut = await l.accelerometer.set_event_handler(accel_handler)
     await fut

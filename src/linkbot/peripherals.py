@@ -69,6 +69,7 @@ class Accelerometer():
         :param granularity: float . The callback will only be called when any
             axis of the accelerometer changes by this many G's of acceleration.
         '''
+        self._event_callback = callback
         if not callback:
             # Remove the event
             try:
@@ -79,11 +80,10 @@ class Accelerometer():
                 self._proxy.rb_remove_broadcast_handler('accelerometerEvent')
                 return fut
             except KeyError:
-                # Don't worry if it's not there.
+                # Don't worry if the bcast handler is not there.
                 pass
 
         else:
-            self._event_callback = callback
             self._proxy.rb_add_broadcast_handler( 'accelerometerEvent', 
                                                   self.__event_handler )
             return await self._proxy.enableAccelerometerEvent(
@@ -94,6 +94,108 @@ class Accelerometer():
         await self._event_callback( payload.x, 
                                     payload.y, 
                                     payload.z, 
+                                    payload.timestamp)
+
+class Button():
+    PWR = 0
+    A = 1
+    B = 2
+
+    UP = 0
+    DOWN = 1
+
+    @classmethod
+    async def create(cls, proxy):
+        self = cls()
+        self._proxy = proxy
+        self._event_callback = None
+        return self
+
+    async def values(self):
+        fut = await self._proxy.getButtonState()
+        user_fut = asyncio.Future()
+        fut.add_done_callback(
+                functools.partial(
+                    self.__values,
+                    user_fut
+                    )
+                )
+        return user_fut
+
+    def __values(self, user_fut, fut):
+        pwr = fut.result().mask & 0x01
+        a = (fut.result().mask>>1) & 0x01
+        b = (fut.result().mask>>2) & 0x01
+        user_fut.set_result( (pwr, a, b) )
+
+    async def pwr(self):
+        fut = await self._proxy.getButtonState()
+        user_fut = asyncio.Future()
+        fut.add_done_callback(
+                functools.partial(
+                    self.__button_values,
+                    0,
+                    user_fut
+                    )
+                )
+        return user_fut
+
+    async def a(self):
+        fut = await self._proxy.getButtonState()
+        user_fut = asyncio.Future()
+        fut.add_done_callback(
+                functools.partial(
+                    self.__button_values,
+                    1,
+                    user_fut
+                    )
+                )
+        return user_fut
+
+    async def b(self):
+        fut = await self._proxy.getButtonState()
+        user_fut = asyncio.Future()
+        fut.add_done_callback(
+                functools.partial(
+                    self.__button_values,
+                    2,
+                    user_fut
+                    )
+                )
+        return user_fut
+
+    def __button_values(self, index, user_fut, fut):
+        user_fut.set_result((fut.result().mask>>index) & 0x01)
+
+    async def set_event_handler(self, callback=None):
+        '''
+        Set a callback function to be executed when there is a button press or
+        release.
+
+        :param callback: func(buttonNo(int), buttonDown(bool), timestamp) -> None
+        '''
+        self._event_callback = callback
+        if not callback:
+            # Remove the event
+            try:
+                fut = await self._proxy.enableButtonEvent(
+                        enable=False)
+                await fut
+                self._proxy.rb_remove_broadcast_handler('buttonEvent')
+                return fut
+            except KeyError:
+                # Don't worry if the bcast handler is  not there.
+                pass
+
+        else:
+            self._proxy.rb_add_broadcast_handler( 'buttonEvent', 
+                                                  self.__event_handler )
+            return await self._proxy.enableButtonEvent(
+                    enable=True)
+
+    async def __event_handler(self, payload):
+        await self._event_callback( payload.button, 
+                                    payload.state, 
                                     payload.timestamp)
 
 class Led():

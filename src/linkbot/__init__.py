@@ -426,6 +426,7 @@ class AsyncLinkbot():
         self._motors = await Motors.create(self._proxy)
         self._accelerometer = await peripherals.Accelerometer.create(self._proxy)
         self._led = await peripherals.Led.create(self._proxy)
+        self._button = await peripherals.Button.create(self._proxy)
 
         # Enable joint events
         await self._proxy.enableJointEvent(enable=True)
@@ -453,6 +454,15 @@ class AsyncLinkbot():
         See :class:`Accelerometer`.
         """
         return self._accelerometer
+
+    @property
+    def button(self):
+        """
+        Access to the Linkbot's buttons. 
+
+        See :class:`Button`.
+        """
+        return self._button
 
     @property
     def led(self):
