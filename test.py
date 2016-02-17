@@ -7,6 +7,9 @@ import asyncio
 async def bcast_handler(payload):
     print(payload)
 
+async def accel_handler(x, y, z, timestamp):
+    print("Accel event: ", x, y, z, timestamp)
+
 async def task():
     l = await linkbot.AsyncLinkbot.create('LOCL')
 
@@ -53,6 +56,14 @@ async def task():
     await fut
     print('Try pressing some buttons.')
     await asyncio.sleep(5)
+
+    fut = await l.accelerometer.set_event_handler(accel_handler)
+    await fut
+    print('Accelerometer event handler activated')
+    await asyncio.sleep(5)
+    await l.accelerometer.set_event_handler(None)
+    print('Accelerometer event handler deactivated')
+    await asyncio.sleep(3)
     l.close()
 
 loop = asyncio.get_event_loop()

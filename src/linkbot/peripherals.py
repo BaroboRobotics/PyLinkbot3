@@ -6,6 +6,7 @@ class Accelerometer():
     async def create(cls, proxy):
         self = cls()
         self._proxy = proxy
+        self._event_callback = None
         return self
 
     async def values(self):
@@ -58,6 +59,42 @@ class Accelerometer():
 
     def __get_index(self, index, user_fut, fut):
         user_fut.set_result( fut.result()[index] )
+
+    async def set_event_handler(self, callback=None, granularity=0.05):
+        '''
+        Set a callback function to be executed when the accelerometer
+        values on the robot change.
+
+        :param callback: async func(x, y, z, timestamp) -> None
+        :param granularity: float . The callback will only be called when any
+            axis of the accelerometer changes by this many G's of acceleration.
+        '''
+        if not callback:
+            # Remove the event
+            try:
+                fut = await self._proxy.enableAccelerometerEvent(
+                        enable=False,
+                        granularity=granularity)
+                await fut
+                self._proxy.rb_remove_broadcast_handler('accelerometerEvent')
+                return fut
+            except KeyError:
+                # Don't worry if it's not there.
+                pass
+
+        else:
+            self._event_callback = callback
+            self._proxy.rb_add_broadcast_handler( 'accelerometerEvent', 
+                                                  self.__event_handler )
+            return await self._proxy.enableAccelerometerEvent(
+                    enable=True,
+                    granularity=granularity )
+
+    async def __event_handler(self, payload):
+        await self._event_callback( payload.x, 
+                                    payload.y, 
+                                    payload.z, 
+                                    payload.timestamp)
 
 class Led():
     @classmethod
