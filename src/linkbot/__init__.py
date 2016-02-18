@@ -349,7 +349,6 @@ class Motor:
         await self._poll_state()
         fut = asyncio.Future()
         # If we are aready not moving, just return a completed future
-        print('State is: {}'.format(self.state))
         if not self.is_moving():
             fut.set_result(self.state)
         else:
@@ -386,15 +385,15 @@ class Motors:
         results += (results_obj.timestamp,)
         user_fut.set_result(results)
 
-    async def set_angles(self, angles, mask, relative=False, timeouts=None,
+    async def set_angles(self, angles, mask=0x07, relative=False, timeouts=None,
             states_on_timeout = None):
         angles = list(map(_deg2rad, angles))
         args_obj = self._proxy.rb_get_args_obj('move')
         names = ['motorOneGoal', 'motorTwoGoal', 'motorThreeGoal']
         if relative:
-            move_type = self._MoveType.RELATIVE
+            move_type = Motor._MoveType.RELATIVE
         else:
-            move_type = self._MoveType.ABSOLUTE
+            move_type = Motor._MoveType.ABSOLUTE
         for i,name in enumerate(names):
             if mask&(1<<i):
                 getattr(args_obj,name).type = move_type
