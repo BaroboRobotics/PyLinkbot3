@@ -173,20 +173,20 @@ class Motor:
 
         This property controls the strategy with which the motors are moved.
         Legal values are:
-        AsyncLinkbot.MoveController.PID: Move the motors directly with the
-            internal PID controller. This is typically the fastest way to get a
-            motor from one position to another. The motor may experience some
-            overshoot and underdamped response when moving larger distances.
-        AsyncLinkbot.MoveController.CONST_VEL: Move the motor at a constant
-            velocity. This motor controller attemts to accelerate and decelerate
-            a motor infinitely fast to and from a constant velocity to move the
-            motor from one position to the next. The velocity can be controlled
-            by setting the property `omega`.
-        AsyncLinkbot.MoveController.SMOOTH: Move the motor with specified
-            acceleration, maximum velocity, and deceleration. For this type of
-            movement, access maximum velocity with property `omega`,
-            acceleration with property `acceleration`, and deceleration with property
-            `deceleration`.
+        * AsyncLinkbot.MoveController.PID: Move the motors directly with the
+        internal PID controller. This is typically the fastest way to get a
+        motor from one position to another. The motor may experience some
+        overshoot and underdamped response when moving larger distances.
+        * AsyncLinkbot.MoveController.CONST_VEL: Move the motor at a constant
+        velocity. This motor controller attemts to accelerate and decelerate
+        a motor infinitely fast to and from a constant velocity to move the
+        motor from one position to the next. The velocity can be controlled
+        by setting the property `omega`.
+        * AsyncLinkbot.MoveController.SMOOTH: Move the motor with specified
+        acceleration, maximum velocity, and deceleration. For this type of
+        movement, access maximum velocity with property `omega`,
+        acceleration with property `acceleration`, and deceleration with property
+        `deceleration`.
         '''
         fut = asyncio.Future()
         fut.set_result(self._controller)
