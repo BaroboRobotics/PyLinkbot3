@@ -6,32 +6,26 @@
 Welcome to PyLinkbot3's documentation!
 ======================================
 
-Contents:
-
-.. toctree::
-   :maxdepth: 2
-
-   asynclinkbot
-   motors
-   peripherals
-
-Introduction
-============
-
 This package is used to control a Linkbot. Linkbots are small modular robots used
 in classrooms to teach programming, math, and science.
 
-The :class:`AsyncLinkbot` class is an asynchronous handle to a remote Linkbot.
-It is meant to be used in an :module:`asyncio` coroutine. The class itself
-contains several child classes that represent various peripherals on the
-Linkbot, such as the motors, buttons, accelerometer, and LED. 
+This package includes two main interfaces to the Linkbot. One is an asynchronous
+interface designed to be used with Python 3.5's :mod:`asyncio` module. This one is
+called :class:`linkbot.AsyncLinkbot`.
 
-Here is a small piece of sample code showing how to move a Linkbot's motors to
-their zero positions using the asynchronous :class:`AsyncLinkbot` object. In
-this example, the Linkbot's serial ID is 'ABCD':
+We also provide a synchronous interface called :class:`linkbot.Linkbot` which is built
+on top of the asynchronous interface. This one is arguably easier to use since
+it hides all of the asynchronous details from the user. However, there are
+certain tasks, such as sending commands to a fleet of Linkbots, which may be
+better suited for the asynchronous interface.
 
-.. literalinclude:: snippets/demo1.py
-   :language: python
+Contents
+========
+
+.. toctree::
+   :maxdepth: 3
+
+   asynclinkbot
 
 
 Indices and tables

@@ -15,5 +15,5 @@ setup (name = 'PyLinkbot',
        package_dir = {'':'src'},
        packages = ['linkbot'],
        url = 'http://github.com/BaroboRobotics/PyLinkbot3',
-       install_requires=['protobuf>=3.0.0b2', 'PyRibbonBridge'],
+       install_requires=['PyRibbonBridge>=0.0.2', 'PySfp>=0.0.1'],
        )

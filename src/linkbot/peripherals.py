@@ -94,7 +94,6 @@ class Accelerometer():
         :param granularity: float . The callback will only be called when any
             axis of the accelerometer changes by this many G's of acceleration.
         '''
-        self._event_callback = callback
         if not callback:
             # Remove the event
             try:
@@ -103,12 +102,14 @@ class Accelerometer():
                         granularity=granularity)
                 await fut
                 self._proxy.rb_remove_broadcast_handler('accelerometerEvent')
+                self._event_callback = callback
                 return fut
             except KeyError:
                 # Don't worry if the bcast handler is not there.
                 pass
 
         else:
+            self._event_callback = callback
             self._proxy.rb_add_broadcast_handler( 'accelerometerEvent', 
                                                   self.__event_handler )
             return await self._proxy.enableAccelerometerEvent(

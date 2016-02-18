@@ -282,6 +282,23 @@ class Motor:
                 )
         return user_fut
 
+    async def set_power(self, power):
+        '''
+        Set the motor's power.
+
+        :type power: int [-255,255]
+        '''
+        
+        args_obj = self._proxy.rb_get_args_obj('move')
+        names = ['motorOneGoal', 'motorTwoGoal', 'motorThreeGoal']
+        name = names[self._index]
+        getattr(args_obj,name).type = Motor._MoveType.INFINITE
+        getattr(args_obj,name).goal = power
+        getattr(args_obj,name).controller = Motor.Controller.PID
+
+        fut = await self._proxy.move(args_obj)
+        return fut
+
     def __handle_set_attribute(self, user_fut, fut):
         user_fut.set_result( fut.result() )
 
@@ -408,6 +425,10 @@ class Motors:
         fut = await self._proxy.move(args_obj)
         return fut
 
+    async def stop(self, mask=0x07):
+        fut = await self._proxy.stop(mask=mask)
+        return fut
+
 class AsyncLinkbot():
     @classmethod
     async def create(cls, serial_id):
@@ -437,11 +458,11 @@ class AsyncLinkbot():
         """
         The motors of the Linkbot.
 
-        See :class:`Motors` . To access individual motors, you may do:
+        See :class:`linkbot.Motors` . To access individual motors, you may do:
 
             AsyncLinkbot.motors[0].is_moving()
 
-        or similar. Also see :class:`Motor`
+        or similar. Also see :class:`linkbot.Motor`
         """
         return self._motors
 
@@ -450,7 +471,7 @@ class AsyncLinkbot():
         """
         The Linkbot accelerometer.
 
-        See :class:`Accelerometer`.
+        See :class:`linkbot.peripherals.Accelerometer`.
         """
         return self._accelerometer
 
@@ -459,7 +480,7 @@ class AsyncLinkbot():
         """
         Access to the Linkbot's buttons. 
 
-        See :class:`Button`.
+        See :class:`linkbot.peripherals.Button`.
         """
         return self._button
 
@@ -468,7 +489,7 @@ class AsyncLinkbot():
         """
         The Linkbot multicolor LED.
 
-        See :class:`Led`.
+        See :class:`linkbot.peripherals.Led`.
         """
         return self._led
 
