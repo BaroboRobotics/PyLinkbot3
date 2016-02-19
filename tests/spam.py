@@ -5,31 +5,22 @@
 import asyncio
 import linkbot
 import sys
-
+import random
 
 async def task(serialid, queue):
 
     def done(fut):
-        print('.')
+        print(serialid)
 
-    l = await linkbot.AsyncLinkbot.create('ZVT7')
-
-    for i in range(100):
-        print('ping: ', i)
-        fut = await l.motors.angles() 
-        fut.add_done_callback(done)
-        await queue.put(fut)
-
-async def task2(serialid, queue):
-
-    def done(fut):
-        print('.2')
-
-    l = await linkbot.AsyncLinkbot.create('DGKR')
+    l = await linkbot.AsyncLinkbot.create(serialid)
 
     for i in range(100):
         print('ping: ', i)
-        fut = await l.motors.angles() 
+        #fut = await l.motors.angles() 
+        fut = await l.led.set_color(
+                random.randint(0, 255),
+                random.randint(0, 255),
+                random.randint(0, 255))
         fut.add_done_callback(done)
         await queue.put(fut)
 
@@ -46,11 +37,22 @@ if __name__ == '__main__':
         serialId = sys.argv[1]
 
     loop = asyncio.get_event_loop()
-    tasks = [ 
-            asyncio.ensure_future(task(serialId, q)), 
-            asyncio.ensure_future(task2(serialId, q)), 
-            asyncio.ensure_future(consumer(q)),
-            ]
+    linkbots = [ 'ZVT7',
+                 'DGKR',
+                 'X9Q5',
+                 'SC9J',
+                 'SMFV',
+                 'XR6D',
+                 'DP5T',
+                 '57NQ',
+                 'W13Z',
+                 '71FR',
+                 ]
+    tasks = []
+    for l in linkbots:
+        tasks.append( asyncio.ensure_future(task(l, q)) )
+
+    tasks.append( asyncio.ensure_future(consumer(q)) )
     
     rc = loop.run_until_complete(asyncio.wait(tasks))
     sys.exit(rc)
