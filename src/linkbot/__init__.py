@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import asyncio
+import collections
 import functools
 import logging
 import math
@@ -8,9 +9,12 @@ import os
 import ribbonbridge as rb
 import sfp.asyncio
 import threading
+import time
 import linkbot.peripherals as peripherals
 
 _dirname = os.path.dirname(os.path.realpath(__file__))
+
+DEFAULT_TIMEOUT = 10
 
 def _rad2deg(rad):
     return rad*180/math.pi
@@ -18,12 +22,97 @@ def _rad2deg(rad):
 def _deg2rad(deg):
     return deg*math.pi/180
 
+
 class _Singleton(type):
     instance = None
     def __call__(cls, *args, **kw):
         if not cls.instance:
             cls.instance = super(_Singleton, cls).__call__(*args, **kw)
         return cls.instance
+
+class _SortedList():
+    def __init__(self, key=None):
+        self._members = []
+        self._key = key
+        self._waiters = collections.deque()
+
+    async def add(self, item):
+        self._members.append(item)
+        self._members.sort(key=self._key)
+        if len(self._waiters) > 0:
+            waiter = self._waiters.popleft()
+            waiter.set_result(None)
+
+    async def popleft(self):
+        while len(self._members) == 0:
+            fut = asyncio.Future()
+            self._waiters.append(fut)
+            await fut
+            if fut.cancelled():
+                raise asyncio.QueueEmpty()
+        return self._members.pop(0)
+
+    async def close(self):
+        for w in self._waiters:
+            w.cancel()
+
+class _TimeoutCore():
+    __metaclass__ = _Singleton
+
+    def __init__(self, loop):
+        self._event = asyncio.Event()
+        self._cancelled = False
+        # Each timeout object will be a (timestamp, asyncio.Future()) object.
+        self._timeouts = _SortedList(key=lambda x: x[0])
+        loop.create_task(self._work())
+
+    async def add(self, fut, timeout):
+        timestamp = time.time() + timeout
+        await self._timeouts.add( (timestamp, fut) )
+        self._event.set()
+
+    async def cancel(self):
+        self._cancelled = True
+        self._event.set()
+    
+    async def chain_futures(self, fut1, fut2, callback, timeout=DEFAULT_TIMEOUT):
+        # Execute 'callback' when fut1 completes. fut2's result will be set to the
+        # return value of 'callback'. If timeout is specified, fut2 will be
+        # cancelled after the time specified by 'timeout' has lapsed.
+        # Signature of callback should be callback(future) -> result
+
+        def __handle_chain_futures(fut2, cb, fut1):
+            fut2.set_result(cb(fut1))
+
+        fut1.add_done_callback(
+                functools.partial(__handle_chain_futures,
+                                  fut2,
+                                  callback
+                                  )
+                )
+        if timeout:
+            await self.add(fut2, timeout)
+
+    async def _work(self):
+        while True:
+            next_timeout = await self._timeouts.popleft()
+            if next_timeout[0] > time.time():
+                self._event.clear()
+                try:
+                    await asyncio.wait_for( self._event.wait(), 
+                                            next_timeout[0]-time.time() )
+                    # If we get here, the event was signalled. Check the
+                    # cancellation flag
+                    if self._cancelled:
+                        break
+                    else:
+                        continue
+                except asyncio.TimeoutError:
+                    # Cancel the future if it is not done
+                    if not next_timeout[1].done():
+                        next_timeout[1].set_exception(
+                                asyncio.TimeoutError('Future timeout out waiting for result.')
+                                )
 
 class _IoCore():
     __metaclass__ = _Singleton
@@ -380,6 +469,7 @@ class Motors:
         self.motors = []
         for i in range(3):
             self.motors.append( await Motor.create(i, proxy) )
+        self._timeouts = _TimeoutCore(asyncio.get_event_loop())
         return self
 
     def __getitem__(self, key):
@@ -388,19 +478,16 @@ class Motors:
     async def angles(self):
         fut = await self._proxy.getEncoderValues()
         user_fut = asyncio.Future()
-        fut.add_done_callback(
-                functools.partial(
-                    self.__angles, user_fut)
-                )
+        await self._timeouts.chain_futures(fut, user_fut, self.__angles)
         return user_fut
 
-    def __angles(self, user_fut, fut):
+    def __angles(self, fut):
         results_obj = fut.result()
         results = ()
         for angle in results_obj.values:
             results += (_rad2deg(angle),)
         results += (results_obj.timestamp,)
-        user_fut.set_result(results)
+        return results
 
     async def set_angles(self, angles, mask=0x07, relative=False, timeouts=None,
             states_on_timeout = None):
@@ -438,20 +525,28 @@ class AsyncLinkbot():
         :type serial_id: str
         :returns: AsyncLinkbot() object.
         """
-        self = cls()
-        self._proxy = await _AsyncLinkbot.create(serial_id)
-        self.rb_add_broadcast_handler = self._proxy.rb_add_broadcast_handler
-        self.close = self._proxy.close
-        self.enableButtonEvent = self._proxy.enableButtonEvent
-        self._motors = await Motors.create(self._proxy)
-        self._accelerometer = await peripherals.Accelerometer.create(self._proxy)
-        self._led = await peripherals.Led.create(self._proxy)
-        self._button = await peripherals.Button.create(self._proxy)
+        try:
+            self = cls()
+            self._proxy = await asyncio.wait_for( _AsyncLinkbot.create(serial_id), 
+                                                  DEFAULT_TIMEOUT )
+            self.rb_add_broadcast_handler = self._proxy.rb_add_broadcast_handler
+            self.close = self._proxy.close
+            self.enableButtonEvent = self._proxy.enableButtonEvent
+            self._motors = await Motors.create(self._proxy)
+            self._accelerometer = await peripherals.Accelerometer.create(self._proxy)
+            self._led = await peripherals.Led.create(self._proxy)
+            self._button = await peripherals.Button.create(self._proxy)
+            self._timeouts = _TimeoutCore(asyncio.get_event_loop())
 
-        # Enable joint events
-        await self._proxy.enableJointEvent(enable=True)
-        self._proxy.rb_add_broadcast_handler('jointEvent', self.__joint_event)
-        return self
+            # Enable joint events
+            await self._proxy.enableJointEvent(enable=True)
+            self._proxy.rb_add_broadcast_handler('jointEvent', self.__joint_event)
+            return self
+        except asyncio.TimeoutError:
+            raise asyncio.TimeoutError(
+                'Timed out trying to connect to remote robot. Please ensure '
+                'that the remote robot is on and not currently connected to '
+                'another computer.' )
 
     @property
     def motors(self):
