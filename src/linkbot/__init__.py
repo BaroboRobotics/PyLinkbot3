@@ -24,11 +24,11 @@ def _deg2rad(deg):
 
 
 class _Singleton(type):
-    instance = None
-    def __call__(cls, *args, **kw):
-        if not cls.instance:
-            cls.instance = super(_Singleton, cls).__call__(*args, **kw)
-        return cls.instance
+    _instances = {}
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            cls._instances[cls] = super(_Singleton, cls).__call__(*args, **kwargs)
+        return cls._instances[cls]
 
 class _SortedList():
     def __init__(self, key=None):
@@ -56,9 +56,7 @@ class _SortedList():
         for w in self._waiters:
             w.cancel()
 
-class _TimeoutCore():
-    __metaclass__ = _Singleton
-
+class _TimeoutCore(metaclass=_Singleton):
     def __init__(self, loop):
         self._event = asyncio.Event()
         self._cancelled = False
@@ -114,9 +112,7 @@ class _TimeoutCore():
                                 asyncio.TimeoutError('Future timeout out waiting for result.')
                                 )
 
-class _IoCore():
-    __metaclass__ = _Singleton
-
+class _IoCore(metaclass=_Singleton):
     def __init__(self):
         self._initializing = True
         self._initializing_sig = threading.Condition()
@@ -214,6 +210,26 @@ class _AsyncLinkbot(rb.Proxy):
         logging.info('Emitting bytestring to protocol layer...')
         self._linkbot_protocol.write(bytestring)
 
+class _EncoderEventHandler(metaclass=_Singleton):
+    def __init__(self):
+        self._handlers = [None, None, None]
+
+    async def event_handler(self, payload):
+        joint = payload.encoder
+        value = payload.value
+        timestamp = payload.timestamp
+        try:
+            await self._handlers[joint](_rad2deg(value), timestamp)
+        except IndexError:
+            # Don't care if the callback doesn't exist
+            pass
+        except TypeError:
+            pass
+
+    def set_event_handler(self, index, callback):
+        assert(index >= 0 and index < 3)
+        self._handlers[index] = callback
+
 class FormFactor():
     I = 0
     L = 1
@@ -248,6 +264,7 @@ class Motor:
         await self._poll_state()
         # List of futures that should be set when this joint is done moving
         self._move_waiters = []
+        self._callback_handler = _EncoderEventHandler()
         return self
 
     async def accel(self):
@@ -370,6 +387,44 @@ class Motor:
                     )
                 )
         return user_fut
+
+    async def set_event_handler(self, callback=None, granularity=2.0):
+        '''
+        Set a callback function to be executed when the motor angle
+        values on the robot change.
+
+        :param callback: async func(joint, angle, timestamp) -> None
+        :param granularity: float . The callback will only be called when a
+            motor moves away from its current position by more than
+            'granularity' degrees.
+        '''
+        if not callback:
+            # Remove the event
+            try:
+                args = self._proxy.rb_get_args_obj('enableEncoderEvent')
+                names = ['encoderOne', 'encoderTwo', 'encoderThree']
+                name = names[self._index]
+                getattr(args, name).enable = False
+                getattr(args, name).granularity = _deg2rad(granularity)
+                fut = await self._proxy.enableEncoderEvent(args)
+                await fut
+                self._event_callback = callback
+                return fut
+            except KeyError:
+                # Don't worry if the bcast handler is not there.
+                pass
+
+        else:
+            self._callback_handler.set_event_handler(self._index, callback)
+            self._proxy.rb_add_broadcast_handler( 'encoderEvent', 
+                                                  self._callback_handler.event_handler)
+            args = self._proxy.rb_get_args_obj('enableEncoderEvent')
+            names = ['encoderOne', 'encoderTwo', 'encoderThree']
+            name = names[self._index]
+            getattr(args, name).enable = True
+            getattr(args, name).granularity = _deg2rad(granularity)
+            fut = await self._proxy.enableEncoderEvent(args)
+            return fut
 
     async def set_power(self, power):
         '''

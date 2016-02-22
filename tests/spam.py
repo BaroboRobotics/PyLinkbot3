@@ -69,7 +69,7 @@ async def task(serialid, queue):
         print(serialid)
 
     async def cb(*args):
-        print('{} accel event.'.format(serialid))
+        print('{} encoder event.'.format(serialid))
 
     l = await linkbot.AsyncLinkbot.create(serialid)
     #await l.motors[0].set_power(128)
