@@ -10,7 +10,7 @@ import random
 import collections
 import logging
 
-# logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
+#logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 
 class CoroPool():
     def __init__(self, maxsize=4):
@@ -72,19 +72,29 @@ async def task(serialid, queue):
         print('{} encoder event.'.format(serialid))
 
     l = await linkbot.AsyncLinkbot.create(serialid)
-    #await l.motors[0].set_power(128)
-    fut = await l.accelerometer.set_event_handler(cb, 0.01)
+    await l.motors[0].set_power(128)
+    fut = await l.motors[0].set_event_handler(cb)
     await fut
 
     for i in range(100):
         print('ping: ', i)
         #fut = await l.motors.angles() 
+        '''
         await queue.put(
                 l.led.set_color(
                     random.randint(0, 255),
                     random.randint(0, 255),
                     random.randint(0, 255))
                 )
+        '''
+        fut = await l.led.set_color(
+                random.randint(0, 255),
+                random.randint(0, 255),
+                random.randint(0, 255))
+        await fut
+
+    await l.motors[0].set_event_handler()
+    await l.motors.stop()
 
 async def consumer(queue):
     while True:
@@ -101,6 +111,9 @@ if __name__ == '__main__':
     #loop.set_debug(enabled=True)
     linkbots = [ 'ZVT7',
                  'DGKR',
+                 'T552',
+                 'LOCL',
+                 '7ST7',
                  ]
     '''
     linkbots = [ 'ZVT7',
