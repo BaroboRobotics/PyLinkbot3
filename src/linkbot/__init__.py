@@ -134,7 +134,6 @@ class _IoCore(metaclass=_Singleton):
         self._initializing = False
         self._initializing_sig.notify_all()
         self._initializing_sig.release()
-        logging.info('Starting event loop.')
         self.loop.run_forever()
 
 class _SfpProxy(rb.Proxy):
@@ -207,10 +206,9 @@ class _AsyncLinkbot(rb.Proxy):
         self._linkbot_transport.close()
 
     async def rb_emit_to_server(self, bytestring):
-        logging.info('Emitting bytestring to protocol layer...')
         self._linkbot_protocol.write(bytestring)
 
-class _EncoderEventHandler(metaclass=_Singleton):
+class _EncoderEventHandler():
     def __init__(self):
         self._handlers = [None, None, None]
 
@@ -255,7 +253,7 @@ class Motor:
         INFINITE = 3
 
     @classmethod
-    async def create(cls, index, proxy):
+    async def create(cls, index, proxy, motors_obj):
         self = cls()
         self._controller = self.Controller.CONST_VEL
         self._index = index
@@ -264,7 +262,7 @@ class Motor:
         await self._poll_state()
         # List of futures that should be set when this joint is done moving
         self._move_waiters = []
-        self._callback_handler = _EncoderEventHandler()
+        self._motors = motors_obj
         return self
 
     async def accel(self):
@@ -415,9 +413,9 @@ class Motor:
                 pass
 
         else:
-            self._callback_handler.set_event_handler(self._index, callback)
+            self._motors._callback_handler.set_event_handler(self._index, callback)
             self._proxy.rb_add_broadcast_handler( 'encoderEvent', 
-                                                  self._callback_handler.event_handler)
+                                                  self._motors._callback_handler.event_handler)
             args = self._proxy.rb_get_args_obj('enableEncoderEvent')
             names = ['encoderOne', 'encoderTwo', 'encoderThree']
             name = names[self._index]
@@ -523,8 +521,9 @@ class Motors:
         self._proxy = proxy
         self.motors = []
         for i in range(3):
-            self.motors.append( await Motor.create(i, proxy) )
+            self.motors.append( await Motor.create(i, proxy, self) )
         self._timeouts = _TimeoutCore(asyncio.get_event_loop())
+        self._callback_handler = _EncoderEventHandler()
         return self
 
     def __getitem__(self, key):
@@ -592,10 +591,13 @@ class AsyncLinkbot():
             self._led = await peripherals.Led.create(self._proxy)
             self._button = await peripherals.Button.create(self._proxy)
             self._timeouts = _TimeoutCore(asyncio.get_event_loop())
+            self._serial_id = serial_id
 
             # Enable joint events
             await self._proxy.enableJointEvent(enable=True)
             self._proxy.rb_add_broadcast_handler('jointEvent', self.__joint_event)
+            self._proxy.rb_add_broadcast_handler('debugMessageEvent',
+                    self.__debug_message_event)
             return self
         except asyncio.TimeoutError:
             raise asyncio.TimeoutError(
@@ -646,6 +648,10 @@ class AsyncLinkbot():
     async def __joint_event(self, payload):
         # Update the motor states
         self.motors[payload.joint].state = payload.event
+
+    async def __debug_message_event(self, payload):
+        logging.warning('Received DEBUG message from robot {}: {}'
+                .format(self._serial_id, payload.bytestring))
 
 class _Linkbot():
     def __init__(self, serial_id):
