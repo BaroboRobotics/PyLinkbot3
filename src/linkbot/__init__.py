@@ -351,6 +351,9 @@ class Motor:
         return user_fut
 
     def __handle_values_result(self, conv, user_fut, fut):
+        if fut.cancelled():
+            user_fut.cancel()
+            return
         results_obj = fut.result()
         values = []
         for v in results_obj.values:
