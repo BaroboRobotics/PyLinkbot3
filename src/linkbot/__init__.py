@@ -80,7 +80,10 @@ class _TimeoutCore(metaclass=_Singleton):
         # Signature of callback should be callback(future) -> result
 
         def __handle_chain_futures(fut2, cb, fut1):
-            fut2.set_result(cb(fut1))
+            if fut1.cancelled() and not fut2.done():
+                fut2.cancel()
+            else:
+                fut2.set_result(cb(fut1))
 
         fut1.add_done_callback(
                 functools.partial(__handle_chain_futures,
@@ -154,32 +157,34 @@ class _AsyncLinkbot(rb.Proxy):
     async def create(cls, serial_id):
         logging.info('Creating async Linkbot handle to ID:{}'.format(serial_id))
         self = cls( os.path.join(_dirname, 'robot_pb2.py'))
+        self._serial_id = serial_id
         self.__daemon = _SfpProxy(
                 os.path.join(_dirname, 'daemon_pb2.py'))
 
         loop = asyncio.get_event_loop()
-        logging.info('Creating tcp connection to daemon...')
+        self.__log('Creating tcp connection to daemon...')
         (transport, protocol) = await loop.create_connection(
                 functools.partial(
                     sfp.asyncio.SfpProtocol,
                     self.__daemon.rb_deliver,
                     loop),
                 'localhost', '42000' )
-        logging.info('Daemon TCP connection established.')
+        self.__log('Daemon TCP connection established.')
+        protocol.connection_lost = self.__connection_closed
 
-        logging.info('Setting daemon protocol...')
+        self.__log('Setting daemon protocol...')
         self.__daemon.set_protocol(protocol)
-        logging.info('Initiating daemon handshake...')
+        self.__log('Initiating daemon handshake...')
         await asyncio.sleep(0.5)
         await self.__daemon.rb_connect()
-        logging.info('Daemon handshake finished.')
+        self.__log('Daemon handshake finished.')
 
-        logging.info('Resolving serial id...')
+        self.__log('Resolving serial id...')
         args = self.__daemon.rb_get_args_obj('resolveSerialId')
         args.serialId.value = serial_id
         result_fut = await self.__daemon.resolveSerialId(args)
         tcp_endpoint = await result_fut
-        logging.info('Connecting to robot endpoint...')
+        self.__log('Connecting to robot endpoint...')
         (linkbot_transport, linkbot_protocol) = \
             await loop.create_connection(
                     functools.partial(
@@ -188,13 +193,13 @@ class _AsyncLinkbot(rb.Proxy):
                         loop),
                     tcp_endpoint.endpoint.address,
                     str(tcp_endpoint.endpoint.port) )
-        logging.info('Connected to robot endpoint.')
+        self.__log('Connected to robot endpoint.')
         self._linkbot_transport = linkbot_transport
         self._linkbot_protocol = linkbot_protocol
-        logging.info('Sending connect request to robot...')
+        self.__log('Sending connect request to robot...')
         await asyncio.sleep(0.5)
         await self.rb_connect()
-        logging.info('Done sending connect request to robot.')
+        self.__log('Done sending connect request to robot.')
 
         #Get the form factor
         fut = await self.getFormFactor()
@@ -205,8 +210,22 @@ class _AsyncLinkbot(rb.Proxy):
     def close(self):
         self._linkbot_transport.close()
 
+    def __connection_closed(self, exc):
+        ''' Called when the connection is closed from the other end.
+           
+            :param exc: An exception or "None"
+        '''
+        if exc:
+            self.__log('Remote closed connection: '+str(exc), 'warning')
+        else:
+            self.__log('Remote closed connection gracefully.')
+        self.rb_close()
+
     async def rb_emit_to_server(self, bytestring):
         self._linkbot_protocol.write(bytestring)
+
+    def __log(self, msg, logtype='info'):
+        getattr(logging, logtype)(self._serial_id + ': ' + msg)
 
 class _EncoderEventHandler():
     def __init__(self):
