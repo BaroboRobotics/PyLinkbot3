@@ -4,13 +4,15 @@
 
 import asyncio
 import concurrent
+import functools
 import linkbot
 import sys
 import random
 import collections
 import logging
+import signal
 
-#logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
+logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 
 class CoroPool():
     def __init__(self, maxsize=4):
@@ -72,12 +74,12 @@ async def task(serialid, queue):
         print('{} encoder event.'.format(serialid))
 
     l = await linkbot.AsyncLinkbot.create(serialid)
-    await l.motors[0].set_power(128)
-    fut = await l.motors[0].set_event_handler(cb)
-    await fut
+    #await l.motors[0].set_power(128)
+    #fut = await l.motors[0].set_event_handler(cb)
+    #await fut
 
     for i in range(100):
-        print('ping: ', i)
+        print(serialid, 'ping: ', i)
         #fut = await l.motors.angles() 
         '''
         await queue.put(
@@ -92,14 +94,27 @@ async def task(serialid, queue):
                 random.randint(0, 255),
                 random.randint(0, 255))
         await fut
+        if fut.cancelled():
+            print('Future cancelled. Aborting...')
+            return None
 
-    await l.motors[0].set_event_handler()
-    await l.motors.stop()
+    fut = await l.led.set_color(0, 0, 255)
+    await fut
+    #await l.motors[0].set_event_handler()
+    #await l.motors.stop()
+
+    return None
 
 async def consumer(queue):
     while True:
         futs = await queue.consume()
         print('Consumed ', len(futs))
+
+def stop_everything(loop):
+    print('Stopping event loop. These tasks are not yet complete:')
+    for task in asyncio.Task.all_tasks(loop):
+        task.print_stack()
+    loop.stop()
 
 if __name__ == '__main__':
     q = CoroPool(maxsize=4)
@@ -108,12 +123,30 @@ if __name__ == '__main__':
         serialId = sys.argv[1]
 
     loop = asyncio.get_event_loop()
-    #loop.set_debug(enabled=True)
+    loop.add_signal_handler(signal.SIGINT, 
+            functools.partial(stop_everything, loop) )
+    loop.set_debug(enabled=True)
     linkbots = [ 'ZVT7',
                  'DGKR',
                  'T552',
-                 'LOCL',
                  '7ST7',
+                 'F7JD',
+                 '8Z77',
+                 'HFDJ',
+                 'HBLV',
+                 'ZRG6',
+                 '958T',
+                 'ZK53',
+                 '1ZH6',
+                 'ABCD',
+                 'TV98',
+                 #'2DPF',
+                 'L5WM',
+                 '1175',
+                 'QBL4',
+                 'R277',
+                 'T81H',
+                 'CTN3',
                  ]
     '''
     linkbots = [ 'ZVT7',
@@ -132,7 +165,7 @@ if __name__ == '__main__':
     for l in linkbots:
         tasks.append( asyncio.ensure_future(task(l, q)) )
 
-    tasks.append( asyncio.ensure_future(consumer(q)) )
+    #tasks.append( asyncio.ensure_future(consumer(q)) )
     
     rc = loop.run_until_complete(asyncio.wait(tasks))
     sys.exit(rc)
