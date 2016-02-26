@@ -10,7 +10,7 @@ import ribbonbridge as rb
 import sfp.asyncio
 import threading
 import time
-import linkbot.peripherals as peripherals
+import linkbot.async_peripherals as async_peripherals
 
 _dirname = os.path.dirname(os.path.realpath(__file__))
 
@@ -258,11 +258,11 @@ class AsyncLinkbot():
             self.rb_add_broadcast_handler = self._proxy.rb_add_broadcast_handler
             self.close = self._proxy.close
             self.enableButtonEvent = self._proxy.enableButtonEvent
-            self._accelerometer = await peripherals.Accelerometer.create(self._proxy)
-            self._button = await peripherals.Button.create(self._proxy)
-            self._buzzer = await peripherals.Buzzer.create(self._proxy)
-            self._led = await peripherals.Led.create(self._proxy)
-            self._motors = await peripherals.Motors.create(self._proxy)
+            self._accelerometer = await async_peripherals.Accelerometer.create(self._proxy)
+            self._button = await async_peripherals.Button.create(self._proxy)
+            self._buzzer = await async_peripherals.Buzzer.create(self._proxy)
+            self._led = await async_peripherals.Led.create(self._proxy)
+            self._motors = await async_peripherals.Motors.create(self._proxy)
             self._timeouts = _TimeoutCore(asyncio.get_event_loop())
             self._serial_id = serial_id
 
@@ -283,7 +283,7 @@ class AsyncLinkbot():
         """
         The Linkbot accelerometer.
 
-        See :class:`linkbot.peripherals.Accelerometer`.
+        See :class:`linkbot.async_peripherals.Accelerometer`.
         """
         return self._accelerometer
 
@@ -292,7 +292,7 @@ class AsyncLinkbot():
         """
         Access to the Linkbot's buttons. 
 
-        See :class:`linkbot.peripherals.Button`.
+        See :class:`linkbot.async_peripherals.Button`.
         """
         return self._button
 
@@ -301,7 +301,7 @@ class AsyncLinkbot():
         """
         Access to the Linkbot's buzzer.
 
-        See :class:`linkbot.peripherals.Buzzer`.
+        See :class:`linkbot.async_peripherals.Buzzer`.
         """
         return self._buzzer
 
@@ -310,7 +310,7 @@ class AsyncLinkbot():
         """
         The Linkbot multicolor LED.
 
-        See :class:`linkbot.peripherals.Led`.
+        See :class:`linkbot.async_peripherals.Led`.
         """
         return self._led
 
@@ -319,11 +319,11 @@ class AsyncLinkbot():
         """
         The motors of the Linkbot.
 
-        See :class:`linkbot.peripherals.Motors` . To access individual motors, you may do:
+        See :class:`linkbot.async_peripherals.Motors` . To access individual motors, you may do:
 
             AsyncLinkbot.motors[0].is_moving()
 
-        or similar. Also see :class:`linkbot.peripherals.Motor`
+        or similar. Also see :class:`linkbot.async_peripherals.Motor`
         """
         return self._motors
 
