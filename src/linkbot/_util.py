@@ -2,6 +2,8 @@ import asyncio
 import functools
 import math
 
+DEFAULT_TIMEOUT=10
+
 def rad2deg(rad):
     return rad*180/math.pi
 
@@ -22,3 +24,10 @@ def chain_futures(fut1, fut2, conv=lambda x: x):
                 conv)
             )
 
+def run_linkbot_coroutine(coro, loop):
+    fut = loop.run_until_complete(
+            asyncio.wait_for(
+                asyncio.ensure_future(coro),
+                DEFAULT_TIMEOUT ) )
+    result = loop.run_until_complete(asyncio.wait_for(fut, DEFAULT_TIMEOUT))
+    return result

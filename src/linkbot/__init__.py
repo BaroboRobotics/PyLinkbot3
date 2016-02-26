@@ -11,6 +11,7 @@ import sfp.asyncio
 import threading
 import time
 import linkbot.async_peripherals as async_peripherals
+import linkbot.peripherals as peripherals
 
 _dirname = os.path.dirname(os.path.realpath(__file__))
 
@@ -109,11 +110,23 @@ class _TimeoutCore(metaclass=_Singleton):
                                 )
 
 class _IoCore(metaclass=_Singleton):
+    _num_instances = 0
+
     def __init__(self):
         self._initializing = True
         self._initializing_sig = threading.Condition()
         self.loop = None
         self._thread = threading.Thread(target=self._work)
+
+    def close(self):
+        self._num_instances -= 1
+        if self._num_instances == 0:
+            self.stop_work()
+    
+    def start_work(self):
+        self._num_instances += 1
+        if self._thread.is_alive():
+            return
         self._thread.start()
 
         self._initializing_sig.acquire()
@@ -121,11 +134,15 @@ class _IoCore(metaclass=_Singleton):
             self._initializing_sig.wait(timeout=1)
         self._initializing_sig.release()
 
+    def stop_work(self):
+        self.loop.stop()
+
     def get_event_loop(self):
         return self.loop
 
     def _work(self):
         self.loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(self.loop)
         self._initializing_sig.acquire()
         self._initializing = False
         self._initializing_sig.notify_all()
@@ -365,10 +382,20 @@ class _Linkbot():
 
 class Linkbot():
     def __init__(self, serial_id):
-        self.__iocore = _IoCore()
-
-        self._proxy = asyncio.run_coroutine_threadsafe(
+        #self.__iocore = _IoCore()
+        #self.__iocore.start_work()
+        #time.sleep(1)
+        #self._loop = self.__iocore.get_event_loop()
+        self._loop = asyncio.get_event_loop()
+    
+        '''
+        fut = asyncio.run_coroutine_threadsafe(
                 AsyncLinkbot.create(serial_id),
-                self.__iocore.get_event_loop()
-                )
+                self._loop)
+        self._alinkbot = fut.result()
+        '''
+        self._alinkbot = self._loop.run_until_complete(
+                AsyncLinkbot.create(serial_id))
+
+        self.motors = peripherals.Motors(self._alinkbot.motors, self._loop)
 

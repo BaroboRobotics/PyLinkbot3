@@ -2,6 +2,7 @@ import asyncio
 import functools
 import linkbot
 import linkbot._util as util
+import weakref
 
 class Accelerometer():
     @classmethod
@@ -346,7 +347,7 @@ class Motor:
         await self._poll_state()
         # List of futures that should be set when this joint is done moving
         self._move_waiters = []
-        self._motors = motors_obj
+        self._motors = weakref.ref(motors_obj)
         return self
 
     async def accel(self):
