@@ -613,14 +613,16 @@ class Motor:
         '''
         await self._poll_state()
         fut = asyncio.Future()
+        user_fut = asyncio.Future()
         # If we are aready not moving, just return a completed future
         if not self.is_moving():
-            fut.set_result(self.state)
+            user_fut.set_result(self.state)
         else:
             self._move_waiters.append(fut)
             poll_fut = asyncio.ensure_future(self.__poll_movewait())
             fut = asyncio.gather(poll_fut, fut)
-        return fut
+            util.chain_futures(fut, user_fut, conv=lambda x: None)
+        return user_fut
 
     async def __poll_movewait(self):
         '''
@@ -630,7 +632,7 @@ class Motor:
         while self._move_waiters:
             fut = self._move_waiters[0]
             try:
-                await asyncio.shield(asyncio.wait_for(fut, 2))
+                await asyncio.wait_for(asyncio.shield(fut), 2)
             except asyncio.TimeoutError:
                 await self._poll_state()
             else:
@@ -723,6 +725,16 @@ class Motors:
 
         fut = await self._proxy.move(args_obj)
         return fut
+
+    async def move_wait(self, mask=0x07):
+        futs = []
+        for i in range(3):
+            if mask & (1<<i):
+                futs.append( await self.motors[i].move_wait() )
+        user_fut = asyncio.Future()
+        fut = asyncio.gather(*tuple(futs))
+        util.chain_futures(fut, user_fut, conv=lambda x: None)
+        return user_fut
 
     async def stop(self, mask=0x07):
         ''' Immediately stop all motors.
