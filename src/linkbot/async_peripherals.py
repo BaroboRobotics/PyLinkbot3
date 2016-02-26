@@ -518,7 +518,8 @@ class Motor:
         user_fut.set_result( fut.result() )
 
     def is_moving(self):
-        if self._state in [self.State.COAST, self.State.HOLD]:
+        if self._state in [peripherals.Motor.State.COAST, 
+                           peripherals.Motor.State.HOLD]:
             return False
         else:
             return True
@@ -529,7 +530,7 @@ class Motor:
         return self._state
     @state.setter
     def state(self, value):
-        assert(value in self.State.__dict__.values())
+        assert(value in peripherals.Motor.State.__dict__.values())
         self._state = value
         if not self.is_moving():
             for fut in self._move_waiters:
@@ -708,9 +709,9 @@ class Motors:
         args_obj = self._proxy.rb_get_args_obj('move')
         names = ['motorOneGoal', 'motorTwoGoal', 'motorThreeGoal']
         if relative:
-            move_type = Motor._MoveType.RELATIVE
+            move_type = peripherals.Motor._MoveType.RELATIVE
         else:
-            move_type = Motor._MoveType.ABSOLUTE
+            move_type = peripherals.Motor._MoveType.ABSOLUTE
         for i,name in enumerate(names):
             if mask&(1<<i):
                 getattr(args_obj,name).type = move_type
