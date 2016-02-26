@@ -12,8 +12,8 @@ It is meant to be used in an :mod:`asyncio` coroutine. The class itself
 contains several child classes that represent various peripherals on the
 Linkbot, such as the motors, buttons, accelerometer, and LED. 
 
-Here is a small piece of sample code showing how to move a Linkbot's motors to
-their zero positions using the asynchronous :class:`linkbot.AsyncLinkbot` object. 
+Here is a small piece of sample code showing how to move a Linkbot's motors 
+using the asynchronous :class:`linkbot.AsyncLinkbot` object. 
 
 .. literalinclude:: snippets/demo1.py
    :language: python
