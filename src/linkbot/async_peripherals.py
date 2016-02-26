@@ -2,6 +2,7 @@ import asyncio
 import functools
 import linkbot
 import linkbot._util as util
+import linkbot.peripherals as peripherals
 import weakref
 
 class Accelerometer():
@@ -320,30 +321,13 @@ class Buzzer():
         return fut
 
 class Motor:
-    class Controller:
-        PID = 1
-        CONST_VEL = 2
-        SMOOTH = 3
-        ACCEL = 4
-
-    class State:
-        COAST = 0
-        HOLD = 1
-        MOVING = 2
-        ERROR = 4
-
-    class _MoveType:
-        ABSOLUTE = 1
-        RELATIVE = 2
-        INFINITE = 3
-
     @classmethod
     async def create(cls, index, proxy, motors_obj):
         self = cls()
-        self._controller = self.Controller.CONST_VEL
+        self._controller = peripherals.Motor.Controller.CONST_VEL
         self._index = index
         self._proxy = proxy
-        self._state = Motor.State.COAST
+        self._state = peripherals.Motor.State.COAST
         await self._poll_state()
         # List of futures that should be set when this joint is done moving
         self._move_waiters = []
@@ -398,9 +382,9 @@ class Motor:
 
     async def _poll_state(self):
         if (self._index == 1) and (self._proxy.form_factor == linkbot.FormFactor.I):
-            self._state = Motor.State.COAST
+            self._state = peripherals.Motor.State.COAST
         elif (self._index == 2) and (self._proxy.form_factor == linkbot.FormFactor.L):
-            self._state = Motor.State.COAST
+            self._state = peripherals.Motor.State.COAST
         else:
             fut = await self.__get_motor_controller_attribute(
                     'getJointStates' )
@@ -525,7 +509,7 @@ class Motor:
         name = names[self._index]
         getattr(args_obj,name).type = Motor._MoveType.INFINITE
         getattr(args_obj,name).goal = power
-        getattr(args_obj,name).controller = Motor.Controller.PID
+        getattr(args_obj,name).controller = peripherals.Motor.Controller.PID
 
         fut = await self._proxy.move(args_obj)
         return fut
@@ -552,7 +536,8 @@ class Motor:
                 fut.set_result(self._state)
             self._move_waiters.clear()
 
-    async def begin_accel(self, timeout, v0 = 0.0, state_on_timeout=State.COAST):
+    async def begin_accel(self, timeout, v0 = 0.0,
+            state_on_timeout=peripherals.Motor.State.COAST):
         mask = 1<<self._index
         args_obj = self._proxy.rb_get_args_obj('move')
         names = ['motorOneGoal', 'motorTwoGoal', 'motorThreeGoal']
@@ -560,14 +545,15 @@ class Motor:
             if mask&(1<<i):
                 getattr(args_obj,name).type = self._MoveType.INFINITE
                 getattr(args_obj,name).goal = v0
-                getattr(args_obj,name).controller = self.Controller.ACCEL
+                getattr(args_obj,name).controller = peripherals.Motor.Controller.ACCEL
                 getattr(args_obj,name).timeout = timeout
                 getattr(args_obj,name).modeOnTimeout = state_on_timeout
 
         fut = await self._proxy.move(args_obj)
         return fut
 
-    async def begin_move(self, timeout = 0, forward=True, state_on_timeout=State.COAST):
+    async def begin_move(self, timeout = 0, forward=True,
+            state_on_timeout=peripherals.Motor.State.COAST):
         mask = 1<<self._index
         args_obj = self._proxy.rb_get_args_obj('move')
         names = ['motorOneGoal', 'motorTwoGoal', 'motorThreeGoal']
@@ -579,14 +565,14 @@ class Motor:
             if mask&(1<<i):
                 getattr(args_obj,name).type = self._MoveType.INFINITE
                 getattr(args_obj,name).goal = goal
-                getattr(args_obj,name).controller = self.Controller.CONST_VEL
+                getattr(args_obj,name).controller = peripherals.Motor.Controller.CONST_VEL
                 getattr(args_obj,name).timeout = timeout
                 getattr(args_obj,name).modeOnTimeout = state_on_timeout
 
         fut = await self._proxy.move(args_obj)
         return fut
 
-    async def move(self, angle, relative=False):
+    async def move(self, angle, relative=True):
         ''' Move the motor.
 
         :param angle: The angle to move the motor.
@@ -690,7 +676,7 @@ class Motors:
         results += (results_obj.timestamp,)
         return results
 
-    async def move(self, angles, mask=0x07, relative=False, timeouts=None,
+    async def move(self, angles, mask=0x07, relative=True, timeouts=None,
             states_on_timeout = None):
         ''' Move a Linkbot's joints
 
@@ -705,6 +691,18 @@ class Motors:
             * 5: joints 1 and 3
             * 6: joints 2 and 3
             * 7: all 3 joints
+            
+        :param relative: This flag controls whether to move a relative distance
+            from the motor's current position or to an absolute position.
+        :type relative: bool
+        :param timeouts: Sets timeouts for each motor's movement, in seconds. If
+            the timeout expires while the motor is in motion, the motor will
+            transition to the motor state specified by the ``states_on_timeout``
+            parameter.
+        :type timeouts: [float, float, float]
+        :type states_on_timeout: [ linkbot.peripherals.Motor.State,
+                                   linkbot.peripherals.Motor.State,
+                                   linkbot.peripherals.Motor.State ]
         '''
         angles = list(map(util.deg2rad, angles))
         args_obj = self._proxy.rb_get_args_obj('move')
