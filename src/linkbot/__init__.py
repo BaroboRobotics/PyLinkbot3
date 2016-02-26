@@ -109,46 +109,6 @@ class _TimeoutCore(metaclass=_Singleton):
                                 asyncio.TimeoutError('Future timeout out waiting for result.')
                                 )
 
-class _IoCore(metaclass=_Singleton):
-    _num_instances = 0
-
-    def __init__(self):
-        self._initializing = True
-        self._initializing_sig = threading.Condition()
-        self.loop = None
-        self._thread = threading.Thread(target=self._work)
-
-    def close(self):
-        self._num_instances -= 1
-        if self._num_instances == 0:
-            self.stop_work()
-    
-    def start_work(self):
-        self._num_instances += 1
-        if self._thread.is_alive():
-            return
-        self._thread.start()
-
-        self._initializing_sig.acquire()
-        while self._initializing:
-            self._initializing_sig.wait(timeout=1)
-        self._initializing_sig.release()
-
-    def stop_work(self):
-        self.loop.stop()
-
-    def get_event_loop(self):
-        return self.loop
-
-    def _work(self):
-        self.loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(self.loop)
-        self._initializing_sig.acquire()
-        self._initializing = False
-        self._initializing_sig.notify_all()
-        self._initializing_sig.release()
-        self.loop.run_forever()
-
 class _SfpProxy(rb.Proxy):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -352,40 +312,8 @@ class AsyncLinkbot():
         logging.warning('Received DEBUG message from robot {}: {}'
                 .format(self._serial_id, payload.bytestring))
 
-class _Linkbot():
-    def __init__(self, serial_id):
-        self.__iocore = _IoCore()
-
-        self._proxy = asyncio.run_coroutine_threadsafe(
-                AsyncLinkbot.create(serial_id),
-                self.__iocore.get_event_loop()
-                )
-
-    def __getattr__(self, name):
-        if name not in self._proxy.rb_procedures():
-            raise AttributeError('{} is not a Linkbot member function.'
-                    .format(name) )
-        return functools.partial(
-                self._handle_rpc, name
-                )
-
-    def _handle_rpc(self, name, args_obj=None, **kw):
-        if not args_obj:
-            args_obj = self._proxy.rb_get_args_obj()
-            for k,v in kw.items():
-                setattr(args_obj, k, v)
-        fut = asyncio.run_coroutine_threadsafe(
-                getattr(self._proxy, name)(args_obj),
-                self.__iocore.get_event_loop()
-                )
-        return fut
-
 class Linkbot():
     def __init__(self, serial_id):
-        #self.__iocore = _IoCore()
-        #self.__iocore.start_work()
-        #time.sleep(1)
-        #self._loop = self.__iocore.get_event_loop()
         self._loop = asyncio.get_event_loop()
     
         '''
