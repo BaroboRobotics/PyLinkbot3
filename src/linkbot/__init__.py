@@ -16,13 +16,6 @@ _dirname = os.path.dirname(os.path.realpath(__file__))
 
 DEFAULT_TIMEOUT = 10
 
-def _rad2deg(rad):
-    return rad*180/math.pi
-
-def _deg2rad(deg):
-    return deg*math.pi/180
-
-
 class _Singleton(type):
     _instances = {}
     def __call__(cls, *args, **kwargs):
@@ -227,10 +220,6 @@ class _AsyncLinkbot(rb.Proxy):
     def __log(self, msg, logtype='info'):
         getattr(logging, logtype)(self._serial_id + ': ' + msg)
 
-class _EncoderEventHandler():
-    def __init__(self):
-        self._handlers = [None, None, None]
-
     async def event_handler(self, payload):
         joint = payload.encoder
         value = payload.value
@@ -253,376 +242,6 @@ class FormFactor():
     T = 2
     DONGLE = 3
 
-class Motor:
-    class Controller:
-        PID = 1
-        CONST_VEL = 2
-        SMOOTH = 3
-        ACCEL = 4
-
-    class State:
-        COAST = 0
-        HOLD = 1
-        MOVING = 2
-        ERROR = 4
-
-    class _MoveType:
-        ABSOLUTE = 1
-        RELATIVE = 2
-        INFINITE = 3
-
-    @classmethod
-    async def create(cls, index, proxy, motors_obj):
-        self = cls()
-        self._controller = self.Controller.CONST_VEL
-        self._index = index
-        self._proxy = proxy
-        self._state = Motor.State.COAST
-        await self._poll_state()
-        # List of futures that should be set when this joint is done moving
-        self._move_waiters = []
-        self._motors = motors_obj
-        return self
-
-    async def accel(self):
-        # Get the acceleration setting of a motor
-        return await self.__get_motor_controller_attribute(
-                'getMotorControllerAlphaI',
-                conv=_rad2deg
-                )
-
-    async def controller(self):
-        '''The movement controller.
-
-        This property controls the strategy with which the motors are moved.
-        Legal values are:
-        * AsyncLinkbot.MoveController.PID: Move the motors directly with the
-        internal PID controller. This is typically the fastest way to get a
-        motor from one position to another. The motor may experience some
-        overshoot and underdamped response when moving larger distances.
-        * AsyncLinkbot.MoveController.CONST_VEL: Move the motor at a constant
-        velocity. This motor controller attemts to accelerate and decelerate
-        a motor infinitely fast to and from a constant velocity to move the
-        motor from one position to the next. The velocity can be controlled
-        by setting the property `omega`.
-        * AsyncLinkbot.MoveController.SMOOTH: Move the motor with specified
-        acceleration, maximum velocity, and deceleration. For this type of
-        movement, access maximum velocity with property `omega`,
-        acceleration with property `acceleration`, and deceleration with property
-        `deceleration`.
-        '''
-        fut = asyncio.Future()
-        fut.set_result(self._controller)
-        return fut
-
-    async def decel(self):
-        # Get the deceleration setting of a motor
-        return await self.__get_motor_controller_attribute(
-                'getMotorControllerAlphaF',
-                conv=_rad2deg
-                )
-
-    async def omega(self):
-        # Get the rotational velocity setting of a motor
-        return await self.__get_motor_controller_attribute(
-                'getMotorControllerOmega',
-                conv=_rad2deg
-                )
-
-    async def _poll_state(self):
-        if (self._index == 1) and (self._proxy.form_factor == FormFactor.I):
-            self._state = Motor.State.COAST
-        elif (self._index == 2) and (self._proxy.form_factor == FormFactor.L):
-            self._state = Motor.State.COAST
-        else:
-            fut = await self.__get_motor_controller_attribute(
-                    'getJointStates' )
-            self._state = await fut
-
-    async def __get_motor_controller_attribute(self, name, conv=lambda x: x):
-        # 'conv' is a conversion function, in case the returned values need to
-        # be converted to/from radians. Use 'id' for null conversion
-        fut = await getattr(self._proxy, name)()
-        user_fut = asyncio.Future()
-        fut.add_done_callback(
-                functools.partial(
-                    self.__handle_values_result, conv, user_fut)
-                )
-        return user_fut
-
-    def __handle_values_result(self, conv, user_fut, fut):
-        if fut.cancelled():
-            user_fut.cancel()
-            return
-        results_obj = fut.result()
-        values = []
-        for v in results_obj.values:
-            values.append(conv(v))
-        if self._proxy.form_factor == FormFactor.I:
-            values.append(0.0)
-        elif self._proxy.form_factor == FormFactor.L:
-            values.insert(1, 0.0)
-        user_fut.set_result(values[self._index])
-
-    async def set_accel(self, value):
-        # See :func:`accel`
-        return await self.__set_motor_controller_attribute(
-                'setMotorControllerAlphaI',
-                _deg2rad(value)
-                )
-
-    async def set_controller(self, value):
-        # See "controller"
-        if value < 1 or value > 3:
-            raise RangeError('Motor controller must be a value in range [1,3]')
-        self._controller = value
-        fut = asyncio.Future()
-        fut.set_result(None)
-        return fut
-
-    async def set_decel(self, value):
-        # See :func:`decel`
-        return await self.__set_motor_controller_attribute(
-                'setMotorControllerAlphaF',
-                _deg2rad(value)
-                )
-
-    async def set_omega(self, value):
-        # See :func:`omega`
-        return await self.__set_motor_controller_attribute(
-                'setMotorControllerOmega',
-                _deg2rad(value)
-                )
-
-    async def __set_motor_controller_attribute(self, name, value):
-        args_obj = self._proxy.rb_get_args_obj(name)
-        args_obj.mask = 1<<self._index
-        args_obj.values.append(value)
-        fut = await getattr(self._proxy, name)(args_obj)
-        user_fut = asyncio.Future()
-        fut.add_done_callback(
-                functools.partial(
-                    self.__handle_set_attribute,
-                    user_fut
-                    )
-                )
-        return user_fut
-
-    async def set_event_handler(self, callback=None, granularity=2.0):
-        '''
-        Set a callback function to be executed when the motor angle
-        values on the robot change.
-
-        :param callback: async func(joint, angle, timestamp) -> None
-        :param granularity: float . The callback will only be called when a
-            motor moves away from its current position by more than
-            'granularity' degrees.
-        '''
-        if not callback:
-            # Remove the event
-            try:
-                args = self._proxy.rb_get_args_obj('enableEncoderEvent')
-                names = ['encoderOne', 'encoderTwo', 'encoderThree']
-                name = names[self._index]
-                getattr(args, name).enable = False
-                getattr(args, name).granularity = _deg2rad(granularity)
-                fut = await self._proxy.enableEncoderEvent(args)
-                await fut
-                self._event_callback = callback
-                return fut
-            except KeyError:
-                # Don't worry if the bcast handler is not there.
-                pass
-
-        else:
-            self._motors._callback_handler.set_event_handler(self._index, callback)
-            self._proxy.rb_add_broadcast_handler( 'encoderEvent', 
-                                                  self._motors._callback_handler.event_handler)
-            args = self._proxy.rb_get_args_obj('enableEncoderEvent')
-            names = ['encoderOne', 'encoderTwo', 'encoderThree']
-            name = names[self._index]
-            getattr(args, name).enable = True
-            getattr(args, name).granularity = _deg2rad(granularity)
-            fut = await self._proxy.enableEncoderEvent(args)
-            return fut
-
-    async def set_power(self, power):
-        '''
-        Set the motor's power.
-
-        :type power: int [-255,255]
-        '''
-        
-        args_obj = self._proxy.rb_get_args_obj('move')
-        names = ['motorOneGoal', 'motorTwoGoal', 'motorThreeGoal']
-        name = names[self._index]
-        getattr(args_obj,name).type = Motor._MoveType.INFINITE
-        getattr(args_obj,name).goal = power
-        getattr(args_obj,name).controller = Motor.Controller.PID
-
-        fut = await self._proxy.move(args_obj)
-        return fut
-
-    def __handle_set_attribute(self, user_fut, fut):
-        user_fut.set_result( fut.result() )
-
-    def is_moving(self):
-        if self._state in [self.State.COAST, self.State.HOLD]:
-            return False
-        else:
-            return True
-
-    @property
-    def state(self):
-        # The current joint state. One of :class:`Motor.State`
-        return self._state
-    @state.setter
-    def state(self, value):
-        assert(value in self.State.__dict__.values())
-        self._state = value
-        if not self.is_moving():
-            for fut in self._move_waiters:
-                fut.set_result(self._state)
-            self._move_waiters.clear()
-
-    async def begin_accel(self, timeout, v0 = 0.0, state_on_timeout=State.COAST):
-        mask = 1<<self._index
-        args_obj = self._proxy.rb_get_args_obj('move')
-        names = ['motorOneGoal', 'motorTwoGoal', 'motorThreeGoal']
-        for i,name in enumerate(names):
-            if mask&(1<<i):
-                getattr(args_obj,name).type = self._MoveType.INFINITE
-                getattr(args_obj,name).goal = v0
-                getattr(args_obj,name).controller = self.Controller.ACCEL
-                getattr(args_obj,name).timeout = timeout
-                getattr(args_obj,name).modeOnTimeout = state_on_timeout
-
-        fut = await self._proxy.move(args_obj)
-        return fut
-
-    async def begin_move(self, timeout = 0, forward=True, state_on_timeout=State.COAST):
-        mask = 1<<self._index
-        args_obj = self._proxy.rb_get_args_obj('move')
-        names = ['motorOneGoal', 'motorTwoGoal', 'motorThreeGoal']
-        if forward:
-            goal = 1
-        else:
-            goal = -1
-        for i,name in enumerate(names):
-            if mask&(1<<i):
-                getattr(args_obj,name).type = self._MoveType.INFINITE
-                getattr(args_obj,name).goal = goal
-                getattr(args_obj,name).controller = self.Controller.CONST_VEL
-                getattr(args_obj,name).timeout = timeout
-                getattr(args_obj,name).modeOnTimeout = state_on_timeout
-
-        fut = await self._proxy.move(args_obj)
-        return fut
-
-    async def move(self, angle, relative=False):
-        self._motors.move(
-                [angle, angle, angle],
-                mask=1<<self._index,
-                relative=relative)
-
-    async def move_wait(self):
-        '''
-        Wait for a motor to stop moving.
-
-        Returns an asyncio.Future(). The result of the future is set when the
-        motor has stopped moving, either by transitioning into a "COAST" state
-        or "HOLD" state.
-        '''
-        await self._poll_state()
-        fut = asyncio.Future()
-        # If we are aready not moving, just return a completed future
-        if not self.is_moving():
-            fut.set_result(self.state)
-        else:
-            self._move_waiters.append(fut)
-        return fut
-
-class Motors:
-    @classmethod
-    async def create(cls, proxy):
-        self = cls()
-        self._proxy = proxy
-        self.motors = []
-        for i in range(3):
-            self.motors.append( await Motor.create(i, proxy, self) )
-        self._timeouts = _TimeoutCore(asyncio.get_event_loop())
-        self._callback_handler = _EncoderEventHandler()
-        return self
-
-    def __getitem__(self, key):
-        return self.motors[key]
-
-    async def angles(self):
-        ''' Get the current joint angles.
-
-        :returns: (angle1, angle2, angle3, timestamp) . These are the three
-            robot joint angles and a timestamp from the robot which is the
-            number of milliseconds the robot has been on.
-        :rtype: (float, float, float, int)
-        '''
-
-        fut = await self._proxy.getEncoderValues()
-        user_fut = asyncio.Future()
-        await self._timeouts.chain_futures(fut, user_fut, self.__angles)
-        return user_fut
-
-    def __angles(self, fut):
-        results_obj = fut.result()
-        results = ()
-        for angle in results_obj.values:
-            results += (_rad2deg(angle),)
-        results += (results_obj.timestamp,)
-        return results
-
-    async def move(self, angles, mask=0x07, relative=False, timeouts=None,
-            states_on_timeout = None):
-        ''' Move a Linkbot's joints
-
-        :param angles: A list of angles in degrees
-        :type angles: [float, float, float]
-        :param mask: Which joints to actually move. Valid values are:
-            * 1: joint 1
-            * 2: joint 2
-            * 3: joints 1 and 2
-            * 4: joint 3
-            * 5: joints 1 and 3
-            * 6: joints 2 and 3
-            * 7: all 3 joints
-        '''
-        angles = list(map(_deg2rad, angles))
-        args_obj = self._proxy.rb_get_args_obj('move')
-        names = ['motorOneGoal', 'motorTwoGoal', 'motorThreeGoal']
-        if relative:
-            move_type = Motor._MoveType.RELATIVE
-        else:
-            move_type = Motor._MoveType.ABSOLUTE
-        for i,name in enumerate(names):
-            if mask&(1<<i):
-                getattr(args_obj,name).type = move_type
-                getattr(args_obj,name).goal = angles[i]
-                fut = await self.motors[i].controller()
-                getattr(args_obj,name).controller = await fut
-                if timeouts:
-                    getattr(args_obj,name).timeout = timeouts[i]
-                if states_on_timeout:
-                    getattr(args_obj,name).modeOnTimeout = states_on_timeout[i]
-
-        fut = await self._proxy.move(args_obj)
-        return fut
-
-    async def stop(self, mask=0x07):
-        ''' Immediately stop all motors.
-
-        :param mask: See :func:`linkbot.Motors.move`
-        '''
-        fut = await self._proxy.stop(mask=mask)
-        return fut
-
 class AsyncLinkbot():
     @classmethod
     async def create(cls, serial_id):
@@ -639,10 +258,11 @@ class AsyncLinkbot():
             self.rb_add_broadcast_handler = self._proxy.rb_add_broadcast_handler
             self.close = self._proxy.close
             self.enableButtonEvent = self._proxy.enableButtonEvent
-            self._motors = await Motors.create(self._proxy)
             self._accelerometer = await peripherals.Accelerometer.create(self._proxy)
-            self._led = await peripherals.Led.create(self._proxy)
             self._button = await peripherals.Button.create(self._proxy)
+            self._buzzer = await peripherals.Buzzer.create(self._proxy)
+            self._led = await peripherals.Led.create(self._proxy)
+            self._motors = await peripherals.Motors.create(self._proxy)
             self._timeouts = _TimeoutCore(asyncio.get_event_loop())
             self._serial_id = serial_id
 
@@ -657,19 +277,6 @@ class AsyncLinkbot():
                 'Timed out trying to connect to remote robot. Please ensure '
                 'that the remote robot is on and not currently connected to '
                 'another computer.' )
-
-    @property
-    def motors(self):
-        """
-        The motors of the Linkbot.
-
-        See :class:`linkbot.Motors` . To access individual motors, you may do:
-
-            AsyncLinkbot.motors[0].is_moving()
-
-        or similar. Also see :class:`linkbot.Motor`
-        """
-        return self._motors
 
     @property
     def accelerometer(self):
@@ -690,6 +297,15 @@ class AsyncLinkbot():
         return self._button
 
     @property
+    def buzzer(self):
+        """
+        Access to the Linkbot's buzzer.
+
+        See :class:`linkbot.peripherals.Buzzer`.
+        """
+        return self._buzzer
+
+    @property
     def led(self):
         """
         The Linkbot multicolor LED.
@@ -697,6 +313,19 @@ class AsyncLinkbot():
         See :class:`linkbot.peripherals.Led`.
         """
         return self._led
+
+    @property
+    def motors(self):
+        """
+        The motors of the Linkbot.
+
+        See :class:`linkbot.peripherals.Motors` . To access individual motors, you may do:
+
+            AsyncLinkbot.motors[0].is_moving()
+
+        or similar. Also see :class:`linkbot.peripherals.Motor`
+        """
+        return self._motors
 
     async def __joint_event(self, payload):
         # Update the motor states
@@ -734,4 +363,12 @@ class _Linkbot():
                 )
         return fut
 
+class Linkbot():
+    def __init__(self, serial_id):
+        self.__iocore = _IoCore()
+
+        self._proxy = asyncio.run_coroutine_threadsafe(
+                AsyncLinkbot.create(serial_id),
+                self.__iocore.get_event_loop()
+                )
 

@@ -8,4 +8,5 @@ async def task():
 
 loop = asyncio.get_event_loop()
 loop.run_until_complete(task())
+loop.close()
 
