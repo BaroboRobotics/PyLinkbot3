@@ -519,6 +519,12 @@ class Motor:
         fut = await self._proxy.move(args_obj)
         return fut
 
+    async def move(self, angle, relative=False):
+        self._motors.move(
+                [angle, angle, angle],
+                mask=1<<self._index,
+                relative=relative)
+
     async def move_wait(self):
         '''
         Wait for a motor to stop moving.
@@ -552,6 +558,14 @@ class Motors:
         return self.motors[key]
 
     async def angles(self):
+        ''' Get the current joint angles.
+
+        :returns: (angle1, angle2, angle3, timestamp) . These are the three
+            robot joint angles and a timestamp from the robot which is the
+            number of milliseconds the robot has been on.
+        :rtype: (float, float, float, int)
+        '''
+
         fut = await self._proxy.getEncoderValues()
         user_fut = asyncio.Future()
         await self._timeouts.chain_futures(fut, user_fut, self.__angles)
@@ -565,8 +579,21 @@ class Motors:
         results += (results_obj.timestamp,)
         return results
 
-    async def set_angles(self, angles, mask=0x07, relative=False, timeouts=None,
+    async def move(self, angles, mask=0x07, relative=False, timeouts=None,
             states_on_timeout = None):
+        ''' Move a Linkbot's joints
+
+        :param angles: A list of angles in degrees
+        :type angles: [float, float, float]
+        :param mask: Which joints to actually move. Valid values are:
+            * 1: joint 1
+            * 2: joint 2
+            * 3: joints 1 and 2
+            * 4: joint 3
+            * 5: joints 1 and 3
+            * 6: joints 2 and 3
+            * 7: all 3 joints
+        '''
         angles = list(map(_deg2rad, angles))
         args_obj = self._proxy.rb_get_args_obj('move')
         names = ['motorOneGoal', 'motorTwoGoal', 'motorThreeGoal']
@@ -589,6 +616,10 @@ class Motors:
         return fut
 
     async def stop(self, mask=0x07):
+        ''' Immediately stop all motors.
+
+        :param mask: See :func:`linkbot.Motors.move`
+        '''
         fut = await self._proxy.stop(mask=mask)
         return fut
 

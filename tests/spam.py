@@ -1,6 +1,28 @@
 #!/usr/bin/env python3
 
-# Tested functions:
+''' Test robots:
+    linkbots = [ 'ZVT7',
+                 'DGKR',
+                 'T552',
+                 '7ST7',
+                 'F7JD',
+                 '8Z77',
+                 'HFDJ',
+                 'HBLV',
+                 'ZRG6',
+                 '958T',
+                 'ZK53',
+                 '1ZH6',
+                 'ABCD',
+                 'TV98',
+                 'L5WM',
+                 '1175',
+                 'QBL4',
+                 'R277',
+                 'T81H',
+                 'CTN3',
+                 ]
+'''
 
 import asyncio
 import concurrent
@@ -12,7 +34,7 @@ import collections
 import logging
 import signal
 
-logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
+#logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 
 class CoroPool():
     def __init__(self, maxsize=4):
@@ -140,7 +162,6 @@ if __name__ == '__main__':
                  '1ZH6',
                  'ABCD',
                  'TV98',
-                 #'2DPF',
                  'L5WM',
                  '1175',
                  'QBL4',
@@ -168,4 +189,5 @@ if __name__ == '__main__':
     #tasks.append( asyncio.ensure_future(consumer(q)) )
     
     rc = loop.run_until_complete(asyncio.wait(tasks))
+    loop.close()
     sys.exit(rc)
