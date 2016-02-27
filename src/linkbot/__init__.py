@@ -12,17 +12,11 @@ import threading
 import time
 import linkbot.async_peripherals as async_peripherals
 import linkbot.peripherals as peripherals
+import linkbot._util as util
 
 _dirname = os.path.dirname(os.path.realpath(__file__))
 
 DEFAULT_TIMEOUT = 10
-
-class _Singleton(type):
-    _instances = {}
-    def __call__(cls, *args, **kwargs):
-        if cls not in cls._instances:
-            cls._instances[cls] = super(_Singleton, cls).__call__(*args, **kwargs)
-        return cls._instances[cls]
 
 class _SortedList():
     def __init__(self, key=None):
@@ -50,7 +44,7 @@ class _SortedList():
         for w in self._waiters:
             w.cancel()
 
-class _TimeoutCore(metaclass=_Singleton):
+class _TimeoutCore(metaclass=util.Singleton):
     def __init__(self, loop):
         self._event = asyncio.Event()
         self._cancelled = False
@@ -202,7 +196,7 @@ class _AsyncLinkbot(rb.Proxy):
         value = payload.value
         timestamp = payload.timestamp
         try:
-            await self._handlers[joint](_rad2deg(value), timestamp)
+            await self._handlers[joint](util.rad2deg(value), timestamp)
         except IndexError:
             # Don't care if the callback doesn't exist
             pass
@@ -322,10 +316,12 @@ class Linkbot():
         :raises concurrent.futures._base.TimeoutError: if the remote robot
             cannot be be reached.
         '''
-        self._loop = asyncio.get_event_loop()
+        self.__io_core = util.IoCore()
+        self._loop = self.__io_core.get_event_loop()
     
-        self._alinkbot = self._loop.run_until_complete(
-                AsyncLinkbot.create(serial_id))
+        fut = asyncio.run_coroutine_threadsafe(
+                AsyncLinkbot.create(serial_id), self._loop)
+        self._alinkbot = fut.result()
         
         self._motors = peripherals.Motors(self._alinkbot.motors, self._loop)
 

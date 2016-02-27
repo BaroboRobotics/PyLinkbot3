@@ -667,7 +667,7 @@ class Motors:
             value = payload.value
             timestamp = payload.timestamp
             try:
-                await self._handlers[joint](_rad2deg(value), timestamp)
+                await self._handlers[joint](util.rad2deg(value), timestamp)
             except IndexError:
                 # Don't care if the callback doesn't exist
                 pass
