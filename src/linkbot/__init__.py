@@ -314,16 +314,32 @@ class AsyncLinkbot():
 
 class Linkbot():
     def __init__(self, serial_id):
+        ''' Create a new Linkbot handle.
+
+        :param serial_id: The 4 digit alpha-numeric unique Linkbot identifier
+            printed on the top of the Linkbot.
+        :type serial_id: string
+        :raises concurrent.futures._base.TimeoutError: if the remote robot
+            cannot be be reached.
+        '''
         self._loop = asyncio.get_event_loop()
     
-        '''
-        fut = asyncio.run_coroutine_threadsafe(
-                AsyncLinkbot.create(serial_id),
-                self._loop)
-        self._alinkbot = fut.result()
-        '''
         self._alinkbot = self._loop.run_until_complete(
                 AsyncLinkbot.create(serial_id))
+        
+        self._motors = peripherals.Motors(self._alinkbot.motors, self._loop)
 
-        self.motors = peripherals.Motors(self._alinkbot.motors, self._loop)
+    @property
+    def motors(self):
+        """
+        The motors of the Linkbot.
+
+        See :class:`linkbot.peripherals.Motors` . To access individual motors,
+        you may do::
+
+            Linkbot.motors[0].is_moving()
+
+        or similar. Also see :class:`linkbot.peripherals.Motor`
+        """
+        return self._motors
 

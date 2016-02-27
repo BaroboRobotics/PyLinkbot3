@@ -1,11 +1,11 @@
-The AsyncLinkbot class
+
+The AsyncLinkbot Class
 ======================
 
 .. toctree::
    :maxdepth: 2
    
-   motors.rst
-   peripherals.rst
+   async_peripherals.rst
 
 The :class:`linkbot.AsyncLinkbot` class is an asynchronous handle to a remote Linkbot.
 It is meant to be used in an :mod:`asyncio` coroutine. The class itself

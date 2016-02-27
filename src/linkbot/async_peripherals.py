@@ -321,6 +321,11 @@ class Buzzer():
         return fut
 
 class Motor:
+    '''
+    The asynchronous representation of a Linkbot's motor.
+
+    See also :class:`linkbot.peripherals.Motor` for the synchronous counterpart.
+    '''
     @classmethod
     async def create(cls, index, proxy, motors_obj):
         self = cls()
@@ -331,11 +336,16 @@ class Motor:
         await self._poll_state()
         # List of futures that should be set when this joint is done moving
         self._move_waiters = []
-        self._motors = weakref.ref(motors_obj)
+        #self._motors = weakref.ref(motors_obj)
+        self._motors = motors_obj
         return self
 
     async def accel(self):
-        # Get the acceleration setting of a motor
+        ''' Get the acceleration setting of a motor
+
+        :rtype: float
+        :returns: The acceleration setting in units of deg/s/s
+        '''
         return await self.__get_motor_controller_attribute(
                 'getMotorControllerAlphaI',
                 conv=util.rad2deg
@@ -347,16 +357,16 @@ class Motor:
         This property controls the strategy with which the motors are moved.
         Legal values are:
 
-        * AsyncLinkbot.MoveController.PID: Move the motors directly with the
+        * :const:`linkbot.peripherals.Motor.Controller.PID`: Move the motors directly with the
           internal PID controller. This is typically the fastest way to get a
           motor from one position to another. The motor may experience some
           overshoot and underdamped response when moving larger distances.
-        * AsyncLinkbot.MoveController.CONST_VEL: Move the motor at a constant
+        * :const:`linkbot.peripherals.Motor.Controller.CONST_VEL`: Move the motor at a constant
           velocity. This motor controller attemts to accelerate and decelerate
           a motor infinitely fast to and from a constant velocity to move the
           motor from one position to the next. The velocity can be controlled
           by setting the property `omega`.
-        * AsyncLinkbot.MoveController.SMOOTH: Move the motor with specified
+        * :const:`linkbot.peripherals.Motor.Controller.SMOOTH`: Move the motor with specified
           acceleration, maximum velocity, and deceleration. For this type of
           movement, access maximum velocity with property `omega`,
           acceleration with property `acceleration`, and deceleration with property
@@ -367,14 +377,22 @@ class Motor:
         return fut
 
     async def decel(self):
-        # Get the deceleration setting of a motor
+        ''' Get the deceleration setting of a motor
+
+        :rtype: float
+        :returns: The deceleration setting in units of deg/s/s
+        '''
         return await self.__get_motor_controller_attribute(
                 'getMotorControllerAlphaF',
                 conv=util.rad2deg
                 )
 
     async def omega(self):
-        # Get the rotational velocity setting of a motor
+        ''' Get the rotational velocity setting of a motor
+
+        :rtype: float
+        :returns: The speed setting of the motor in deg/s
+        '''
         return await self.__get_motor_controller_attribute(
                 'getMotorControllerOmega',
                 conv=util.rad2deg
@@ -416,7 +434,10 @@ class Motor:
         user_fut.set_result(values[self._index])
 
     async def set_accel(self, value):
-        # See :func:`accel`
+        ''' Set the acceleration of a motor.
+        
+        See :func:`linkbot.async_peripherals.Motor.accel`
+        '''
         return await self.__set_motor_controller_attribute(
                 'setMotorControllerAlphaI',
                 util.deg2rad(value)
@@ -641,6 +662,22 @@ class Motors:
         def __init__(self):
             self._handlers = [None, None, None]
 
+        async def event_handler(self, payload):
+            joint = payload.encoder
+            value = payload.value
+            timestamp = payload.timestamp
+            try:
+                await self._handlers[joint](_rad2deg(value), timestamp)
+            except IndexError:
+                # Don't care if the callback doesn't exist
+                pass
+            except TypeError:
+                pass
+
+        def set_event_handler(self, index, callback):
+            assert(index >= 0 and index < 3)
+            self._handlers[index] = callback
+
     @classmethod
     async def create(cls, proxy):
         self = cls()
@@ -739,7 +776,7 @@ class Motors:
     async def stop(self, mask=0x07):
         ''' Immediately stop all motors.
 
-        :param mask: See :func:`linkbot.Motors.move`
+        :param mask: See :func:`linkbot.async_peripherals.Motors.move`
         '''
         fut = await self._proxy.stop(mask=mask)
         return fut

@@ -1,32 +1,24 @@
+The Linkbot Peripherals
+-----------------------
 
-Asynchronous Peripherals
-------------------------
+This section describes how to access all of the Linkbots peripherals, such as its 
+its motors, LED, buzzer, buttons, accelerometer, and I2C expansion port.
 
-This section describes how to access some miscellaneous peripherals on the
-Linkbot, such as the buttons, accelerometer, multicolor LED, and buzzer. The
-functions described here are asynchronous in nature, designed to be used with
-Python 3.5's new asyncio module.
+.. automodule:: linkbot
 
-Accelerometer
-+++++++++++++
+Motor
++++++
 
-A Linkbot's accelerometer object can be accessed via the "accelerometer" member
-of the AsyncLinkbot class. For instance,
+.. autoclass:: linkbot::peripherals.Motor
+   :members: 
 
-.. literalinclude:: snippets/accelerometer1.py
-   :language: python
+.. autoclass:: linkbot::peripherals.Motor.Controller
+   :members: 
+   :undoc-members:
 
-.. autoclass:: linkbot.peripherals.Accelerometer
-   :members:
+.. autoclass:: linkbot::peripherals.Motor.State
+   :members: 
+   :undoc-members:
 
-Buttons
-+++++++
-
-.. autoclass:: linkbot.peripherals.Button
-   :members:
-
-Multi-Color LED
-+++++++++++++++
-
-.. autoclass:: linkbot.peripherals.Led
+.. autoclass:: linkbot::peripherals.Motors
    :members:
