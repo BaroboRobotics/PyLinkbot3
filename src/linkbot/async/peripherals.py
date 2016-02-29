@@ -5,6 +5,14 @@ import linkbot._util as util
 import linkbot.peripherals as peripherals
 import weakref
 
+__all__ = [ 'Accelerometer', 
+            'Button',
+            'Led',
+            'Buzzer',
+            'Motor',
+            'Motors',
+            ]
+
 class Accelerometer():
     @classmethod
     async def create(cls, proxy):
@@ -685,7 +693,7 @@ class Motors:
         self.motors = []
         for i in range(3):
             self.motors.append( await Motor.create(i, proxy, self) )
-        self._timeouts = linkbot._TimeoutCore(asyncio.get_event_loop())
+        self._timeouts = util.TimeoutCore(asyncio.get_event_loop())
         self._callback_handler = self._EncoderEventHandler()
         return self
 

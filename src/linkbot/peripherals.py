@@ -1,6 +1,8 @@
 import asyncio
 import linkbot._util as util
 
+__all__ = ['Motor', 'Motors']
+
 class Motor():
     class Controller:
         PID = 1

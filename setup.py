@@ -13,7 +13,7 @@ setup (name = 'PyLinkbot',
        version = '3.0.0a0',
        description = "This is a pure Python implementation of PyLinkbot. See http://github.com/BaroboRobotics/PyLinkbot",
        package_dir = {'':'src'},
-       packages = ['linkbot'],
+       packages = ['linkbot', 'linkbot.async'],
        url = 'http://github.com/BaroboRobotics/PyLinkbot3',
        install_requires=['PyRibbonBridge>=0.0.2', 'PySfp>=0.0.1'],
        )
