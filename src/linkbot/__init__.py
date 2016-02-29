@@ -8,10 +8,10 @@ import math
 import os
 import threading
 import time
-from . import peripherals
 from . import _util as util
 
 from .async import *
+from .peripherals import *
 
 __all__ = ['FormFactor', 'Linkbot', ]
 __all__ += [async.__all__, ]
@@ -39,19 +39,19 @@ class Linkbot():
                 AsyncLinkbot.create(serial_id), self._loop)
         self._alinkbot = fut.result()
         
-        self._motors = peripherals.Motors(self._alinkbot.motors, self._loop)
+        self._motors = Motors(self._alinkbot.motors, self._loop)
 
     @property
     def motors(self):
         """
         The motors of the Linkbot.
 
-        See :class:`linkbot.peripherals.Motors` . To access individual motors,
+        See :class:`linkbot.Motors` . To access individual motors,
         you may do::
 
             Linkbot.motors[0].is_moving()
 
-        or similar. Also see :class:`linkbot.peripherals.Motor`
+        or similar. Also see :class:`linkbot.Motor`
         """
         return self._motors
 

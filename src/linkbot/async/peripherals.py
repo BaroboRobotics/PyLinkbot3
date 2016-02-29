@@ -615,7 +615,7 @@ class Motor:
             degrees until it reaches the absolute position of 90 degrees.
         :type relative: bool
         '''
-        self._motors.move(
+        return self._motors.move(
                 [angle, angle, angle],
                 mask=1<<self._index,
                 relative=relative)
