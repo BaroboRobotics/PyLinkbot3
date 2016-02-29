@@ -10,7 +10,8 @@ import threading
 import time
 from . import peripherals
 from . import _util as util
-from . import async
+
+from .async import *
 
 __all__ = ['FormFactor', 'Linkbot', ]
 __all__ += [async.__all__, ]
@@ -35,7 +36,7 @@ class Linkbot():
         self._loop = self.__io_core.get_event_loop()
     
         fut = asyncio.run_coroutine_threadsafe(
-                async.AsyncLinkbot.create(serial_id), self._loop)
+                AsyncLinkbot.create(serial_id), self._loop)
         self._alinkbot = fut.result()
         
         self._motors = peripherals.Motors(self._alinkbot.motors, self._loop)

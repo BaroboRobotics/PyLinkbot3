@@ -8,7 +8,6 @@ from . import peripherals
 from .. import _util as util
 
 __all__ = ['AsyncLinkbot']
-__all__ += [peripherals.__all__, ]
 
 _dirname = os.path.dirname(os.path.realpath(__file__))
 
