@@ -19,7 +19,8 @@ async def task(serial_id):
     print('Enabling accelerometer events for 5 seconds...')
     await l.accelerometer.set_event_handler(cb)
     await asyncio.sleep(5)
-    print('Done.')
+    print('Done. Disabling accelerometer events...')
+    await l.accelerometer.set_event_handler()
 
 loop = asyncio.get_event_loop()
 loop.run_until_complete(task('DGKR'))

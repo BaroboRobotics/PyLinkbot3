@@ -521,7 +521,7 @@ class Motor:
                 names = ['encoderOne', 'encoderTwo', 'encoderThree']
                 name = names[self._index]
                 getattr(args, name).enable = False
-                getattr(args, name).granularity = util.deg2rad(granularty)
+                getattr(args, name).granularity = util.deg2rad(granularity)
                 fut = await self._proxy.enableEncoderEvent(args)
                 await fut
                 self._event_callback = callback
@@ -729,11 +729,15 @@ class Motors:
             timestamp = payload.timestamp
             try:
                 await self._handlers[joint](util.rad2deg(value), timestamp)
-            except IndexError:
+            except IndexError as e:
                 # Don't care if the callback doesn't exist
                 pass
-            except TypeError:
+            except TypeError as e:
                 pass
+            except Exception as e:
+                logging.warning('Could not run encoder event handler: {}'
+                        .format(str(e)) )
+                raise
 
         def set_event_handler(self, index, callback):
             assert(index >= 0 and index < 3)

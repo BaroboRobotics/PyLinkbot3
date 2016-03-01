@@ -1,7 +1,62 @@
 import asyncio
+import functools
 import linkbot._util as util
 
 __all__ = ['Motor', 'Motors']
+
+class Accelerometer():
+    def __init__(self, async_accelerometer, loop):
+        self._proxy = async_accelerometer
+        self._loop = loop
+
+    def values(self):
+        '''
+        Get the current accelerometer values.
+
+        :returns: The x, y, and z axis accelererations in units of standard
+            Earth G's, as well as a timestamp in milliseconds from the robot.
+        :rtype: (float, float, float, int)
+        '''
+        return util.run_linkbot_coroutine(
+                self._proxy.values(),
+                self._loop )
+
+    def x(self):
+        '''
+        Get the current x axis value.
+
+        :rtype: float
+        :returns: The acceleration along the "X" axis in units of Earth
+            gravitational units (a.k.a. G's)
+        '''
+        return util.run_linkbot_coroutine(
+                self._proxy.x(),
+                self._loop )
+
+    def y(self):
+        '''
+        Get the current y axis value.
+
+        :rtype: float
+        :returns: The acceleration along the "Y" axis in units of Earth
+            gravitational units (a.k.a. G's)
+        '''
+        return util.run_linkbot_coroutine(
+                self._proxy.y(),
+                self._loop )
+
+    def z(self):
+        '''
+        Get the current y axis value.
+
+        :rtype: float
+        :returns: The acceleration along the "Z" axis in units of Earth
+            gravitational units (a.k.a. G's)
+        '''
+        return util.run_linkbot_coroutine(
+                self._proxy.z(),
+                self._loop )
+
 
 class Motor():
     class Controller:
@@ -108,12 +163,119 @@ class Motor():
         return util.run_linkbot_coroutine(
                 self._amotor.set_omega(value), self._loop)
 
-    
     def set_event_handler(self, callback=None, granularity=2.0):
+        self.__event_handler = callback
+        if callback:
+            return util.run_linkbot_coroutine(
+                    self._amotor.set_event_handler(self.__event_cb, granularity),
+                    self._loop)
+        else:
+            return util.run_linkbot_coroutine(
+                    self._amotor.set_event_handler(),
+                    self._loop)
+
+    async def __event_cb(self, angle, timestamp):
+        if self.__event_handler:
+            self.__event_handler(angle, timestamp)
+
+    def set_power(self, power):
+        '''
+        Set the motor's power.
+
+        :type power: int [-255,255]
+        '''
         return util.run_linkbot_coroutine(
-                self._amotor.set_event_handler(callback, granularity),
+                self.amotor.set_power(power),
                 self._loop)
 
+    def begin_accel(self, timeout, v0 = 0.0,
+            state_on_timeout=State.COAST):
+        ''' Cause a motor to begin accelerating indefinitely. 
+
+        The joint will begin accelerating at the acceleration specified
+        previously by :func:`linkbot.peripherals.Motor.accel`. If a 
+        timeout is specified, the motor will transition states after the timeout
+        expires. The state the motor transitions to is specified by the
+        parameter ```state_on_timeout```. 
+
+        If the robot reaches its maximum speed, specified by the function
+        :func:`linkbot.peripherals.Motor.set_omega`, it will stop
+        accelerating and continue at that speed until the timeout, if any,
+        expires.
+
+        :param timeout: Seconds to wait before robot transitions states.
+        :type timeout: float
+        :param v0: Initial velocity in deg/s
+        :type v0: float
+        :param state_on_timeout: End state after timeout
+        :type state_on_timeout: :class:`linkbot.peripherals.Motor.State`
+        '''
+        return util.run_linkbot_coroutine(
+                self.amotor.begin_accel(timeout, v0, state_on_timeout),
+                self._loop)
+
+    def begin_move(self, timeout = 0, forward=True,
+            state_on_timeout=State.COAST):
+        ''' Begin moving motor at constant velocity
+
+        The joint will begin moving at a constant velocity previously set by
+        :func:`linkbot.peripherals.Motor.set_omega`. 
+
+        :param timeout: After ```timeout``` seconds, the motor will transition
+            states to the state specified by the parameter
+            ```state_on_timeout```.
+        :type timeout: float
+        :param forward: Whether to move the joint in the positive direction
+            (True) or negative direction (False).
+        :type forward: bool
+        :param state_on_timeout: State to transition to after the motion
+            times out.
+        :type state_on_timeout: :class:`linkbot.peripherals.Motor.State`
+        '''
+        return util.run_linkbot_coroutine(
+                self.amotor.begin_move(timeout, forward, state_on_timeout),
+                self._loop)
+
+    def move(self, angle, relative=True, wait=True):
+        ''' Move the motor.
+
+        :param angle: The angle to move the motor.
+        :type angle: float
+        :param relative: Determines if the motor should move to an absolute
+            position or perform a relative motion. For instance, if the motor is
+            currently at a position of 45 degrees, performing a relative move of
+            90 degrees will move the motor to 135 degrees, while doing an
+            absolute move of 90 degrees will move the motor forward by 45
+            degrees until it reaches the absolute position of 90 degrees.
+        :type relative: bool
+        :param wait: Indicate whether the function should wait for the movement
+            to finish before returning or not. For example, the following two
+            snippets of code yield identical robot behavior::
+
+                my_linkbot.motors[0].move(90, wait=True)
+
+            and::
+
+                my_linkbot.motors[0].move(90, wait=False)
+                my_linkbot.motors[0].move_wait()
+
+        :type wait: bool
+        '''
+        util.run_linkbot_coroutine(
+                self.amotor.move(angle, relative),
+                self._loop)
+        if wait:
+            self.move_wait()
+
+    def move_wait(self):
+        ''' Wait for the motor to stop moving.
+
+        This function blocks until the motor is either in a ```COAST``` state or
+        ```HOLD``` state.
+        '''
+        return util.run_linkbot_coroutine(
+                self.amotor.move_wait(),
+                self._loop)
 
 class Motors():
     def __init__(self, async_motors, loop):
@@ -126,6 +288,9 @@ class Motors():
     def __getitem__(self, index):
         return self.motors[index]
 
+    def __len__(self):
+        return 3
+
     def angles(self):
         ''' Get the current joint angles and a timestamp from the robot.
 
@@ -137,14 +302,9 @@ class Motors():
         '''
         return util.run_linkbot_coroutine(self._amotors.angles(), self._loop)
 
-    def moveNB(self, angles, mask=0x07, relative=True, timeouts=None,
-            states_on_timeout = None):
+    def move(self, angles, mask=0x07, relative=True, timeouts=None,
+            states_on_timeout = None, wait=True):
         ''' Move a Linkbot's joints. 
-
-        This function returns as soon as it receives confirmation from the robot
-        that the joints have begun moving. Use
-        :func:`linkbot.peripherals.Motors.move_wait` or the non "NB" version of
-        this function to wait for the motors to finish moving.
 
         :param angles: A list of angles in degrees
         :type angles: [float, float, float]
@@ -169,36 +329,20 @@ class Motors():
         :type states_on_timeout: [ linkbot.peripherals.Motor.State,
                                    linkbot.peripherals.Motor.State,
                                    linkbot.peripherals.Motor.State ]
+        :param wait: Indicate whether this function should return when the
+                motion starts or when the motion finishes. If this is set to
+                ```True```, this function will block until the motion completely
+                finishes. If set to ```False```, this function will return
+                immediately after receiving confirmation from the robot that the
+                joint has begun moving.
         '''
-        return util.run_linkbot_coroutine(
+        util.run_linkbot_coroutine(
                 self._amotors.move(angles, mask, relative, timeouts, 
                     states_on_timeout),
                 self._loop)
 
-    def move(self, *args, **kwargs):
-        ''' Move a Linkbot's joints.
-
-        This function takes the same arguments as
-        :func:`linkbot.peripherals.Motors.moveNB` . However, this function only
-        returns after the movement has finished. For example, the following two
-        code examples result in identical robot behavior::
-
-            robot = linkbot.Linkbot('ABCD')
-            robot.motors.moveNB([90, 0, 90])
-            robot.motors.move_wait()
-
-        and::
-         
-            robot = linkbot.Linkbot('ABCD')
-            robot.motors.move([90, 0, 90])
-
-        '''
-            
-        self.moveNB(*args, **kwargs)
-        if 'mask' in kwargs:
-            self.move_wait(kwargs['mask'])
-        else:
-            self.move_wait()
+        if wait:
+            self.move_wait(mask)
 
     def move_wait(self, mask=0x07):
         ''' Wait for motors to stop moving.

@@ -38,8 +38,10 @@ class Linkbot():
         fut = asyncio.run_coroutine_threadsafe(
                 AsyncLinkbot.create(serial_id), self._loop)
         self._alinkbot = fut.result()
+       
         
         self._motors = Motors(self._alinkbot.motors, self._loop)
+
 
     @property
     def motors(self):

@@ -9,9 +9,6 @@ its motors, LED, buzzer, buttons, accelerometer, and I2C expansion port.
 Motor
 +++++
 
-.. autoclass:: linkbot::peripherals.Motor
-   :members: 
-
 .. autoclass:: linkbot::peripherals.Motor.Controller
    :members: 
    :undoc-members:
@@ -19,6 +16,12 @@ Motor
 .. autoclass:: linkbot::peripherals.Motor.State
    :members: 
    :undoc-members:
+
+.. autoclass:: linkbot::peripherals.Motor
+   :members: 
+
+Motors
+++++++
 
 .. autoclass:: linkbot::peripherals.Motors
    :members:
