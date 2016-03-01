@@ -39,9 +39,19 @@ class Linkbot():
                 AsyncLinkbot.create(serial_id), self._loop)
         self._alinkbot = fut.result()
        
-        
+        self._accelerometer = Accelerometer(
+                self._alinkbot.accelerometer,
+                self._loop )
         self._motors = Motors(self._alinkbot.motors, self._loop)
 
+    @property
+    def accelerometer(self):
+        '''
+        The robot accelerometer.
+
+        See :class:`linkbot.peripherals.Accelerometer`
+        '''
+        return self._accelerometer
 
     @property
     def motors(self):

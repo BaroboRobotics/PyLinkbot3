@@ -509,7 +509,7 @@ class Motor:
         Set a callback function to be executed when the motor angle
         values on the robot change.
 
-        :param callback: async func(joint, angle, timestamp) -> None
+        :param callback: async func(angle, timestamp) -> None
         :param granularity: float . The callback will only be called when a
             motor moves away from its current position by more than
             'granularity' degrees.

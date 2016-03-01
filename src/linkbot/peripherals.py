@@ -2,7 +2,7 @@ import asyncio
 import functools
 import linkbot._util as util
 
-__all__ = ['Motor', 'Motors']
+__all__ = ['Accelerometer', 'Motor', 'Motors']
 
 class Accelerometer():
     def __init__(self, async_accelerometer, loop):
@@ -57,7 +57,21 @@ class Accelerometer():
                 self._proxy.z(),
                 self._loop )
 
+    def set_event_handler(self, callback=None, granularity=0.05):
+        self.__event_handler = callback
+        if callback:
+            util.run_linkbot_coroutine(
+                    self._proxy.set_event_handler(self.__event_cb, granularity),
+                    self._loop)
+        else:
+            util.run_linkbot_coroutine(
+                    self._proxy.set_event_handler(),
+                    self._loop)
 
+    async def __event_cb(self, *args, **kwargs):
+        if self.__event_handler:
+            self.__event_handler(*args, **kwargs)
+        
 class Motor():
     class Controller:
         PID = 1
