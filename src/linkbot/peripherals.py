@@ -71,7 +71,31 @@ class Accelerometer():
     async def __event_cb(self, *args, **kwargs):
         if self.__event_handler:
             self.__event_handler(*args, **kwargs)
-        
+
+class Button():
+    PWR = 0
+    A = 1
+    B = 2
+
+    UP = 0
+    DOWN = 1
+
+    def __init__(self, async_button, loop):
+        self._proxy = async_button
+        self._loop = loop
+
+    def values(self):
+        '''
+        Get the current button values
+
+        :rtype: Return type is (int, int, int), indicating the
+            button state for the power, A, and B buttons, respectively. The button
+            state is one of either Button.UP or Button.DOWN.
+        '''
+        return util.run_linkbot_coroutine(
+                self._proxy.values(),
+                self._loop)
+
 class Motor():
     class Controller:
         PID = 1

@@ -134,6 +134,19 @@ class Accelerometer():
                                     payload.z, 
                                     payload.timestamp)
 
+class Battery():
+    @classmethod
+    async def create(cls, proxy):
+        self = cls()
+        self._proxy = proxy
+        return self
+
+    async def voltage(self):
+        fut = await self._proxy.getBatteryVoltage()
+        user_fut = asyncio.Future()
+        util.chain_futures(fut, user_fut)
+        return user_fut
+
 class Button():
     PWR = 0
     A = 1

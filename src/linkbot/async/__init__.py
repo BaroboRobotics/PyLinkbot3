@@ -132,6 +132,7 @@ class AsyncLinkbot():
             self.close = self._proxy.close
             self.enableButtonEvent = self._proxy.enableButtonEvent
             self._accelerometer = await peripherals.Accelerometer.create(self._proxy)
+            self._battery = await peripherals.Battery.create(self._proxy)
             self._button = await peripherals.Button.create(self._proxy)
             self._buzzer = await peripherals.Buzzer.create(self._proxy)
             self._led = await peripherals.Led.create(self._proxy)
@@ -159,6 +160,16 @@ class AsyncLinkbot():
         See :class:`linkbot.async.peripherals.Accelerometer`.
         """
         return self._accelerometer
+
+    @property
+    def battery(self):
+        """
+        The Linkbot battery.
+
+        Access the Linkbot's battery voltage. See
+        :class:`linkbot.async.peripherals.Battery`
+        """
+        return self._battery
 
     @property
     def button(self):
