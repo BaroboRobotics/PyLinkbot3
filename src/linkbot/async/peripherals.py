@@ -435,16 +435,15 @@ class Motor:
         values = []
         for v in results_obj.values:
             values.append(conv(v))
-        if self._proxy.form_factor == linkbot.FormFactor.I:
-            values.append(0.0)
-        elif self._proxy.form_factor == linkbot.FormFactor.L:
-            values.insert(1, 0.0)
         user_fut.set_result(values[self._index])
 
     async def set_accel(self, value):
         ''' Set the acceleration of a motor.
+
+        :param value: The acceleration in deg/s/s
+        :type value: float
         
-        See :func:`linkbot.async_peripherals.Motor.accel`
+        See :func:`linkbot.async.peripherals.Motor.accel`
         '''
         return await self.__set_motor_controller_attribute(
                 'setMotorControllerAlphaI',
@@ -452,7 +451,12 @@ class Motor:
                 )
 
     async def set_controller(self, value):
-        # See "controller"
+        ''' Set the controller type of a motor. 
+
+        :type value: :class:`linkbot.Motor.Controller`
+
+        See alse: :func:`linkbot.async.peripherals.Motor.controller`
+        '''
         if value < 1 or value > 3:
             raise RangeError('Motor controller must be a value in range [1,3]')
         self._controller = value
@@ -461,14 +465,26 @@ class Motor:
         return fut
 
     async def set_decel(self, value):
-        # See :func:`decel`
+        ''' Set the deceleration of a motor.
+
+        :param value: Deceleration in deg/s/s
+        :type value: float
+
+        See also: :func:`linkbot.async.peripherals.Motor.decel`
+        '''
         return await self.__set_motor_controller_attribute(
                 'setMotorControllerAlphaF',
                 util.deg2rad(value)
                 )
 
     async def set_omega(self, value):
-        # See :func:`omega`
+        ''' Set the speed of the motor.
+
+        :param value: The new speed in deg/s
+        :type value: float
+
+        See also: :func:`linkbot.async.peripherals.Motor.omega`
+        '''
         return await self.__set_motor_controller_attribute(
                 'setMotorControllerOmega',
                 util.deg2rad(value)
@@ -568,6 +584,26 @@ class Motor:
 
     async def begin_accel(self, timeout, v0 = 0.0,
             state_on_timeout=peripherals.Motor.State.COAST):
+        ''' Cause a motor to begin accelerating indefinitely. 
+
+        The joint will begin accelerating at the acceleration specified
+        previously by :func:`linkbot.async.peripherals.Motor.accel`. If a 
+        timeout is specified, the motor will transition states after the timeout
+        expires. The state the motor transitions to is specified by the
+        parameter ```state_on_timeout```. 
+
+        If the robot reaches its maximum speed, specified by the function
+        :func:`linkbot.async.peripherals.Motor.set_omega`, it will stop
+        accelerating and continue at that speed until the timeout, if any,
+        expires.
+
+        :param timeout: Seconds to wait before robot transitions states.
+        :type timeout: float
+        :param v0: Initial velocity in deg/s
+        :type v0: float
+        :param state_on_timeout: End state after timeout
+        :type state_on_timeout: :class:`linkbot.peripherals.Motor.State`
+        '''
         mask = 1<<self._index
         args_obj = self._proxy.rb_get_args_obj('move')
         names = ['motorOneGoal', 'motorTwoGoal', 'motorThreeGoal']
@@ -584,6 +620,22 @@ class Motor:
 
     async def begin_move(self, timeout = 0, forward=True,
             state_on_timeout=peripherals.Motor.State.COAST):
+        ''' Begin moving motor at constant velocity
+
+        The joint will begin moving at a constant velocity previously set by
+        :func:`linkbot.async.peripherals.Motor.set_omega`. 
+
+        :param timeout: After ```timeout``` seconds, the motor will transition
+            states to the state specified by the parameter
+            ```state_on_timeout```.
+        :type timeout: float
+        :param forward: Whether to move the joint in the positive direction
+            (True) or negative direction (False).
+        :type forward: bool
+        :param state_on_timeout: State to transition to after the motion
+            times out.
+        :type state_on_timeout: :class:`linkbot.peripherals.Motor.State`
+        '''
         mask = 1<<self._index
         args_obj = self._proxy.rb_get_args_obj('move')
         names = ['motorOneGoal', 'motorTwoGoal', 'motorThreeGoal']
@@ -663,7 +715,8 @@ class Motors:
 
         linkbot.motors[0] 
 
-    accesses the first motor on a Linkbot.
+    accesses the first motor on a Linkbot, which is of type
+    :class:`linkbot.async.peripherals.Motor`
     '''
 
     class _EncoderEventHandler():
@@ -699,6 +752,9 @@ class Motors:
 
     def __getitem__(self, key):
         return self.motors[key]
+
+    def __len__(self):
+        return 3
 
     async def angles(self):
         ''' Get the current joint angles.
