@@ -8,10 +8,33 @@ __all__ = [ 'Accelerometer',
             'Motor', 
             'Motors']
 
-class Accelerometer():
-    def __init__(self, async_accelerometer, loop):
-        self._proxy = async_accelerometer
+class Peripheral():
+    def __init__(self, async_proxy, loop):
+        self._proxy = async_proxy
         self._loop = loop
+
+    def set_event_handler(self, callback=None, **kwargs):
+        self._user_event_handler = callback
+        if callback:
+            util.run_linkbot_coroutine(
+                    self._proxy.set_event_handler(self._event_handler, **kwargs),
+                    self._loop
+                    )
+        else:
+            util.run_linkbot_coroutine(
+                    self._proxy.set_event_handler(),
+                    self._loop
+                    )
+
+    async def _event_handler(self, *args, **kwargs):
+        if asyncio.iscoroutinefunction(self._user_event_handler):
+            await self._user_event_handler(*args, **kwargs)
+        else:
+            self._user_event_handler(*args, **kwargs)
+
+class Accelerometer(Peripheral):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     def values(self):
         '''
@@ -61,23 +84,6 @@ class Accelerometer():
                 self._proxy.z(),
                 self._loop )
 
-    def set_event_handler(self, callback=None, granularity=0.05):
-        self.__event_handler = callback
-        if callback:
-            util.run_linkbot_coroutine(
-                    self._proxy.set_event_handler(self.__event_cb, granularity),
-                    self._loop)
-        else:
-            util.run_linkbot_coroutine(
-                    self._proxy.set_event_handler(),
-                    self._loop)
-
-    async def __event_cb(self, *args, **kwargs):
-        if asyncio.iscoroutinefunction(self.__event_handler):
-            await self.__event_handler(*args, **kwargs)
-        else:
-            self.__event_handler(*args, **kwargs)
-
 class Battery():
     def __init__(self, async_battery, loop):
         self._proxy = async_battery
@@ -93,7 +99,7 @@ class Battery():
                 self._proxy.voltage(),
                 self._loop )
 
-class Button():
+class Button(Peripheral):
     PWR = 0
     A = 1
     B = 2
@@ -101,9 +107,8 @@ class Button():
     UP = 0
     DOWN = 1
 
-    def __init__(self, async_button, loop):
-        self._proxy = async_button
-        self._loop = loop
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     def values(self):
         '''
@@ -153,24 +158,7 @@ class Button():
                 self._proxy.b(),
                 self._loop )
 
-    def set_event_handler(self, callback=None):
-        self.__event_handler = callback
-        if callback:
-            return util.run_linkbot_coroutine(
-                    self._proxy.set_event_handler(self.__event_cb),
-                    self._loop)
-        else:
-            return util.run_linkbot_coroutine(
-                    self._proxy.set_event_handler(),
-                    self._loop)
-
-    async def __event_cb(self, *args, **kwargs):
-        if asyncio.iscoroutinefunction(self.__event_handler):
-            await self.__event_handler(*args, **kwargs)
-        else:
-            self.__event_handler(*args, **kwargs)
-
-class Motor():
+class Motor(Peripheral):
     class Controller:
         PID = 1
         CONST_VEL = 2
@@ -188,9 +176,8 @@ class Motor():
         RELATIVE = 2
         INFINITE = 3
 
-    def __init__(self, amotor, loop):
-        self._amotor = amotor
-        self._loop = loop
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     def accel(self):
         ''' Get the acceleration setting of a motor
@@ -199,7 +186,7 @@ class Motor():
         :returns: The acceleration setting in units of deg/s/s
         '''
         return util.run_linkbot_coroutine(
-                self._amotor.accel(), self._loop)
+                self._proxy.accel(), self._loop)
 
     def controller(self):
         '''The movement controller.
@@ -223,7 +210,7 @@ class Motor():
           `deceleration`.
         '''
         return util.run_linkbot_coroutine(
-                self._amotor.controller(), self._loop)
+                self._proxy.controller(), self._loop)
 
     def decel(self):
         ''' Get the deceleration setting of a motor
@@ -232,7 +219,7 @@ class Motor():
         :returns: The deceleration setting in units of deg/s/s
         '''
         return util.run_linkbot_coroutine(
-                self._amotor.decel(), self._loop)
+                self._proxy.decel(), self._loop)
 
     def omega(self):
         ''' Get the rotational velocity setting of a motor
@@ -241,7 +228,7 @@ class Motor():
         :returns: The speed setting of the motor in deg/s
         '''
         return util.run_linkbot_coroutine(
-                self._amotor.omega(), self._loop)
+                self._proxy.omega(), self._loop)
 
     def set_accel(self, value):
         ''' Set the acceleration of a motor.
@@ -249,7 +236,7 @@ class Motor():
         See :func:`linkbot.peripherals.Motor.accel`
         '''
         return util.run_linkbot_coroutine(
-                self._amotor.set_accel(value), self._loop)
+                self._proxy.set_accel(value), self._loop)
     
     def set_controller(self, value):
         ''' Set the motor controller.
@@ -257,7 +244,7 @@ class Motor():
         See :func:`linkbot.peripherals.Motor.controller`
         '''
         return util.run_linkbot_coroutine(
-                self._amotor.set_controller(value), self._loop)
+                self._proxy.set_controller(value), self._loop)
 
     def set_decel(self, value):
         ''' Set the motor deceleration.
@@ -265,7 +252,7 @@ class Motor():
         See :func:`linkbot.peripherals.Motor.decel`
         '''
         return util.run_linkbot_coroutine(
-                self._amotor.set_decel(value), self._loop)
+                self._proxy.set_decel(value), self._loop)
 
     def set_omega(self, value):
         ''' Set the motor's velocity.
@@ -273,24 +260,7 @@ class Motor():
         See :func:`linkbot.peripherals.Motor.omega`
         '''
         return util.run_linkbot_coroutine(
-                self._amotor.set_omega(value), self._loop)
-
-    def set_event_handler(self, callback=None, granularity=2.0):
-        self.__event_handler = callback
-        if callback:
-            return util.run_linkbot_coroutine(
-                    self._amotor.set_event_handler(self.__event_cb, granularity),
-                    self._loop)
-        else:
-            return util.run_linkbot_coroutine(
-                    self._amotor.set_event_handler(),
-                    self._loop)
-
-    async def __event_cb(self, angle, timestamp):
-        if asyncio.iscoroutinefunction(self.__event_handler):
-            await self.__event_handler(angle, timestamp)
-        else:
-            self.__event_handler(angle, timestamp)
+                self._proxy.set_omega(value), self._loop)
 
     def set_power(self, power):
         '''
