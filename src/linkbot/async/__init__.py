@@ -172,7 +172,7 @@ class AsyncLinkbot():
         return self._battery
 
     @property
-    def button(self):
+    def buttons(self):
         """
         Access to the Linkbot's buttons. 
 

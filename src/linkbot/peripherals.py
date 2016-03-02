@@ -2,7 +2,11 @@ import asyncio
 import functools
 import linkbot._util as util
 
-__all__ = ['Accelerometer', 'Battery', 'Motor', 'Motors']
+__all__ = [ 'Accelerometer', 
+            'Battery', 
+            'Button',
+            'Motor', 
+            'Motors']
 
 class Accelerometer():
     def __init__(self, async_accelerometer, loop):
@@ -69,7 +73,9 @@ class Accelerometer():
                     self._loop)
 
     async def __event_cb(self, *args, **kwargs):
-        if self.__event_handler:
+        if asyncio.iscoroutinefunction(self.__event_handler):
+            await self.__event_handler(*args, **kwargs)
+        else:
             self.__event_handler(*args, **kwargs)
 
 class Battery():
@@ -110,6 +116,59 @@ class Button():
         return util.run_linkbot_coroutine(
                 self._proxy.values(),
                 self._loop)
+
+    def pwr(self):
+        '''
+        Get the current state of the power button.
+
+        :rtype: int
+        :returns: either :const:`linkbot.peripherals.Button.UP` or
+                  :const:`linkbot.peripherals.Button.DOWN`
+        '''
+        return util.run_linkbot_coroutine(
+                self._proxy.pwr(),
+                self._loop )
+
+    def a(self):
+        '''
+        Get the current state of the 'A' button.
+
+        :rtype: int
+        :returns: either :const:`linkbot.peripherals.Button.UP` or
+                  :const:`linkbot.peripherals.Button.DOWN`
+        '''
+        return util.run_linkbot_coroutine(
+                self._proxy.a(),
+                self._loop )
+
+    def b(self):
+        '''
+        Get the current state of the 'B' button.
+
+        :rtype: int
+        :returns: either :const:`linkbot.peripherals.Button.UP` or
+                  :const:`linkbot.peripherals.Button.DOWN`
+        '''
+        return util.run_linkbot_coroutine(
+                self._proxy.b(),
+                self._loop )
+
+    def set_event_handler(self, callback=None):
+        self.__event_handler = callback
+        if callback:
+            return util.run_linkbot_coroutine(
+                    self._proxy.set_event_handler(self.__event_cb),
+                    self._loop)
+        else:
+            return util.run_linkbot_coroutine(
+                    self._proxy.set_event_handler(),
+                    self._loop)
+
+    async def __event_cb(self, *args, **kwargs):
+        if asyncio.iscoroutinefunction(self.__event_handler):
+            await self.__event_handler(*args, **kwargs)
+        else:
+            self.__event_handler(*args, **kwargs)
 
 class Motor():
     class Controller:
@@ -228,7 +287,9 @@ class Motor():
                     self._loop)
 
     async def __event_cb(self, angle, timestamp):
-        if self.__event_handler:
+        if asyncio.iscoroutinefunction(self.__event_handler):
+            await self.__event_handler(angle, timestamp)
+        else:
             self.__event_handler(angle, timestamp)
 
     def set_power(self, power):

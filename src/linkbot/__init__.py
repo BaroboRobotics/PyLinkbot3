@@ -44,6 +44,8 @@ class Linkbot():
                 self._loop )
         self._battery = Battery( self._alinkbot.battery,
                                  self._loop )
+        self._button = Button( self._alinkbot.buttons,
+                               self._loop )
         self._motors = Motors(self._alinkbot.motors, self._loop)
 
     @property
@@ -63,6 +65,15 @@ class Linkbot():
         See :class:`linkbot.peripherals.Battery`
         '''
         return self._battery
+
+    @property
+    def buttons(self):
+        '''
+        Access to the robot's buttons.
+
+        See :class:`linkbot.peripherals.Button`
+        '''
+        return self._button
 
     @property
     def motors(self):
