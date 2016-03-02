@@ -9,6 +9,6 @@ async def task(serial_id):
     print('Battery voltage is: ', await fut)
 
 loop = asyncio.get_event_loop()
-loop.run_until_complete(task('DGKR'))
+loop.run_until_complete(task('5H57'))
 loop.close()
 

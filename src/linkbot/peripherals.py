@@ -2,7 +2,7 @@ import asyncio
 import functools
 import linkbot._util as util
 
-__all__ = ['Accelerometer', 'Motor', 'Motors']
+__all__ = ['Accelerometer', 'Battery', 'Motor', 'Motors']
 
 class Accelerometer():
     def __init__(self, async_accelerometer, loop):
@@ -71,6 +71,21 @@ class Accelerometer():
     async def __event_cb(self, *args, **kwargs):
         if self.__event_handler:
             self.__event_handler(*args, **kwargs)
+
+class Battery():
+    def __init__(self, async_battery, loop):
+        self._proxy = async_battery
+        self._loop = loop
+
+    def voltage(self):
+        ''' Get the current battery voltage. 
+
+        :returns: The battery voltage.
+        :rtype: float
+        '''
+        return util.run_linkbot_coroutine(
+                self._proxy.voltage(),
+                self._loop )
 
 class Button():
     PWR = 0

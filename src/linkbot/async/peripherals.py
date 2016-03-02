@@ -142,6 +142,12 @@ class Battery():
         return self
 
     async def voltage(self):
+        ''' Get the current battery voltage. 
+
+        :returns: An asyncio.Future. The result of the future is the current
+            battery voltage.
+        :rtype: asyncio.Future
+        '''
         fut = await self._proxy.getBatteryVoltage()
         user_fut = asyncio.Future()
         util.chain_futures(fut, user_fut)
