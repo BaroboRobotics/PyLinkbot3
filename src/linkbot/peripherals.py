@@ -5,6 +5,7 @@ import linkbot._util as util
 __all__ = [ 'Accelerometer', 
             'Battery', 
             'Button',
+            'Led',
             'Motor', 
             'Motors']
 
@@ -157,6 +158,33 @@ class Button(Peripheral):
         return util.run_linkbot_coroutine(
                 self._proxy.b(),
                 self._loop )
+
+class Led():
+    def __init__(self, async_led, loop):
+        self._proxy = async_led
+        self._loop = loop
+
+    def color(self):
+        ''' Get the current led color.
+
+        :returns: Red, green, blue color intensities. Each intensity is an
+            integer from 0 to 255.
+        :rtype: (int, int, int)
+        '''
+        return util.run_linkbot_coroutine(
+                self._proxy.color(),
+                self._loop )
+
+    def set_color(self, r, g, b):
+        ''' Set the led color.
+
+        The parameters ```r```, ```g```, and ```b``` are integer values from 0
+        to 255 representing the intensity of the red, green, and blue LED's,
+        respectively.
+        '''
+        return util.run_linkbot_coroutine(
+                self._proxy.set_color(r, g, b),
+                self._loop) 
 
 class Motor(Peripheral):
     class Controller:

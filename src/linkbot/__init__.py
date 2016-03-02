@@ -46,6 +46,8 @@ class Linkbot():
                                  self._loop )
         self._button = Button( self._alinkbot.buttons,
                                self._loop )
+        self._led = Led( self._alinkbot.led,
+                         self._loop )
         self._motors = Motors(self._alinkbot.motors, self._loop)
 
     @property
@@ -74,6 +76,15 @@ class Linkbot():
         See :class:`linkbot.peripherals.Button`
         '''
         return self._button
+
+    @property
+    def led(self):
+        '''
+        Access to the robot's multi-color LED.
+
+        See :class:`linkbot.peripherals.Led`.
+        '''
+        return self._led
 
     @property
     def motors(self):
