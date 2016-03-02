@@ -5,6 +5,7 @@ import linkbot._util as util
 __all__ = [ 'Accelerometer', 
             'Battery', 
             'Button',
+            'Buzzer',
             'Led',
             'Motor', 
             'Motors']
@@ -158,6 +159,31 @@ class Button(Peripheral):
         return util.run_linkbot_coroutine(
                 self._proxy.b(),
                 self._loop )
+
+class Buzzer():
+    def __init__(self, async_buzzer, loop):
+        self._proxy = async_buzzer
+        self._loop = loop
+
+    def frequency(self):
+        ''' Get the current buzzer frequency.
+
+        :rtype: float
+        :returns: The frequency in Hz.
+        '''
+        return util.run_linkbot_coroutine(
+                self._proxy.frequency(),
+                self._loop)
+
+    def set_frequency(self, frequency):
+        ''' Set the buzzer frequency.
+
+        :param frequency: A frequency in Hz. A value of 0 turns the buzzer off.
+        :type frequency: float
+        '''
+        return util.run_linkbot_coroutine(
+                self._proxy.set_frequency(frequency),
+                self._loop)
 
 class Led():
     def __init__(self, async_led, loop):

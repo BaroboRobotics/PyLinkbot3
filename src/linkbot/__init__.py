@@ -46,6 +46,8 @@ class Linkbot():
                                  self._loop )
         self._button = Button( self._alinkbot.buttons,
                                self._loop )
+        self._buzzer = Buzzer( self._alinkbot.buzzer,
+                               self._loop )
         self._led = Led( self._alinkbot.led,
                          self._loop )
         self._motors = Motors(self._alinkbot.motors, self._loop)
@@ -76,6 +78,15 @@ class Linkbot():
         See :class:`linkbot.peripherals.Button`
         '''
         return self._button
+
+    @property
+    def buzzer(self):
+        '''
+        Control the Linkbot's buzzer.
+
+        See :class:`linkbot.peripherals.Buzzer`
+        '''
+        return self._buzzer
 
     @property
     def led(self):
