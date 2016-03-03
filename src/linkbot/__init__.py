@@ -48,6 +48,8 @@ class Linkbot():
                                self._loop )
         self._buzzer = Buzzer( self._alinkbot.buzzer,
                                self._loop )
+        self._eeprom_obj = Eeprom( self._alinkbot._eeprom,
+                                   self._loop )
         self._led = Led( self._alinkbot.led,
                          self._loop )
         self._motors = Motors(self._alinkbot.motors, self._loop)
@@ -89,6 +91,17 @@ class Linkbot():
         return self._buzzer
 
     @property
+    def _eeprom(self):
+        """
+        Access the robot's EEPROM memory.
+
+        Warning: Improperly accessing the robot's EEPROM memory may yield
+        unexpected results. The robot uses EEPROM memory to store information
+        such as its serial ID, calibration data, etc.
+        """
+        return self._eeprom_obj
+
+    @property
     def led(self):
         '''
         Access to the robot's multi-color LED.
@@ -110,37 +123,6 @@ class Linkbot():
         or similar. Also see :class:`linkbot.Motor`
         """
         return self._motors
-
-    def _read_eeprom(self, address, size):
-        '''
-        Read ```size``` bytes from EEPROM address ```address``` on the robot.
-
-        :param address: The start address to read from
-        :type address: int
-        :param size: The number of bytes to read
-        :type size: int
-        :rtype: bytestring
-        '''
-        return util.run_linkbot_coroutine(
-            self._alinkbot._read_eeprom(address, size),
-            self._loop)
-
-    def _write_eeprom(self, address, bytestring):
-        '''
-        Write data to the EEPROM.
-
-        WARNING: This function can overwrite important EEPROM data that the
-        robot uses to function properly, such as its serial ID, calibration
-        values, hardware versioning information, etc. 
-
-        :param address: Start EEPROM address to write to
-        :type address: int
-        :param bytestring: Bytes to write to EEPROM
-        :type bytestring: bytearray or bytes
-        '''
-        return util.run_linkbot_coroutine(
-                self._alinkbot._write_eeprom(address, bytestring),
-                self._loop)
 
     def version(self):
         '''

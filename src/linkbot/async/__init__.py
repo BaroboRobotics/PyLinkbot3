@@ -135,6 +135,7 @@ class AsyncLinkbot():
             self._battery = await peripherals.Battery.create(self._proxy)
             self._button = await peripherals.Button.create(self._proxy)
             self._buzzer = await peripherals.Buzzer.create(self._proxy)
+            self._eeprom_obj = await peripherals.Eeprom.create(self._proxy)
             self._led = await peripherals.Led.create(self._proxy)
             self._motors = await peripherals.Motors.create(self._proxy)
             self._timeouts = util.TimeoutCore(asyncio.get_event_loop())
@@ -190,6 +191,17 @@ class AsyncLinkbot():
         return self._buzzer
 
     @property
+    def _eeprom(self):
+        """
+        Access the robot's EEPROM memory.
+
+        Warning: Improperly accessing the robot's EEPROM memory may yield
+        unexpected results. The robot uses EEPROM memory to store information
+        such as its serial ID, calibration data, etc.
+        """
+        return self._eeprom_obj
+
+    @property
     def led(self):
         """
         The Linkbot multicolor LED.
@@ -226,41 +238,7 @@ class AsyncLinkbot():
         util.chain_futures(fut, user_fut, conv=conv)
         return user_fut
 
-    async def _write_eeprom(self, address, bytestring):
-        '''
-        Write data to the EEPROM.
-
-        WARNING: This function can overwrite important EEPROM data that the
-        robot uses to function properly, such as its serial ID, calibration
-        values, hardware versioning information, etc. 
-
-        :param address: Start EEPROM address to write to
-        :type address: int
-        :param bytestring: Bytes to write to EEPROM
-        :type bytestring: bytearray or bytes
-        :rtype: asyncio.Future
-        '''
-        fut = await self._proxy.writeEeprom(
-                address=address,
-                data=bytestring )
-        return fut
-
-    async def _read_eeprom(self, address, size):
-        '''
-        Read ```size``` bytes from EEPROM address ```address``` on the robot.
-
-        :param address: The start address to read from
-        :type address: int
-        :param size: The number of bytes to read
-        :type size: int
-        :rtype: asyncio.Future(bytearray)
-        '''
-        fut = await self._proxy.readEeprom(address=address, size=size)
-        user_fut = asyncio.Future()
-        util.chain_futures(fut, user_fut, conv=lambda x: x.data)
-        return user_fut
         
-
     async def __joint_event(self, payload):
         # Update the motor states
         self.motors[payload.joint].state = payload.event

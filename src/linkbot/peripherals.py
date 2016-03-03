@@ -6,6 +6,7 @@ __all__ = [ 'Accelerometer',
             'Battery', 
             'Button',
             'Buzzer',
+            'Eeprom',
             'Led',
             'Motor', 
             'Motors']
@@ -185,6 +186,43 @@ class Buzzer():
                 self._proxy.set_frequency(frequency),
                 self._loop)
 
+class Eeprom():
+    def __init__(self, async_eeprom, loop):
+        self._proxy = async_eeprom
+        self._loop = loop
+
+    def read(self, address, size):
+        '''
+        Read ```size``` bytes from EEPROM address ```address``` on the robot.
+
+        :param address: The start address to read from
+        :type address: int
+        :param size: The number of bytes to read
+        :type size: int
+        :rtype: bytestring
+        '''
+        return util.run_linkbot_coroutine(
+            self._proxy.read(address, size),
+            self._loop)
+
+    def write(self, address, bytestring):
+        '''
+        Write data to the EEPROM.
+
+        WARNING: This function can overwrite important EEPROM data that the
+        robot uses to function properly, such as its serial ID, calibration
+        values, hardware versioning information, etc. 
+
+        :param address: Start EEPROM address to write to
+        :type address: int
+        :param bytestring: Bytes to write to EEPROM
+        :type bytestring: bytearray or bytes
+        '''
+        return util.run_linkbot_coroutine(
+                self._proxy.write(address, bytestring),
+                self._loop)
+
+        
 class Led():
     def __init__(self, async_led, loop):
         self._proxy = async_led

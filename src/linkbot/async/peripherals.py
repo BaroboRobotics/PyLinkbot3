@@ -7,6 +7,7 @@ import weakref
 
 __all__ = [ 'Accelerometer', 
             'Button',
+            'Eeprom',
             'Led',
             'Buzzer',
             'Motor',
@@ -150,7 +151,7 @@ class Battery():
         '''
         fut = await self._proxy.getBatteryVoltage()
         user_fut = asyncio.Future()
-        util.chain_futures(fut, user_fut)
+        util.chain_futures(fut, user_fut, conv=lambda x:x.v)
         return user_fut
 
 class Button():
@@ -276,6 +277,47 @@ class Button():
         await self._event_callback( payload.button, 
                                     payload.state, 
                                     payload.timestamp)
+
+class Eeprom():
+    @classmethod
+    async def create(cls, proxy):
+        self = cls()
+        self._proxy = proxy
+        return self
+
+    async def read(self, address, size):
+        '''
+        Read ```size``` bytes from EEPROM address ```address``` on the robot.
+
+        :param address: The start address to read from
+        :type address: int
+        :param size: The number of bytes to read
+        :type size: int
+        :rtype: asyncio.Future(bytearray)
+        '''
+        fut = await self._proxy.readEeprom(address=address, size=size)
+        user_fut = asyncio.Future()
+        util.chain_futures(fut, user_fut, conv=lambda x: x.data)
+        return user_fut
+
+    async def write(self, address, bytestring):
+        '''
+        Write data to the EEPROM.
+
+        WARNING: This function can overwrite important EEPROM data that the
+        robot uses to function properly, such as its serial ID, calibration
+        values, hardware versioning information, etc. 
+
+        :param address: Start EEPROM address to write to
+        :type address: int
+        :param bytestring: Bytes to write to EEPROM
+        :type bytestring: bytearray or bytes
+        :rtype: asyncio.Future
+        '''
+        fut = await self._proxy.writeEeprom(
+                address=address,
+                data=bytestring )
+        return fut
 
 class Led():
     @classmethod
