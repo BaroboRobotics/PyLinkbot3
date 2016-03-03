@@ -6,6 +6,7 @@ import ribbonbridge as rb
 import sfp.asyncio
 from . import peripherals
 from .. import _util as util
+import websockets
 
 __all__ = ['AsyncLinkbot']
 
@@ -42,8 +43,12 @@ class _AsyncLinkbot(rb.Proxy):
         self._serial_id = serial_id
         self._loop = asyncio.get_event_loop()
 
-        self.__log('Creating tcp connection to daemon...')
-        await self.__create_sfp_proxy()
+        if os.environ.get('LINKBOT_USE_WEBSOCKETS'):
+            self.__log('Creating Websocket connection to daemon...')
+            await self.__create_ws_proxy()
+        else:
+            self.__log('Creating tcp connection to daemon...')
+            await self.__create_sfp_proxy()
 
         self.__log('Resolving serial id...')
         args = self.__daemon.rb_get_args_obj('resolveSerialId')
@@ -85,13 +90,27 @@ class _AsyncLinkbot(rb.Proxy):
         self.__log('Daemon TCP connection established.')
         protocol.connection_lost = self.__connection_closed
 
-        self.__log('Setting daemon protocol...')
         self.__daemon.set_protocol(protocol)
         self.__log('Initiating daemon handshake...')
         await asyncio.sleep(0.5)
         await self.__daemon.rb_connect()
         self.__log('Daemon handshake finished.')
 
+    async def __create_ws_proxy(self):
+        self.__daemon = _WsProxy(
+                os.path.join(_dirname, 'daemon_pb2.py'))
+        self.__log('Connecting to remote websocket...')
+        protocol = await websockets.client.connect(
+                'ws://localhost:42000',
+                loop=self._loop)
+        protocol.data_received = self.__daemon.rb_deliver
+        protocol.connection_lost = self.__connection_closed
+        self.__log('Connecting established.')
+
+        self.__daemon.set_protocol(protocol)
+        self.__log('Initiating daemon handshake...')
+        await self.__daemon.rb_connect()
+        self.__log('Daemon handshake finished.')
 
     def close(self):
         self._linkbot_transport.close()
