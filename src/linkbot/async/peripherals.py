@@ -6,12 +6,15 @@ import linkbot.peripherals as peripherals
 import weakref
 
 __all__ = [ 'Accelerometer', 
+            'Battery',
             'Button',
+            'Buzzer',
             'Eeprom',
             'Led',
             'Buzzer',
             'Motor',
             'Motors',
+            'Twi',
             ]
 
 class Accelerometer():
@@ -154,6 +157,48 @@ class Battery():
         util.chain_futures(fut, user_fut, conv=lambda x:x.v)
         return user_fut
 
+    async def percentage(self):
+        ''' Return an estimated battery percentage.
+
+        This function estimates the battery charge level based on the current
+        voltage of the battery. The battery voltage discharge curve is highly
+        non-linear, and this function uses three cubic curve-fit equations to
+        generate a "best guess" of the battery level as a percentage.
+
+        See
+        https://docs.google.com/spreadsheets/d/1nZYGi2s-gs6waFfvLNPQ9SBCAgTuzwL0sdIo_FG3BQA/edit?usp=sharing
+        for the formula, charts, and graphs.
+
+        :returns: A value from 0 to 100 representing the charge of the battery.
+        :rtype: asyncio.Future
+        '''
+        def v_to_percent(v):
+            if v > 2.939176:
+                p = 100 - ((-1767.563651*v**3) + \
+                          (16574.91975*v**2) + \
+                          (-51953.36291*v) + \
+                          54443.61917)
+            elif v > 2.9081037:
+                p = 100 - ((-77201.18865*v**3) + \
+                          (666450.9575*v**2) + \
+                          (-1917865.889*v) + \
+                          1839890.523)
+            else:
+                p = 100 - ((-422.9524082*v**3) + \
+                          (3210.382045*v**2) + \
+                          (-8135.146192*v) + \
+                          6979.444376)
+            if p > 100:
+                p = 100
+            if p < 0:
+                p = 0
+            return p
+
+        fut = await self.voltage()
+        user_fut = asyncio.Future()
+        util.chain_futures(fut, user_fut, v_to_percent)
+        return user_fut
+
 class Button():
     PWR = 0
     A = 1
@@ -278,6 +323,33 @@ class Button():
                                     payload.state, 
                                     payload.timestamp)
 
+class Buzzer():
+    @classmethod
+    async def create(cls, proxy):
+        self = cls()
+        self._proxy = proxy
+        return self
+
+    async def frequency(self):
+        '''
+        Get the current buzzer frequency.
+
+        :returns: Frequency in Hz
+        :rtype: float
+        '''
+        fut = await self._proxy.getBuzzerFrequency()
+        return fut
+
+    async def set_frequency(self, hz):
+        '''
+        Set the buzzer frequency.
+
+        :param hz: A frequency in Hz.
+        :type hz: float
+        '''
+        fut = await self._proxy.setBuzzerFrequency(value=hz)
+        return fut
+
 class Eeprom():
     @classmethod
     async def create(cls, proxy):
@@ -360,33 +432,6 @@ class Led():
         '''
         word = b | (g<<8) | (r<<16)
         fut = await self._proxy.setLedColor(value=word)
-        return fut
-
-class Buzzer():
-    @classmethod
-    async def create(cls, proxy):
-        self = cls()
-        self._proxy = proxy
-        return self
-
-    async def frequency(self):
-        '''
-        Get the current buzzer frequency.
-
-        :returns: Frequency in Hz
-        :rtype: float
-        '''
-        fut = await self._proxy.getBuzzerFrequency()
-        return fut
-
-    async def set_frequency(self, hz):
-        '''
-        Set the buzzer frequency.
-
-        :param hz: A frequency in Hz.
-        :type hz: float
-        '''
-        fut = await self._proxy.setBuzzerFrequency(value=hz)
         return fut
 
 class Motor:
@@ -927,4 +972,55 @@ class Motors:
         '''
         fut = await self._proxy.stop(mask=mask)
         return fut
+
+class Twi:
+    @classmethod
+    async def create(cls, proxy):
+        self = cls()
+        self._proxy = proxy
+        return self
+
+    async def read(self, address, size):
+        '''
+        Read from an attached TWI device.
+
+        :param address: TWI address to read from
+        :type address: int
+        :param size: Number of bytes to read
+        :type size: int
+        :returns: asyncio.Future containing a bytestring
+        '''
+        fut = await self._proxy.readTwi(address=address, recvsize=size)
+        user_fut = asyncio.Future()
+        util.chain_futures(fut, user_fut, conv=lambda x:x.data)
+        return user_fut
+
+    async def write(self, address, bytestring):
+        '''
+        Write to an attached TWI device.
+
+        :param address: TWI address to write to.
+        :param bytestring: a bytestring to write
+        '''
+        fut = await self._proxy.writeTwi(address=address, data=bytestring)
+        return fut
+
+    async def write_read(self, write_addr, write_data, recv_size):
+        '''
+        Write and read from a TWI device in one step without releasing the TWI
+        bus.
+
+        :param write_addr: Address to write to.
+        :param write_data: Data to write.
+        :type write_data: bytes
+        :param recv_size: Number of bytes to read after writing.
+        :returns: asyncio.Future containing a bytestring
+        '''
+        fut = await self._proxy.writeReadTwi(
+                address=write_addr,
+                recvsize=recv_size,
+                data=write_data)
+        user_fut = asyncio.Future()
+        util.chain_futures(fut, user_fut, conv=lambda x:x.data)
+        return user_fut
 

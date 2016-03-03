@@ -102,6 +102,25 @@ class Battery():
                 self._proxy.voltage(),
                 self._loop )
 
+    def percentage(self):
+        ''' Return an estimated battery percentage.
+
+        This function estimates the battery charge level based on the current
+        voltage of the battery. The battery voltage discharge curve is highly
+        non-linear, and this function uses three cubic curve-fit equations to
+        generate a "best guess" of the battery level as a percentage.
+
+        See
+        https://docs.google.com/spreadsheets/d/1nZYGi2s-gs6waFfvLNPQ9SBCAgTuzwL0sdIo_FG3BQA/edit?usp=sharing
+        for the formula, charts, and graphs.
+
+        :returns: A value from 0 to 100 representing the charge of the battery.
+        :rtype: float
+        '''
+        return util.run_linkbot_coroutine(
+                self._proxy.percentage(),
+                self._loop)
+
 class Button(Peripheral):
     PWR = 0
     A = 1
@@ -554,3 +573,48 @@ class Motors():
         '''
         return util.run_linkbot_coroutine(
                 self._amotors.stop(mask=mask), self._loop)
+
+class Twi():
+    def __init__(self, async_twi, loop):
+        self._proxy = async_twi
+        self._loop = loop
+
+    async def read(self, address, size):
+        '''
+        Read from an attached TWI device.
+
+        :param address: TWI address to read from
+        :type address: int
+        :param size: Number of bytes to read
+        :type size: int
+        :rtype: bytestring
+        '''
+        return util.run_linkbot_coroutine(
+                self._proxy.read(address, size),
+                self._loop)
+
+    async def write(self, address, bytestring):
+        '''
+        Write to an attached TWI device.
+
+        :param address: TWI address to write to.
+        :param bytestring: a bytestring to write
+        '''
+        return util.run_linkbot_coroutine(
+                self._proxy.write(address, bytestring),
+                self._loop)
+
+    async def write_read(self, write_addr, write_data, recv_size):
+        '''
+        Write and read from a TWI device in one step without releasing the TWI
+        bus.
+
+        :param write_addr: Address to write to.
+        :param write_data: Data to write.
+        :type write_data: bytes
+        :param recv_size: Number of bytes to read after writing.
+        :rtype: bytestring
+        '''
+        return util.run_linkbot_coroutine(
+                self._proxy.write_read(write_addr, write_data, recv_size),
+                self._loop)
