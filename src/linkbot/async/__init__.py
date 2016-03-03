@@ -211,6 +211,21 @@ class AsyncLinkbot():
         """
         return self._motors
 
+    async def version(self):
+        '''
+        Get the firmware version
+
+        :returns: asyncio.Future with result (major, minor, patch)
+        :rtype: asyncio.Future with result type: (int, int, int)
+        '''
+        def conv(payload):
+            return (payload.major, payload.minor, payload.patch)
+
+        fut = await self._proxy.getFirmwareVersion()
+        user_fut = asyncio.Future()
+        util.chain_futures(fut, user_fut, conv=conv)
+        return user_fut
+
     async def __joint_event(self, payload):
         # Update the motor states
         self.motors[payload.joint].state = payload.event

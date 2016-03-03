@@ -111,3 +111,13 @@ class Linkbot():
         """
         return self._motors
 
+    def version(self):
+        '''
+        Get the firmware version
+
+        :rtype:(int, int, int)
+        '''
+        return util.run_linkbot_coroutine(
+                self._alinkbot.version(),
+                self._loop)
+

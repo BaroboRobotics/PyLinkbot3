@@ -492,6 +492,23 @@ class Motors():
         return util.run_linkbot_coroutine(
                 self._amotors.move_wait(mask=mask), self._loop)
 
+    def reset(self):
+        ''' Reset the revolution-counter on the Linkbot.
+
+        When a Linkbot's motor turns more than 360 degrees, the motor's reported
+        angle does not wrap back around to zero. For instance, if a motor is
+        rotated ten times, retrieving the motor angle would yield a value of
+        something like 3600 degrees. Similarly, if a motor is currently at 3600
+        degrees and it receives an instruction to move to an absolute position
+        of 0 degrees, the motor will "wind down" backwards ten full rotations.
+
+        This function resets the internal counter on the Linkbot that stores
+        multiple revolutions on the robot. For instance, if the robot angle is
+        currently 3610, after a ```reset()```, the motor will report to be at an
+        angle of 10 degrees. 
+        '''
+        return util.run_linkbot_coroutine( self._amotors.reset(), self._loop )
+
     def stop(self, mask=0x07):
         ''' Immediately stop all motors.
 
