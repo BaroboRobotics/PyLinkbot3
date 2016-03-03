@@ -21,6 +21,16 @@ class _SfpProxy(rb.Proxy):
     async def rb_emit_to_server(self, bytestring):
         self._protocol.write(bytestring)
 
+class _WsProxy(rb.Proxy):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def set_protocol(self, protocol):
+        self._protocol = protocol
+
+    async def rb_emit_to_server(self, bytestring):
+        self._protocol.send(bytestring)
+
 class _AsyncLinkbot(rb.Proxy):
     def __init__(self, *args, **kw):
         super().__init__(*args, **kw)
@@ -30,26 +40,10 @@ class _AsyncLinkbot(rb.Proxy):
         logging.info('Creating async Linkbot handle to ID:{}'.format(serial_id))
         self = cls( os.path.join(_dirname, 'robot_pb2.py'))
         self._serial_id = serial_id
-        self.__daemon = _SfpProxy(
-                os.path.join(_dirname, 'daemon_pb2.py'))
+        self._loop = asyncio.get_event_loop()
 
-        loop = asyncio.get_event_loop()
         self.__log('Creating tcp connection to daemon...')
-        (transport, protocol) = await loop.create_connection(
-                functools.partial(
-                    sfp.asyncio.SfpProtocol,
-                    self.__daemon.rb_deliver,
-                    loop),
-                'localhost', '42000' )
-        self.__log('Daemon TCP connection established.')
-        protocol.connection_lost = self.__connection_closed
-
-        self.__log('Setting daemon protocol...')
-        self.__daemon.set_protocol(protocol)
-        self.__log('Initiating daemon handshake...')
-        await asyncio.sleep(0.5)
-        await self.__daemon.rb_connect()
-        self.__log('Daemon handshake finished.')
+        await self.__create_sfp_proxy()
 
         self.__log('Resolving serial id...')
         args = self.__daemon.rb_get_args_obj('resolveSerialId')
@@ -58,11 +52,11 @@ class _AsyncLinkbot(rb.Proxy):
         tcp_endpoint = await result_fut
         self.__log('Connecting to robot endpoint...')
         (linkbot_transport, linkbot_protocol) = \
-            await loop.create_connection(
+            await self._loop.create_connection(
                     functools.partial(
                         sfp.asyncio.SfpProtocol,
                         self.rb_deliver,
-                        loop),
+                        self._loop),
                     tcp_endpoint.endpoint.address,
                     str(tcp_endpoint.endpoint.port) )
         self.__log('Connected to robot endpoint.')
@@ -78,6 +72,26 @@ class _AsyncLinkbot(rb.Proxy):
         result_obj = await fut
         self.form_factor = result_obj.value
         return self
+
+    async def __create_sfp_proxy(self):
+        self.__daemon = _SfpProxy(
+                os.path.join(_dirname, 'daemon_pb2.py'))
+        (transport, protocol) = await self._loop.create_connection(
+                functools.partial(
+                    sfp.asyncio.SfpProtocol,
+                    self.__daemon.rb_deliver,
+                    self._loop),
+                'localhost', '42000' )
+        self.__log('Daemon TCP connection established.')
+        protocol.connection_lost = self.__connection_closed
+
+        self.__log('Setting daemon protocol...')
+        self.__daemon.set_protocol(protocol)
+        self.__log('Initiating daemon handshake...')
+        await asyncio.sleep(0.5)
+        await self.__daemon.rb_connect()
+        self.__log('Daemon handshake finished.')
+
 
     def close(self):
         self._linkbot_transport.close()
