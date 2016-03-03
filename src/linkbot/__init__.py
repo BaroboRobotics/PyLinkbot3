@@ -111,6 +111,37 @@ class Linkbot():
         """
         return self._motors
 
+    def _read_eeprom(self, address, size):
+        '''
+        Read ```size``` bytes from EEPROM address ```address``` on the robot.
+
+        :param address: The start address to read from
+        :type address: int
+        :param size: The number of bytes to read
+        :type size: int
+        :rtype: bytestring
+        '''
+        return util.run_linkbot_coroutine(
+            self._alinkbot._read_eeprom(address, size),
+            self._loop)
+
+    def _write_eeprom(self, address, bytestring):
+        '''
+        Write data to the EEPROM.
+
+        WARNING: This function can overwrite important EEPROM data that the
+        robot uses to function properly, such as its serial ID, calibration
+        values, hardware versioning information, etc. 
+
+        :param address: Start EEPROM address to write to
+        :type address: int
+        :param bytestring: Bytes to write to EEPROM
+        :type bytestring: bytearray or bytes
+        '''
+        return util.run_linkbot_coroutine(
+                self._alinkbot._write_eeprom(address, bytestring),
+                self._loop)
+
     def version(self):
         '''
         Get the firmware version
