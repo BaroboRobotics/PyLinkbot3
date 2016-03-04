@@ -37,22 +37,15 @@ class Linkbot():
     
         fut = asyncio.run_coroutine_threadsafe(
                 AsyncLinkbot.create(serial_id), self._loop)
-        self._alinkbot = fut.result()
+        self._proxy = fut.result()
        
-        self._accelerometer = Accelerometer(
-                self._alinkbot.accelerometer,
-                self._loop )
-        self._battery = Battery( self._alinkbot.battery,
-                                 self._loop )
-        self._button = Button( self._alinkbot.buttons,
-                               self._loop )
-        self._buzzer = Buzzer( self._alinkbot.buzzer,
-                               self._loop )
-        self._eeprom_obj = Eeprom( self._alinkbot._eeprom,
-                                   self._loop )
-        self._led = Led( self._alinkbot.led,
-                         self._loop )
-        self._motors = Motors(self._alinkbot.motors, self._loop)
+        self._accelerometer = Accelerometer(self)
+        self._battery = Battery(self)
+        self._button = Button(self)
+        self._buzzer = Buzzer(self)
+        self._eeprom_obj = Eeprom(self)
+        self._led = Led(self)
+        self._motors = Motors(self)
 
     @property
     def accelerometer(self):
@@ -131,6 +124,6 @@ class Linkbot():
         :rtype: (int, int, int)
         '''
         return util.run_linkbot_coroutine(
-                self._alinkbot.version(),
+                self._proxy.version(),
                 self._loop)
 

@@ -36,8 +36,9 @@ class Peripheral():
             self._user_event_handler(*args, **kwargs)
 
 class Accelerometer(Peripheral):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, linkbot_parent):
+        super().__init__(linkbot_parent._proxy.accelerometer, 
+                linkbot_parent._loop)
 
     def values(self):
         '''
@@ -88,9 +89,9 @@ class Accelerometer(Peripheral):
                 self._loop )
 
 class Battery():
-    def __init__(self, async_battery, loop):
-        self._proxy = async_battery
-        self._loop = loop
+    def __init__(self, linkbot_parent):
+        self._proxy = linkbot_parent._proxy.battery
+        self._loop = linkbot_parent._loop
 
     def voltage(self):
         ''' Get the current battery voltage. 
@@ -129,8 +130,8 @@ class Button(Peripheral):
     UP = 0
     DOWN = 1
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, linkbot_parent):
+        super().__init__(linkbot_parent._proxy.buttons, linkbot_parent._loop)
 
     def values(self):
         '''
@@ -181,9 +182,9 @@ class Button(Peripheral):
                 self._loop )
 
 class Buzzer():
-    def __init__(self, async_buzzer, loop):
-        self._proxy = async_buzzer
-        self._loop = loop
+    def __init__(self, linkbot_parent):
+        self._proxy = linkbot_parent._proxy.buzzer
+        self._loop = linkbot_parent._loop
 
     def frequency(self):
         ''' Get the current buzzer frequency.
@@ -206,9 +207,9 @@ class Buzzer():
                 self._loop)
 
 class Eeprom():
-    def __init__(self, async_eeprom, loop):
-        self._proxy = async_eeprom
-        self._loop = loop
+    def __init__(self, linkbot_parent):
+        self._proxy = linkbot_parent._proxy._eeprom
+        self._loop = linkbot_parent._loop
 
     def read(self, address, size):
         '''
@@ -243,9 +244,9 @@ class Eeprom():
 
         
 class Led():
-    def __init__(self, async_led, loop):
-        self._proxy = async_led
-        self._loop = loop
+    def __init__(self, linkbot_parent):
+        self._proxy = linkbot_parent._proxy.led
+        self._loop = linkbot_parent._loop
 
     def color(self):
         ''' Get the current led color.
@@ -473,12 +474,12 @@ class Motor(Peripheral):
                 self._loop)
 
 class Motors():
-    def __init__(self, async_motors, loop):
-        self._amotors = async_motors
-        self._loop = loop
+    def __init__(self, linkbot_parent, motor_class=Motor):
+        self._amotors = linkbot_parent._proxy.motors
+        self._loop = linkbot_parent._loop
         self.motors = []
         for i in range(3):
-            self.motors.append( Motor(self._amotors[i], self._loop) )
+            self.motors.append( motor_class(self._amotors[i], self._loop) )
 
     def __getitem__(self, index):
         return self.motors[index]
