@@ -164,13 +164,13 @@ class AsyncLinkbot():
             self.rb_add_broadcast_handler = self._proxy.rb_add_broadcast_handler
             self.close = self._proxy.close
             self.enableButtonEvent = self._proxy.enableButtonEvent
-            self._accelerometer = await peripherals.Accelerometer.create(self._proxy)
-            self._battery = await peripherals.Battery.create(self._proxy)
-            self._button = await peripherals.Button.create(self._proxy)
-            self._buzzer = await peripherals.Buzzer.create(self._proxy)
-            self._eeprom_obj = await peripherals.Eeprom.create(self._proxy)
-            self._led = await peripherals.Led.create(self._proxy)
-            self._motors = await peripherals.Motors.create(self._proxy)
+            self._accelerometer = await peripherals.Accelerometer.create(self)
+            self._battery = await peripherals.Battery.create(self)
+            self._button = await peripherals.Button.create(self)
+            self._buzzer = await peripherals.Buzzer.create(self)
+            self._eeprom_obj = await peripherals.Eeprom.create(self)
+            self._led = await peripherals.Led.create(self)
+            self._motors = await peripherals.Motors.create(self)
             self._timeouts = util.TimeoutCore(asyncio.get_event_loop())
             self._serial_id = serial_id
 

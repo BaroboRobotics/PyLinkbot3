@@ -19,9 +19,9 @@ __all__ = [ 'Accelerometer',
 
 class Accelerometer():
     @classmethod
-    async def create(cls, proxy):
+    async def create(cls, asynclinkbot_parent):
         self = cls()
-        self._proxy = proxy
+        self._proxy = asynclinkbot_parent._proxy
         self._event_callback = None
         return self
 
@@ -140,9 +140,9 @@ class Accelerometer():
 
 class Battery():
     @classmethod
-    async def create(cls, proxy):
+    async def create(cls, asynclinkbot_parent):
         self = cls()
-        self._proxy = proxy
+        self._proxy = asynclinkbot_parent._proxy
         return self
 
     async def voltage(self):
@@ -211,9 +211,9 @@ class Button():
     DOWN = 1
 
     @classmethod
-    async def create(cls, proxy):
+    async def create(cls, asynclinkbot_parent):
         self = cls()
-        self._proxy = proxy
+        self._proxy = asynclinkbot_parent._proxy
         self._event_callback = None
         return self
 
@@ -328,9 +328,9 @@ class Button():
 
 class Buzzer():
     @classmethod
-    async def create(cls, proxy):
+    async def create(cls, asynclinkbot_parent):
         self = cls()
-        self._proxy = proxy
+        self._proxy = asynclinkbot_parent._proxy 
         return self
 
     async def frequency(self):
@@ -355,9 +355,9 @@ class Buzzer():
 
 class Eeprom():
     @classmethod
-    async def create(cls, proxy):
+    async def create(cls, asynclinkbot_parent):
         self = cls()
-        self._proxy = proxy
+        self._proxy = asynclinkbot_parent._proxy
         return self
 
     async def read(self, address, size):
@@ -396,9 +396,9 @@ class Eeprom():
 
 class Led():
     @classmethod
-    async def create(cls, proxy):
+    async def create(cls, asynclinkbot_parent):
         self = cls()
-        self._proxy = proxy
+        self._proxy = asynclinkbot_parent._proxy
         return self
 
     async def color(self):
@@ -453,7 +453,6 @@ class Motor:
         await self._poll_state()
         # List of futures that should be set when this joint is done moving
         self._move_waiters = []
-        #self._motors = weakref.ref(motors_obj)
         self._motors = motors_obj
         return self
 
@@ -853,12 +852,12 @@ class Motors:
             self._handlers[index] = callback
 
     @classmethod
-    async def create(cls, proxy):
+    async def create(cls, asynclinkbot_parent, motor_class=Motor):
         self = cls()
-        self._proxy = proxy
+        self._proxy = asynclinkbot_parent._proxy
         self.motors = []
         for i in range(3):
-            self.motors.append( await Motor.create(i, proxy, self) )
+            self.motors.append( await motor_class.create(i, self._proxy, self) )
         self._timeouts = util.TimeoutCore(asyncio.get_event_loop())
         self._callback_handler = self._EncoderEventHandler()
         return self
