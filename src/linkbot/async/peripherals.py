@@ -169,6 +169,9 @@ class Battery():
         https://docs.google.com/spreadsheets/d/1nZYGi2s-gs6waFfvLNPQ9SBCAgTuzwL0sdIo_FG3BQA/edit?usp=sharing
         for the formula, charts, and graphs.
 
+        Also note that both the battery voltage and percentage values returned
+        by the robot will be inaccurate while the robot is being charged.
+
         :returns: A value from 0 to 100 representing the charge of the battery.
         :rtype: asyncio.Future
         '''

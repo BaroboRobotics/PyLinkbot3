@@ -128,7 +128,7 @@ class Linkbot():
         '''
         Get the firmware version
 
-        :rtype:(int, int, int)
+        :rtype: (int, int, int)
         '''
         return util.run_linkbot_coroutine(
                 self._alinkbot.version(),

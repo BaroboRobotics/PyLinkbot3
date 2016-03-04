@@ -457,7 +457,7 @@ class Motor(Peripheral):
         :type wait: bool
         '''
         util.run_linkbot_coroutine(
-                self.amotor.move(angle, relative),
+                self._proxy.move(angle, relative),
                 self._loop)
         if wait:
             self.move_wait()
@@ -469,7 +469,7 @@ class Motor(Peripheral):
         ```HOLD``` state.
         '''
         return util.run_linkbot_coroutine(
-                self.amotor.move_wait(),
+                self._proxy.move_wait(),
                 self._loop)
 
 class Motors():
