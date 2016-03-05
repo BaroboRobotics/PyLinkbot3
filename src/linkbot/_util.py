@@ -27,11 +27,11 @@ def chain_futures(fut1, fut2, conv=lambda x: x):
                 conv)
             )
 
-def run_linkbot_coroutine(coro, loop):
+def run_linkbot_coroutine(coro, loop, timeout=DEFAULT_TIMEOUT):
     fut = asyncio.run_coroutine_threadsafe(coro, loop)
-    fut2 = fut.result(timeout=DEFAULT_TIMEOUT)
+    fut2 = fut.result(timeout=timeout)
     result = asyncio.run_coroutine_threadsafe(
-            asyncio.wait_for(fut2, timeout=DEFAULT_TIMEOUT), loop)
+            asyncio.wait_for(fut2, timeout=timeout), loop)
     return result.result()
 
 class Singleton(type):

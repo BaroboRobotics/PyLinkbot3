@@ -471,7 +471,8 @@ class Motor(Peripheral):
         '''
         return util.run_linkbot_coroutine(
                 self._proxy.move_wait(),
-                self._loop)
+                self._loop,
+                timeout=None)
 
 class Motors():
     def __init__(self, linkbot_parent, motor_class=Motor):
