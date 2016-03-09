@@ -18,4 +18,10 @@ setup (name = 'PyLinkbot',
            'PyRibbonBridge>=0.0.5', 
            'PySfp>=0.1.1', 
            'websockets>=3.0',],
-       )
+       classifiers=[
+           'Development Status :: 3 - Alpha',
+           'Intended Audience :: Education',
+           'Operating System :: OS Independent',
+           'Programming Language :: Python :: 3.5',
+       ],
+)
