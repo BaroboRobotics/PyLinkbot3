@@ -16,7 +16,7 @@ setup (name = 'PyLinkbot',
        packages = ['linkbot', 'linkbot.async'],
        url = 'http://github.com/BaroboRobotics/PyLinkbot3',
        install_requires=[
-           'PyRibbonBridge>=0.0.2', 
-           'PySfp>=0.0.1', 
+           'PyRibbonBridge>=0.0.5', 
+           'PySfp>=0.1.0', 
            'websockets>=3.0',],
        )

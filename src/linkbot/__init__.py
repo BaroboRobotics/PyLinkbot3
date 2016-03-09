@@ -108,12 +108,12 @@ class Linkbot():
         """
         The motors of the Linkbot.
 
-        See :class:`linkbot.Motors` . To access individual motors,
+        See :class:`linkbot.peripherals.Motors` . To access individual motors,
         you may do::
 
             Linkbot.motors[0].is_moving()
 
-        or similar. Also see :class:`linkbot.Motor`
+        or similar. Also see :class:`linkbot.peripherals.Motor`
         """
         return self._motors
 

@@ -31,7 +31,7 @@ class Peripheral():
 
     async def _event_handler(self, *args, **kwargs):
         if asyncio.iscoroutinefunction(self._user_event_handler):
-            await self._user_event_handler(*args, **kwargs)
+            asyncio.ensure_future(self._user_event_handler(*args, **kwargs))
         else:
             self._user_event_handler(*args, **kwargs)
 
@@ -296,6 +296,8 @@ class Motor(Peripheral):
 
         :rtype: float
         :returns: The acceleration setting in units of deg/s/s
+
+        See also: :func:`linkbot.peripherals.Motor.set_accel`
         '''
         return util.run_linkbot_coroutine(
                 self._proxy.accel(), self._loop)
@@ -318,8 +320,10 @@ class Motor(Peripheral):
         * :const:`linkbot.peripherals.Motor.Controller.SMOOTH`: Move the motor with specified
           acceleration, maximum velocity, and deceleration. For this type of
           movement, access maximum velocity with property `omega`,
-          acceleration with property `acceleration`, and deceleration with property
-          `deceleration`.
+          acceleration with property `accel`, and deceleration with property
+          `decel`.
+
+        See also: :func:`linkbot.peripherals.Motor.set_controller`
         '''
         return util.run_linkbot_coroutine(
                 self._proxy.controller(), self._loop)
@@ -329,6 +333,8 @@ class Motor(Peripheral):
 
         :rtype: float
         :returns: The deceleration setting in units of deg/s/s
+
+        See also: :func:`linkbot.peripherals.Motor.set_decel`
         '''
         return util.run_linkbot_coroutine(
                 self._proxy.decel(), self._loop)
@@ -338,6 +344,8 @@ class Motor(Peripheral):
 
         :rtype: float
         :returns: The speed setting of the motor in deg/s
+
+        See also: :func:`linkbot.peripherals.Motor.set_omega`
         '''
         return util.run_linkbot_coroutine(
                 self._proxy.omega(), self._loop)
@@ -546,7 +554,7 @@ class Motors():
 
         This function returns when the Linkbot's motors stop moving. The
         ``mask`` argument is similar to the ``mask`` argument in 
-        :func:`linkbot.peripherals.Motors.moveNB`.
+        :func:`linkbot.peripherals.Motors.move`.
         '''
         return util.run_linkbot_coroutine(
                 self._amotors.move_wait(mask=mask), self._loop)
@@ -571,7 +579,7 @@ class Motors():
     def stop(self, mask=0x07):
         ''' Immediately stop all motors.
 
-        :param mask: See :func:`linkbot.peripherals.Motors.moveNB`
+        :param mask: See :func:`linkbot.peripherals.Motors.move`
         '''
         return util.run_linkbot_coroutine(
                 self._amotors.stop(mask=mask), self._loop)

@@ -3,7 +3,7 @@ import functools
 import logging
 import os
 import ribbonbridge as rb
-import sfp.asyncio
+import sfp
 from . import peripherals
 from .. import _util as util
 import websockets
@@ -12,7 +12,7 @@ __all__ = ['AsyncLinkbot']
 
 _dirname = os.path.dirname(os.path.realpath(__file__))
 
-class _SfpProxy(rb.Proxy):
+class _DaemonProxy(rb.Proxy):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -20,52 +20,69 @@ class _SfpProxy(rb.Proxy):
         self._protocol = protocol
 
     async def rb_emit_to_server(self, bytestring):
-        self._protocol.write(bytestring)
-
-class _WsProxy(rb.Proxy):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    def set_protocol(self, protocol):
-        self._protocol = protocol
-
-    async def rb_emit_to_server(self, bytestring):
-        self._protocol.send(bytestring)
+        await self._protocol.send(bytestring)
 
 class _AsyncLinkbot(rb.Proxy):
     def __init__(self, *args, **kw):
         super().__init__(*args, **kw)
 
+    def __del__(self):
+        self.close()
+
     @classmethod
     async def create(cls, serial_id):
         logging.info('Creating async Linkbot handle to ID:{}'.format(serial_id))
         self = cls( os.path.join(_dirname, 'robot_pb2.py'))
+        if os.environ.get('LINKBOT_USE_WEBSOCKETS'):
+            self.__use_websockets = True
+        else:
+            self.__use_websockets = False
         self._serial_id = serial_id
         self._loop = asyncio.get_event_loop()
 
-        if os.environ.get('LINKBOT_USE_WEBSOCKETS'):
+        self.__daemon = _DaemonProxy(
+                os.path.join(_dirname, 'daemon_pb2.py'))
+
+        if self.__use_websockets:
             self.__log('Creating Websocket connection to daemon...')
-            await self.__create_ws_proxy()
+            protocol = await websockets.connect(
+                    'ws://localhost:42000', loop=self._loop)
         else:
             self.__log('Creating tcp connection to daemon...')
-            await self.__create_sfp_proxy()
+            (transport, protocol) = await sfp.client.connect(
+                    'localhost', '42000', loop=self._loop)
+
+        self.__log('Daemon TCP connection established.')
+        protocol.connection_lost = self.__connection_closed
+
+        self.__daemon.set_protocol(protocol)
+        daemon_consumer = asyncio.ensure_future(self.__daemon_consumer(protocol))
+        self.__log('Initiating daemon handshake...')
+        await asyncio.sleep(0.5)
+        await self.__daemon.rb_connect()
+        self.__log('Daemon handshake finished.')
 
         self.__log('Resolving serial id...')
         args = self.__daemon.rb_get_args_obj('resolveSerialId')
         args.serialId.value = serial_id
         result_fut = await self.__daemon.resolveSerialId(args)
         tcp_endpoint = await result_fut
+        self.__log('Disconnecting from daemon.')
+        await protocol.close()
+        daemon_consumer.cancel()
         self.__log('Connecting to robot endpoint...')
-        (linkbot_transport, linkbot_protocol) = \
-            await self._loop.create_connection(
-                    functools.partial(
-                        sfp.asyncio.SfpProtocol,
-                        self.rb_deliver,
-                        self._loop),
-                    tcp_endpoint.endpoint.address,
-                    str(tcp_endpoint.endpoint.port) )
+        if self.__use_websockets:
+            linkbot_protocol = await websockets.client.connect(
+                    'ws://'+tcp_endpoint.endpoint.address+':'+str(tcp_endpoint.endpoint.port),
+                    loop=self._loop)
+        else:
+            (_, linkbot_protocol) = \
+                    await sfp.client.connect(
+                            tcp_endpoint.endpoint.address,
+                            tcp_endpoint.endpoint.port)
+        self.__linkbot_consumer_handle = \
+            asyncio.ensure_future(self.__linkbot_consumer(linkbot_protocol))
         self.__log('Connected to robot endpoint.')
-        self._linkbot_transport = linkbot_transport
         self._linkbot_protocol = linkbot_protocol
         self.__log('Sending connect request to robot...')
         await asyncio.sleep(0.5)
@@ -78,42 +95,25 @@ class _AsyncLinkbot(rb.Proxy):
         self.form_factor = result_obj.value
         return self
 
-    async def __create_sfp_proxy(self):
-        self.__daemon = _SfpProxy(
-                os.path.join(_dirname, 'daemon_pb2.py'))
-        (transport, protocol) = await self._loop.create_connection(
-                functools.partial(
-                    sfp.asyncio.SfpProtocol,
-                    self.__daemon.rb_deliver,
-                    self._loop),
-                'localhost', '42000' )
-        self.__log('Daemon TCP connection established.')
-        protocol.connection_lost = self.__connection_closed
+    async def __daemon_consumer(self, protocol):
+        while True:
+            try:
+                msg = await protocol.recv()
+            except asyncio.CancelledError:
+                return
+            await self.__daemon.rb_deliver(msg)
 
-        self.__daemon.set_protocol(protocol)
-        self.__log('Initiating daemon handshake...')
-        await asyncio.sleep(0.5)
-        await self.__daemon.rb_connect()
-        self.__log('Daemon handshake finished.')
-
-    async def __create_ws_proxy(self):
-        self.__daemon = _WsProxy(
-                os.path.join(_dirname, 'daemon_pb2.py'))
-        self.__log('Connecting to remote websocket...')
-        protocol = await websockets.client.connect(
-                'ws://localhost:42000',
-                loop=self._loop)
-        protocol.data_received = self.__daemon.rb_deliver
-        protocol.connection_lost = self.__connection_closed
-        self.__log('Connecting established.')
-
-        self.__daemon.set_protocol(protocol)
-        self.__log('Initiating daemon handshake...')
-        await self.__daemon.rb_connect()
-        self.__log('Daemon handshake finished.')
+    async def __linkbot_consumer(self, protocol):
+        while True:
+            try:
+                msg = await protocol.recv()
+            except asyncio.CancelledError:
+                return
+            await self.rb_deliver(msg)
 
     def close(self):
-        self._linkbot_transport.close()
+        self._linkbot_protocol.close()
+        self.__linkbot_consumer_handle.cancel()
 
     def __connection_closed(self, exc):
         ''' Called when the connection is closed from the other end.
@@ -127,7 +127,7 @@ class _AsyncLinkbot(rb.Proxy):
         self.rb_close()
 
     async def rb_emit_to_server(self, bytestring):
-        self._linkbot_protocol.write(bytestring)
+        await self._linkbot_protocol.send(bytestring)
 
     def __log(self, msg, logtype='info'):
         getattr(logging, logtype)(self._serial_id + ': ' + msg)
