@@ -1,109 +1,129 @@
 #!/usr/bin/env python3
 
 import asyncio
+import collections
+import functools
 import logging
+import math
 import os
-import ribbonbridge as rb
-import sfp.asyncio
 import threading
+import time
+from . import _util as util
 
-_dirname = os.path.dirname(os.path.realpath(__file__))
+from .async import *
+from .peripherals import *
 
-class _Singleton(type):
-    instance = None
-    def __call__(cls, *args, **kw):
-        if not cls.instance:
-            cls.instance = super(_Singleton, cls).__call__(*args, **kw)
-        return cls.instance
+__all__ = ['FormFactor', 'Linkbot', ]
+__all__ += [async.__all__, ]
 
-class _IoCore():
-    __metaclass__ = _Singleton
+class FormFactor():
+    I = 0
+    L = 1
+    T = 2
+    DONGLE = 3
 
-    def __init__(self):
-        self._initializing = True
-        self._initializing_sig = threading.Condition()
-        self.loop = None
-        self._thread = threading.Thread(target=self._work)
-        self._thread.start()
-
-        self._initializing_sig.acquire()
-        while self._initializing:
-            self._initializing_sig.wait(timeout=1)
-        self._initializing_sig.release()
-
-    def get_event_loop(self):
-        return self.loop
-
-    def _work(self):
-        self.loop = asyncio.new_event_loop()
-        self._initializing_sig.acquire()
-        self._initializing = False
-        self._initializing_sig.notify_all()
-        self._initializing_sig.release()
-        logging.info('Starting event loop.')
-        self.loop.run_forever()
-
-class _SfpProxy(rb.Proxy):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    def set_protocol(self, protocol):
-        self._protocol = protocol
-
-    async def rb_emit_to_server(self, bytestring):
-        self._protocol.write(bytestring)
-
-class Linkbot(rb.Proxy):
+class Linkbot():
     def __init__(self, serial_id):
-        self.__iocore = _IoCore()
+        ''' Create a new Linkbot handle.
 
-        super().__init__(
-                os.path.join(_dirname, 'robot_pb2.py'),
-                self.__iocore.get_event_loop()
-                )
-
-        self.__daemon = _SfpProxy(
-                os.path.join(_dirname, 'daemon_pb2.py'),
-                self.__iocore.get_event_loop()
-                )
-
-        # Connect TCP to daemon
-        coro = self.__iocore.get_event_loop().create_connection(
-                sfp.asyncio.SfpProtocol,
-                'localhost', '42000' )
-        fut = asyncio.run_coroutine_threadsafe( 
-                coro,
-                self.__iocore.get_event_loop() )
-        (transport, protocol) = fut.result()
-        self.__daemon.set_protocol(protocol)
-        protocol.deliver = self.__daemon.rb_deliver
-        self.__daemon.rb_connect()
+        :param serial_id: The 4 digit alpha-numeric unique Linkbot identifier
+            printed on the top of the Linkbot.
+        :type serial_id: string
+        :raises concurrent.futures._base.TimeoutError: if the remote robot
+            cannot be be reached.
+        '''
+        self.__io_core = util.IoCore()
+        self._loop = self.__io_core.get_event_loop()
     
-        args = self.__daemon.rb_get_args_obj('resolveSerialId')
-        args.serialId.value = serial_id
-        tcp_endpoint = self.__daemon.resolveSerialId(args).result()
-        print(tcp_endpoint)
-        # Close the connection to the daemon, start a connection to the robot
-        transport.close()
-        logging.info('Connecting to robot endpoint...')
-        coro = self.__iocore.get_event_loop().create_connection(
-                sfp.asyncio.SfpProtocol,
-                tcp_endpoint.endpoint.address,
-                str(tcp_endpoint.endpoint.port) )
         fut = asyncio.run_coroutine_threadsafe(
-                coro, self.__iocore.get_event_loop() )
-        (linkbot_transport, linkbot_protocol) = fut.result()
-        logging.info('Connected to robot endpoint.')
-        self._linkbot_transport = linkbot_transport
-        self._linkbot_protocol = linkbot_protocol
-        self._linkbot_protocol.deliver = self.rb_deliver
-        logging.info('Sending connect request to robot...')
-        self.rb_connect()
-        logging.info('Done sending connect request to robot.')
+                AsyncLinkbot.create(serial_id), self._loop)
+        self._proxy = fut.result()
+       
+        self._accelerometer = Accelerometer(self)
+        self._battery = Battery(self)
+        self._button = Button(self)
+        self._buzzer = Buzzer(self)
+        self._eeprom_obj = Eeprom(self)
+        self._led = Led(self)
+        self._motors = Motors(self)
 
-    async def rb_emit_to_server(self, bytestring):
-        self._linkbot_protocol.write(bytestring)
-         
+    @property
+    def accelerometer(self):
+        '''
+        The robot accelerometer.
 
+        See :class:`linkbot.peripherals.Accelerometer`
+        '''
+        return self._accelerometer
 
+    @property
+    def battery(self):
+        '''
+        The robot battery.
+
+        See :class:`linkbot.peripherals.Battery`
+        '''
+        return self._battery
+
+    @property
+    def buttons(self):
+        '''
+        Access to the robot's buttons.
+
+        See :class:`linkbot.peripherals.Button`
+        '''
+        return self._button
+
+    @property
+    def buzzer(self):
+        '''
+        Control the Linkbot's buzzer.
+
+        See :class:`linkbot.peripherals.Buzzer`
+        '''
+        return self._buzzer
+
+    @property
+    def _eeprom(self):
+        """
+        Access the robot's EEPROM memory.
+
+        Warning: Improperly accessing the robot's EEPROM memory may yield
+        unexpected results. The robot uses EEPROM memory to store information
+        such as its serial ID, calibration data, etc.
+        """
+        return self._eeprom_obj
+
+    @property
+    def led(self):
+        '''
+        Access to the robot's multi-color LED.
+
+        See :class:`linkbot.peripherals.Led`.
+        '''
+        return self._led
+
+    @property
+    def motors(self):
+        """
+        The motors of the Linkbot.
+
+        See :class:`linkbot.peripherals.Motors` . To access individual motors,
+        you may do::
+
+            Linkbot.motors[0].is_moving()
+
+        or similar. Also see :class:`linkbot.peripherals.Motor`
+        """
+        return self._motors
+
+    def version(self):
+        '''
+        Get the firmware version
+
+        :rtype: (int, int, int)
+        '''
+        return util.run_linkbot_coroutine(
+                self._proxy.version(),
+                self._loop)
 
