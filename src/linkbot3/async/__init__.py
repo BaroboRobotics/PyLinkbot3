@@ -191,7 +191,7 @@ class AsyncLinkbot():
         """
         The Linkbot accelerometer.
 
-        See :class:`linkbot.async.peripherals.Accelerometer`.
+        See :class:`linkbot3.async.peripherals.Accelerometer`.
         """
         return self._accelerometer
 
@@ -201,7 +201,7 @@ class AsyncLinkbot():
         The Linkbot battery.
 
         Access the Linkbot's battery voltage. See
-        :class:`linkbot.async.peripherals.Battery`
+        :class:`linkbot3.async.peripherals.Battery`
         """
         return self._battery
 
@@ -210,7 +210,7 @@ class AsyncLinkbot():
         """
         Access to the Linkbot's buttons. 
 
-        See :class:`linkbot.async.peripherals.Button`.
+        See :class:`linkbot3.async.peripherals.Button`.
         """
         return self._button
 
@@ -219,7 +219,7 @@ class AsyncLinkbot():
         """
         Access to the Linkbot's buzzer.
 
-        See :class:`linkbot.async.peripherals.Buzzer`.
+        See :class:`linkbot3.async.peripherals.Buzzer`.
         """
         return self._buzzer
 
@@ -239,7 +239,7 @@ class AsyncLinkbot():
         """
         The Linkbot multicolor LED.
 
-        See :class:`linkbot.async.peripherals.Led`.
+        See :class:`linkbot3.async.peripherals.Led`.
         """
         return self._led
 
@@ -248,11 +248,11 @@ class AsyncLinkbot():
         """
         The motors of the Linkbot.
 
-        See :class:`linkbot.async.peripherals.Motors` . To access individual motors, you may do:
+        See :class:`linkbot3.async.peripherals.Motors` . To access individual motors, you may do:
 
             AsyncLinkbot.motors[0].is_moving()
 
-        or similar. Also see :class:`linkbot.async.peripherals.Motor`
+        or similar. Also see :class:`linkbot3.async.peripherals.Motor`
         """
         return self._motors
 

@@ -16,14 +16,14 @@ of the AsyncLinkbot class. For instance,
 .. literalinclude:: snippets/async/accelerometer.py
    :language: python
 
-.. autoclass:: linkbot.async.peripherals.Accelerometer
+.. autoclass:: linkbot3.async.peripherals.Accelerometer
    :members:
 
 Battery
 +++++++
 Get a Linkbot's current battery voltage or percentage level.
 
-.. autoclass:: linkbot.async.peripherals.Battery
+.. autoclass:: linkbot3.async.peripherals.Battery
    :members:
 
 Buttons
@@ -37,7 +37,7 @@ cannot be overridden. For example,
 .. literalinclude:: snippets/async/buttons.py
    :language: python
 
-.. autoclass:: linkbot.async.peripherals.Button
+.. autoclass:: linkbot3.async.peripherals.Button
    :members:
 
 Buzzer
@@ -46,7 +46,7 @@ Buzzer
 The Linkbot's buzzer can play tones ranging from low buzzes to frequencies
 higher than most humans can perceive. 
 
-.. autoclass:: linkbot.async.peripherals.Buzzer
+.. autoclass:: linkbot3.async.peripherals.Buzzer
    :members:
 
 Multi-Color LED
@@ -57,7 +57,7 @@ Control a Linkbot's LED color through this interface.
 .. literalinclude:: snippets/async/led.py
    :language: python
 
-.. autoclass:: linkbot.async.peripherals.Led
+.. autoclass:: linkbot3.async.peripherals.Led
    :members:
 
 Motor
@@ -67,11 +67,11 @@ Move and sense from individual motors.
 .. literalinclude:: snippets/async/smooth.py
    :language: python 
 
-.. autoclass:: linkbot.async.peripherals.Motor
+.. autoclass:: linkbot3.async.peripherals.Motor
    :members:
 
 Motors
 ++++++
 
-.. autoclass:: linkbot.async.peripherals.Motors
+.. autoclass:: linkbot3.async.peripherals.Motors
    :members:

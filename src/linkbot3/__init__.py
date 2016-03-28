@@ -52,7 +52,7 @@ class Linkbot():
         '''
         The robot accelerometer.
 
-        See :class:`linkbot.peripherals.Accelerometer`
+        See :class:`linkbot3.peripherals.Accelerometer`
         '''
         return self._accelerometer
 
@@ -61,7 +61,7 @@ class Linkbot():
         '''
         The robot battery.
 
-        See :class:`linkbot.peripherals.Battery`
+        See :class:`linkbot3.peripherals.Battery`
         '''
         return self._battery
 
@@ -70,7 +70,7 @@ class Linkbot():
         '''
         Access to the robot's buttons.
 
-        See :class:`linkbot.peripherals.Button`
+        See :class:`linkbot3.peripherals.Button`
         '''
         return self._button
 
@@ -79,7 +79,7 @@ class Linkbot():
         '''
         Control the Linkbot's buzzer.
 
-        See :class:`linkbot.peripherals.Buzzer`
+        See :class:`linkbot3.peripherals.Buzzer`
         '''
         return self._buzzer
 
@@ -99,7 +99,7 @@ class Linkbot():
         '''
         Access to the robot's multi-color LED.
 
-        See :class:`linkbot.peripherals.Led`.
+        See :class:`linkbot3.peripherals.Led`.
         '''
         return self._led
 
@@ -108,12 +108,12 @@ class Linkbot():
         """
         The motors of the Linkbot.
 
-        See :class:`linkbot.peripherals.Motors` . To access individual motors,
+        See :class:`linkbot3.peripherals.Motors` . To access individual motors,
         you may do::
 
             Linkbot.motors[0].is_moving()
 
-        or similar. Also see :class:`linkbot.peripherals.Motor`
+        or similar. Also see :class:`linkbot3.peripherals.Motor`
         """
         return self._motors
 
