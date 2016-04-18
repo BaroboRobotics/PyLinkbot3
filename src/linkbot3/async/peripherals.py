@@ -660,7 +660,7 @@ class Motor:
         args_obj = self._proxy.rb_get_args_obj('move')
         names = ['motorOneGoal', 'motorTwoGoal', 'motorThreeGoal']
         name = names[self._index]
-        getattr(args_obj,name).type = Motor._MoveType.INFINITE
+        getattr(args_obj,name).type = peripherals.Motor._MoveType.INFINITE
         getattr(args_obj,name).goal = power
         getattr(args_obj,name).controller = peripherals.Motor.Controller.PID
 

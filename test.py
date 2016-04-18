@@ -3,7 +3,7 @@
 import linkbot 
 import logging
 import asyncio
-#logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
+logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 #async def bcast_handler(payload):
 #    print(payload)
 

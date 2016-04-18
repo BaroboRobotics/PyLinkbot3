@@ -67,9 +67,9 @@ class _AsyncLinkbot(rb.Proxy):
         args.serialId.value = serial_id
         result_fut = await self.__daemon.resolveSerialId(args)
         tcp_endpoint = await result_fut
-        self.__log('Disconnecting from daemon.')
-        await protocol.close()
-        daemon_consumer.cancel()
+        #self.__log('Disconnecting from daemon.')
+        #await protocol.close()
+        #daemon_consumer.cancel()
         self.__log('Connecting to robot endpoint...')
         if self.__use_websockets:
             linkbot_protocol = await websockets.client.connect(
