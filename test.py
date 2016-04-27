@@ -13,8 +13,8 @@ async def accel_handler(x, y, z, timestamp):
 async def button_handler(button, down, timestamp):
     print('Button: ', button, down, timestamp)
 
-async def task():
-    l = await linkbot.AsyncLinkbot.create('LOCL')
+async def task(serial_id):
+    l = await linkbot.AsyncLinkbot.create(serial_id)
 
     fut = await l.motors.angles()
     print(await fut)
@@ -79,6 +79,7 @@ async def task():
     l.close()
 
 loop = asyncio.get_event_loop()
-loop.run_until_complete(task())
+serial_id = input('Please enter robot serial ID:')
+loop.run_until_complete(task(serial_id))
 import time
 time.sleep(3)
