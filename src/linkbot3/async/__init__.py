@@ -23,11 +23,13 @@ class _DaemonProxy(rb.Proxy):
         await self._protocol.send(bytestring)
 
 class _AsyncLinkbot(rb.Proxy):
+    '''
     def __init__(self, *args, **kw):
         super().__init__(*args, **kw)
 
     def __del__(self):
         self.close()
+    '''
 
     @classmethod
     async def create(cls, serial_id):
@@ -62,7 +64,7 @@ class _AsyncLinkbot(rb.Proxy):
         await self.__daemon.rb_connect()
         self.__log('Daemon handshake finished.')
 
-        self.__log('Resolving serial id...')
+        self.__log('Resolving serial id: ' + serial_id)
         args = self.__daemon.rb_get_args_obj('resolveSerialId')
         args.serialId.value = serial_id
         result_fut = await self.__daemon.resolveSerialId(args)
