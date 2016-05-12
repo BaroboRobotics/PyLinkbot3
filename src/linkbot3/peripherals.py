@@ -28,8 +28,8 @@ class Peripheral():
                     self._proxy.set_event_handler(),
                     self._loop
                     )
-
-    async def _event_handler(self, *args, **kwargs):
+    @asyncio.coroutine
+    def _event_handler(self, *args, **kwargs):
         if asyncio.iscoroutinefunction(self._user_event_handler):
             asyncio.ensure_future(self._user_event_handler(*args, **kwargs))
         else:
@@ -589,7 +589,8 @@ class Twi():
         self._proxy = async_twi
         self._loop = loop
 
-    async def read(self, address, size):
+    @asyncio.coroutine
+    def read(self, address, size):
         '''
         Read from an attached TWI device.
 
@@ -603,7 +604,8 @@ class Twi():
                 self._proxy.read(address, size),
                 self._loop)
 
-    async def write(self, address, bytestring):
+    @asyncio.coroutine
+    def write(self, address, bytestring):
         '''
         Write to an attached TWI device.
 
@@ -613,8 +615,9 @@ class Twi():
         return util.run_linkbot_coroutine(
                 self._proxy.write(address, bytestring),
                 self._loop)
-
-    async def write_read(self, write_addr, write_data, recv_size):
+    
+    @asyncio.coroutine
+    def write_read(self, write_addr, write_data, recv_size):
         '''
         Write and read from a TWI device in one step without releasing the TWI
         bus.

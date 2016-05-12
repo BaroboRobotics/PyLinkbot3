@@ -81,23 +81,26 @@ class SortedList():
         self._key = key
         self._waiters = collections.deque()
 
-    async def add(self, item):
+    @asyncio.coroutine
+    def add(self, item):
         self._members.append(item)
         self._members.sort(key=self._key)
         if len(self._waiters) > 0:
             waiter = self._waiters.popleft()
             waiter.set_result(None)
 
-    async def popleft(self):
+    @asyncio.coroutine
+    def popleft(self):
         while len(self._members) == 0:
             fut = asyncio.Future()
             self._waiters.append(fut)
-            await fut
+            yield from fut
             if fut.cancelled():
                 raise asyncio.QueueEmpty()
         return self._members.pop(0)
 
-    async def close(self):
+    @asyncio.coroutine
+    def close(self):
         for w in self._waiters:
             w.cancel()
 
@@ -109,16 +112,19 @@ class TimeoutCore(metaclass=Singleton):
         self._timeouts = SortedList(key=lambda x: x[0])
         loop.create_task(self._work())
 
-    async def add(self, fut, timeout):
+    @asyncio.coroutine
+    def add(self, fut, timeout):
         timestamp = time.time() + timeout
-        await self._timeouts.add( (timestamp, fut) )
+        yield from self._timeouts.add( (timestamp, fut) )
         self._event.set()
 
-    async def cancel(self):
+    @asyncio.coroutine
+    def cancel(self):
         self._cancelled = True
         self._event.set()
-    
-    async def chain_futures(self, fut1, fut2, callback, timeout=DEFAULT_TIMEOUT):
+   
+    @asyncio.coroutine 
+    def chain_futures(self, fut1, fut2, callback, timeout=DEFAULT_TIMEOUT):
         # Execute 'callback' when fut1 completes. fut2's result will be set to the
         # return value of 'callback'. If timeout is specified, fut2 will be
         # cancelled after the time specified by 'timeout' has lapsed.
@@ -137,15 +143,16 @@ class TimeoutCore(metaclass=Singleton):
                                   )
                 )
         if timeout:
-            await self.add(fut2, timeout)
+            yield from self.add(fut2, timeout)
 
-    async def _work(self):
+    @asyncio.coroutine
+    def _work(self):
         while True:
-            next_timeout = await self._timeouts.popleft()
+            next_timeout = yield from self._timeouts.popleft()
             if next_timeout[0] > time.time():
                 self._event.clear()
                 try:
-                    await asyncio.wait_for( self._event.wait(), 
+                    yield from asyncio.wait_for( self._event.wait(), 
                                             next_timeout[0]-time.time() )
                     # If we get here, the event was signalled. Check the
                     # cancellation flag

@@ -19,13 +19,15 @@ __all__ = [ 'Accelerometer',
 
 class Accelerometer():
     @classmethod
-    async def create(cls, asynclinkbot_parent):
+    @asyncio.coroutine
+    def create(cls, asynclinkbot_parent):
         self = cls()
         self._proxy = asynclinkbot_parent._proxy
         self._event_callback = None
         return self
 
-    async def values(self):
+    @asyncio.coroutine
+    def values(self):
         '''
         Get the current accelerometer values.
 
@@ -33,7 +35,7 @@ class Accelerometer():
             float) representing the x, y, and z axes, respectively. The 
             units of each value are in Earth gravitational units (a.k.a. G's).
         '''
-        fut = await self._proxy.getAccelerometerData()
+        fut = yield from self._proxy.getAccelerometerData()
         user_fut = asyncio.Future()
         fut.add_done_callback(
                 functools.partial(
@@ -47,14 +49,15 @@ class Accelerometer():
                 ( fut.result().x, fut.result().y, fut.result().z )
                 )
 
-    async def x(self):
+    @asyncio.coroutine
+    def x(self):
         '''
         Get the current x axis value.
 
         :rtype: asyncio.Future. The future's result type is "float", in units of
             Earth gravitational units (a.k.a. G's)
         '''
-        fut = await self.values()
+        fut = yield from self.values()
         user_fut = asyncio.Future()
         fut.add_done_callback(
                 functools.partial(
@@ -64,14 +67,15 @@ class Accelerometer():
                 )
         return user_fut
 
-    async def y(self):
+    @asyncio.coroutine
+    def y(self):
         '''
         Get the current y axis value.
 
         :rtype: asyncio.Future. The future's result type is "float", in units of
             Earth gravitational units (a.k.a. G's)
         '''
-        fut = await self.values()
+        fut = yield from self.values()
         user_fut = asyncio.Future()
         fut.add_done_callback(
                 functools.partial(
@@ -81,14 +85,15 @@ class Accelerometer():
                 )
         return user_fut
 
-    async def z(self):
+    @asyncio.coroutine
+    def z(self):
         '''
         Get the current z axis value.
 
         :rtype: asyncio.Future. The future's result type is "float", in units of
             Earth gravitational units (a.k.a. G's)
         '''
-        fut = await self.values()
+        fut = yield from self.values()
         user_fut = asyncio.Future()
         fut.add_done_callback(
                 functools.partial(
@@ -101,7 +106,8 @@ class Accelerometer():
     def __get_index(self, index, user_fut, fut):
         user_fut.set_result( fut.result()[index] )
 
-    async def set_event_handler(self, callback=None, granularity=0.05):
+    @asyncio.coroutine
+    def set_event_handler(self, callback=None, granularity=0.05):
         '''
         Set a callback function to be executed when the accelerometer
         values on the robot change.
@@ -113,10 +119,10 @@ class Accelerometer():
         if not callback:
             # Remove the event
             try:
-                fut = await self._proxy.enableAccelerometerEvent(
+                fut = yield from self._proxy.enableAccelerometerEvent(
                         enable=False,
                         granularity=granularity)
-                await fut
+                yield from fut
                 self._proxy.rb_remove_broadcast_handler('accelerometerEvent')
                 self._event_callback = callback
                 return fut
@@ -128,36 +134,41 @@ class Accelerometer():
             self._event_callback = callback
             self._proxy.rb_add_broadcast_handler( 'accelerometerEvent', 
                                                   self.__event_handler )
-            return await self._proxy.enableAccelerometerEvent(
+            rc = yield from self._proxy.enableAccelerometerEvent(
                     enable=True,
                     granularity=granularity )
+            return rc
 
-    async def __event_handler(self, payload):
-        await self._event_callback( payload.x, 
+    @asyncio.coroutine
+    def __event_handler(self, payload):
+        yield from self._event_callback( payload.x, 
                                     payload.y, 
                                     payload.z, 
                                     payload.timestamp)
 
 class Battery():
     @classmethod
-    async def create(cls, asynclinkbot_parent):
+    @asyncio.coroutine
+    def create(cls, asynclinkbot_parent):
         self = cls()
         self._proxy = asynclinkbot_parent._proxy
         return self
 
-    async def voltage(self):
+    @asyncio.coroutine
+    def voltage(self):
         ''' Get the current battery voltage. 
 
         :returns: An asyncio.Future. The result of the future is the current
             battery voltage.
         :rtype: asyncio.Future
         '''
-        fut = await self._proxy.getBatteryVoltage()
+        fut = yield from self._proxy.getBatteryVoltage()
         user_fut = asyncio.Future()
         util.chain_futures(fut, user_fut, conv=lambda x:x.v)
         return user_fut
 
-    async def percentage(self):
+    @asyncio.coroutine
+    def percentage(self):
         ''' Return an estimated battery percentage.
 
         This function estimates the battery charge level based on the current
@@ -197,7 +208,7 @@ class Battery():
                 p = 0
             return p
 
-        fut = await self.voltage()
+        fut = yield from self.voltage()
         user_fut = asyncio.Future()
         util.chain_futures(fut, user_fut, v_to_percent)
         return user_fut
@@ -211,13 +222,15 @@ class Button():
     DOWN = 1
 
     @classmethod
-    async def create(cls, asynclinkbot_parent):
+    @asyncio.coroutine
+    def create(cls, asynclinkbot_parent):
         self = cls()
         self._proxy = asynclinkbot_parent._proxy
         self._event_callback = None
         return self
 
-    async def values(self):
+    @asyncio.coroutine
+    def values(self):
         '''
         Get the current button values
 
@@ -225,7 +238,7 @@ class Button():
             button state for the power, A, and B buttons, respectively. The button
             state is one of either Button.UP or Button.DOWN.
         '''
-        fut = await self._proxy.getButtonState()
+        fut = yield from self._proxy.getButtonState()
         user_fut = asyncio.Future()
         fut.add_done_callback(
                 functools.partial(
@@ -241,13 +254,14 @@ class Button():
         b = (fut.result().mask>>2) & 0x01
         user_fut.set_result( (pwr, a, b) )
 
-    async def pwr(self):
+    @asyncio.coroutine
+    def pwr(self):
         '''
         Get the current state of the power button.
 
         :rtype: either Button.UP or Button.DOWN
         '''
-        fut = await self._proxy.getButtonState()
+        fut = yield from self._proxy.getButtonState()
         user_fut = asyncio.Future()
         fut.add_done_callback(
                 functools.partial(
@@ -258,13 +272,14 @@ class Button():
                 )
         return user_fut
 
-    async def a(self):
+    @asyncio.coroutine
+    def a(self):
         '''
         Get the current state of the 'A' button.
 
         :rtype: either Button.UP or Button.DOWN
         '''
-        fut = await self._proxy.getButtonState()
+        fut = yield from self._proxy.getButtonState()
         user_fut = asyncio.Future()
         fut.add_done_callback(
                 functools.partial(
@@ -275,13 +290,14 @@ class Button():
                 )
         return user_fut
 
-    async def b(self):
+    @asyncio.coroutine
+    def b(self):
         '''
         Get the current state of the 'B' button.
 
         :rtype: either Button.UP or Button.DOWN
         '''
-        fut = await self._proxy.getButtonState()
+        fut = yield from self._proxy.getButtonState()
         user_fut = asyncio.Future()
         fut.add_done_callback(
                 functools.partial(
@@ -295,7 +311,8 @@ class Button():
     def __button_values(self, index, user_fut, fut):
         user_fut.set_result((fut.result().mask>>index) & 0x01)
 
-    async def set_event_handler(self, callback=None):
+    @asyncio.coroutine
+    def set_event_handler(self, callback=None):
         '''
         Set a callback function to be executed when there is a button press or
         release.
@@ -306,9 +323,9 @@ class Button():
         if not callback:
             # Remove the event
             try:
-                fut = await self._proxy.enableButtonEvent(
+                fut = yield from self._proxy.enableButtonEvent(
                         enable=False)
-                await fut
+                yield from fut
                 self._proxy.rb_remove_broadcast_handler('buttonEvent')
                 return fut
             except KeyError:
@@ -318,49 +335,56 @@ class Button():
         else:
             self._proxy.rb_add_broadcast_handler( 'buttonEvent', 
                                                   self.__event_handler )
-            return await self._proxy.enableButtonEvent(
+            rc = yield from self._proxy.enableButtonEvent(
                     enable=True)
+            return rc
 
-    async def __event_handler(self, payload):
-        await self._event_callback( payload.button, 
+    @asyncio.coroutine
+    def __event_handler(self, payload):
+        yield from self._event_callback( payload.button, 
                                     payload.state, 
                                     payload.timestamp)
 
 class Buzzer():
     @classmethod
-    async def create(cls, asynclinkbot_parent):
+    @asyncio.coroutine
+    def create(cls, asynclinkbot_parent):
         self = cls()
         self._proxy = asynclinkbot_parent._proxy 
         return self
 
-    async def frequency(self):
+    @asyncio.coroutine
+    def frequency(self):
         '''
         Get the current buzzer frequency.
 
         :returns: Frequency in Hz
         :rtype: float
         '''
-        fut = await self._proxy.getBuzzerFrequency()
+        fut = yield from self._proxy.getBuzzerFrequency()
         return fut
 
-    async def set_frequency(self, hz):
+    @asyncio.coroutine
+    def set_frequency(self, hz):
         '''
         Set the buzzer frequency.
 
         :param hz: A frequency in Hz.
         :type hz: float
         '''
-        fut = await self._proxy.setBuzzerFrequency(value=hz)
+        fut = yield from self._proxy.setBuzzerFrequency(value=hz)
         return fut
 
 class Eeprom():
     @classmethod
-    async def create(cls, asynclinkbot_parent):
+    @asyncio.coroutine
+    def create(cls, asynclinkbot_parent):
         self = cls()
         self._proxy = asynclinkbot_parent._proxy
         return self
 
-    async def read(self, address, size):
+    @asyncio.coroutine
+    def read(self, address, size):
         '''
         Read ```size``` bytes from EEPROM address ```address``` on the robot.
 
@@ -370,12 +394,13 @@ class Eeprom():
         :type size: int
         :rtype: asyncio.Future(bytearray)
         '''
-        fut = await self._proxy.readEeprom(address=address, size=size)
+        fut = yield from self._proxy.readEeprom(address=address, size=size)
         user_fut = asyncio.Future()
         util.chain_futures(fut, user_fut, conv=lambda x: x.data)
         return user_fut
 
-    async def write(self, address, bytestring):
+    @asyncio.coroutine
+    def write(self, address, bytestring):
         '''
         Write data to the EEPROM.
 
@@ -389,26 +414,28 @@ class Eeprom():
         :type bytestring: bytearray or bytes
         :rtype: asyncio.Future
         '''
-        fut = await self._proxy.writeEeprom(
+        fut = yield from self._proxy.writeEeprom(
                 address=address,
                 data=bytestring )
         return fut
 
 class Led():
     @classmethod
-    async def create(cls, asynclinkbot_parent):
+    @asyncio.coroutine
+    def create(cls, asynclinkbot_parent):
         self = cls()
         self._proxy = asynclinkbot_parent._proxy
         return self
 
-    async def color(self):
+    @asyncio.coroutine
+    def color(self):
         '''
         Get the current LED color.
 
         :rtype: (int, int, int) indicating the intensity of the red, green,
             and blue channels. Each intensity is a value between [0,255].
         '''
-        fut = await self._proxy.getLedColor()
+        fut = yield from self._proxy.getLedColor()
         user_fut = asyncio.Future()
         fut.add_done_callback(
                 functools.partial(
@@ -425,7 +452,8 @@ class Led():
         b = word&0x0000ff
         user_fut.set_result( (r,g,b) )
 
-    async def set_color(self, r, g, b):
+    @asyncio.coroutine
+    def set_color(self, r, g, b):
         '''
         Set the current LED color.
 
@@ -434,7 +462,7 @@ class Led():
         :type b: int [0,255]
         '''
         word = b | (g<<8) | (r<<16)
-        fut = await self._proxy.setLedColor(value=word)
+        fut = yield from self._proxy.setLedColor(value=word)
         return fut
 
 class Motor:
@@ -444,30 +472,34 @@ class Motor:
     See also :class:`linkbot3.peripherals.Motor` for the synchronous counterpart.
     '''
     @classmethod
-    async def create(cls, index, proxy, motors_obj):
+    @asyncio.coroutine
+    def create(cls, index, proxy, motors_obj):
         self = cls()
         self._controller = peripherals.Motor.Controller.CONST_VEL
         self._index = index
         self._proxy = proxy
         self._state = peripherals.Motor.State.COAST
-        await self._poll_state()
+        yield from self._poll_state()
         # List of futures that should be set when this joint is done moving
         self._move_waiters = []
         self._motors = motors_obj
         return self
 
-    async def accel(self):
+    @asyncio.coroutine
+    def accel(self):
         ''' Get the acceleration setting of a motor
 
         :rtype: float
         :returns: The acceleration setting in units of deg/s/s
         '''
-        return await self.__get_motor_controller_attribute(
+        rc = yield from self.__get_motor_controller_attribute(
                 'getMotorControllerAlphaI',
                 conv=util.rad2deg
                 )
+        return rc
 
-    async def controller(self):
+    @asyncio.coroutine
+    def controller(self):
         '''The movement controller.
 
         This property controls the strategy with which the motors are moved.
@@ -492,42 +524,48 @@ class Motor:
         fut.set_result(self._controller)
         return fut
 
-    async def decel(self):
+    @asyncio.coroutine
+    def decel(self):
         ''' Get the deceleration setting of a motor
 
         :rtype: float
         :returns: The deceleration setting in units of deg/s/s
         '''
-        return await self.__get_motor_controller_attribute(
+        rc = yield from self.__get_motor_controller_attribute(
                 'getMotorControllerAlphaF',
                 conv=util.rad2deg
                 )
+        return rc
 
-    async def omega(self):
+    @asyncio.coroutine
+    def omega(self):
         ''' Get the rotational velocity setting of a motor
 
         :rtype: float
         :returns: The speed setting of the motor in deg/s
         '''
-        return await self.__get_motor_controller_attribute(
+        rc = yield from self.__get_motor_controller_attribute(
                 'getMotorControllerOmega',
                 conv=util.rad2deg
                 )
+        return rc
 
-    async def _poll_state(self):
+    @asyncio.coroutine
+    def _poll_state(self):
         if (self._index == 1) and (self._proxy.form_factor == linkbot3.FormFactor.I):
             self._state = peripherals.Motor.State.COAST
         elif (self._index == 2) and (self._proxy.form_factor == linkbot3.FormFactor.L):
             self._state = peripherals.Motor.State.COAST
         else:
-            fut = await self.__get_motor_controller_attribute(
+            fut = yield from self.__get_motor_controller_attribute(
                     'getJointStates' )
-            self._state = await fut
+            self._state = yield from fut
 
-    async def __get_motor_controller_attribute(self, name, conv=lambda x: x):
+    @asyncio.coroutine
+    def __get_motor_controller_attribute(self, name, conv=lambda x: x):
         # 'conv' is a conversion function, in case the returned values need to
         # be converted to/from radians. Use 'id' for null conversion
-        fut = await getattr(self._proxy, name)()
+        fut = yield from getattr(self._proxy, name)()
         user_fut = asyncio.Future()
         fut.add_done_callback(
                 functools.partial(
@@ -545,7 +583,8 @@ class Motor:
             values.append(conv(v))
         user_fut.set_result(values[self._index])
 
-    async def set_accel(self, value):
+    @asyncio.coroutine
+    def set_accel(self, value):
         ''' Set the acceleration of a motor.
 
         :param value: The acceleration in deg/s/s
@@ -553,12 +592,14 @@ class Motor:
         
         See :func:`linkbot3.async.peripherals.Motor.accel`
         '''
-        return await self.__set_motor_controller_attribute(
+        rc = yield from self.__set_motor_controller_attribute(
                 'setMotorControllerAlphaI',
                 util.deg2rad(value)
                 )
+        return rc
 
-    async def set_controller(self, value):
+    @asyncio.coroutine
+    def set_controller(self, value):
         ''' Set the controller type of a motor. 
 
         :type value: :class:`linkbot3.Motor.Controller`
@@ -569,10 +610,13 @@ class Motor:
             raise RangeError('Motor controller must be a value in range [1,3]')
         self._controller = value
         fut = asyncio.Future()
-        fut.set_result(None)
+        fut2 = asyncio.Future()
+        fut2.set_result(None)
+        fut.set_result(fut2)
         return fut
 
-    async def set_decel(self, value):
+    @asyncio.coroutine
+    def set_decel(self, value):
         ''' Set the deceleration of a motor.
 
         :param value: Deceleration in deg/s/s
@@ -580,12 +624,14 @@ class Motor:
 
         See also: :func:`linkbot3.async.peripherals.Motor.decel`
         '''
-        return await self.__set_motor_controller_attribute(
+        rc = yield from self.__set_motor_controller_attribute(
                 'setMotorControllerAlphaF',
                 util.deg2rad(value)
                 )
+        return rc
 
-    async def set_omega(self, value):
+    @asyncio.coroutine
+    def set_omega(self, value):
         ''' Set the speed of the motor.
 
         :param value: The new speed in deg/s
@@ -593,16 +639,18 @@ class Motor:
 
         See also: :func:`linkbot3.async.peripherals.Motor.omega`
         '''
-        return await self.__set_motor_controller_attribute(
+        rc = yield from self.__set_motor_controller_attribute(
                 'setMotorControllerOmega',
                 util.deg2rad(value)
                 )
+        return rc
 
-    async def __set_motor_controller_attribute(self, name, value):
+    @asyncio.coroutine
+    def __set_motor_controller_attribute(self, name, value):
         args_obj = self._proxy.rb_get_args_obj(name)
         args_obj.mask = 1<<self._index
         args_obj.values.append(value)
-        fut = await getattr(self._proxy, name)(args_obj)
+        fut = yield from getattr(self._proxy, name)(args_obj)
         user_fut = asyncio.Future()
         fut.add_done_callback(
                 functools.partial(
@@ -612,7 +660,8 @@ class Motor:
                 )
         return user_fut
 
-    async def set_event_handler(self, callback=None, granularity=2.0):
+    @asyncio.coroutine
+    def set_event_handler(self, callback=None, granularity=2.0):
         '''
         Set a callback function to be executed when the motor angle
         values on the robot change.
@@ -630,8 +679,8 @@ class Motor:
                 name = names[self._index]
                 getattr(args, name).enable = False
                 getattr(args, name).granularity = util.deg2rad(granularity)
-                fut = await self._proxy.enableEncoderEvent(args)
-                await fut
+                fut = yield from self._proxy.enableEncoderEvent(args)
+                yield from fut
                 self._event_callback = callback
                 return fut
             except KeyError:
@@ -647,10 +696,11 @@ class Motor:
             name = names[self._index]
             getattr(args, name).enable = True
             getattr(args, name).granularity = util.deg2rad(granularity)
-            fut = await self._proxy.enableEncoderEvent(args)
+            fut = yield from self._proxy.enableEncoderEvent(args)
             return fut
 
-    async def set_power(self, power):
+    @asyncio.coroutine
+    def set_power(self, power):
         '''
         Set the motor's power.
 
@@ -664,7 +714,7 @@ class Motor:
         getattr(args_obj,name).goal = power
         getattr(args_obj,name).controller = peripherals.Motor.Controller.PID
 
-        fut = await self._proxy.move(args_obj)
+        fut = yield from self._proxy.move(args_obj)
         return fut
 
     def __handle_set_attribute(self, user_fut, fut):
@@ -690,7 +740,8 @@ class Motor:
                 fut.set_result(self._state)
             self._move_waiters.clear()
 
-    async def begin_accel(self, timeout, v0 = 0.0,
+    @asyncio.coroutine
+    def begin_accel(self, timeout, v0 = 0.0,
             state_on_timeout=peripherals.Motor.State.COAST):
         ''' Cause a motor to begin accelerating indefinitely. 
 
@@ -723,10 +774,11 @@ class Motor:
                 getattr(args_obj,name).timeout = timeout
                 getattr(args_obj,name).modeOnTimeout = state_on_timeout
 
-        fut = await self._proxy.move(args_obj)
+        fut = yield from self._proxy.move(args_obj)
         return fut
 
-    async def begin_move(self, timeout = 0, forward=True,
+    @asyncio.coroutine
+    def begin_move(self, timeout = 0, forward=True,
             state_on_timeout=peripherals.Motor.State.COAST):
         ''' Begin moving motor at constant velocity
 
@@ -759,10 +811,11 @@ class Motor:
                 getattr(args_obj,name).timeout = timeout
                 getattr(args_obj,name).modeOnTimeout = state_on_timeout
 
-        fut = await self._proxy.move(args_obj)
+        fut = yield from self._proxy.move(args_obj)
         return fut
 
-    async def move(self, angle, relative=True):
+    @asyncio.coroutine
+    def move(self, angle, relative=True):
         ''' Move the motor.
 
         :param angle: The angle to move the motor.
@@ -780,7 +833,8 @@ class Motor:
                 mask=1<<self._index,
                 relative=relative)
 
-    async def move_wait(self):
+    @asyncio.coroutine
+    def move_wait(self):
         '''
         Wait for a motor to stop moving.
 
@@ -788,7 +842,7 @@ class Motor:
         motor has stopped moving, either by transitioning into a "COAST" state
         or "HOLD" state.
         '''
-        await self._poll_state()
+        yield from self._poll_state()
         fut = asyncio.Future()
         user_fut = asyncio.Future()
         # If we are aready not moving, just return a completed future
@@ -801,7 +855,8 @@ class Motor:
             util.chain_futures(fut, user_fut, conv=lambda x: None)
         return user_fut
 
-    async def __poll_movewait(self):
+    @asyncio.coroutine
+    def __poll_movewait(self):
         '''
         This internal function is used to poll the state of the motors as long
         as there is a future waiting on :func:`linkbot3.Motor.move_wait`. 
@@ -809,9 +864,9 @@ class Motor:
         while self._move_waiters:
             fut = self._move_waiters[0]
             try:
-                await asyncio.wait_for(asyncio.shield(fut), 2)
+                yield from asyncio.wait_for(asyncio.shield(fut), 2)
             except asyncio.TimeoutError:
-                await self._poll_state()
+                yield from self._poll_state()
             else:
                 continue
 
@@ -830,13 +885,14 @@ class Motors:
     class _EncoderEventHandler():
         def __init__(self):
             self._handlers = [None, None, None]
-
-        async def event_handler(self, payload):
+        
+        @asyncio.coroutine
+        def event_handler(self, payload):
             joint = payload.encoder
             value = payload.value
             timestamp = payload.timestamp
             try:
-                await self._handlers[joint](util.rad2deg(value), timestamp)
+                yield from self._handlers[joint](util.rad2deg(value), timestamp)
             except IndexError as e:
                 # Don't care if the callback doesn't exist
                 pass
@@ -852,12 +908,14 @@ class Motors:
             self._handlers[index] = callback
 
     @classmethod
-    async def create(cls, asynclinkbot_parent, motor_class=Motor):
+    @asyncio.coroutine
+    def create(cls, asynclinkbot_parent, motor_class=Motor):
         self = cls()
         self._proxy = asynclinkbot_parent._proxy
         self.motors = []
         for i in range(3):
-            self.motors.append( await motor_class.create(i, self._proxy, self) )
+            motor =  yield from motor_class.create(i, self._proxy, self) 
+            self.motors.append(motor)
         self._timeouts = util.TimeoutCore(asyncio.get_event_loop())
         self._callback_handler = self._EncoderEventHandler()
         return self
@@ -867,8 +925,9 @@ class Motors:
 
     def __len__(self):
         return 3
-
-    async def angles(self):
+    
+    @asyncio.coroutine
+    def angles(self):
         ''' Get the current joint angles.
 
         :returns: (angle1, angle2, angle3, timestamp) . These are the three
@@ -877,9 +936,9 @@ class Motors:
         :rtype: (float, float, float, int)
         '''
 
-        fut = await self._proxy.getEncoderValues()
+        fut = yield from self._proxy.getEncoderValues()
         user_fut = asyncio.Future()
-        await self._timeouts.chain_futures(fut, user_fut, self.__angles)
+        yield from self._timeouts.chain_futures(fut, user_fut, self.__angles)
         return user_fut
 
     def __angles(self, fut):
@@ -890,7 +949,8 @@ class Motors:
         results += (results_obj.timestamp,)
         return results
 
-    async def move(self, angles, mask=0x07, relative=True, timeouts=None,
+    @asyncio.coroutine
+    def move(self, angles, mask=0x07, relative=True, timeouts=None,
             states_on_timeout = None):
         ''' Move a Linkbot's joints
 
@@ -929,27 +989,29 @@ class Motors:
             if mask&(1<<i):
                 getattr(args_obj,name).type = move_type
                 getattr(args_obj,name).goal = angles[i]
-                fut = await self.motors[i].controller()
-                getattr(args_obj,name).controller = await fut
+                getattr(args_obj,name).controller = yield from self.motors[i].controller()
                 if timeouts:
                     getattr(args_obj,name).timeout = timeouts[i]
                 if states_on_timeout:
                     getattr(args_obj,name).modeOnTimeout = states_on_timeout[i]
 
-        fut = await self._proxy.move(args_obj)
+        fut = yield from self._proxy.move(args_obj)
         return fut
 
-    async def move_wait(self, mask=0x07):
+    @asyncio.coroutine
+    def move_wait(self, mask=0x07):
         futs = []
         for i in range(3):
             if mask & (1<<i):
-                futs.append( await self.motors[i].move_wait() )
+                fut = yield from self.motors[i].move_wait() 
+                futs.append(fut)
         user_fut = asyncio.Future()
         fut = asyncio.gather(*tuple(futs))
         util.chain_futures(fut, user_fut, conv=lambda x: None)
         return user_fut
 
-    async def reset(self):
+    @asyncio.coroutine
+    def reset(self):
         ''' Reset the revolution-counter on the Linkbot.
 
         When a Linkbot's motor turns more than 360 degrees, the motor's reported
@@ -964,25 +1026,28 @@ class Motors:
         currently 3610, after a ```reset()```, the motor will report to be at an
         angle of 10 degrees. 
         '''
-        fut = await self._proxy.resetEncoderRevs()
+        fut = yield from self._proxy.resetEncoderRevs()
         return fut
 
-    async def stop(self, mask=0x07):
+    @asyncio.coroutine
+    def stop(self, mask=0x07):
         ''' Immediately stop all motors.
 
         :param mask: See :func:`linkbot3.async_peripherals.Motors.move`
         '''
-        fut = await self._proxy.stop(mask=mask)
+        fut = yield from self._proxy.stop(mask=mask)
         return fut
 
 class Twi:
     @classmethod
-    async def create(cls, proxy):
+    @asyncio.coroutine
+    def create(cls, proxy):
         self = cls()
         self._proxy = proxy
         return self
 
-    async def read(self, address, size):
+    @asyncio.coroutine
+    def read(self, address, size):
         '''
         Read from an attached TWI device.
 
@@ -992,22 +1057,24 @@ class Twi:
         :type size: int
         :returns: asyncio.Future containing a bytestring
         '''
-        fut = await self._proxy.readTwi(address=address, recvsize=size)
+        fut = yield from self._proxy.readTwi(address=address, recvsize=size)
         user_fut = asyncio.Future()
         util.chain_futures(fut, user_fut, conv=lambda x:x.data)
         return user_fut
 
-    async def write(self, address, bytestring):
+    @asyncio.coroutine
+    def write(self, address, bytestring):
         '''
         Write to an attached TWI device.
 
         :param address: TWI address to write to.
         :param bytestring: a bytestring to write
         '''
-        fut = await self._proxy.writeTwi(address=address, data=bytestring)
+        fut = yield from self._proxy.writeTwi(address=address, data=bytestring)
         return fut
 
-    async def write_read(self, write_addr, write_data, recv_size):
+    @asyncio.coroutine
+    def write_read(self, write_addr, write_data, recv_size):
         '''
         Write and read from a TWI device in one step without releasing the TWI
         bus.
@@ -1018,7 +1085,7 @@ class Twi:
         :param recv_size: Number of bytes to read after writing.
         :returns: asyncio.Future containing a bytestring
         '''
-        fut = await self._proxy.writeReadTwi(
+        fut = yield from self._proxy.writeReadTwi(
                 address=write_addr,
                 recvsize=recv_size,
                 data=write_data)

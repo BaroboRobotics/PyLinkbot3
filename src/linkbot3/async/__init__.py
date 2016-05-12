@@ -19,8 +19,9 @@ class _DaemonProxy(rb.Proxy):
     def set_protocol(self, protocol):
         self._protocol = protocol
 
-    async def rb_emit_to_server(self, bytestring):
-        await self._protocol.send(bytestring)
+    @asyncio.coroutine
+    def rb_emit_to_server(self, bytestring):
+        yield from self._protocol.send(bytestring)
 
 class _AsyncLinkbot(rb.Proxy):
     '''
@@ -32,7 +33,8 @@ class _AsyncLinkbot(rb.Proxy):
     '''
 
     @classmethod
-    async def create(cls, serial_id):
+    @asyncio.coroutine
+    def create(cls, serial_id):
         logging.info('Creating async Linkbot handle to ID:{}'.format(serial_id))
         self = cls( os.path.join(_dirname, 'robot_pb2.py'))
         if os.environ.get('LINKBOT_USE_WEBSOCKETS'):
@@ -47,11 +49,11 @@ class _AsyncLinkbot(rb.Proxy):
 
         if self.__use_websockets:
             self.__log('Creating Websocket connection to daemon...')
-            protocol = await websockets.connect(
+            protocol = yield from websockets.connect(
                     'ws://localhost:42000', loop=self._loop)
         else:
             self.__log('Creating tcp connection to daemon...')
-            (transport, protocol) = await sfp.client.connect(
+            (transport, protocol) = yield from sfp.client.connect(
                     'localhost', '42000', loop=self._loop)
 
         self.__log('Daemon TCP connection established.')
@@ -60,26 +62,27 @@ class _AsyncLinkbot(rb.Proxy):
         self.__daemon.set_protocol(protocol)
         daemon_consumer = asyncio.ensure_future(self.__daemon_consumer(protocol))
         self.__log('Initiating daemon handshake...')
-        await asyncio.sleep(0.5)
-        await self.__daemon.rb_connect()
+        yield from asyncio.sleep(0.5)
+        yield from self.__daemon.rb_connect()
         self.__log('Daemon handshake finished.')
 
+        yield from asyncio.sleep(0.5)
         self.__log('Resolving serial id: ' + serial_id)
         args = self.__daemon.rb_get_args_obj('resolveSerialId')
         args.serialId.value = serial_id
-        result_fut = await self.__daemon.resolveSerialId(args)
-        tcp_endpoint = await result_fut
+        result_fut = yield from self.__daemon.resolveSerialId(args)
+        tcp_endpoint = yield from result_fut
         #self.__log('Disconnecting from daemon.')
-        #await protocol.close()
+        #yield from protocol.close()
         #daemon_consumer.cancel()
         self.__log('Connecting to robot endpoint...')
         if self.__use_websockets:
-            linkbot_protocol = await websockets.client.connect(
+            linkbot_protocol = yield from websockets.client.connect(
                     'ws://'+tcp_endpoint.endpoint.address+':'+str(tcp_endpoint.endpoint.port),
                     loop=self._loop)
         else:
             (_, linkbot_protocol) = \
-                    await sfp.client.connect(
+                    yield from sfp.client.connect(
                             tcp_endpoint.endpoint.address,
                             tcp_endpoint.endpoint.port)
         self.__linkbot_consumer_handle = \
@@ -87,31 +90,34 @@ class _AsyncLinkbot(rb.Proxy):
         self.__log('Connected to robot endpoint.')
         self._linkbot_protocol = linkbot_protocol
         self.__log('Sending connect request to robot...')
-        await asyncio.sleep(0.5)
-        await self.rb_connect()
+        yield from asyncio.sleep(0.5)
+        yield from self.rb_connect()
         self.__log('Done sending connect request to robot.')
 
         #Get the form factor
-        fut = await self.getFormFactor()
-        result_obj = await fut
+        fut = yield from self.getFormFactor()
+        result_obj = yield from fut
         self.form_factor = result_obj.value
         return self
 
-    async def __daemon_consumer(self, protocol):
+    @asyncio.coroutine
+    def __daemon_consumer(self, protocol):
         while True:
             try:
-                msg = await protocol.recv()
+                msg = yield from protocol.recv()
             except asyncio.CancelledError:
+                logging.warning('Daemon consumer received asyncio.CancelledError')
                 return
-            await self.__daemon.rb_deliver(msg)
+            yield from self.__daemon.rb_deliver(msg)
 
-    async def __linkbot_consumer(self, protocol):
+    @asyncio.coroutine
+    def __linkbot_consumer(self, protocol):
         while True:
             try:
-                msg = await protocol.recv()
+                msg = yield from protocol.recv()
             except asyncio.CancelledError:
                 return
-            await self.rb_deliver(msg)
+            yield from self.rb_deliver(msg)
 
     def close(self):
         self._linkbot_protocol.close()
@@ -128,18 +134,20 @@ class _AsyncLinkbot(rb.Proxy):
             self.__log('Remote closed connection gracefully.')
         self.rb_close()
 
-    async def rb_emit_to_server(self, bytestring):
-        await self._linkbot_protocol.send(bytestring)
+    @asyncio.coroutine
+    def rb_emit_to_server(self, bytestring):
+        yield from self._linkbot_protocol.send(bytestring)
 
     def __log(self, msg, logtype='info'):
         getattr(logging, logtype)(self._serial_id + ': ' + msg)
 
-    async def event_handler(self, payload):
+    @asyncio.coroutine
+    def event_handler(self, payload):
         joint = payload.encoder
         value = payload.value
         timestamp = payload.timestamp
         try:
-            await self._handlers[joint](util.rad2deg(value), timestamp)
+            yield from self._handlers[joint](util.rad2deg(value), timestamp)
         except IndexError:
             # Don't care if the callback doesn't exist
             pass
@@ -152,7 +160,8 @@ class _AsyncLinkbot(rb.Proxy):
 
 class AsyncLinkbot():
     @classmethod
-    async def create(cls, serial_id):
+    @asyncio.coroutine
+    def create(cls, serial_id):
         """ Create a new asynchronous Linkbot object.
 
         :param serial_id: The robot to connect to
@@ -161,23 +170,23 @@ class AsyncLinkbot():
         """
         try:
             self = cls()
-            self._proxy = await asyncio.wait_for( _AsyncLinkbot.create(serial_id), 
+            self._proxy = yield from asyncio.wait_for( _AsyncLinkbot.create(serial_id), 
                                                   util.DEFAULT_TIMEOUT )
             self.rb_add_broadcast_handler = self._proxy.rb_add_broadcast_handler
             self.close = self._proxy.close
             self.enableButtonEvent = self._proxy.enableButtonEvent
-            self._accelerometer = await peripherals.Accelerometer.create(self)
-            self._battery = await peripherals.Battery.create(self)
-            self._button = await peripherals.Button.create(self)
-            self._buzzer = await peripherals.Buzzer.create(self)
-            self._eeprom_obj = await peripherals.Eeprom.create(self)
-            self._led = await peripherals.Led.create(self)
-            self._motors = await peripherals.Motors.create(self)
+            self._accelerometer = yield from peripherals.Accelerometer.create(self)
+            self._battery = yield from peripherals.Battery.create(self)
+            self._button = yield from peripherals.Button.create(self)
+            self._buzzer = yield from peripherals.Buzzer.create(self)
+            self._eeprom_obj = yield from peripherals.Eeprom.create(self)
+            self._led = yield from peripherals.Led.create(self)
+            self._motors = yield from peripherals.Motors.create(self)
             self._timeouts = util.TimeoutCore(asyncio.get_event_loop())
             self._serial_id = serial_id
 
             # Enable joint events
-            await self._proxy.enableJointEvent(enable=True)
+            yield from self._proxy.enableJointEvent(enable=True)
             self._proxy.rb_add_broadcast_handler('jointEvent', self.__joint_event)
             self._proxy.rb_add_broadcast_handler('debugMessageEvent',
                     self.__debug_message_event)
@@ -258,7 +267,8 @@ class AsyncLinkbot():
         """
         return self._motors
 
-    async def version(self):
+    @asyncio.coroutine
+    def version(self):
         '''
         Get the firmware version
 
@@ -268,17 +278,19 @@ class AsyncLinkbot():
         def conv(payload):
             return (payload.major, payload.minor, payload.patch)
 
-        fut = await self._proxy.getFirmwareVersion()
+        fut = yield from self._proxy.getFirmwareVersion()
         user_fut = asyncio.Future()
         util.chain_futures(fut, user_fut, conv=conv)
         return user_fut
 
-        
-    async def __joint_event(self, payload):
+    
+    @asyncio.coroutine    
+    def __joint_event(self, payload):
         # Update the motor states
         self.motors[payload.joint].state = payload.event
 
-    async def __debug_message_event(self, payload):
+    @asyncio.coroutine
+    def __debug_message_event(self, payload):
         logging.warning('Received DEBUG message from robot {}: {}'
                 .format(self._serial_id, payload.bytestring))
 
