@@ -3,9 +3,12 @@
 # Tested functions:
 
 import asyncio
-import linkbot
+import linkbot3 as linkbot
 import math
 import sys
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 def mag(xs):
     return math.sqrt(math.fsum(map(lambda x: x**2, xs)))
@@ -37,7 +40,7 @@ async def task(serialid):
         return -1
 
 if __name__ == '__main__':
-    serialId = 'LOCL'
+    serialId = 'DGKR'
     if len(sys.argv) ==  2:
         serialId = sys.argv[1]
 

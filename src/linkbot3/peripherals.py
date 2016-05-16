@@ -1,6 +1,6 @@
 import asyncio
 import functools
-import linkbot._util as util
+from . import _util as util
 
 __all__ = [ 'Accelerometer', 
             'Battery', 
@@ -28,8 +28,8 @@ class Peripheral():
                     self._proxy.set_event_handler(),
                     self._loop
                     )
-
-    async def _event_handler(self, *args, **kwargs):
+    @asyncio.coroutine
+    def _event_handler(self, *args, **kwargs):
         if asyncio.iscoroutinefunction(self._user_event_handler):
             asyncio.ensure_future(self._user_event_handler(*args, **kwargs))
         else:
@@ -150,8 +150,8 @@ class Button(Peripheral):
         Get the current state of the power button.
 
         :rtype: int
-        :returns: either :const:`linkbot.peripherals.Button.UP` or
-                  :const:`linkbot.peripherals.Button.DOWN`
+        :returns: either :const:`linkbot3.peripherals.Button.UP` or
+                  :const:`linkbot3.peripherals.Button.DOWN`
         '''
         return util.run_linkbot_coroutine(
                 self._proxy.pwr(),
@@ -162,8 +162,8 @@ class Button(Peripheral):
         Get the current state of the 'A' button.
 
         :rtype: int
-        :returns: either :const:`linkbot.peripherals.Button.UP` or
-                  :const:`linkbot.peripherals.Button.DOWN`
+        :returns: either :const:`linkbot3.peripherals.Button.UP` or
+                  :const:`linkbot3.peripherals.Button.DOWN`
         '''
         return util.run_linkbot_coroutine(
                 self._proxy.a(),
@@ -174,8 +174,8 @@ class Button(Peripheral):
         Get the current state of the 'B' button.
 
         :rtype: int
-        :returns: either :const:`linkbot.peripherals.Button.UP` or
-                  :const:`linkbot.peripherals.Button.DOWN`
+        :returns: either :const:`linkbot3.peripherals.Button.UP` or
+                  :const:`linkbot3.peripherals.Button.DOWN`
         '''
         return util.run_linkbot_coroutine(
                 self._proxy.b(),
@@ -297,7 +297,7 @@ class Motor(Peripheral):
         :rtype: float
         :returns: The acceleration setting in units of deg/s/s
 
-        See also: :func:`linkbot.peripherals.Motor.set_accel`
+        See also: :func:`linkbot3.peripherals.Motor.set_accel`
         '''
         return util.run_linkbot_coroutine(
                 self._proxy.accel(), self._loop)
@@ -308,22 +308,22 @@ class Motor(Peripheral):
         This property controls the strategy with which the motors are moved.
         Legal values are:
 
-        * :const:`linkbot.peripherals.Motor.Controller.PID`: Move the motors directly with the
+        * :const:`linkbot3.peripherals.Motor.Controller.PID`: Move the motors directly with the
           internal PID controller. This is typically the fastest way to get a
           motor from one position to another. The motor may experience some
           overshoot and underdamped response when moving larger distances.
-        * :const:`linkbot.peripherals.Motor.Controller.CONST_VEL`: Move the motor at a constant
+        * :const:`linkbot3.peripherals.Motor.Controller.CONST_VEL`: Move the motor at a constant
           velocity. This motor controller attemts to accelerate and decelerate
           a motor infinitely fast to and from a constant velocity to move the
           motor from one position to the next. The velocity can be controlled
           by setting the property `omega`.
-        * :const:`linkbot.peripherals.Motor.Controller.SMOOTH`: Move the motor with specified
+        * :const:`linkbot3.peripherals.Motor.Controller.SMOOTH`: Move the motor with specified
           acceleration, maximum velocity, and deceleration. For this type of
           movement, access maximum velocity with property `omega`,
           acceleration with property `accel`, and deceleration with property
           `decel`.
 
-        See also: :func:`linkbot.peripherals.Motor.set_controller`
+        See also: :func:`linkbot3.peripherals.Motor.set_controller`
         '''
         return util.run_linkbot_coroutine(
                 self._proxy.controller(), self._loop)
@@ -334,7 +334,7 @@ class Motor(Peripheral):
         :rtype: float
         :returns: The deceleration setting in units of deg/s/s
 
-        See also: :func:`linkbot.peripherals.Motor.set_decel`
+        See also: :func:`linkbot3.peripherals.Motor.set_decel`
         '''
         return util.run_linkbot_coroutine(
                 self._proxy.decel(), self._loop)
@@ -345,7 +345,7 @@ class Motor(Peripheral):
         :rtype: float
         :returns: The speed setting of the motor in deg/s
 
-        See also: :func:`linkbot.peripherals.Motor.set_omega`
+        See also: :func:`linkbot3.peripherals.Motor.set_omega`
         '''
         return util.run_linkbot_coroutine(
                 self._proxy.omega(), self._loop)
@@ -353,7 +353,7 @@ class Motor(Peripheral):
     def set_accel(self, value):
         ''' Set the acceleration of a motor.
         
-        See :func:`linkbot.peripherals.Motor.accel`
+        See :func:`linkbot3.peripherals.Motor.accel`
         '''
         return util.run_linkbot_coroutine(
                 self._proxy.set_accel(value), self._loop)
@@ -361,7 +361,7 @@ class Motor(Peripheral):
     def set_controller(self, value):
         ''' Set the motor controller.
 
-        See :func:`linkbot.peripherals.Motor.controller`
+        See :func:`linkbot3.peripherals.Motor.controller`
         '''
         return util.run_linkbot_coroutine(
                 self._proxy.set_controller(value), self._loop)
@@ -369,7 +369,7 @@ class Motor(Peripheral):
     def set_decel(self, value):
         ''' Set the motor deceleration.
 
-        See :func:`linkbot.peripherals.Motor.decel`
+        See :func:`linkbot3.peripherals.Motor.decel`
         '''
         return util.run_linkbot_coroutine(
                 self._proxy.set_decel(value), self._loop)
@@ -377,7 +377,7 @@ class Motor(Peripheral):
     def set_omega(self, value):
         ''' Set the motor's velocity.
 
-        See :func:`linkbot.peripherals.Motor.omega`
+        See :func:`linkbot3.peripherals.Motor.omega`
         '''
         return util.run_linkbot_coroutine(
                 self._proxy.set_omega(value), self._loop)
@@ -397,13 +397,13 @@ class Motor(Peripheral):
         ''' Cause a motor to begin accelerating indefinitely. 
 
         The joint will begin accelerating at the acceleration specified
-        previously by :func:`linkbot.peripherals.Motor.accel`. If a 
+        previously by :func:`linkbot3.peripherals.Motor.accel`. If a 
         timeout is specified, the motor will transition states after the timeout
         expires. The state the motor transitions to is specified by the
         parameter ```state_on_timeout```. 
 
         If the robot reaches its maximum speed, specified by the function
-        :func:`linkbot.peripherals.Motor.set_omega`, it will stop
+        :func:`linkbot3.peripherals.Motor.set_omega`, it will stop
         accelerating and continue at that speed until the timeout, if any,
         expires.
 
@@ -412,7 +412,7 @@ class Motor(Peripheral):
         :param v0: Initial velocity in deg/s
         :type v0: float
         :param state_on_timeout: End state after timeout
-        :type state_on_timeout: :class:`linkbot.peripherals.Motor.State`
+        :type state_on_timeout: :class:`linkbot3.peripherals.Motor.State`
         '''
         return util.run_linkbot_coroutine(
                 self.amotor.begin_accel(timeout, v0, state_on_timeout),
@@ -423,7 +423,7 @@ class Motor(Peripheral):
         ''' Begin moving motor at constant velocity
 
         The joint will begin moving at a constant velocity previously set by
-        :func:`linkbot.peripherals.Motor.set_omega`. 
+        :func:`linkbot3.peripherals.Motor.set_omega`. 
 
         :param timeout: After ```timeout``` seconds, the motor will transition
             states to the state specified by the parameter
@@ -434,7 +434,7 @@ class Motor(Peripheral):
         :type forward: bool
         :param state_on_timeout: State to transition to after the motion
             times out.
-        :type state_on_timeout: :class:`linkbot.peripherals.Motor.State`
+        :type state_on_timeout: :class:`linkbot3.peripherals.Motor.State`
         '''
         return util.run_linkbot_coroutine(
                 self.amotor.begin_move(timeout, forward, state_on_timeout),
@@ -531,9 +531,9 @@ class Motors():
             transition to the motor state specified by the ``states_on_timeout``
             parameter.
         :type timeouts: [float, float, float]
-        :type states_on_timeout: [ linkbot.peripherals.Motor.State,
-                                   linkbot.peripherals.Motor.State,
-                                   linkbot.peripherals.Motor.State ]
+        :type states_on_timeout: [ linkbot3.peripherals.Motor.State,
+                                   linkbot3.peripherals.Motor.State,
+                                   linkbot3.peripherals.Motor.State ]
         :param wait: Indicate whether this function should return when the
                 motion starts or when the motion finishes. If this is set to
                 ```True```, this function will block until the motion completely
@@ -554,7 +554,7 @@ class Motors():
 
         This function returns when the Linkbot's motors stop moving. The
         ``mask`` argument is similar to the ``mask`` argument in 
-        :func:`linkbot.peripherals.Motors.move`.
+        :func:`linkbot3.peripherals.Motors.move`.
         '''
         return util.run_linkbot_coroutine(
                 self._amotors.move_wait(mask=mask), self._loop)
@@ -579,7 +579,7 @@ class Motors():
     def stop(self, mask=0x07):
         ''' Immediately stop all motors.
 
-        :param mask: See :func:`linkbot.peripherals.Motors.move`
+        :param mask: See :func:`linkbot3.peripherals.Motors.move`
         '''
         return util.run_linkbot_coroutine(
                 self._amotors.stop(mask=mask), self._loop)
@@ -589,7 +589,8 @@ class Twi():
         self._proxy = async_twi
         self._loop = loop
 
-    async def read(self, address, size):
+    @asyncio.coroutine
+    def read(self, address, size):
         '''
         Read from an attached TWI device.
 
@@ -603,7 +604,8 @@ class Twi():
                 self._proxy.read(address, size),
                 self._loop)
 
-    async def write(self, address, bytestring):
+    @asyncio.coroutine
+    def write(self, address, bytestring):
         '''
         Write to an attached TWI device.
 
@@ -613,8 +615,9 @@ class Twi():
         return util.run_linkbot_coroutine(
                 self._proxy.write(address, bytestring),
                 self._loop)
-
-    async def write_read(self, write_addr, write_data, recv_size):
+    
+    @asyncio.coroutine
+    def write_read(self, write_addr, write_data, recv_size):
         '''
         Write and read from a TWI device in one step without releasing the TWI
         bus.

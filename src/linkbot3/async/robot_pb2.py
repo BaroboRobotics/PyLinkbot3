@@ -14,16 +14,15 @@ from google.protobuf import descriptor_pb2
 _sym_db = _symbol_database.Default()
 
 
-import nanopb_pb2 as nanopb__pb2
+import nanopb_pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='robot.proto',
   package='barobo.Robot',
-  syntax='proto2',
   serialized_pb=_b('\n\x0brobot.proto\x12\x0c\x62\x61robo.Robot\x1a\x0cnanopb.proto\"G\n\x14getAccelerometerData\x1a\x04\n\x02In\x1a)\n\x06Result\x12\t\n\x01x\x18\x01 \x02(\x02\x12\t\n\x01y\x18\x02 \x02(\x02\x12\t\n\x01z\x18\x03 \x02(\x02\",\n\x0bgetLedColor\x1a\x04\n\x02In\x1a\x17\n\x06Result\x12\r\n\x05value\x18\x01 \x02(\r\",\n\x0bsetLedColor\x1a\x13\n\x02In\x12\r\n\x05value\x18\x01 \x02(\r\x1a\x08\n\x06Result\"3\n\x12getBuzzerFrequency\x1a\x04\n\x02In\x1a\x17\n\x06Result\x12\r\n\x05value\x18\x01 \x02(\x02\"3\n\x12setBuzzerFrequency\x1a\x13\n\x02In\x12\r\n\x05value\x18\x01 \x02(\x02\x1a\x08\n\x06Result\"3\n\x11\x65nableButtonEvent\x1a\x14\n\x02In\x12\x0e\n\x06\x65nable\x18\x01 \x02(\x08\x1a\x08\n\x06Result\"\xaa\x02\n\x12\x65nableEncoderEvent\x1a\x89\x02\n\x02In\x12\x43\n\nencoderOne\x18\x01 \x01(\x0b\x32/.barobo.Robot.enableEncoderEvent.In.SignalState\x12\x43\n\nencoderTwo\x18\x02 \x01(\x0b\x32/.barobo.Robot.enableEncoderEvent.In.SignalState\x12\x45\n\x0c\x65ncoderThree\x18\x03 \x01(\x0b\x32/.barobo.Robot.enableEncoderEvent.In.SignalState\x1a\x32\n\x0bSignalState\x12\x0e\n\x06\x65nable\x18\x01 \x02(\x08\x12\x13\n\x0bgranularity\x18\x02 \x02(\x02\x1a\x08\n\x06Result\"2\n\x10\x65nableJointEvent\x1a\x14\n\x02In\x12\x0e\n\x06\x65nable\x18\x01 \x02(\x08\x1a\x08\n\x06Result\"O\n\x18\x65nableAccelerometerEvent\x1a)\n\x02In\x12\x0e\n\x06\x65nable\x18\x01 \x02(\x08\x12\x13\n\x0bgranularity\x18\x02 \x02(\x02\x1a\x08\n\x06Result\"Z\n!setMotorControllerSafetyThreshold\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\rB\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"V\n\x1dsetMotorControllerSafetyAngle\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"Q\n\x18setMotorControllerAlphaI\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"Q\n\x18setMotorControllerAlphaF\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"P\n\x17setMotorControllerOmega\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"[\n\"setMotorControllerProportionalGain\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"Y\n setMotorControllerIntegratorGain\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"Y\n setMotorControllerDerivativeGain\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\".\n\x11getBatteryVoltage\x1a\x04\n\x02In\x1a\x13\n\x06Result\x12\t\n\x01v\x18\x01 \x02(\x02\"4\n\tgetAdcRaw\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\rB\x07\x10\x01\x92?\x02\x10 \"L\n!getMotorControllerSafetyThreshold\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\rB\x07\x10\x01\x92?\x02\x10 \"H\n\x1dgetMotorControllerSafetyAngle\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"C\n\x18getMotorControllerAlphaI\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"C\n\x18getMotorControllerAlphaF\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"B\n\x17getMotorControllerOmega\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"M\n\"getMotorControllerProportionalGain\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"K\n getMotorControllerIntegratorGain\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"K\n getMotorControllerDerivativeGain\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"N\n\x10getEncoderValues\x1a\x04\n\x02In\x1a\x34\n\x06Result\x12\x11\n\ttimestamp\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"f\n\x0egetJointStates\x1a\x04\n\x02In\x1aN\n\x06Result\x12\x11\n\ttimestamp\x18\x01 \x02(\r\x12\x31\n\x06values\x18\x02 \x03(\x0e\x32\x18.barobo.Robot.JointStateB\x07\x10\x01\x92?\x02\x10 \"\x85\x01\n\rgetFormFactor\x1a\x04\n\x02In\x1a?\n\x06Result\x12\x35\n\x05value\x18\x01 \x02(\x0e\x32&.barobo.Robot.getFormFactor.FormFactor\"-\n\nFormFactor\x12\x05\n\x01I\x10\x00\x12\x05\n\x01L\x10\x01\x12\x05\n\x01T\x10\x02\x12\n\n\x06\x44ONGLE\x10\x03\"\xbb\x02\n\x04Goal\x12%\n\x04type\x18\x01 \x02(\x0e\x32\x17.barobo.Robot.Goal.Type\x12\x0c\n\x04goal\x18\x02 \x02(\x02\x12\x31\n\ncontroller\x18\x03 \x01(\x0e\x32\x1d.barobo.Robot.Goal.Controller\x12\x0f\n\x07timeout\x18\x04 \x01(\x02\x12/\n\rmodeOnTimeout\x18\x05 \x01(\x0e\x32\x18.barobo.Robot.JointState\"0\n\x04Type\x12\x0c\n\x08\x41\x42SOLUTE\x10\x01\x12\x0c\n\x08RELATIVE\x10\x02\x12\x0c\n\x08INFINITE\x10\x03\"W\n\nController\x12\x07\n\x03PID\x10\x01\x12\x0c\n\x08\x43ONSTVEL\x10\x02\x12\n\n\x06SMOOTH\x10\x03\x12\t\n\x05\x41\x43\x43\x45L\x10\x04\x12\r\n\tCYCLOIDAL\x10\x05\x12\x0c\n\x08HARMONIC\x10\x06\"\x97\x01\n\x04move\x1a\x84\x01\n\x02In\x12(\n\x0cmotorOneGoal\x18\x01 \x01(\x0b\x32\x12.barobo.Robot.Goal\x12(\n\x0cmotorTwoGoal\x18\x02 \x01(\x0b\x32\x12.barobo.Robot.Goal\x12*\n\x0emotorThreeGoal\x18\x03 \x01(\x0b\x32\x12.barobo.Robot.Goal\x1a\x08\n\x06Result\"\"\n\x10resetEncoderRevs\x1a\x04\n\x02In\x1a\x08\n\x06Result\"$\n\x04stop\x1a\x12\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x1a\x08\n\x06Result\".\n\x0egetButtonState\x1a\x04\n\x02In\x1a\x16\n\x06Result\x12\x0c\n\x04mask\x18\x01 \x02(\r\"Q\n\x12getFirmwareVersion\x1a\x04\n\x02In\x1a\x35\n\x06Result\x12\r\n\x05major\x18\x01 \x02(\r\x12\r\n\x05minor\x18\x02 \x02(\r\x12\r\n\x05patch\x18\x03 \x02(\r\"D\n\x0bwriteEeprom\x1a+\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x02(\r\x12\x14\n\x04\x64\x61ta\x18\x02 \x02(\x0c\x42\x06\x92?\x03\x08\x80\x01\x1a\x08\n\x06Result\"Q\n\nreadEeprom\x1a#\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x02(\r\x12\x0c\n\x04size\x18\x02 \x02(\r\x1a\x1e\n\x06Result\x12\x14\n\x04\x64\x61ta\x18\x01 \x02(\x0c\x42\x06\x92?\x03\x08\x80\x01\"A\n\x08writeTwi\x1a+\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x02(\r\x12\x14\n\x04\x64\x61ta\x18\x02 \x02(\x0c\x42\x06\x92?\x03\x08\x80\x01\x1a\x08\n\x06Result\"R\n\x07readTwi\x1a\'\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x02(\r\x12\x10\n\x08recvsize\x18\x02 \x02(\r\x1a\x1e\n\x06Result\x12\x14\n\x04\x64\x61ta\x18\x02 \x02(\x0c\x42\x06\x92?\x03\x08\x80\x01\"m\n\x0cwriteReadTwi\x1a=\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x02(\r\x12\x10\n\x08recvsize\x18\x02 \x02(\r\x12\x14\n\x04\x64\x61ta\x18\x03 \x02(\x0c\x42\x06\x92?\x03\x08\x80\x01\x1a\x1e\n\x06Result\x12\x14\n\x04\x64\x61ta\x18\x02 \x02(\x0c\x42\x06\x92?\x03\x08\x80\x01\"p\n\x0b\x62uttonEvent\x12\x11\n\ttimestamp\x18\x01 \x02(\r\x12$\n\x06\x62utton\x18\x02 \x02(\x0e\x32\x14.barobo.Robot.Button\x12(\n\x05state\x18\x03 \x02(\x0e\x32\x19.barobo.Robot.ButtonState\"A\n\x0c\x65ncoderEvent\x12\x11\n\ttimestamp\x18\x01 \x02(\r\x12\x0f\n\x07\x65ncoder\x18\x02 \x02(\r\x12\r\n\x05value\x18\x03 \x02(\x02\"H\n\x12\x61\x63\x63\x65lerometerEvent\x12\x11\n\ttimestamp\x18\x01 \x02(\r\x12\t\n\x01x\x18\x02 \x02(\x02\x12\t\n\x01y\x18\x03 \x02(\x02\x12\t\n\x01z\x18\x04 \x02(\x02\"W\n\njointEvent\x12\x11\n\ttimestamp\x18\x01 \x02(\r\x12\r\n\x05joint\x18\x02 \x02(\r\x12\'\n\x05\x65vent\x18\x03 \x02(\x0e\x32\x18.barobo.Robot.JointState\"B\n\x11\x64\x65\x62ugMessageEvent\x12\x11\n\ttimestamp\x18\x01 \x02(\r\x12\x1a\n\nbytestring\x18\x02 \x02(\tB\x06\x92?\x03\x08\x80\x01\")\n\x14\x63onnectionTerminated\x12\x11\n\ttimestamp\x18\x01 \x02(\r*8\n\nJointState\x12\t\n\x05\x43OAST\x10\x00\x12\x08\n\x04HOLD\x10\x01\x12\n\n\x06MOVING\x10\x02\x12\t\n\x05\x45RROR\x10\x04*!\n\x06\x42utton\x12\t\n\x05POWER\x10\x00\x12\x05\n\x01\x41\x10\x01\x12\x05\n\x01\x42\x10\x02*\x1f\n\x0b\x42uttonState\x12\x06\n\x02UP\x10\x00\x12\x08\n\x04\x44OWN\x10\x01')
   ,
-  dependencies=[nanopb__pb2.DESCRIPTOR,])
+  dependencies=[nanopb_pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 _JOINTSTATE = _descriptor.EnumDescriptor(
@@ -228,7 +227,6 @@ _GETACCELEROMETERDATA_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -272,7 +270,6 @@ _GETACCELEROMETERDATA_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -295,7 +292,6 @@ _GETACCELEROMETERDATA = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -319,7 +315,6 @@ _GETLEDCOLOR_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -349,7 +344,6 @@ _GETLEDCOLOR_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -372,7 +366,6 @@ _GETLEDCOLOR = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -403,7 +396,6 @@ _SETLEDCOLOR_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -426,7 +418,6 @@ _SETLEDCOLOR_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -449,7 +440,6 @@ _SETLEDCOLOR = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -473,7 +463,6 @@ _GETBUZZERFREQUENCY_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -503,7 +492,6 @@ _GETBUZZERFREQUENCY_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -526,7 +514,6 @@ _GETBUZZERFREQUENCY = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -557,7 +544,6 @@ _SETBUZZERFREQUENCY_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -580,7 +566,6 @@ _SETBUZZERFREQUENCY_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -603,7 +588,6 @@ _SETBUZZERFREQUENCY = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -634,7 +618,6 @@ _ENABLEBUTTONEVENT_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -657,7 +640,6 @@ _ENABLEBUTTONEVENT_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -680,7 +662,6 @@ _ENABLEBUTTONEVENT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -718,7 +699,6 @@ _ENABLEENCODEREVENT_IN_SIGNALSTATE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -762,7 +742,6 @@ _ENABLEENCODEREVENT_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -785,7 +764,6 @@ _ENABLEENCODEREVENT_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -808,7 +786,6 @@ _ENABLEENCODEREVENT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -839,7 +816,6 @@ _ENABLEJOINTEVENT_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -862,7 +838,6 @@ _ENABLEJOINTEVENT_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -885,7 +860,6 @@ _ENABLEJOINTEVENT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -923,7 +897,6 @@ _ENABLEACCELEROMETEREVENT_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -946,7 +919,6 @@ _ENABLEACCELEROMETEREVENT_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -969,7 +941,6 @@ _ENABLEACCELEROMETEREVENT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1007,7 +978,6 @@ _SETMOTORCONTROLLERSAFETYTHRESHOLD_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1030,7 +1000,6 @@ _SETMOTORCONTROLLERSAFETYTHRESHOLD_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1053,7 +1022,6 @@ _SETMOTORCONTROLLERSAFETYTHRESHOLD = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1091,7 +1059,6 @@ _SETMOTORCONTROLLERSAFETYANGLE_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1114,7 +1081,6 @@ _SETMOTORCONTROLLERSAFETYANGLE_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1137,7 +1103,6 @@ _SETMOTORCONTROLLERSAFETYANGLE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1175,7 +1140,6 @@ _SETMOTORCONTROLLERALPHAI_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1198,7 +1162,6 @@ _SETMOTORCONTROLLERALPHAI_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1221,7 +1184,6 @@ _SETMOTORCONTROLLERALPHAI = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1259,7 +1221,6 @@ _SETMOTORCONTROLLERALPHAF_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1282,7 +1243,6 @@ _SETMOTORCONTROLLERALPHAF_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1305,7 +1265,6 @@ _SETMOTORCONTROLLERALPHAF = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1343,7 +1302,6 @@ _SETMOTORCONTROLLEROMEGA_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1366,7 +1324,6 @@ _SETMOTORCONTROLLEROMEGA_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1389,7 +1346,6 @@ _SETMOTORCONTROLLEROMEGA = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1427,7 +1383,6 @@ _SETMOTORCONTROLLERPROPORTIONALGAIN_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1450,7 +1405,6 @@ _SETMOTORCONTROLLERPROPORTIONALGAIN_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1473,7 +1427,6 @@ _SETMOTORCONTROLLERPROPORTIONALGAIN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1511,7 +1464,6 @@ _SETMOTORCONTROLLERINTEGRATORGAIN_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1534,7 +1486,6 @@ _SETMOTORCONTROLLERINTEGRATORGAIN_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1557,7 +1508,6 @@ _SETMOTORCONTROLLERINTEGRATORGAIN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1595,7 +1545,6 @@ _SETMOTORCONTROLLERDERIVATIVEGAIN_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1618,7 +1567,6 @@ _SETMOTORCONTROLLERDERIVATIVEGAIN_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1641,7 +1589,6 @@ _SETMOTORCONTROLLERDERIVATIVEGAIN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1665,7 +1612,6 @@ _GETBATTERYVOLTAGE_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1695,7 +1641,6 @@ _GETBATTERYVOLTAGE_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1718,7 +1663,6 @@ _GETBATTERYVOLTAGE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1742,7 +1686,6 @@ _GETADCRAW_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1772,7 +1715,6 @@ _GETADCRAW_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1795,7 +1737,6 @@ _GETADCRAW = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1819,7 +1760,6 @@ _GETMOTORCONTROLLERSAFETYTHRESHOLD_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1849,7 +1789,6 @@ _GETMOTORCONTROLLERSAFETYTHRESHOLD_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1872,7 +1811,6 @@ _GETMOTORCONTROLLERSAFETYTHRESHOLD = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1896,7 +1834,6 @@ _GETMOTORCONTROLLERSAFETYANGLE_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1926,7 +1863,6 @@ _GETMOTORCONTROLLERSAFETYANGLE_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1949,7 +1885,6 @@ _GETMOTORCONTROLLERSAFETYANGLE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -1973,7 +1908,6 @@ _GETMOTORCONTROLLERALPHAI_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2003,7 +1937,6 @@ _GETMOTORCONTROLLERALPHAI_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2026,7 +1959,6 @@ _GETMOTORCONTROLLERALPHAI = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2050,7 +1982,6 @@ _GETMOTORCONTROLLERALPHAF_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2080,7 +2011,6 @@ _GETMOTORCONTROLLERALPHAF_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2103,7 +2033,6 @@ _GETMOTORCONTROLLERALPHAF = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2127,7 +2056,6 @@ _GETMOTORCONTROLLEROMEGA_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2157,7 +2085,6 @@ _GETMOTORCONTROLLEROMEGA_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2180,7 +2107,6 @@ _GETMOTORCONTROLLEROMEGA = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2204,7 +2130,6 @@ _GETMOTORCONTROLLERPROPORTIONALGAIN_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2234,7 +2159,6 @@ _GETMOTORCONTROLLERPROPORTIONALGAIN_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2257,7 +2181,6 @@ _GETMOTORCONTROLLERPROPORTIONALGAIN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2281,7 +2204,6 @@ _GETMOTORCONTROLLERINTEGRATORGAIN_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2311,7 +2233,6 @@ _GETMOTORCONTROLLERINTEGRATORGAIN_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2334,7 +2255,6 @@ _GETMOTORCONTROLLERINTEGRATORGAIN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2358,7 +2278,6 @@ _GETMOTORCONTROLLERDERIVATIVEGAIN_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2388,7 +2307,6 @@ _GETMOTORCONTROLLERDERIVATIVEGAIN_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2411,7 +2329,6 @@ _GETMOTORCONTROLLERDERIVATIVEGAIN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2435,7 +2352,6 @@ _GETENCODERVALUES_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2472,7 +2388,6 @@ _GETENCODERVALUES_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2495,7 +2410,6 @@ _GETENCODERVALUES = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2519,7 +2433,6 @@ _GETJOINTSTATES_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2556,7 +2469,6 @@ _GETJOINTSTATES_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2579,7 +2491,6 @@ _GETJOINTSTATES = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2603,7 +2514,6 @@ _GETFORMFACTOR_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2633,7 +2543,6 @@ _GETFORMFACTOR_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2657,7 +2566,6 @@ _GETFORMFACTOR = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2718,7 +2626,6 @@ _GOAL = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2763,7 +2670,6 @@ _MOVE_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2786,7 +2692,6 @@ _MOVE_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2809,7 +2714,6 @@ _MOVE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2833,7 +2737,6 @@ _RESETENCODERREVS_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2856,7 +2759,6 @@ _RESETENCODERREVS_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2879,7 +2781,6 @@ _RESETENCODERREVS = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2910,7 +2811,6 @@ _STOP_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2933,7 +2833,6 @@ _STOP_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2956,7 +2855,6 @@ _STOP = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -2980,7 +2878,6 @@ _GETBUTTONSTATE_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -3010,7 +2907,6 @@ _GETBUTTONSTATE_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -3033,7 +2929,6 @@ _GETBUTTONSTATE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -3057,7 +2952,6 @@ _GETFIRMWAREVERSION_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -3101,7 +2995,6 @@ _GETFIRMWAREVERSION_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -3124,7 +3017,6 @@ _GETFIRMWAREVERSION = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -3162,7 +3054,6 @@ _WRITEEEPROM_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -3185,7 +3076,6 @@ _WRITEEEPROM_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -3208,7 +3098,6 @@ _WRITEEEPROM = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -3246,7 +3135,6 @@ _READEEPROM_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -3276,7 +3164,6 @@ _READEEPROM_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -3299,7 +3186,6 @@ _READEEPROM = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -3337,7 +3223,6 @@ _WRITETWI_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -3360,7 +3245,6 @@ _WRITETWI_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -3383,7 +3267,6 @@ _WRITETWI = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -3421,7 +3304,6 @@ _READTWI_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -3451,7 +3333,6 @@ _READTWI_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -3474,7 +3355,6 @@ _READTWI = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -3519,7 +3399,6 @@ _WRITEREADTWI_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -3549,7 +3428,6 @@ _WRITEREADTWI_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -3572,7 +3450,6 @@ _WRITEREADTWI = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -3617,7 +3494,6 @@ _BUTTONEVENT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -3662,7 +3538,6 @@ _ENCODEREVENT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -3714,7 +3589,6 @@ _ACCELEROMETEREVENT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -3759,7 +3633,6 @@ _JOINTEVENT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -3797,7 +3670,6 @@ _DEBUGMESSAGEEVENT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -3828,7 +3700,6 @@ _CONNECTIONTERMINATED = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
-  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],

@@ -11,9 +11,9 @@ in classrooms to teach programming, math, and science.
 
 This package includes two main interfaces to the Linkbot. One is an asynchronous
 interface designed to be used with Python 3.5's :mod:`asyncio` module. This one is
-called :class:`linkbot.AsyncLinkbot`.
+called :class:`linkbot3.AsyncLinkbot`.
 
-We also provide a synchronous interface called :class:`linkbot.Linkbot` which is built
+We also provide a synchronous interface called :class:`linkbot3.Linkbot` which is built
 on top of the asynchronous interface. This one is arguably easier to use since
 it hides all of the asynchronous details from the user. However, there are
 certain tasks, such as sending commands to a fleet of Linkbots, which may be

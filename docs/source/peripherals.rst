@@ -4,7 +4,7 @@ The Linkbot Peripherals
 This section describes how to access all of the Linkbots peripherals, such as its 
 its motors, LED, buzzer, buttons, accelerometer, and I2C expansion port.
 
-.. automodule:: linkbot
+.. automodule:: linkbot3
 
 Accelerometer
 +++++++++++++
@@ -15,7 +15,7 @@ of the AsyncLinkbot class. For instance,
 .. literalinclude:: snippets/Linkbot/accelerometer.py
    :language: python
 
-.. autoclass:: linkbot.peripherals.Accelerometer
+.. autoclass:: linkbot3.peripherals.Accelerometer
    :members:
 
 Battery
@@ -25,7 +25,7 @@ Get a Linkbot's current battery voltage or percentage level.
 .. literalinclude:: snippets/Linkbot/battery.py
    :language: python
 
-.. autoclass:: linkbot.peripherals.Battery
+.. autoclass:: linkbot3.peripherals.Battery
    :members:
 
 Buttons
@@ -39,7 +39,7 @@ cannot be overridden. For example,
 .. literalinclude:: snippets/Linkbot/buttons.py
    :language: python
 
-.. autoclass:: linkbot.peripherals.Button
+.. autoclass:: linkbot3.peripherals.Button
    :members:
 
 Buzzer
@@ -50,7 +50,7 @@ higher than most humans can perceive.
 
 .. literalinclude:: snippets/Linkbot/buzzer.py
 
-.. autoclass:: linkbot.peripherals.Buzzer
+.. autoclass:: linkbot3.peripherals.Buzzer
    :members:
 
 Multi-Color LED
@@ -61,7 +61,7 @@ Control a Linkbot's LED color through this interface.
 .. literalinclude:: snippets/Linkbot/led.py
    :language: python
 
-.. autoclass:: linkbot.peripherals.Led
+.. autoclass:: linkbot3.peripherals.Led
    :members:
 
 Motor
