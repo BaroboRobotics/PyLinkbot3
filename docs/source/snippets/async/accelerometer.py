@@ -1,4 +1,4 @@
-import linkbot
+import linkbot3 as linkbot
 import asyncio
 
 async def cb(*args):

@@ -1,4 +1,4 @@
-import linkbot
+import linkbot3 as linkbot
 import asyncio
 
 robots = [ '2G7D',

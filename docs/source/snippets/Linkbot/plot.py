@@ -1,4 +1,4 @@
-import linkbot
+import linkbot3 as linkbot
 from matplotlib import pyplot
 
 class MotorPlot():

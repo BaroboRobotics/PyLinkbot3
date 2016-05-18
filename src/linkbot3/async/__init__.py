@@ -111,6 +111,8 @@ class _AsyncLinkbot(rb.Proxy):
         while True:
             try:
                 msg = yield from protocol.recv()
+                if msg is None:
+                    continue
             except asyncio.CancelledError:
                 logging.warning('Daemon consumer received asyncio.CancelledError')
                 return
@@ -118,8 +120,10 @@ class _AsyncLinkbot(rb.Proxy):
 
     @asyncio.coroutine
     def __linkbot_consumer(self, protocol):
+        logging.info('Linkbot message consumer starting...')
         while True:
             try:
+                logging.info('Consuming Linkbot message from WS...')
                 msg = yield from protocol.recv()
             except asyncio.CancelledError:
                 return
