@@ -41,6 +41,12 @@ class _AsyncLinkbot(rb.Proxy):
             self.__use_websockets = True
         else:
             self.__use_websockets = False
+
+        try:
+            daemon_host = os.environ['LINKBOT_DAEMON_HOSTPORT'].split(':')
+        except KeyError:
+            daemon_host = ['localhost', '42000']
+
         self._serial_id = serial_id
         self._loop = asyncio.get_event_loop()
 
@@ -50,11 +56,11 @@ class _AsyncLinkbot(rb.Proxy):
         if self.__use_websockets:
             self.__log('Creating Websocket connection to daemon...')
             protocol = yield from websockets.connect(
-                    'ws://localhost:42000', loop=self._loop)
+                    'ws://'+daemon_host[0]+':'+daemon_host[1], loop=self._loop)
         else:
             self.__log('Creating tcp connection to daemon...')
             (transport, protocol) = yield from sfp.client.connect(
-                    'localhost', '42000', loop=self._loop)
+                    daemon_host[0], daemon_host[1], loop=self._loop)
 
         self.__log('Daemon TCP connection established.')
         protocol.connection_lost = self.__connection_closed
@@ -105,6 +111,8 @@ class _AsyncLinkbot(rb.Proxy):
         while True:
             try:
                 msg = yield from protocol.recv()
+                if msg is None:
+                    continue
             except asyncio.CancelledError:
                 logging.warning('Daemon consumer received asyncio.CancelledError')
                 return
@@ -112,8 +120,10 @@ class _AsyncLinkbot(rb.Proxy):
 
     @asyncio.coroutine
     def __linkbot_consumer(self, protocol):
+        logging.info('Linkbot message consumer starting...')
         while True:
             try:
+                logging.info('Consuming Linkbot message from WS...')
                 msg = yield from protocol.recv()
             except asyncio.CancelledError:
                 return

@@ -1,4 +1,4 @@
-import linkbot
+import linkbot3 as linkbot
 import asyncio
 
 # This is my accelerometer event callback. Whenever the Linkbot detects that

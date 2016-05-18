@@ -1,4 +1,4 @@
-import linkbot
+import linkbot3 as linkbot
 import logging
 
 async def cb(*args, **kwargs):
