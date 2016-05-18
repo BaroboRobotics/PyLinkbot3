@@ -12,11 +12,26 @@ __all__ = [ 'Accelerometer',
             'Motors']
 
 class Peripheral():
+    '''
+    The parent class for (most) Linkbot peripherals.
+    '''
     def __init__(self, async_proxy, loop):
         self._proxy = async_proxy
         self._loop = loop
 
     def set_event_handler(self, callback=None, **kwargs):
+        ''' 
+            Set an event handler for a peripheral.
+
+            The event handler will call the callback function when the
+            peripheral senses any changes to its state. For instance, if the peripheral is
+            the accelerometer, the callback will be invoked whenever the accelerometer
+            values change. If the peripheral is the buttons, the callback will be invoked
+            whenever a button is depressed or released.
+
+            The arguments passed to the callback vary from peripheral to peripheral. See 
+            the peripheral's documentation for callback arguments.
+        '''
         self._user_event_handler = callback
         if callback:
             util.run_linkbot_coroutine(
@@ -87,6 +102,14 @@ class Accelerometer(Peripheral):
         return util.run_linkbot_coroutine(
                 self._proxy.z(),
                 self._loop )
+
+    def set_event_handler(self, callback = None, granularity = 0.05):
+        '''
+        Set the event handler for accelerometer events. 
+
+        :param callback: function(x, y, z, timestamp_millis)
+        '''
+        super().set_event_handler(callback, granularity=granularity)
 
 class Battery():
     def __init__(self, linkbot_parent):
@@ -180,6 +203,15 @@ class Button(Peripheral):
         return util.run_linkbot_coroutine(
                 self._proxy.b(),
                 self._loop )
+
+    def set_event_handler(self, callback = None, **kwargs):
+        '''
+        Set a callback function to be executed when there is a button press or
+        release.
+
+        :param callback: func(buttonNo(int), buttonDown(bool), timestamp) -> None
+        '''
+        super().set_event_handler(callback, **kwargs)
 
 class Buzzer():
     def __init__(self, linkbot_parent):
@@ -373,6 +405,18 @@ class Motor(Peripheral):
         '''
         return util.run_linkbot_coroutine(
                 self._proxy.set_decel(value), self._loop)
+
+    def set_event_handler(self, callback = None, granularity = 2.0):
+        '''
+        Set a callback function to be executed when the motor angle
+        values on the robot change.
+
+        :param callback: async func(angle, timestamp) -> None
+        :param granularity: float . The callback will only be called when a
+            motor moves away from its current position by more than
+            'granularity' degrees.
+        '''
+        super().set_event_handler(callback, granularity=granularity)
 
     def set_omega(self, value):
         ''' Set the motor's velocity.

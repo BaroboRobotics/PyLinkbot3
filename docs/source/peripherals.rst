@@ -67,19 +67,28 @@ Control a Linkbot's LED color through this interface.
 Motor
 +++++
 
-.. autoclass:: linkbot::peripherals.Motor.Controller
+.. autoclass:: linkbot3::peripherals.Motor.Controller
    :members: 
    :undoc-members:
 
-.. autoclass:: linkbot::peripherals.Motor.State
+.. autoclass:: linkbot3::peripherals.Motor.State
    :members: 
    :undoc-members:
 
-.. autoclass:: linkbot::peripherals.Motor
+.. autoclass:: linkbot3::peripherals.Motor
    :members: 
 
 Motors
 ++++++
 
-.. autoclass:: linkbot::peripherals.Motors
+.. autoclass:: linkbot3::peripherals.Motors
    :members:
+
+Peripheral
+++++++++++
+
+The parent class for (most) Linkbot peripherals.
+
+.. autoclass:: linkbot3.peripherals.Peripheral
+   :members:
+

@@ -1,8 +1,5 @@
 import linkbot3 as linkbot
 
-import logging
-logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
-
 # This is my button event callback. Whenever the Linkbot detects that
 # a button has been pressed or released, this callback is executed.
 def cb(*args):
