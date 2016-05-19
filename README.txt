@@ -36,7 +36,8 @@ and new websockets based daemons. By default, the library will search for an
 SFP based daemon located at localhost:42000. The following environment
 variables control this library's behavior:
 
-LINKBOT_USE_WEBSOCKETS=1 # Makes PyLinkbot use websockets instead of SFP
+LINKBOT_USE_SFP=1 # Makes PyLinkbot use the old SFP transport instead of
+                  # WebSockets.
 LINKBOT_DAEMON_HOSTPORT="hostname:port" # Makes PyLinkbot use the specified
     # host:port as its daemon. For instance, if you want to use the daemon
     # running on a local linkbot-hub, set this environment variable to the

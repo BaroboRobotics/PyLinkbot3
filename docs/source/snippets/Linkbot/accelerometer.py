@@ -1,8 +1,5 @@
 import linkbot3 as linkbot
 
-#import logging
-#logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
-
 # This is my accelerometer event callback. Whenever the Linkbot detects that
 # the accelerometer has moved, this callback is executed.
 def cb(x, y, z, timestamp):
