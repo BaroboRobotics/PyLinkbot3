@@ -16,6 +16,21 @@ from .peripherals import *
 __all__ = ['FormFactor', 'Linkbot', ]
 __all__ += [async.__all__, ]
 
+class Daemon():
+    def __init__(self):
+        self.__io_core = util.IoCore()
+        self._loop = self.__io_core.get_event_loop()
+    
+        fut = asyncio.run_coroutine_threadsafe(
+                AsyncDaemon.create(), self._loop)
+        self._proxy = fut.result()
+
+    def cycle(self, seconds):
+        asyncio.run_coroutine_threadsafe(
+            self._proxy.cycle(seconds),
+            self._loop)
+       
+
 class FormFactor():
     I = 0
     L = 1
