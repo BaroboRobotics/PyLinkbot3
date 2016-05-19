@@ -25,7 +25,12 @@ def config(**kwargs):
     '''
     global _use_websockets
     global _daemon_host
-    _use_websockets = !kwargs.pop('use_sfp', False)
+    use_sfp = kwargs.pop('use_sfp', False)
+    if use_sfp:
+        _use_websockets = False
+    else:
+        _use_websockets = True
+
     _daemon_host = kwargs.pop('daemon_hostport', 'localhost:42000').split(':')
 
 class _DaemonProxy(rb.Proxy):
