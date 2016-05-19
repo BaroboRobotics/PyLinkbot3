@@ -8,7 +8,7 @@ from . import peripherals
 from .. import _util as util
 import websockets
 
-__all__ = ['AsyncLinkbot', 'config']
+__all__ = ['AsyncLinkbot', 'config', 'AsyncDaemon']
 
 _dirname = os.path.dirname(os.path.realpath(__file__))
 
@@ -324,4 +324,46 @@ class AsyncLinkbot():
     def __debug_message_event(self, payload):
         logging.warning('Received DEBUG message from robot {}: {}'
                 .format(self._serial_id, payload.bytestring))
+
+class AsyncDaemon(_DaemonProxy):
+    @classmethod
+    @asyncio.coroutine
+    def create(cls):
+        global _use_websockets
+        global _daemon_host
+
+        self = cls(os.path.join(_dirname, 'daemon_pb2.py'))
+
+        if _use_websockets:
+            #self.__log('Creating Websocket connection to daemon...')
+            protocol = yield from websockets.connect(
+                    'ws://'+_daemon_host[0]+':'+_daemon_host[1])
+        else:
+            #self.__log('Creating tcp connection to daemon...')
+            (transport, protocol) = yield from sfp.client.connect(
+                    _daemon_host[0], _daemon_host[1], loop=self._loop)
+        
+        self.set_protocol(protocol)
+        self.consumer = asyncio.ensure_future(self.__consumer(protocol))
+
+        return self
+
+    @asyncio.coroutine
+    def cycle(self, seconds):
+        args = self.rb_get_args_obj('cycleDongle')
+        args.seconds = seconds
+        result_fut = yield from self.cycleDongle(args)
+        return result_fut
+
+    @asyncio.coroutine
+    def __consumer(self, protocol):
+        while True:
+            try:
+                msg = yield from protocol.recv()
+                if msg is None:
+                    continue
+            except asyncio.CancelledError:
+                logging.warning('Daemon consumer received asyncio.CancelledError')
+                return
+            yield from self.rb_deliver(msg)
 
