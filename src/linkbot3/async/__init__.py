@@ -8,7 +8,7 @@ from . import peripherals
 from .. import _util as util
 import websockets
 
-__all__ = ['AsyncLinkbot']
+__all__ = ['AsyncLinkbot', 'config']
 
 _dirname = os.path.dirname(os.path.realpath(__file__))
 
