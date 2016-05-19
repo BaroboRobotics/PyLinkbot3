@@ -27,6 +27,7 @@ Contents
 
    linkbot
    asynclinkbot
+   config
 
 
 Indices and tables

@@ -16,9 +16,16 @@ _use_websockets = True
 _daemon_host = ['localhost', '42000']
 
 def config(**kwargs):
+    ''' Configure linkbot module settings
+
+        :param use_sfp: default:False Use WebSockets daemon communication transport, or the old SFP transport?
+        :type use_sfp: bool
+        :param daemon_hostport: default:'localhost:42000' Location of the linkbotd daemon.
+        :type daemon_hostport: string
+    '''
     global _use_websockets
     global _daemon_host
-    _use_websockets = kwargs.pop('use_websockets', True)
+    _use_websockets = !kwargs.pop('use_sfp', False)
     _daemon_host = kwargs.pop('daemon_hostport', 'localhost:42000').split(':')
 
 class _DaemonProxy(rb.Proxy):
