@@ -12,6 +12,15 @@ __all__ = ['AsyncLinkbot']
 
 _dirname = os.path.dirname(os.path.realpath(__file__))
 
+_use_websockets = True
+_daemon_host = ['localhost', '42000']
+
+def config(**kwargs):
+    global _use_websockets
+    global _daemon_host
+    _use_websockets = kwargs.pop('use_websockets', True)
+    _daemon_host = kwargs.pop('daemon_hostport', 'localhost:42000').split(':')
+
 class _DaemonProxy(rb.Proxy):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -35,17 +44,17 @@ class _AsyncLinkbot(rb.Proxy):
     @classmethod
     @asyncio.coroutine
     def create(cls, serial_id):
+        global _use_websockets
+        global _daemon_host
         logging.info('Creating async Linkbot handle to ID:{}'.format(serial_id))
         self = cls( os.path.join(_dirname, 'robot_pb2.py'))
-        if os.environ.get('LINKBOT_USE_WEBSOCKETS'):
-            self.__use_websockets = True
-        else:
-            self.__use_websockets = False
+        if os.environ.get('LINKBOT_USE_SFP'):
+            _use_websockets = False
 
         try:
-            daemon_host = os.environ['LINKBOT_DAEMON_HOSTPORT'].split(':')
+            _daemon_host = os.environ['LINKBOT_DAEMON_HOSTPORT'].split(':')
         except KeyError:
-            daemon_host = ['localhost', '42000']
+            pass
 
         self._serial_id = serial_id
         self._loop = asyncio.get_event_loop()
@@ -53,14 +62,14 @@ class _AsyncLinkbot(rb.Proxy):
         self.__daemon = _DaemonProxy(
                 os.path.join(_dirname, 'daemon_pb2.py'))
 
-        if self.__use_websockets:
+        if _use_websockets:
             self.__log('Creating Websocket connection to daemon...')
             protocol = yield from websockets.connect(
-                    'ws://'+daemon_host[0]+':'+daemon_host[1], loop=self._loop)
+                    'ws://'+_daemon_host[0]+':'+_daemon_host[1], loop=self._loop)
         else:
             self.__log('Creating tcp connection to daemon...')
             (transport, protocol) = yield from sfp.client.connect(
-                    daemon_host[0], daemon_host[1], loop=self._loop)
+                    _daemon_host[0], _daemon_host[1], loop=self._loop)
 
         self.__log('Daemon TCP connection established.')
         protocol.connection_lost = self.__connection_closed
@@ -82,9 +91,9 @@ class _AsyncLinkbot(rb.Proxy):
         #yield from protocol.close()
         #daemon_consumer.cancel()
         self.__log('Connecting to robot endpoint...')
-        if self.__use_websockets:
+        if _use_websockets:
             linkbot_protocol = yield from websockets.client.connect(
-                    'ws://'+tcp_endpoint.endpoint.address+':'+str(tcp_endpoint.endpoint.port),
+                    'ws://'+_daemon_host[0]+':'+str(tcp_endpoint.endpoint.port),
                     loop=self._loop)
         else:
             (_, linkbot_protocol) = \
