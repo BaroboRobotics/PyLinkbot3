@@ -22,11 +22,11 @@ Installation
 The recommended way to install this package is through setuptools utilities,
 such as "easy_install" or "pip". For example:
 
-    easy_install3 PyLinkbot
+    easy_install3 PyLinkbot3
 
 or
 
-    pip3 install PyLinkbot
+    pip3 install PyLinkbot3
 
 Usage Options
 -------------
