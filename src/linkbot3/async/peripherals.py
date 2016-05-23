@@ -916,7 +916,7 @@ class Motors:
         for i in range(3):
             motor =  yield from motor_class.create(i, self._proxy, self) 
             self.motors.append(motor)
-        self._timeouts = util.TimeoutCore(asyncio.get_event_loop())
+        #self._timeouts = util.TimeoutCore(asyncio.get_event_loop())
         self._callback_handler = self._EncoderEventHandler()
         return self
 
@@ -938,11 +938,10 @@ class Motors:
 
         fut = yield from self._proxy.getEncoderValues()
         user_fut = asyncio.Future()
-        yield from self._timeouts.chain_futures(fut, user_fut, self.__angles)
+        util.chain_futures(fut, user_fut, self.__angles)
         return user_fut
 
-    def __angles(self, fut):
-        results_obj = fut.result()
+    def __angles(self, results_obj):
         results = ()
         for angle in results_obj.values:
             results += (util.rad2deg(angle),)

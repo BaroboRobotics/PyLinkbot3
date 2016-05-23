@@ -87,6 +87,7 @@ class _AsyncLinkbot(rb.Proxy):
         protocol.connection_lost = self.__connection_closed
 
         self.__daemon.set_protocol(protocol)
+        self._daemon_protocol = protocol
         daemon_consumer = asyncio.ensure_future(self.__daemon_consumer(protocol))
         self.__log('Initiating daemon handshake...')
         yield from asyncio.sleep(0.5)
@@ -128,6 +129,11 @@ class _AsyncLinkbot(rb.Proxy):
         return self
 
     @asyncio.coroutine
+    def disconnect(self):
+        yield from self._daemon_protocol.close()
+        yield from self._linkbot_protocol.close()
+
+    @asyncio.coroutine
     def __daemon_consumer(self, protocol):
         while True:
             try:
@@ -136,6 +142,9 @@ class _AsyncLinkbot(rb.Proxy):
                     continue
             except asyncio.CancelledError:
                 logging.warning('Daemon consumer received asyncio.CancelledError')
+                return
+            except websockets.exceptions.ConnectionClosed:
+                logging.info('Daemon consumer connection closed.')
                 return
             yield from self.__daemon.rb_deliver(msg)
 
@@ -147,6 +156,9 @@ class _AsyncLinkbot(rb.Proxy):
                 logging.info('Consuming Linkbot message from WS...')
                 msg = yield from protocol.recv()
             except asyncio.CancelledError:
+                return
+            except websockets.exceptions.ConnectionClosed:
+                logging.info('Connection Closed.')
                 return
             yield from self.rb_deliver(msg)
 
@@ -213,7 +225,6 @@ class AsyncLinkbot():
             self._eeprom_obj = yield from peripherals.Eeprom.create(self)
             self._led = yield from peripherals.Led.create(self)
             self._motors = yield from peripherals.Motors.create(self)
-            self._timeouts = util.TimeoutCore(asyncio.get_event_loop())
             self._serial_id = serial_id
 
             # Enable joint events
@@ -227,6 +238,10 @@ class AsyncLinkbot():
                 'Timed out trying to connect to remote robot. Please ensure '
                 'that the remote robot is on and not currently connected to '
                 'another computer.' )
+
+    @asyncio.coroutine
+    def disconnect(self):
+        yield from self._proxy.disconnect()
 
     @property
     def accelerometer(self):
@@ -314,6 +329,22 @@ class AsyncLinkbot():
         util.chain_futures(fut, user_fut, conv=conv)
         return user_fut
 
+    @asyncio.coroutine
+    def form_factor(self):
+        '''
+        Get the robot's self-identified form factor
+
+        :returns: asyncio.Future with result int
+        :rtype: asyncio.Future with result type: int
+        '''
+        def conv(payload):
+            return payload.value
+
+        fut = yield from self._proxy.getFormFactor()
+        user_fut = asyncio.Future()
+        util.chain_futures(fut, user_fut, conv=conv)
+        return user_fut
+
     
     @asyncio.coroutine    
     def __joint_event(self, payload):
@@ -364,6 +395,9 @@ class AsyncDaemon(_DaemonProxy):
                     continue
             except asyncio.CancelledError:
                 logging.warning('Daemon consumer received asyncio.CancelledError')
+                return
+            except websockets.exceptions.ConnectionClosed:
+                logging.info('Connection Closed.')
                 return
             yield from self.rb_deliver(msg)
 

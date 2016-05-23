@@ -109,6 +109,12 @@ class Linkbot():
         """
         return self._eeprom_obj
 
+    def form_factor(self):
+        '''
+        Get the form factor of the Linkbot. See :class:`linkbot3.FormFactor`.
+        '''
+        return util.run_linkbot_coroutine(self._proxy.form_factor(), self._loop)
+
     @property
     def led(self):
         '''
