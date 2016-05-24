@@ -98,6 +98,12 @@ class Linkbot():
         '''
         return self._buzzer
 
+    def disconnect(self):
+        '''
+        Disconnect from the Linkbot.
+        '''
+        asyncio.run_coroutine_threadsafe(self._proxy.disconnect(), self._loop)
+
     @property
     def _eeprom(self):
         """
