@@ -302,6 +302,20 @@ class Led():
                 self._proxy.set_color(r, g, b),
                 self._loop) 
 
+    def set_color_code(self, code):
+        ''' Set the led color via a HTML style color code string.
+
+        The code string must start with a hash character (#) and contain six
+        hexadecimal digits, such as: '#FFCE00'.
+        '''
+
+        assert(code[0] == '#')
+        red = int( code[1:3], 16 )
+        green = int( code[3:5], 16 )
+        blue = int( code[5:7], 16 )
+
+        return self.set_color(red, green, blue)
+
 class Motor(Peripheral):
     class Controller:
         PID = 1
