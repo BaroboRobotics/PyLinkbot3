@@ -348,6 +348,15 @@ class Motor(Peripheral):
         return util.run_linkbot_coroutine(
                 self._proxy.accel(), self._loop)
 
+    def angle(self):
+        ''' Get the current motor angle of a motor
+
+        :rtype: float
+        :returns: The current angle in degrees.
+        '''
+        return util.run_linkbot_coroutine(
+            self._proxy.angle(), self._loop)
+
     def controller(self):
         '''The movement controller.
 

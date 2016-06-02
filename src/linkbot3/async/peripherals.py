@@ -499,6 +499,18 @@ class Motor:
         return rc
 
     @asyncio.coroutine
+    def angle(self):
+        ''' Get the current motor angle of a motor
+
+        :rtype: float
+        :returns: The current angle in degrees.
+        '''
+        fut = yield from self._proxy.getEncoderValues()
+        user_fut = asyncio.Future()
+        util.chain_futures(fut, user_fut, lambda x: util.rad2deg(x.values[self._index]))
+        return user_fut
+
+    @asyncio.coroutine
     def controller(self):
         '''The movement controller.
 
