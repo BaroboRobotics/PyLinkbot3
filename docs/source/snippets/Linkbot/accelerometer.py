@@ -5,7 +5,7 @@ import linkbot3 as linkbot
 def cb(x, y, z, timestamp):
     print('Accel event: ', x, y, z, timestamp)
 
-l = linkbot.Linkbot('DGKR')
+l = linkbot.Linkbot('7944')
 print('Current accelerometer values: ', l.accelerometer.values())
 print('Current X axis value: ', l.accelerometer.x())
 print('Current Y axis value: ', l.accelerometer.y())

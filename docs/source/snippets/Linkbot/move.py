@@ -1,7 +1,7 @@
 import linkbot3 as linkbot
 
-# My Linkbot's ID is 'DGKR'
-l = linkbot.Linkbot('DGKR')
+# My Linkbot's ID is '7944'
+l = linkbot.Linkbot('7944')
 
 # move forward by rotating wheels 90 degrees
 l.motors.move([90, 0, -90])
