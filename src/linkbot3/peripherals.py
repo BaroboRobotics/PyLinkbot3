@@ -1,6 +1,10 @@
 import asyncio
 import functools
+import sys
 from . import _util as util
+
+if sys.version_info < (3,4,4):
+    asyncio.ensure_future = asyncio.async
 
 __all__ = [ 'Accelerometer', 
             'Battery', 

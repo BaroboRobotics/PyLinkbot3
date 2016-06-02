@@ -4,9 +4,14 @@ import logging
 import os
 import ribbonbridge as rb
 import sfp
+import sys
+import websockets
+
 from . import peripherals
 from .. import _util as util
-import websockets
+
+if sys.version_info < (3,4,4):
+    asyncio.ensure_future = asyncio.async
 
 __all__ = ['AsyncLinkbot', 'config', 'AsyncDaemon']
 
