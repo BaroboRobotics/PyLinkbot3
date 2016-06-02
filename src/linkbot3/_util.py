@@ -1,11 +1,30 @@
 import asyncio
 import collections
+import concurrent
 import functools
 import math
 import threading
+import sys
 import time
 
 DEFAULT_TIMEOUT=10
+
+if sys.version_info >= (3, 4, 4):
+    run_coroutine_threadsafe = asyncio.run_coroutine_threadsafe
+else:
+    def run_coroutine_threadsafe(coroutine, loop):
+        future = concurrent.futures.Future()
+
+        def callback():
+            try:
+                chain_futures( asyncio.async(coroutine, loop=loop), future )
+            except Exception as exc:
+                if future.set_running_or_notify_cancel():
+                    future.set_exception(exc)
+                raise
+
+        loop.call_soon_threadsafe(callback)
+        return future
 
 def rad2deg(rad):
     return rad*180/math.pi
@@ -28,9 +47,9 @@ def chain_futures(fut1, fut2, conv=lambda x: x):
             )
 
 def run_linkbot_coroutine(coro, loop, timeout=DEFAULT_TIMEOUT):
-    fut = asyncio.run_coroutine_threadsafe(coro, loop)
+    fut = run_coroutine_threadsafe(coro, loop)
     fut2 = fut.result(timeout=timeout)
-    result = asyncio.run_coroutine_threadsafe(
+    result = run_coroutine_threadsafe(
             asyncio.wait_for(fut2, timeout=timeout), loop)
     return result.result()
 

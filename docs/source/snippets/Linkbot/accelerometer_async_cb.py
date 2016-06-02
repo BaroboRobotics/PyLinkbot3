@@ -8,7 +8,7 @@ async def async_cb(x, y, z, timestamp):
     await asyncio.sleep(2)
     print('Event handler completed.')
 
-l = linkbot.Linkbot('DGKR')
+l = linkbot.Linkbot('7944')
 print('Current accelerometer values: ', l.accelerometer.values())
 print('Current X axis value: ', l.accelerometer.x())
 print('Current Y axis value: ', l.accelerometer.y())

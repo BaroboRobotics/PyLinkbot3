@@ -1,6 +1,10 @@
 import asyncio
 import functools
+import sys
 from . import _util as util
+
+if sys.version_info < (3,4,4):
+    asyncio.ensure_future = asyncio.async
 
 __all__ = [ 'Accelerometer', 
             'Battery', 
@@ -302,6 +306,20 @@ class Led():
                 self._proxy.set_color(r, g, b),
                 self._loop) 
 
+    def set_color_code(self, code):
+        ''' Set the led color via a HTML style color code string.
+
+        The code string must start with a hash character (#) and contain six
+        hexadecimal digits, such as: '#FFCE00'.
+        '''
+
+        assert(code[0] == '#')
+        red = int( code[1:3], 16 )
+        green = int( code[3:5], 16 )
+        blue = int( code[5:7], 16 )
+
+        return self.set_color(red, green, blue)
+
 class Motor(Peripheral):
     class Controller:
         PID = 1
@@ -333,6 +351,15 @@ class Motor(Peripheral):
         '''
         return util.run_linkbot_coroutine(
                 self._proxy.accel(), self._loop)
+
+    def angle(self):
+        ''' Get the current motor angle of a motor
+
+        :rtype: float
+        :returns: The current angle in degrees.
+        '''
+        return util.run_linkbot_coroutine(
+            self._proxy.angle(), self._loop)
 
     def controller(self):
         '''The movement controller.

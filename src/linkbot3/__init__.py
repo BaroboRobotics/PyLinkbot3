@@ -21,12 +21,12 @@ class Daemon():
         self.__io_core = util.IoCore()
         self._loop = self.__io_core.get_event_loop()
     
-        fut = asyncio.run_coroutine_threadsafe(
+        fut = util.run_coroutine_threadsafe(
                 AsyncDaemon.create(), self._loop)
         self._proxy = fut.result()
 
     def cycle(self, seconds):
-        asyncio.run_coroutine_threadsafe(
+        util.run_coroutine_threadsafe(
             self._proxy.cycle(seconds),
             self._loop)
        
@@ -50,7 +50,7 @@ class Linkbot():
         self.__io_core = util.IoCore()
         self._loop = self.__io_core.get_event_loop()
     
-        fut = asyncio.run_coroutine_threadsafe(
+        fut = util.run_coroutine_threadsafe(
                 AsyncLinkbot.create(serial_id), self._loop)
         self._proxy = fut.result()
        
@@ -98,6 +98,12 @@ class Linkbot():
         '''
         return self._buzzer
 
+    def disconnect(self):
+        '''
+        Disconnect from the Linkbot.
+        '''
+        util.run_coroutine_threadsafe(self._proxy.disconnect(), self._loop)
+
     @property
     def _eeprom(self):
         """
@@ -108,6 +114,12 @@ class Linkbot():
         such as its serial ID, calibration data, etc.
         """
         return self._eeprom_obj
+
+    def form_factor(self):
+        '''
+        Get the form factor of the Linkbot. See :class:`linkbot3.FormFactor`.
+        '''
+        return util.run_linkbot_coroutine(self._proxy.form_factor(), self._loop)
 
     @property
     def led(self):

@@ -19,6 +19,6 @@ async def task(serial_id):
 
 
 loop = asyncio.get_event_loop()
-loop.run_until_complete(task('DGKR'))
+loop.run_until_complete(task('7944'))
 loop.close()
 

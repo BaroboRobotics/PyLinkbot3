@@ -5,11 +5,8 @@ import math
 
 async def task(serial_id):
     l = await linkbot.AsyncLinkbot.create(serial_id)
-    fut = await l.battery.voltage()
-    print('Battery voltage is: ', await fut)
-    fut = await l.battery.percentage()
-    print('Battery percentage: ', await fut)
-    await l.disconnect()
+    fut = await l.form_factor()
+    print('The form factor is: ', await fut)
 
 loop = asyncio.get_event_loop()
 loop.run_until_complete(task('7944'))
