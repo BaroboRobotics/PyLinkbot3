@@ -3,7 +3,7 @@
 import linkbot3 as linkbot
 import logging
 import asyncio
-logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
+logging.basicConfig(level=logging.DEBUG)
 #async def bcast_handler(payload):
 #    print(payload)
 
@@ -52,16 +52,16 @@ def task(serial_id):
     fut = yield from l.led.color()
     values = yield from fut
     print('led: ', values)
-    fut = yield from l.button.values()
+    fut = yield from l.buttons.values()
     values = yield from fut
     print('buttons: ', values)
-    fut = yield from l.button.pwr()
+    fut = yield from l.buttons.pwr()
     values = yield from fut
     print('PWR: ', values)
-    fut = yield from l.button.a()
+    fut = yield from l.buttons.a()
     values = yield from fut
     print('A: ', values)
-    fut = yield from l.button.b()
+    fut = yield from l.buttons.b()
     values = yield from fut
     print('B: ', values)
 
@@ -78,11 +78,11 @@ def task(serial_id):
     fut = yield from l.motors[0].move_wait()
     yield from fut
 
-    fut = yield from l.button.set_event_handler(button_handler)
+    fut = yield from l.buttons.set_event_handler(button_handler)
     yield from fut
     print('Try pressing some buttons.')
     yield from asyncio.sleep(5)
-    fut = yield from l.button.set_event_handler(None)
+    fut = yield from l.buttons.set_event_handler(None)
     yield from fut
 
     fut = yield from l.accelerometer.set_event_handler(accel_handler)
