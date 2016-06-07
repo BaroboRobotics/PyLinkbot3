@@ -785,7 +785,7 @@ class Motor:
         names = ['motorOneGoal', 'motorTwoGoal', 'motorThreeGoal']
         for i,name in enumerate(names):
             if mask&(1<<i):
-                getattr(args_obj,name).type = self._MoveType.INFINITE
+                getattr(args_obj,name).type = peripherals.Motor._MoveType.INFINITE
                 getattr(args_obj,name).goal = v0
                 getattr(args_obj,name).controller = peripherals.Motor.Controller.ACCEL
                 getattr(args_obj,name).timeout = timeout
@@ -822,7 +822,7 @@ class Motor:
             goal = -1
         for i,name in enumerate(names):
             if mask&(1<<i):
-                getattr(args_obj,name).type = self._MoveType.INFINITE
+                getattr(args_obj,name).type = peripherals.Motor._MoveType.INFINITE
                 getattr(args_obj,name).goal = goal
                 getattr(args_obj,name).controller = peripherals.Motor.Controller.CONST_VEL
                 getattr(args_obj,name).timeout = timeout
