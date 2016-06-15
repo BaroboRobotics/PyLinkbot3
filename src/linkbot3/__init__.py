@@ -23,7 +23,10 @@ class Daemon():
     
         fut = util.run_coroutine_threadsafe(
                 AsyncDaemon.create(), self._loop)
-        self._proxy = fut.result()
+        try:
+            self._proxy = fut.result()
+        except:
+            raise Exception("Could not connect to daemon.")
 
     def cycle(self, seconds):
         util.run_coroutine_threadsafe(

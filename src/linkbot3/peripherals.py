@@ -647,6 +647,34 @@ class Motors():
         '''
         return util.run_linkbot_coroutine( self._amotors.reset(), self._loop )
 
+    def set_event_handler(self, callback=None, granularity=2.0):
+        '''
+        Set an event handler for all motors. The event handler will be invoked
+        when a motor angle value changes by more than the amount specified by
+        "granularity".
+
+        :param callback: async func(encoder_number, angle, timestamp) -> None
+        :param granularity: float . The callback will only be called when a
+            motor moves away from its current position by more than
+            'granularity' degrees.
+        '''
+        self._user_event_handler = callback
+        if callback:
+            util.run_linkbot_coroutine(
+                self._amotors.set_event_handler(self._event_handler, granularity),
+                self._loop)
+        else:
+            util.run_linkbot_coroutine(
+                self._amotors.set_event_handler(),
+                self._loop)
+
+    @asyncio.coroutine
+    def _event_handler(self, *args, **kwargs):
+        if asyncio.iscoroutinefunction(self._user_event_handler):
+            asyncio.ensure_future(self._user_event_handler(*args, **kwargs))
+        else:
+            self._user_event_handler(*args, **kwargs)
+
     def stop(self, mask=0x07):
         ''' Immediately stop all motors.
 

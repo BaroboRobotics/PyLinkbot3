@@ -942,6 +942,44 @@ class Motors:
 
     def __len__(self):
         return 3
+
+    def set_event_handler(self, callback=None, granularity=2.0):
+        '''
+        Set an event handler for all motors. The event handler will be invoked
+        when a motor angle value changes by more than the amount specified by
+        "granularity".
+
+        :param callback: async func(encoder_number, angle, timestamp) -> None
+        :param granularity: float . The callback will only be called when a
+            motor moves away from its current position by more than
+            'granularity' degrees.
+        '''
+        if not callback:
+            # Remove the callback
+            try:
+                args = self._proxy.rb_get_args_obj('enableEncoderEvent')
+                for encoder in ['encoderOne', 'encoderTwo', 'encoderThree']:
+                    getattr(args, encoder).enable = False
+                    getattr(args, encoder).granularity = granularity
+                    fut = yield from self._proxy.enableEncoderEvent(args)
+                    yield from fut
+                    return fut
+            except KeyError:
+                # Don't worry if the bcast handler is not there.
+                pass
+        else:
+            for i in range(3):
+                self._callback_handler.set_event_handler(i, functools.partial(callback, i))
+
+            self._proxy.rb_add_broadcast_handler( 'encoderEvent', 
+                                                  self._callback_handler.event_handler)
+            args = self._proxy.rb_get_args_obj('enableEncoderEvent')
+            names = ['encoderOne', 'encoderTwo', 'encoderThree']
+            for name in names:
+                getattr(args, name).enable = True
+                getattr(args, name).granularity = util.deg2rad(granularity)
+            fut = yield from self._proxy.enableEncoderEvent(args)
+            return fut
     
     @asyncio.coroutine
     def angles(self):
