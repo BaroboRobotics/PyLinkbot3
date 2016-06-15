@@ -1084,6 +1084,35 @@ class Motors:
         return fut
 
     @asyncio.coroutine
+    def set_powers(self, powers, mask=0x07):
+        ''' Set the PWM duty cycle on the Linkbot's motors
+
+        :param powers: A list of powers ranging in value from 0 to 255
+        :type angles: [int, int, int]
+        :param mask: Which joints to actually move. Valid values are:
+
+            * 1: joint 1
+            * 2: joint 2
+            * 3: joints 1 and 2
+            * 4: joint 3
+            * 5: joints 1 and 3
+            * 6: joints 2 and 3
+            * 7: all 3 joints
+            
+        '''
+        args_obj = self._proxy.rb_get_args_obj('move')
+        names = ['motorOneGoal', 'motorTwoGoal', 'motorThreeGoal']
+        move_type = peripherals.Motor._MoveType.INFINITE
+        for i,name in enumerate(names):
+            if mask&(1<<i):
+                getattr(args_obj,name).type = move_type
+                getattr(args_obj,name).goal = powers[i]
+                getattr(args_obj,name).controller = peripherals.Motor.Controller.PID
+
+        fut = yield from self._proxy.move(args_obj)
+        return fut
+
+    @asyncio.coroutine
     def stop(self, mask=0x07):
         ''' Immediately stop all motors.
 
