@@ -647,6 +647,54 @@ class Motors():
         '''
         return util.run_linkbot_coroutine( self._amotors.reset(), self._loop )
 
+    def set_event_handler(self, callback=None, granularity=2.0):
+        '''
+        Set an event handler for all motors. The event handler will be invoked
+        when a motor angle value changes by more than the amount specified by
+        "granularity".
+
+        :param callback: async func(encoder_number, angle, timestamp) -> None
+        :param granularity: float . The callback will only be called when a
+            motor moves away from its current position by more than
+            'granularity' degrees.
+        '''
+        self._user_event_handler = callback
+        if callback:
+            util.run_linkbot_coroutine(
+                self._amotors.set_event_handler(self._event_handler, granularity),
+                self._loop)
+        else:
+            util.run_linkbot_coroutine(
+                self._amotors.set_event_handler(),
+                self._loop)
+
+    @asyncio.coroutine
+    def _event_handler(self, *args, **kwargs):
+        if asyncio.iscoroutinefunction(self._user_event_handler):
+            asyncio.ensure_future(self._user_event_handler(*args, **kwargs))
+        else:
+            self._user_event_handler(*args, **kwargs)
+
+    def set_powers(self, powers, mask=0x07):
+        ''' Set the PWM duty cycle on the Linkbot's motors
+
+        :param powers: A list of powers ranging in value from 0 to 255
+        :type angles: [int, int, int]
+        :param mask: Which joints to actually move. Valid values are:
+
+            * 1: joint 1
+            * 2: joint 2
+            * 3: joints 1 and 2
+            * 4: joint 3
+            * 5: joints 1 and 3
+            * 6: joints 2 and 3
+            * 7: all 3 joints
+            
+        '''
+        util.run_linkbot_coroutine(
+                self._amotors.set_powers(powers, mask),
+                self._loop)
+
     def stop(self, mask=0x07):
         ''' Immediately stop all motors.
 
