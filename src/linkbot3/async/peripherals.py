@@ -721,6 +721,8 @@ class Motor:
         '''
         Set the motor's power.
 
+        This function directly controls the duty cycle of the PWM driving the motors.
+
         :type power: int [-255,255]
         '''
         
@@ -1087,7 +1089,7 @@ class Motors:
     def set_powers(self, powers, mask=0x07):
         ''' Set the PWM duty cycle on the Linkbot's motors
 
-        :param powers: A list of powers ranging in value from 0 to 255
+        :param powers: A list of powers ranging in value from -255 to 255
         :type angles: [int, int, int]
         :param mask: Which joints to actually move. Valid values are:
 

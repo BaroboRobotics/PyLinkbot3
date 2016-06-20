@@ -4,7 +4,7 @@ import linkbot3
 import sys
 import logging
 
-#logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
+logging.basicConfig(level=logging.DEBUG)
 
 if len(sys.argv) == 2:
     serial_id = sys.argv[1]

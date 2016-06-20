@@ -110,7 +110,7 @@ class _AsyncLinkbot(rb.Proxy):
         #self.__log('Disconnecting from daemon.')
         #yield from protocol.close()
         #daemon_consumer.cancel()
-        self.__log('Connecting to robot endpoint...')
+        self.__log('Connecting to robot endpoint:'+_daemon_host[0]+':'+str(tcp_endpoint.endpoint.port)) 
         if _use_websockets:
             linkbot_protocol = yield from websockets.client.connect(
                     'ws://'+_daemon_host[0]+':'+str(tcp_endpoint.endpoint.port),
@@ -383,6 +383,7 @@ class AsyncDaemon(_DaemonProxy):
         
         self.set_protocol(protocol)
         self.consumer = asyncio.ensure_future(self.__consumer(protocol))
+        yield from self.rb_connect()
 
         return self
 
