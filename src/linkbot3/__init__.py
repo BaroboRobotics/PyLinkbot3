@@ -32,7 +32,7 @@ class Daemon():
         util.run_coroutine_threadsafe(
             self._proxy.cycle(seconds),
             self._loop)
-       
+
 
 class FormFactor():
     I = 0
@@ -146,6 +146,12 @@ class Linkbot():
         or similar. Also see :class:`linkbot3.peripherals.Motor`
         """
         return self._motors
+
+    def reboot(self):
+        util.run_linkbot_coroutine(
+            self._proxy.reboot(),
+            self._loop)
+       
 
     def version(self):
         '''

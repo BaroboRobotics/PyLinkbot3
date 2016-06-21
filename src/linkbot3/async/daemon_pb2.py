@@ -13,17 +13,18 @@ from google.protobuf import descriptor_pb2
 _sym_db = _symbol_database.Default()
 
 
-import nanopb_pb2
-import commontypes_pb2
-import rpc_pb2
+import nanopb_pb2 as nanopb__pb2
+import commontypes_pb2 as commontypes__pb2
+import rpc_pb2 as rpc__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='daemon.proto',
   package='barobo.Daemon',
+  syntax='proto2',
   serialized_pb=_b('\n\x0c\x64\x61\x65mon.proto\x12\rbarobo.Daemon\x1a\x0cnanopb.proto\x1a\x11\x63ommontypes.proto\x1a\trpc.proto\"3\n\x0bTcpEndpoint\x12\x16\n\x07\x61\x64\x64ress\x18\x01 \x02(\tB\x05\x92?\x02\x08@\x12\x0c\n\x04port\x18\x02 \x02(\r\"\x93\x01\n\x0fresolveSerialId\x1a(\n\x02In\x12\"\n\x08serialId\x18\x01 \x02(\x0b\x32\x10.barobo.SerialId\x1aV\n\x06Result\x12\x1e\n\x06status\x18\x01 \x02(\x0e\x32\x0e.barobo.Status\x12,\n\x08\x65ndpoint\x18\x02 \x02(\x0b\x32\x1a.barobo.Daemon.TcpEndpoint\".\n\x0b\x63ycleDongle\x1a\x15\n\x02In\x12\x0f\n\x07seconds\x18\x01 \x02(\r\x1a\x08\n\x06Result\"n\n\rsendRobotPing\x1a\x33\n\x02In\x12-\n\x0c\x64\x65stinations\x18\x01 \x03(\x0b\x32\x10.barobo.SerialIdB\x05\x92?\x02\x10\x08\x1a(\n\x06Result\x12\x1e\n\x06status\x18\x01 \x02(\x0e\x32\x0e.barobo.Status\"b\n\x0b\x64ongleEvent\x12\x1e\n\x06status\x18\x01 \x02(\x0e\x32\x0e.barobo.Status\x12\x33\n\x0f\x66irmwareVersion\x18\x02 \x02(\x0b\x32\x1a.barobo.rpc.VersionTriplet\"\xcb\x01\n\nrobotEvent\x12\"\n\x08serialId\x18\x01 \x02(\x0b\x32\x10.barobo.SerialId\x12\x33\n\x0f\x66irmwareVersion\x18\x02 \x02(\x0b\x32\x1a.barobo.rpc.VersionTriplet\x12.\n\nrpcVersion\x18\x03 \x02(\x0b\x32\x1a.barobo.rpc.VersionTriplet\x12\x34\n\x10interfaceVersion\x18\x04 \x02(\x0b\x32\x1a.barobo.rpc.VersionTriplet')
   ,
-  dependencies=[nanopb_pb2.DESCRIPTOR,commontypes_pb2.DESCRIPTOR,rpc_pb2.DESCRIPTOR,])
+  dependencies=[nanopb__pb2.DESCRIPTOR,commontypes__pb2.DESCRIPTOR,rpc__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
@@ -58,6 +59,7 @@ _TCPENDPOINT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -88,6 +90,7 @@ _RESOLVESERIALID_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -124,6 +127,7 @@ _RESOLVESERIALID_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -146,6 +150,7 @@ _RESOLVESERIALID = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -176,6 +181,7 @@ _CYCLEDONGLE_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -198,6 +204,7 @@ _CYCLEDONGLE_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -220,6 +227,7 @@ _CYCLEDONGLE = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -250,6 +258,7 @@ _SENDROBOTPING_IN = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -279,6 +288,7 @@ _SENDROBOTPING_RESULT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -301,6 +311,7 @@ _SENDROBOTPING = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -338,6 +349,7 @@ _DONGLEEVENT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -389,6 +401,7 @@ _ROBOTEVENT = _descriptor.Descriptor(
   ],
   options=None,
   is_extendable=False,
+  syntax='proto2',
   extension_ranges=[],
   oneofs=[
   ],
@@ -396,23 +409,23 @@ _ROBOTEVENT = _descriptor.Descriptor(
   serialized_end=742,
 )
 
-_RESOLVESERIALID_IN.fields_by_name['serialId'].message_type = commontypes_pb2._SERIALID
+_RESOLVESERIALID_IN.fields_by_name['serialId'].message_type = commontypes__pb2._SERIALID
 _RESOLVESERIALID_IN.containing_type = _RESOLVESERIALID
-_RESOLVESERIALID_RESULT.fields_by_name['status'].enum_type = commontypes_pb2._STATUS
+_RESOLVESERIALID_RESULT.fields_by_name['status'].enum_type = commontypes__pb2._STATUS
 _RESOLVESERIALID_RESULT.fields_by_name['endpoint'].message_type = _TCPENDPOINT
 _RESOLVESERIALID_RESULT.containing_type = _RESOLVESERIALID
 _CYCLEDONGLE_IN.containing_type = _CYCLEDONGLE
 _CYCLEDONGLE_RESULT.containing_type = _CYCLEDONGLE
-_SENDROBOTPING_IN.fields_by_name['destinations'].message_type = commontypes_pb2._SERIALID
+_SENDROBOTPING_IN.fields_by_name['destinations'].message_type = commontypes__pb2._SERIALID
 _SENDROBOTPING_IN.containing_type = _SENDROBOTPING
-_SENDROBOTPING_RESULT.fields_by_name['status'].enum_type = commontypes_pb2._STATUS
+_SENDROBOTPING_RESULT.fields_by_name['status'].enum_type = commontypes__pb2._STATUS
 _SENDROBOTPING_RESULT.containing_type = _SENDROBOTPING
-_DONGLEEVENT.fields_by_name['status'].enum_type = commontypes_pb2._STATUS
-_DONGLEEVENT.fields_by_name['firmwareVersion'].message_type = rpc_pb2._VERSIONTRIPLET
-_ROBOTEVENT.fields_by_name['serialId'].message_type = commontypes_pb2._SERIALID
-_ROBOTEVENT.fields_by_name['firmwareVersion'].message_type = rpc_pb2._VERSIONTRIPLET
-_ROBOTEVENT.fields_by_name['rpcVersion'].message_type = rpc_pb2._VERSIONTRIPLET
-_ROBOTEVENT.fields_by_name['interfaceVersion'].message_type = rpc_pb2._VERSIONTRIPLET
+_DONGLEEVENT.fields_by_name['status'].enum_type = commontypes__pb2._STATUS
+_DONGLEEVENT.fields_by_name['firmwareVersion'].message_type = rpc__pb2._VERSIONTRIPLET
+_ROBOTEVENT.fields_by_name['serialId'].message_type = commontypes__pb2._SERIALID
+_ROBOTEVENT.fields_by_name['firmwareVersion'].message_type = rpc__pb2._VERSIONTRIPLET
+_ROBOTEVENT.fields_by_name['rpcVersion'].message_type = rpc__pb2._VERSIONTRIPLET
+_ROBOTEVENT.fields_by_name['interfaceVersion'].message_type = rpc__pb2._VERSIONTRIPLET
 DESCRIPTOR.message_types_by_name['TcpEndpoint'] = _TCPENDPOINT
 DESCRIPTOR.message_types_by_name['resolveSerialId'] = _RESOLVESERIALID
 DESCRIPTOR.message_types_by_name['cycleDongle'] = _CYCLEDONGLE

@@ -1,3 +1,9 @@
 [submodule "LinkbotLabs-SDK"]
 	path = LinkbotLabs-SDK
 	url = https://github.com/BaroboRobotics/LinkbotLabs-SDK
+[submodule "linkbot-interfaces"]
+	path = linkbot-interfaces
+	url = https://github.com/BaroboRobotics/linkbot-interfaces
+[submodule "ribbon-bridge"]
+	path = ribbon-bridge
+	url = https://github.com/BaroboRobotics/ribbon-bridge

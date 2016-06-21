@@ -40,16 +40,16 @@ class NanoPbResource(ExternalResource):
     def build(self):
         # ./deps/nanopb-0.3.1-linux-x86/generator-bin/protoc --proto_path=deps/nanopb-0.3.1-linux-x86/generator/proto --proto_path=LinkbotLabs-SDK/baromesh/interfaces/ --python_out=pbout LinkbotLabs-SDK/baromesh/int
         pb_files = [
-            'LinkbotLabs-SDK/baromesh/interfaces/robot.proto',
-            'LinkbotLabs-SDK/baromesh/interfaces/daemon.proto',
+            'linkbot-interfaces/robot.proto',
+            'linkbot-interfaces/daemon.proto',
         ]
         for f in pb_files:
             subprocess.check_call([
                 #os.path.join(self.getdir(), 'generator-bin', 'protoc'),
                 'protoc',
                 '--proto_path='+os.path.join(self.getdir(), 'generator', 'proto'),
-                '--proto_path='+os.path.join('LinkbotLabs-SDK', 'baromesh', 'interfaces'),
-                '--proto_path='+os.path.join('LinkbotLabs-SDK', 'ribbon-bridge', 'proto'),
+                '--proto_path=linkbot-interfaces',
+                '--proto_path='+os.path.join('ribbon-bridge', 'proto'),
                 '--python_out='+os.path.join('src', 'linkbot3', 'async'),
                 f ])
 

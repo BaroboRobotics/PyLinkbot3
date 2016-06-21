@@ -321,6 +321,11 @@ class AsyncLinkbot():
         return self._motors
 
     @asyncio.coroutine
+    def reboot(self):
+        result_fut = yield from self._proxy.reboot({})
+        return result_fut
+
+    @asyncio.coroutine
     def version(self):
         '''
         Get the firmware version
@@ -392,6 +397,11 @@ class AsyncDaemon(_DaemonProxy):
         args = self.rb_get_args_obj('cycleDongle')
         args.seconds = seconds
         result_fut = yield from self.cycleDongle(args)
+        return result_fut
+
+    @asyncio.coroutine
+    def reboot(self):
+        result_fut = yield from self.reboot({})
         return result_fut
 
     @asyncio.coroutine
