@@ -1,5 +1,4 @@
 import asyncio
-import functools
 import logging
 import os
 import ribbonbridge as rb
@@ -9,6 +8,8 @@ import websockets
 
 from . import peripherals
 from .. import _util as util
+
+from . import commontypes_pb2 as rbcommon
 
 if sys.version_info < (3,4,4):
     asyncio.ensure_future = asyncio.async
@@ -107,9 +108,11 @@ class _AsyncLinkbot(rb.Proxy):
         args.serialId.value = serial_id
         result_fut = yield from self.__daemon.resolveSerialId(args)
         tcp_endpoint = yield from result_fut
-        #self.__log('Disconnecting from daemon.')
-        #yield from protocol.close()
-        #daemon_consumer.cancel()
+        if tcp_endpoint.status != rbcommon.OK:
+            self.logger.warning('Could not connect to robot: {}'.format(
+                rbcommon.Status.Name(tcp_endpoint.status)))
+            raise Exception('Could not connect to remote robot: {}'.format(
+                rbcommon.Status.Name(tcp_endpoint.status)))
         self.__log('Connecting to robot endpoint:'+_daemon_host[0]+':'+str(tcp_endpoint.endpoint.port)) 
         if _use_websockets:
             linkbot_protocol = yield from websockets.client.connect(

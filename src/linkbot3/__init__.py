@@ -1,13 +1,6 @@
 #!/usr/bin/env python3
 
 import asyncio
-import collections
-import functools
-import logging
-import math
-import os
-import threading
-import time
 from . import _util as util
 
 from .async import *
