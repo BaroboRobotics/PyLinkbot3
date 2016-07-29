@@ -5,6 +5,7 @@ from . import _util as util
 
 from .async import *
 from .peripherals import *
+import websockets
 
 __all__ = ['FormFactor', 'Linkbot', ]
 __all__ += [async.__all__, ]
@@ -155,4 +156,40 @@ class Linkbot():
         return util.run_linkbot_coroutine(
                 self._proxy.version(),
                 self._loop)
+
+def scatter_plot(xs, ys):
+    ''' A helper function to generate and display graphical plots.
+
+    :param xs: A list of x axis values, like [0, 3, 4]
+    :param ys: A list of y axis values, like [2, -1, 3]
+    '''
+    import io
+    import matplotlib
+    import os
+    port = None
+    try:
+        port = os.environ['PREX_IPC_PORT']
+    except KeyError as e:
+        pass
+    if port:
+        matplotlib.use('SVG')
+
+    import matplotlib.pyplot as plt
+
+    fig = matplotlib.pyplot.figure()
+    ax = fig.add_subplot(111)
+    ax.plot(xs, ys)
+    plt.show()
+
+    if port:
+        fstream = io.BytesIO()
+        fig.savefig(fstream)
+        coro = __send_image('ws://localhost:'+str(port), fstream.getvalue())
+        asyncio.get_event_loop().run_until_complete(coro)
+
+@asyncio.coroutine
+def __send_image(uri, data):
+    websocket = yield from websockets.connect(uri)
+    yield from websocket.send(data)
+    yield from websocket.close()
 

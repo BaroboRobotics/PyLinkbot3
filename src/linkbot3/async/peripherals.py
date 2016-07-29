@@ -873,7 +873,7 @@ class Motor:
             fut = asyncio.gather(poll_fut, fut)
             util.chain_futures(fut, user_fut, conv=lambda x: None)
         return user_fut
-
+    
     @asyncio.coroutine
     def __poll_movewait(self):
         '''

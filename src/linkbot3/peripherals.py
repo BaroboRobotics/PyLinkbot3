@@ -277,7 +277,6 @@ class Eeprom():
         return util.run_linkbot_coroutine(
                 self._proxy.write(address, bytestring),
                 self._loop)
-
         
 class Led():
     def __init__(self, linkbot_parent):
@@ -438,7 +437,7 @@ class Motor(Peripheral):
         Set a callback function to be executed when the motor angle
         values on the robot change.
 
-        :param callback: async func(angle, timestamp) -> None
+        :param callback: func(angle, timestamp) -> None
         :param granularity: float . The callback will only be called when a
             motor moves away from its current position by more than
             'granularity' degrees.
