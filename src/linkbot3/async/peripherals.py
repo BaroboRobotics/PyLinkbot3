@@ -815,23 +815,10 @@ class Motor:
             times out.
         :type state_on_timeout: :class:`linkbot3.peripherals.Motor.State`
         '''
-        mask = 1<<self._index
-        args_obj = self._proxy.rb_get_args_obj('move')
-        names = ['motorOneGoal', 'motorTwoGoal', 'motorThreeGoal']
-        if forward:
-            goal = 1
-        else:
-            goal = -1
-        for i,name in enumerate(names):
-            if mask&(1<<i):
-                getattr(args_obj,name).type = peripherals.Motor._MoveType.INFINITE
-                getattr(args_obj,name).goal = goal
-                getattr(args_obj,name).controller = peripherals.Motor.Controller.CONST_VEL
-                getattr(args_obj,name).timeout = timeout
-                getattr(args_obj,name).modeOnTimeout = state_on_timeout
-
-        fut = yield from self._proxy.move(args_obj)
-        return fut
+        self._motors.begin_move(mask=1<<self._index, 
+                                timeouts=(timeout,)*3, 
+                                forward=(forward,)*3, 
+                                states_on_timeout=(state_on_timeout,)*3)
 
     @asyncio.coroutine
     def move(self, angle, relative=True):
@@ -1004,6 +991,47 @@ class Motors:
             results += (util.rad2deg(angle),)
         results += (results_obj.timestamp,)
         return results
+
+    @asyncio.coroutine
+    def begin_move(self, 
+        mask=0x07,
+        timeouts=(0, 0, 0),
+        forward=(True, True, True), 
+        states_on_timeout=(peripherals.Motor.State.COAST,
+                           peripherals.Motor.State.COAST,
+                           peripherals.Motor.State.COAST,) ):
+        ''' Begin moving motors at constant velocity
+
+        The joint will begin moving at a constant velocity previously set by
+        :func:`linkbot3.async.peripherals.Motor.set_omega`. 
+
+        :param timeout: After ```timeout``` seconds, the motor will transition
+            states to the state specified by the parameter
+            ```state_on_timeout```.
+        :type timeout: (float, float, float)
+        :param forward: Whether to move the joint in the positive direction
+            (True) or negative direction (False).
+        :type forward: (bool, bool, bool)
+        :param state_on_timeout: State to transition to after the motion
+            times out.
+        :type state_on_timeout: (:class:`linkbot3.peripherals.Motor.State`,)*3
+        '''
+        args_obj = self._proxy.rb_get_args_obj('move')
+        names = ['motorOneGoal', 'motorTwoGoal', 'motorThreeGoal']
+        for i,name in enumerate(names):
+            if forward[i]:
+                goal = 1
+            else:
+                goal = -1
+            if mask&(1<<i):
+                getattr(args_obj,name).type = peripherals.Motor._MoveType.INFINITE
+                getattr(args_obj,name).goal = goal
+                getattr(args_obj,name).controller = peripherals.Motor.Controller.CONST_VEL
+                getattr(args_obj,name).timeout = timeouts[i]
+                getattr(args_obj,name).modeOnTimeout = states_on_timeout[i]
+
+        fut = yield from self._proxy.move(args_obj)
+        return fut
 
     @asyncio.coroutine
     def move(self, angles, mask=0x07, relative=True, timeouts=None,
