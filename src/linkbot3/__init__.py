@@ -4,7 +4,10 @@ import asyncio
 from . import _util as util
 
 from .async import *
+from .async import message_pb2 as prex_pb
 from .peripherals import *
+
+import os
 import websockets
 
 __all__ = ['FormFactor', 'Linkbot', ]
@@ -157,6 +160,57 @@ class Linkbot():
                 self._proxy.version(),
                 self._loop)
 
+class PrexChannel(metaclass=util.Singleton):
+    def __init__(self):
+        self.__io_core = util.IoCore()
+        self._loop = self.__io_core.get_event_loop()
+        self.socket = None
+        self._port = None
+        try:
+            self._port = os.environ['PREX_IPC_PORT']
+            fut = asyncio.run_coroutine_threadsafe(self.connect(), self._loop)
+            fut.result()
+        except KeyError as e:
+            pass
+
+    @asyncio.coroutine
+    def connect(self):
+        if not self._port:
+            raise RuntimeError(
+                'No port was specified for the PREX communications channel. Perhaps the'
+                'environment variable is not set?'
+            )
+        self.socket = yield from websockets.connect('ws://localhost:'+str(self._port))
+
+    def input(self, prompt):
+        # Inform the PREX server that the remote process is now waiting for
+        # user input.
+        fut = asyncio.run_coroutine_threadsafe(self.__input(prompt), self._loop)
+        fut.result()
+
+    @asyncio.coroutine
+    def __input(self, prompt):
+        io = prex_pb.Io()
+        io.type = prex_pb.Io.STDIN
+        io.data = prompt.encode()
+        msg = prex_pb.PrexMessage()
+        msg.type = prex_pb.PrexMessage.IO
+        msg.payload = io.SerializeToString()
+        yield from self.socket.send(msg.SerializeToString())
+
+    def image(self, data, format='PNG'):
+        # Send image data back to the web app
+        fut = asyncio.run_coroutine_threadsafe(self.__image(data, format), self._loop)
+        fut.result()
+
+    def __image(self, data, format='PNG'):
+        image = prex_pb.Image()
+        image.payload = data
+        msg = prex_pb.PrexMessage()
+        msg.type = prex_pb.PrexMessage.IMAGE
+        msg.payload = image.SerializeToString()
+        yield from self.socket.send(msg.SerializeToString())
+
 def scatter_plot(xs, ys):
     ''' A helper function to generate and display graphical plots.
 
@@ -165,7 +219,6 @@ def scatter_plot(xs, ys):
     '''
     import io
     import matplotlib
-    import os
     port = None
     try:
         port = os.environ['PREX_IPC_PORT']
@@ -182,14 +235,8 @@ def scatter_plot(xs, ys):
     plt.show()
 
     if port:
+        channel = PrexChannel()
         fstream = io.BytesIO()
         fig.savefig(fstream)
-        coro = __send_image('ws://localhost:'+str(port), fstream.getvalue())
-        asyncio.get_event_loop().run_until_complete(coro)
-
-@asyncio.coroutine
-def __send_image(uri, data):
-    websocket = yield from websockets.connect(uri)
-    yield from websocket.send(data)
-    yield from websocket.close()
+        channel.image(fstream.getvalue())
 

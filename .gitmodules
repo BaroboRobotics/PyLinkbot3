@@ -7,3 +7,6 @@
 [submodule "ribbon-bridge"]
 	path = ribbon-bridge
 	url = https://github.com/BaroboRobotics/ribbon-bridge
+[submodule "python-prex"]
+	path = python-prex
+	url = https://github.com/davidko/python-prex
