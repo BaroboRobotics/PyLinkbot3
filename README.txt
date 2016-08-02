@@ -42,3 +42,57 @@ LINKBOT_DAEMON_HOSTPORT="hostname:port" # Makes PyLinkbot use the specified
     # host:port as its daemon. For instance, if you want to use the daemon
     # running on a local linkbot-hub, set this environment variable to the
     # hostname and port of the linkbot hub.
+
+CHANGES
+=======
+
+Version 3.1.0
+-------------
+
+* Added "CLinkbot" API, which is styled more closely after the C-STEM C++ Linkbot API.
+* Added internal support for the Prex communications channel for remote execution.
+
+Version 3.0.7
+-------------
+
+* Added the linkbot3.scatter_plot() function
+* Increased default robot timeout to 30 seconds
+* Fixed "Dongle not found" error message
+* Added Linkbot.reboot()
+
+Version 3.0.6
+-------------
+
+* Fixed daemon connection process
+* Added some more documentation snippets
+
+Version 3.0.5
+-------------
+
+* Added Motors.set_powers()
+* Fixed motor event handler
+
+Version 3.0.4
+-------------
+
+* Internal bugfixes
+
+Version 3.0.3
+-------------
+
+* Made everything compatible with Python 3.4.2
+* Added Motor.angle()
+* Added Led.set_color_code()
+* Added Linkbot.disconnect()
+* Updated plot demo
+
+Version 3.0.2
+-------------
+
+* Added daemon object
+
+Version 3.0.1
+-------------
+
+* Fixed syntax error
+
