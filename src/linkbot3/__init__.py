@@ -745,11 +745,11 @@ class PrexChannel(metaclass=util.Singleton):
         msg.payload = image.SerializeToString()
         yield from self.socket.send(msg.SerializeToString())
 
-def scatter_plot(xs, ys):
+def scatter_plot(*args, **kwargs):
     ''' A helper function to generate and display graphical plots.
 
-    :param xs: A list of x axis values, like [0, 3, 4]
-    :param ys: A list of y axis values, like [2, -1, 3]
+    :param args: These arguments are passed directly to matplotlib.pyplot.plot.
+        Please see: http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot
     '''
     import io
     import matplotlib
@@ -765,7 +765,7 @@ def scatter_plot(xs, ys):
 
     fig = matplotlib.pyplot.figure()
     ax = fig.add_subplot(111)
-    ax.plot(xs, ys)
+    ax.plot(*args, **kwargs)
     plt.show()
 
     if port:
