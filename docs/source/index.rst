@@ -27,6 +27,7 @@ Contents
 
    linkbot
    asynclinkbot
+   plotting
    config
 
 

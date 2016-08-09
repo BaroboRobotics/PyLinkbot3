@@ -17,6 +17,10 @@ using the asynchronous :class:`linkbot3.Linkbot` object.
 .. literalinclude:: snippets/Linkbot/move.py
    :language: python
 
+.. autoclass:: linkbot3.FormFactor
+   :members:
+   :undoc-members:
+
 .. autoclass:: linkbot3.Linkbot
    :members:
 
