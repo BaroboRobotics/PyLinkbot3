@@ -60,6 +60,11 @@ class Linkbot():
         self._eeprom_obj = Eeprom(self)
         self._led = Led(self)
         self._motors = Motors(self)
+        self._serial_id = serial_id
+
+    @property
+    def serial_id(self):
+        return self._serial_id
 
     @property
     def accelerometer(self):
@@ -212,6 +217,9 @@ class CLinkbot(Linkbot):
     def get_battery_voltage(self):
         ''' Get the robot's current battery voltage '''
         return self.battery.voltage()
+
+    def get_form_factor(self):
+        return self.form_factor()
 
     def get_joint_angle(self, joint):
         '''

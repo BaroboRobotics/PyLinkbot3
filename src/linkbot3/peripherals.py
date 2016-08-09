@@ -459,7 +459,7 @@ class Motor(Peripheral):
         :type power: int [-255,255]
         '''
         return util.run_linkbot_coroutine(
-                self.amotor.set_power(power),
+                self._proxy.set_power(power),
                 self._loop)
 
     def begin_accel(self, timeout, v0 = 0.0,
