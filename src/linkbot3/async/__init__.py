@@ -111,7 +111,7 @@ class _AsyncLinkbot(rb.Proxy):
         if tcp_endpoint.status != rbcommon.OK:
             self.logger.warning('Could not connect to robot: {}'.format(
                 rbcommon.Status.Name(tcp_endpoint.status)))
-            raise Exception('Could not connect to remote robot: {}'.format(
+            raise RuntimeError('Could not connect to remote robot: {}'.format(
                 rbcommon.Status.Name(tcp_endpoint.status)))
         self.__log('Connecting to robot endpoint:'+_daemon_host[0]+':'+str(tcp_endpoint.endpoint.port)) 
         if _use_websockets:

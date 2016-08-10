@@ -37,7 +37,7 @@ class FormFactor():
     DONGLE = 3
 
 class Linkbot():
-    def __init__(self, serial_id):
+    def __init__(self, serial_id='LOCL'):
         ''' Create a new Linkbot handle.
 
         :param serial_id: The 4 digit alpha-numeric unique Linkbot identifier
@@ -65,6 +65,10 @@ class Linkbot():
     @property
     def serial_id(self):
         return self._serial_id
+
+    def _set_serial_id(self, serial_id):
+        assert( len(serial_id) == 4 )
+        self._eeprom.write(0, serial_id.encode())
 
     @property
     def accelerometer(self):
@@ -701,6 +705,19 @@ class CLinkbot(Linkbot):
     def stop(self, mask=0x07):
         '''Immediately stop and relax all joints on the Linkbot.'''
         self.motors.stop(mask=mask)
+
+    # Events
+    def enable_button_events(self, callback):
+        self.buttons.set_event_handler(callback)
+
+    def disable_button_events(self):
+        self.buttons.set_event_handler(None)
+
+    def enable_accelerometer_events(self, callback, granularity=0.05):
+        self.accelerometer.set_event_handler(callback, granularity)
+
+    def disable_accelerometer_events(self):
+        self.accelerometer.set_event_handler()
 
 class PrexChannel(metaclass=util.Singleton):
     def __init__(self):
