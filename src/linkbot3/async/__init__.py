@@ -40,7 +40,6 @@ def config(**kwargs):
     my_config.daemon_host = daemon_host
 
     timeout = kwargs.pop('timeout', 30)
-    print('Setting timeout to: ', timeout)
     my_config.timeout = timeout
 
 class _DaemonProxy(rb.Proxy):
