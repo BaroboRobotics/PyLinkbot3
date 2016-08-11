@@ -46,6 +46,16 @@ LINKBOT_DAEMON_HOSTPORT="hostname:port" # Makes PyLinkbot use the specified
 CHANGES
 =======
 
+Version 3.1.2
+-------------
+* Added "timeout" config option to set the default timeout for Linkbot
+  communications.
+
+Version 3.1.1
+-------------
+* Pass linkbot3.scatter_plot() arguments directly to pyplot
+* Fixed bugs, syntax errors in CLinkbot
+
 Version 3.1.0
 -------------
 
