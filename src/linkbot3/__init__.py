@@ -757,12 +757,12 @@ class PrexChannel(metaclass=util.Singleton):
         msg.payload = io.SerializeToString()
         yield from self.socket.send(msg.SerializeToString())
 
-    def image(self, data, format='PNG'):
+    def image(self, data, format='SVG'):
         # Send image data back to the web app
         fut = asyncio.run_coroutine_threadsafe(self.__image(data, format), self._loop)
         fut.result()
 
-    def __image(self, data, format='PNG'):
+    def __image(self, data, format='SVG'):
         image = prex_pb.Image()
         image.payload = data
         msg = prex_pb.PrexMessage()
@@ -798,4 +798,3 @@ def scatter_plot(*args, **kwargs):
         fstream = io.BytesIO()
         fig.savefig(fstream)
         channel.image(fstream.getvalue())
-
