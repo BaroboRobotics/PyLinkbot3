@@ -143,8 +143,8 @@ class _AsyncLinkbot(rb.Proxy):
 
     @asyncio.coroutine
     def disconnect(self):
-        yield from self._daemon_protocol.close()
         yield from self._linkbot_protocol.close()
+        yield from self._daemon_protocol.close()
 
     @asyncio.coroutine
     def __daemon_consumer(self, protocol):
