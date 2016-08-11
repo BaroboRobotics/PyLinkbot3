@@ -46,11 +46,12 @@ def chain_futures(fut1, fut2, conv=lambda x: x):
                 conv)
             )
 
-def run_linkbot_coroutine(coro, loop, timeout=DEFAULT_TIMEOUT):
+def run_linkbot_coroutine(coro, loop):
+    my_config = Config()
     fut = run_coroutine_threadsafe(coro, loop)
-    fut2 = fut.result(timeout=timeout)
+    fut2 = fut.result(timeout=my_config.timeout)
     result = run_coroutine_threadsafe(
-            asyncio.wait_for(fut2, timeout=timeout), loop)
+            asyncio.wait_for(fut2, timeout=my_config.timeout), loop)
     return result.result()
 
 class Singleton(type):
@@ -59,6 +60,36 @@ class Singleton(type):
         if cls not in cls._instances:
             cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
         return cls._instances[cls]
+
+class Config(metaclass=Singleton):
+    def __init__(self):
+        self._use_websockets = True
+        self._daemon_host = 'localhost:42000'.split(':')
+        self._timeout = DEFAULT_TIMEOUT
+
+    @property
+    def use_websockets(self):
+        return self._use_websockets
+
+    @use_websockets.setter
+    def use_websockets(self, value):
+        self._use_websockets = value
+
+    @property
+    def daemon_host(self):
+        return self._daemon_host
+
+    @daemon_host.setter
+    def daemon_host(self, value):
+        self._daemon_host = value.split(':')
+
+    @property
+    def timeout(self):
+        return self._timeout
+
+    @timeout.setter
+    def timeout(self, value):
+        self._timeout = value
 
 class IoCore(metaclass=Singleton):
     def __init__(self):

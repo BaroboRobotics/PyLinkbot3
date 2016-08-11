@@ -18,9 +18,6 @@ __all__ = ['AsyncLinkbot', 'config', 'AsyncDaemon']
 
 _dirname = os.path.dirname(os.path.realpath(__file__))
 
-_use_websockets = True
-_daemon_host = ['localhost', '42000']
-
 def config(**kwargs):
     ''' Configure linkbot module settings
 
@@ -28,16 +25,23 @@ def config(**kwargs):
         :type use_sfp: bool
         :param daemon_hostport: default:'localhost:42000' Location of the linkbotd daemon.
         :type daemon_hostport: string
+        :param timeout: default: 30 (seconds)
+        :type timeout: float
     '''
-    global _use_websockets
-    global _daemon_host
+    my_config = util.Config()
     use_sfp = kwargs.pop('use_sfp', False)
     if use_sfp:
-        _use_websockets = False
+        use_websockets = False
     else:
-        _use_websockets = True
+        use_websockets = True
+    my_config.use_websockets = use_websockets
 
-    _daemon_host = kwargs.pop('daemon_hostport', 'localhost:42000').split(':')
+    daemon_host = kwargs.pop('daemon_hostport', 'localhost:42000')
+    my_config.daemon_host = daemon_host
+
+    timeout = kwargs.pop('timeout', 30)
+    print('Setting timeout to: ', timeout)
+    my_config.timeout = timeout
 
 class _DaemonProxy(rb.Proxy):
     def __init__(self, *args, **kwargs):
@@ -62,16 +66,15 @@ class _AsyncLinkbot(rb.Proxy):
     @classmethod
     @asyncio.coroutine
     def create(cls, serial_id):
-        global _use_websockets
-        global _daemon_host
+        my_config = util.Config()
         logging.info('Creating async Linkbot handle to ID:{}'.format(serial_id))
         logger=logging.getLogger('RBProxy.'+serial_id)
         self = cls( os.path.join(_dirname, 'robot_pb2.py'), logger=logger)
         if os.environ.get('LINKBOT_USE_SFP'):
-            _use_websockets = False
+            my_config.use_websockets = False
 
         try:
-            _daemon_host = os.environ['LINKBOT_DAEMON_HOSTPORT'].split(':')
+            my_config.daemon_host = os.environ['LINKBOT_DAEMON_HOSTPORT'].split(':')
         except KeyError:
             pass
 
@@ -82,14 +85,14 @@ class _AsyncLinkbot(rb.Proxy):
         self.__daemon = _DaemonProxy(
                 os.path.join(_dirname, 'daemon_pb2.py'))
 
-        if _use_websockets:
+        if my_config.use_websockets:
             self.__log('Creating Websocket connection to daemon...')
             protocol = yield from websockets.connect(
-                    'ws://'+_daemon_host[0]+':'+_daemon_host[1], loop=self._loop)
+                    'ws://'+my_config.daemon_host[0]+':'+my_config.daemon_host[1], loop=self._loop)
         else:
             self.__log('Creating tcp connection to daemon...')
             (transport, protocol) = yield from sfp.client.connect(
-                    _daemon_host[0], _daemon_host[1], loop=self._loop)
+                    my_config.daemon_host[0], my_config.daemon_host[1], loop=self._loop)
 
         self.__log('Daemon TCP connection established.')
         protocol.connection_lost = self.__connection_closed
@@ -113,10 +116,10 @@ class _AsyncLinkbot(rb.Proxy):
                 rbcommon.Status.Name(tcp_endpoint.status)))
             raise RuntimeError('Could not connect to remote robot: {}'.format(
                 rbcommon.Status.Name(tcp_endpoint.status)))
-        self.__log('Connecting to robot endpoint:'+_daemon_host[0]+':'+str(tcp_endpoint.endpoint.port)) 
-        if _use_websockets:
+        self.__log('Connecting to robot endpoint:'+my_config.daemon_host[0]+':'+str(tcp_endpoint.endpoint.port)) 
+        if my_config.use_websockets:
             linkbot_protocol = yield from websockets.client.connect(
-                    'ws://'+_daemon_host[0]+':'+str(tcp_endpoint.endpoint.port),
+                    'ws://'+my_config.daemon_host[0]+':'+str(tcp_endpoint.endpoint.port),
                     loop=self._loop)
         else:
             (_, linkbot_protocol) = \
@@ -375,19 +378,18 @@ class AsyncDaemon(_DaemonProxy):
     @classmethod
     @asyncio.coroutine
     def create(cls):
-        global _use_websockets
-        global _daemon_host
+        my_config = util.Config()
 
         self = cls(os.path.join(_dirname, 'daemon_pb2.py'))
 
-        if _use_websockets:
+        if my_config.use_websockets:
             #self.__log('Creating Websocket connection to daemon...')
             protocol = yield from websockets.connect(
-                    'ws://'+_daemon_host[0]+':'+_daemon_host[1])
+                    'ws://'+my_config.daemon_host[0]+':'+my_config.daemon_host[1])
         else:
             #self.__log('Creating tcp connection to daemon...')
             (transport, protocol) = yield from sfp.client.connect(
-                    _daemon_host[0], _daemon_host[1], loop=self._loop)
+                    my_config.daemon_host[0], my_config.daemon_host[1], loop=self._loop)
         
         self.set_protocol(protocol)
         self.consumer = asyncio.ensure_future(self.__consumer(protocol))
