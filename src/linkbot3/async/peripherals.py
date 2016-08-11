@@ -922,7 +922,6 @@ class Motors:
         for i in range(3):
             motor =  yield from motor_class.create(i, self._proxy, self) 
             self.motors.append(motor)
-        #self._timeouts = util.TimeoutCore(asyncio.get_event_loop())
         self._callback_handler = self._EncoderEventHandler()
         return self
 
