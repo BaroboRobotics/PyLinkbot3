@@ -182,7 +182,6 @@ class CLinkbot(Linkbot):
         FAIL = 3
     def __init__(self, serial_id):
         super().__init__(serial_id)
-        self._serial_id = serial_id
 
     # This method allows us to programatically support both mixedCase and
     # lowercase_with_underscore method names. If an attribute cannot be found,
@@ -283,7 +282,7 @@ class CLinkbot(Linkbot):
         return self.led.color()
 
     def get_serial_id(self):
-        return self._serial_id
+        return self.serial_id
 
     # SETTERS
     def reset_to_zero(self):
