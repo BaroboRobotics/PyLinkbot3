@@ -64,7 +64,8 @@ class Linkbot():
 
     @property
     def serial_id(self):
-        return self._serial_id
+        raw_id = self._eeprom.read(0, 4)
+        return raw_id.decode()
 
     def _set_serial_id(self, serial_id):
         assert( len(serial_id) == 4 )
