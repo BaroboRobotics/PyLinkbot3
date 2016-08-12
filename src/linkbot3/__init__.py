@@ -64,12 +64,12 @@ class Linkbot():
 
     @property
     def serial_id(self):
-        raw_id = self._eeprom.read(0, 4)
+        raw_id = self._eeprom.read(0x412, 4)
         return raw_id.decode()
 
     def _set_serial_id(self, serial_id):
         assert( len(serial_id) == 4 )
-        self._eeprom.write(0, serial_id.encode())
+        self._eeprom.write(0x412, serial_id.encode())
 
     @property
     def accelerometer(self):
