@@ -37,7 +37,10 @@ def chain_futures(fut1, fut2, conv=lambda x: x):
         if fut1.cancelled():
             fut2.cancel()
         else:
-            fut2.set_result( conv(fut1.result()) )
+            try:
+                fut2.set_result( conv(fut1.result()) )
+            except Exception as e:
+                fut2.set_exception(e)
 
     fut1.add_done_callback(
             functools.partial(
