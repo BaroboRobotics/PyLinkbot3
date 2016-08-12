@@ -52,7 +52,11 @@ class Peripheral():
         if asyncio.iscoroutinefunction(self._user_event_handler):
             asyncio.ensure_future(self._user_event_handler(*args, **kwargs))
         else:
-            self._user_event_handler(*args, **kwargs)
+            #self._user_event_handler(*args, **kwargs)
+            loop = asyncio.get_event_loop()
+            loop.run_in_executor(None, 
+                                 functools.partial(self._user_event_handler, **kwargs),
+                                 *args)
 
 class Accelerometer(Peripheral):
     def __init__(self, linkbot_parent):

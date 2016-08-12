@@ -73,7 +73,7 @@ class _AsyncLinkbot(rb.Proxy):
             my_config.use_websockets = False
 
         try:
-            my_config.daemon_host = os.environ['LINKBOT_DAEMON_HOSTPORT'].split(':')
+            my_config.daemon_host = os.environ['LINKBOT_DAEMON_HOSTPORT']
         except KeyError:
             pass
 
