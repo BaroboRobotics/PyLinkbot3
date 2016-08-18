@@ -21,6 +21,9 @@ using the asynchronous :class:`linkbot3.Linkbot` object.
    :members:
    :undoc-members:
 
+Linkbot API Documentation
+-------------------------
+
 .. autoclass:: linkbot3.Linkbot
    :members:
 

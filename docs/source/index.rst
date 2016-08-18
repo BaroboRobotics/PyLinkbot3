@@ -26,6 +26,7 @@ Contents
    :maxdepth: 3
 
    linkbot
+   clinkbot
    asynclinkbot
    plotting
    config

@@ -18,6 +18,9 @@ using the asynchronous :class:`linkbot3.AsyncLinkbot` object.
 .. literalinclude:: snippets/demo1.py
    :language: python
 
+AsyncLinkbot API Documentation
+------------------------------
+
 .. autoclass:: linkbot3.AsyncLinkbot
    :members:
 
