@@ -46,6 +46,22 @@ LINKBOT_DAEMON_HOSTPORT="hostname:port" # Makes PyLinkbot use the specified
 CHANGES
 =======
 
+Version 3.1.5
+-------------
+* Fixed bug when calling Linkbot functions from within Linkbot event handlers
+* Fixed syntax error in Motor.move_wait()
+
+Version 3.1.4
+-------------
+* Getting serial ID's retrieves it from the robot rather than relying on
+  previously saved value
+
+
+Version 3.1.3
+-------------
+* Removed debugging message
+* Fixed blocking Linkbot event handlers stopping the World.
+
 Version 3.1.2
 -------------
 * Added "timeout" config option to set the default timeout for Linkbot
