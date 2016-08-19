@@ -489,7 +489,7 @@ class Motor(Peripheral):
         :type state_on_timeout: :class:`linkbot3.peripherals.Motor.State`
         '''
         return util.run_linkbot_coroutine(
-                self.amotor.begin_accel(timeout, v0, state_on_timeout),
+                self._proxy.begin_accel(timeout, v0, state_on_timeout),
                 self._loop)
 
     def begin_move(self, timeout = 0, forward=True,
@@ -511,7 +511,7 @@ class Motor(Peripheral):
         :type state_on_timeout: :class:`linkbot3.peripherals.Motor.State`
         '''
         return util.run_linkbot_coroutine(
-                self.amotor.begin_move(timeout, forward, state_on_timeout),
+                self._proxy.begin_move(timeout, forward, state_on_timeout),
                 self._loop)
 
     def move(self, angle, relative=True, wait=True):
