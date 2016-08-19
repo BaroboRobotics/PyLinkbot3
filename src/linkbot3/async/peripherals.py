@@ -815,10 +815,11 @@ class Motor:
             times out.
         :type state_on_timeout: :class:`linkbot3.peripherals.Motor.State`
         '''
-        self._motors.begin_move(mask=1<<self._index, 
+        fut = yield from self._motors.begin_move(mask=1<<self._index, 
                                 timeouts=(timeout,)*3, 
                                 forward=(forward,)*3, 
                                 states_on_timeout=(state_on_timeout,)*3)
+        return fut
 
     @asyncio.coroutine
     def move(self, angle, relative=True):
@@ -1026,7 +1027,8 @@ class Motors:
                 getattr(args_obj,name).type = peripherals.Motor._MoveType.INFINITE
                 getattr(args_obj,name).goal = goal
                 getattr(args_obj,name).controller = peripherals.Motor.Controller.CONST_VEL
-                getattr(args_obj,name).timeout = timeouts[i]
+                if timeouts[i]:
+                    getattr(args_obj,name).timeout = timeouts[i]
                 getattr(args_obj,name).modeOnTimeout = states_on_timeout[i]
 
         fut = yield from self._proxy.move(args_obj)
