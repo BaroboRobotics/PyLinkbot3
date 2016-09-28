@@ -409,6 +409,16 @@ class AsyncDaemon(_DaemonProxy):
         return result_fut
 
     @asyncio.coroutine
+    def ping(self, destinations = [], peripheral_reset_mask = 0x1f):
+        args = self.rb_get_args_obj('sendRobotPing')
+        for d in destinations:
+            serial_id_obj = args.destinations.add()
+            serial_id_obj.value = d
+        args.peripheralResetMask = peripheral_reset_mask
+        result_fut = yield from self.sendRobotPing(args)
+        return result_fut
+
+    @asyncio.coroutine
     def __consumer(self, protocol):
         while True:
             try:

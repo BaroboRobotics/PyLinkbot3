@@ -30,6 +30,12 @@ class Daemon():
             self._proxy.cycle(seconds),
             self._loop)
 
+    def ping(self, destinations = [], peripheral_reset_mask = 0x1F):
+        fut = util.run_coroutine_threadsafe(
+            self._proxy.ping(destinations, peripheral_reset_mask), 
+            self._loop)
+        fut.result()
+
 class FormFactor():
     I = 0
     L = 1
@@ -37,6 +43,12 @@ class FormFactor():
     DONGLE = 3
 
 class Linkbot():
+    MOTOR1 = 0
+    MOTOR2 = 1
+    MOTOR3 = 2
+    LED = 3
+    BUZZER = 4
+    
     def __init__(self, serial_id='LOCL'):
         ''' Create a new Linkbot handle.
 

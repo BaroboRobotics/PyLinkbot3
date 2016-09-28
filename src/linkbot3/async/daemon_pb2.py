@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='daemon.proto',
   package='barobo.Daemon',
   syntax='proto2',
-  serialized_pb=_b('\n\x0c\x64\x61\x65mon.proto\x12\rbarobo.Daemon\x1a\x0cnanopb.proto\x1a\x11\x63ommontypes.proto\x1a\trpc.proto\"3\n\x0bTcpEndpoint\x12\x16\n\x07\x61\x64\x64ress\x18\x01 \x02(\tB\x05\x92?\x02\x08@\x12\x0c\n\x04port\x18\x02 \x02(\r\"\x93\x01\n\x0fresolveSerialId\x1a(\n\x02In\x12\"\n\x08serialId\x18\x01 \x02(\x0b\x32\x10.barobo.SerialId\x1aV\n\x06Result\x12\x1e\n\x06status\x18\x01 \x02(\x0e\x32\x0e.barobo.Status\x12,\n\x08\x65ndpoint\x18\x02 \x02(\x0b\x32\x1a.barobo.Daemon.TcpEndpoint\".\n\x0b\x63ycleDongle\x1a\x15\n\x02In\x12\x0f\n\x07seconds\x18\x01 \x02(\r\x1a\x08\n\x06Result\"n\n\rsendRobotPing\x1a\x33\n\x02In\x12-\n\x0c\x64\x65stinations\x18\x01 \x03(\x0b\x32\x10.barobo.SerialIdB\x05\x92?\x02\x10\x08\x1a(\n\x06Result\x12\x1e\n\x06status\x18\x01 \x02(\x0e\x32\x0e.barobo.Status\"b\n\x0b\x64ongleEvent\x12\x1e\n\x06status\x18\x01 \x02(\x0e\x32\x0e.barobo.Status\x12\x33\n\x0f\x66irmwareVersion\x18\x02 \x02(\x0b\x32\x1a.barobo.rpc.VersionTriplet\"\xcb\x01\n\nrobotEvent\x12\"\n\x08serialId\x18\x01 \x02(\x0b\x32\x10.barobo.SerialId\x12\x33\n\x0f\x66irmwareVersion\x18\x02 \x02(\x0b\x32\x1a.barobo.rpc.VersionTriplet\x12.\n\nrpcVersion\x18\x03 \x02(\x0b\x32\x1a.barobo.rpc.VersionTriplet\x12\x34\n\x10interfaceVersion\x18\x04 \x02(\x0b\x32\x1a.barobo.rpc.VersionTriplet')
+  serialized_pb=_b('\n\x0c\x64\x61\x65mon.proto\x12\rbarobo.Daemon\x1a\x0cnanopb.proto\x1a\x11\x63ommontypes.proto\x1a\trpc.proto\"3\n\x0bTcpEndpoint\x12\x16\n\x07\x61\x64\x64ress\x18\x01 \x02(\tB\x05\x92?\x02\x08@\x12\x0c\n\x04port\x18\x02 \x02(\r\"?\n\x16getDaemonVersionString\x1a\x04\n\x02In\x1a\x1f\n\x06Result\x12\x15\n\x05value\x18\x01 \x02(\tB\x06\x92?\x03\x08\x80\x01\"\x93\x01\n\x0fresolveSerialId\x1a(\n\x02In\x12\"\n\x08serialId\x18\x01 \x02(\x0b\x32\x10.barobo.SerialId\x1aV\n\x06Result\x12\x1e\n\x06status\x18\x01 \x02(\x0e\x32\x0e.barobo.Status\x12,\n\x08\x65ndpoint\x18\x02 \x02(\x0b\x32\x1a.barobo.Daemon.TcpEndpoint\".\n\x0b\x63ycleDongle\x1a\x15\n\x02In\x12\x0f\n\x07seconds\x18\x01 \x02(\r\x1a\x08\n\x06Result\"\x8b\x01\n\rsendRobotPing\x1aP\n\x02In\x12-\n\x0c\x64\x65stinations\x18\x01 \x03(\x0b\x32\x10.barobo.SerialIdB\x05\x92?\x02\x10\x08\x12\x1b\n\x13peripheralResetMask\x18\x02 \x01(\r\x1a(\n\x06Result\x12\x1e\n\x06status\x18\x01 \x02(\x0e\x32\x0e.barobo.Status\"b\n\x0b\x64ongleEvent\x12\x1e\n\x06status\x18\x01 \x02(\x0e\x32\x0e.barobo.Status\x12\x33\n\x0f\x66irmwareVersion\x18\x02 \x02(\x0b\x32\x1a.barobo.rpc.VersionTriplet\"\xcb\x01\n\nrobotEvent\x12\"\n\x08serialId\x18\x01 \x02(\x0b\x32\x10.barobo.SerialId\x12\x33\n\x0f\x66irmwareVersion\x18\x02 \x02(\x0b\x32\x1a.barobo.rpc.VersionTriplet\x12.\n\nrpcVersion\x18\x03 \x02(\x0b\x32\x1a.barobo.rpc.VersionTriplet\x12\x34\n\x10interfaceVersion\x18\x04 \x02(\x0b\x32\x1a.barobo.rpc.VersionTriplet')
   ,
   dependencies=[nanopb__pb2.DESCRIPTOR,commontypes__pb2.DESCRIPTOR,rpc__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -68,6 +68,83 @@ _TCPENDPOINT = _descriptor.Descriptor(
 )
 
 
+_GETDAEMONVERSIONSTRING_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='barobo.Daemon.getDaemonVersionString.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=154,
+  serialized_end=158,
+)
+
+_GETDAEMONVERSIONSTRING_RESULT = _descriptor.Descriptor(
+  name='Result',
+  full_name='barobo.Daemon.getDaemonVersionString.Result',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='value', full_name='barobo.Daemon.getDaemonVersionString.Result.value', index=0,
+      number=1, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=160,
+  serialized_end=191,
+)
+
+_GETDAEMONVERSIONSTRING = _descriptor.Descriptor(
+  name='getDaemonVersionString',
+  full_name='barobo.Daemon.getDaemonVersionString',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_GETDAEMONVERSIONSTRING_IN, _GETDAEMONVERSIONSTRING_RESULT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=128,
+  serialized_end=191,
+)
+
+
 _RESOLVESERIALID_IN = _descriptor.Descriptor(
   name='In',
   full_name='barobo.Daemon.resolveSerialId.In',
@@ -94,8 +171,8 @@ _RESOLVESERIALID_IN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=148,
-  serialized_end=188,
+  serialized_start=213,
+  serialized_end=253,
 )
 
 _RESOLVESERIALID_RESULT = _descriptor.Descriptor(
@@ -131,8 +208,8 @@ _RESOLVESERIALID_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=190,
-  serialized_end=276,
+  serialized_start=255,
+  serialized_end=341,
 )
 
 _RESOLVESERIALID = _descriptor.Descriptor(
@@ -154,8 +231,8 @@ _RESOLVESERIALID = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=129,
-  serialized_end=276,
+  serialized_start=194,
+  serialized_end=341,
 )
 
 
@@ -185,8 +262,8 @@ _CYCLEDONGLE_IN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=293,
-  serialized_end=314,
+  serialized_start=358,
+  serialized_end=379,
 )
 
 _CYCLEDONGLE_RESULT = _descriptor.Descriptor(
@@ -208,8 +285,8 @@ _CYCLEDONGLE_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=190,
-  serialized_end=198,
+  serialized_start=160,
+  serialized_end=168,
 )
 
 _CYCLEDONGLE = _descriptor.Descriptor(
@@ -231,8 +308,8 @@ _CYCLEDONGLE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=278,
-  serialized_end=324,
+  serialized_start=343,
+  serialized_end=389,
 )
 
 
@@ -250,6 +327,13 @@ _SENDROBOTPING_IN = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\002\020\010'))),
+    _descriptor.FieldDescriptor(
+      name='peripheralResetMask', full_name='barobo.Daemon.sendRobotPing.In.peripheralResetMask', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -262,8 +346,8 @@ _SENDROBOTPING_IN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=343,
-  serialized_end=394,
+  serialized_start=409,
+  serialized_end=489,
 )
 
 _SENDROBOTPING_RESULT = _descriptor.Descriptor(
@@ -292,8 +376,8 @@ _SENDROBOTPING_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=190,
-  serialized_end=230,
+  serialized_start=255,
+  serialized_end=295,
 )
 
 _SENDROBOTPING = _descriptor.Descriptor(
@@ -315,8 +399,8 @@ _SENDROBOTPING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=326,
-  serialized_end=436,
+  serialized_start=392,
+  serialized_end=531,
 )
 
 
@@ -353,8 +437,8 @@ _DONGLEEVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=438,
-  serialized_end=536,
+  serialized_start=533,
+  serialized_end=631,
 )
 
 
@@ -405,10 +489,12 @@ _ROBOTEVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=539,
-  serialized_end=742,
+  serialized_start=634,
+  serialized_end=837,
 )
 
+_GETDAEMONVERSIONSTRING_IN.containing_type = _GETDAEMONVERSIONSTRING
+_GETDAEMONVERSIONSTRING_RESULT.containing_type = _GETDAEMONVERSIONSTRING
 _RESOLVESERIALID_IN.fields_by_name['serialId'].message_type = commontypes__pb2._SERIALID
 _RESOLVESERIALID_IN.containing_type = _RESOLVESERIALID
 _RESOLVESERIALID_RESULT.fields_by_name['status'].enum_type = commontypes__pb2._STATUS
@@ -427,6 +513,7 @@ _ROBOTEVENT.fields_by_name['firmwareVersion'].message_type = rpc__pb2._VERSIONTR
 _ROBOTEVENT.fields_by_name['rpcVersion'].message_type = rpc__pb2._VERSIONTRIPLET
 _ROBOTEVENT.fields_by_name['interfaceVersion'].message_type = rpc__pb2._VERSIONTRIPLET
 DESCRIPTOR.message_types_by_name['TcpEndpoint'] = _TCPENDPOINT
+DESCRIPTOR.message_types_by_name['getDaemonVersionString'] = _GETDAEMONVERSIONSTRING
 DESCRIPTOR.message_types_by_name['resolveSerialId'] = _RESOLVESERIALID
 DESCRIPTOR.message_types_by_name['cycleDongle'] = _CYCLEDONGLE
 DESCRIPTOR.message_types_by_name['sendRobotPing'] = _SENDROBOTPING
@@ -439,6 +526,29 @@ TcpEndpoint = _reflection.GeneratedProtocolMessageType('TcpEndpoint', (_message.
   # @@protoc_insertion_point(class_scope:barobo.Daemon.TcpEndpoint)
   ))
 _sym_db.RegisterMessage(TcpEndpoint)
+
+getDaemonVersionString = _reflection.GeneratedProtocolMessageType('getDaemonVersionString', (_message.Message,), dict(
+
+  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
+    DESCRIPTOR = _GETDAEMONVERSIONSTRING_IN,
+    __module__ = 'daemon_pb2'
+    # @@protoc_insertion_point(class_scope:barobo.Daemon.getDaemonVersionString.In)
+    ))
+  ,
+
+  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
+    DESCRIPTOR = _GETDAEMONVERSIONSTRING_RESULT,
+    __module__ = 'daemon_pb2'
+    # @@protoc_insertion_point(class_scope:barobo.Daemon.getDaemonVersionString.Result)
+    ))
+  ,
+  DESCRIPTOR = _GETDAEMONVERSIONSTRING,
+  __module__ = 'daemon_pb2'
+  # @@protoc_insertion_point(class_scope:barobo.Daemon.getDaemonVersionString)
+  ))
+_sym_db.RegisterMessage(getDaemonVersionString)
+_sym_db.RegisterMessage(getDaemonVersionString.In)
+_sym_db.RegisterMessage(getDaemonVersionString.Result)
 
 resolveSerialId = _reflection.GeneratedProtocolMessageType('resolveSerialId', (_message.Message,), dict(
 
@@ -526,6 +636,8 @@ _sym_db.RegisterMessage(robotEvent)
 
 _TCPENDPOINT.fields_by_name['address'].has_options = True
 _TCPENDPOINT.fields_by_name['address']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\002\010@'))
+_GETDAEMONVERSIONSTRING_RESULT.fields_by_name['value'].has_options = True
+_GETDAEMONVERSIONSTRING_RESULT.fields_by_name['value']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))
 _SENDROBOTPING_IN.fields_by_name['destinations'].has_options = True
 _SENDROBOTPING_IN.fields_by_name['destinations']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\002\020\010'))
 # @@protoc_insertion_point(module_scope)
