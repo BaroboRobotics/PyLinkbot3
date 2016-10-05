@@ -5,7 +5,7 @@ import linkbot3 as linkbot
 def cb(*args):
     print('Button event: ', args)
 
-l = linkbot.Linkbot('7944')
+l = linkbot.Linkbot('ZRG6')
 l.buttons.set_event_handler(cb)
 input('Button events enabled. Try moving pressing some buttons. Press "Enter" to '
       'continue.')

@@ -2,8 +2,8 @@ import linkbot3 as linkbot
 import math
 import time
 
-# My Linkbot's ID is '7944'
-l = linkbot.Linkbot('7944')
+# My Linkbot's ID is 'ZRG6'
+l = linkbot.Linkbot('ZRG6')
 
 start_time = time.time()
 # Run a loop for 10 seconds

@@ -11,7 +11,7 @@ class MotorPlot():
         self.angles.append(angle)
         self.times.append(timestamp)
 
-l = linkbot.Linkbot('7944')
+l = linkbot.Linkbot('ZRG6')
 l.motors.reset()
 l.motors.move([0,0,0], relative=False)
 myplot = MotorPlot()

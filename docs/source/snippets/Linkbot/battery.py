@@ -1,5 +1,5 @@
 import linkbot3 as linkbot
 
-l = linkbot.Linkbot('7944')
+l = linkbot.Linkbot('ZRG6')
 print('Battery voltage: ', l.battery.voltage())
 print('Battery level: ', l.battery.percentage())
