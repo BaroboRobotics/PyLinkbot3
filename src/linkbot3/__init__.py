@@ -719,17 +719,23 @@ class CLinkbot(Linkbot):
         self.motors.stop(mask=mask)
 
     # Events
+    def enable_accelerometer_events(self, callback, granularity=0.05):
+        self.accelerometer.set_event_handler(callback, granularity)
+
+    def disable_accelerometer_events(self):
+        self.accelerometer.set_event_handler()
+
     def enable_button_events(self, callback):
         self.buttons.set_event_handler(callback)
 
     def disable_button_events(self):
         self.buttons.set_event_handler(None)
 
-    def enable_accelerometer_events(self, callback, granularity=0.05):
-        self.accelerometer.set_event_handler(callback, granularity)
+    def enable_encoder_events(self, callback, granularity=2.0):
+        self.motors.set_event_handler(callback, granularity)
 
-    def disable_accelerometer_events(self):
-        self.accelerometer.set_event_handler()
+    def disable_encoder_events(self):
+        self.motors.set_event_handler()
 
 class PrexChannel(metaclass=util.Singleton):
     def __init__(self):
