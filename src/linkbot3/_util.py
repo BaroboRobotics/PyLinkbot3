@@ -3,6 +3,7 @@ import collections
 import concurrent
 import functools
 import math
+import os
 import threading
 import sys
 import time
@@ -66,8 +67,16 @@ class Singleton(type):
 
 class Config(metaclass=Singleton):
     def __init__(self):
-        self._use_websockets = True
-        self._daemon_host = 'localhost:42000'.split(':')
+        if os.environ.get('LINKBOT_USE_SFP'):
+            self._use_websockets = False
+        else:
+            self._use_websockets = True
+
+        try:
+            self._daemon_host = os.environ['LINKBOT_DAEMON_HOSTPORT']
+        except:
+            self._daemon_host = 'localhost:42000'.split(':')
+
         self._timeout = DEFAULT_TIMEOUT
 
     @property
