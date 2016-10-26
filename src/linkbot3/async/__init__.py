@@ -69,13 +69,6 @@ class _AsyncLinkbot(rb.Proxy):
         logging.info('Creating async Linkbot handle to ID:{}'.format(serial_id))
         logger=logging.getLogger('RBProxy.'+serial_id)
         self = cls( os.path.join(_dirname, 'robot_pb2.py'), logger=logger)
-        if os.environ.get('LINKBOT_USE_SFP'):
-            my_config.use_websockets = False
-
-        try:
-            my_config.daemon_host = os.environ['LINKBOT_DAEMON_HOSTPORT']
-        except KeyError:
-            pass
 
         serial_id = serial_id.upper()
         self._serial_id = serial_id
@@ -388,7 +381,7 @@ class AsyncDaemon(_DaemonProxy):
         else:
             #self.__log('Creating tcp connection to daemon...')
             (transport, protocol) = yield from sfp.client.connect(
-                    my_config.daemon_host[0], my_config.daemon_host[1], loop=self._loop)
+                    my_config.daemon_host[0], my_config.daemon_host[1])
         
         self.set_protocol(protocol)
         self.consumer = asyncio.ensure_future(self.__consumer(protocol))
