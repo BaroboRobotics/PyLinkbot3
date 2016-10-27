@@ -745,7 +745,7 @@ class PrexChannel(metaclass=util.Singleton):
         self._port = None
         try:
             self._port = os.environ['PREX_IPC_PORT']
-            fut = asyncio.run_coroutine_threadsafe(self.connect(), self._loop)
+            fut = util.run_coroutine_threadsafe(self.connect(), self._loop)
             fut.result()
         except KeyError as e:
             pass
@@ -762,7 +762,7 @@ class PrexChannel(metaclass=util.Singleton):
     def input(self, prompt):
         # Inform the PREX server that the remote process is now waiting for
         # user input.
-        fut = asyncio.run_coroutine_threadsafe(self.__input(prompt), self._loop)
+        fut = util.run_coroutine_threadsafe(self.__input(prompt), self._loop)
         fut.result()
 
     @asyncio.coroutine
@@ -777,7 +777,7 @@ class PrexChannel(metaclass=util.Singleton):
 
     def image(self, data, format='SVG'):
         # Send image data back to the web app
-        fut = asyncio.run_coroutine_threadsafe(self.__image(data, format), self._loop)
+        fut = util.run_coroutine_threadsafe(self.__image(data, format), self._loop)
         fut.result()
 
     def __image(self, data, format='SVG'):
