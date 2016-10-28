@@ -735,7 +735,7 @@ class CLinkbot(Linkbot):
         self.motors.set_event_handler(callback, granularity)
 
     def disable_encoder_events(self):
-        self.motors.set_event_handler()
+        self.motors.set_event_handler(None)
 
 class PrexChannel(metaclass=util.Singleton):
     def __init__(self):
@@ -745,7 +745,7 @@ class PrexChannel(metaclass=util.Singleton):
         self._port = None
         try:
             self._port = os.environ['PREX_IPC_PORT']
-            fut = asyncio.run_coroutine_threadsafe(self.connect(), self._loop)
+            fut = util.run_coroutine_threadsafe(self.connect(), self._loop)
             fut.result()
         except KeyError as e:
             pass
@@ -762,7 +762,7 @@ class PrexChannel(metaclass=util.Singleton):
     def input(self, prompt):
         # Inform the PREX server that the remote process is now waiting for
         # user input.
-        fut = asyncio.run_coroutine_threadsafe(self.__input(prompt), self._loop)
+        fut = util.run_coroutine_threadsafe(self.__input(prompt), self._loop)
         fut.result()
 
     @asyncio.coroutine
@@ -777,12 +777,13 @@ class PrexChannel(metaclass=util.Singleton):
 
     def image(self, data, format='SVG'):
         # Send image data back to the web app
-        fut = asyncio.run_coroutine_threadsafe(self.__image(data, format), self._loop)
+        fut = util.run_coroutine_threadsafe(self.__image(data, format), self._loop)
         fut.result()
 
     def __image(self, data, format='SVG'):
         image = prex_pb.Image()
         image.payload = data
+        image.format = format
         msg = prex_pb.PrexMessage()
         msg.type = prex_pb.PrexMessage.IMAGE
         msg.payload = image.SerializeToString()
@@ -793,16 +794,22 @@ def scatter_plot(*args, **kwargs):
 
     :param args: These arguments are passed directly to matplotlib.pyplot.plot.
         Please see: http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.plot
+
+        If the process is being executed as a Prex child process, the arguments
+        should be in the format: [xs], [ys], [xs], [ys], ... etc.
     '''
-    import io
-    import matplotlib
     port = None
     try:
         port = os.environ['PREX_IPC_PORT']
     except KeyError as e:
         pass
+
     if port:
-        matplotlib.use('SVG')
+        scatter_plot_json(*args, **kwargs)
+        return
+
+    import io
+    import matplotlib
 
     import matplotlib.pyplot as plt
 
@@ -811,8 +818,27 @@ def scatter_plot(*args, **kwargs):
     ax.plot(*args, **kwargs)
     plt.show()
 
-    if port:
-        channel = PrexChannel()
-        fstream = io.BytesIO()
-        fig.savefig(fstream)
-        channel.image(fstream.getvalue())
+def scatter_plot_json(*args, **kwargs):
+    import json
+    data = []
+    i = 0
+
+    port = os.environ['PREX_IPC_PORT']
+    if not port:
+        raise IOError('No PREX port detected. Is the PREX_IPC_PORT environment variable set?')
+
+    if len(args)%2 != 0:
+        raise ValueError('Expected even number of arguments')
+
+    for i,arg in enumerate(args):
+        if 0 == (i%2):
+            # Parse an "X" axis
+            data.append({})
+            data[-1]['type'] = 'scatter'
+            data[-1]['x'] = arg
+        else:
+            data[-1]['y'] = arg
+
+    channel = PrexChannel()
+    channel.image(json.dumps(data).encode(), format='JSON')
+
