@@ -73,7 +73,7 @@ class Config(metaclass=Singleton):
             self._use_websockets = True
 
         try:
-            self._daemon_host = os.environ['LINKBOT_DAEMON_HOSTPORT']
+            self._daemon_host = os.environ['LINKBOT_DAEMON_HOSTPORT'].split(':')
         except:
             self._daemon_host = 'localhost:42000'.split(':')
 

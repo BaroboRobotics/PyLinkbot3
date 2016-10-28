@@ -580,7 +580,7 @@ class Motors():
         '''
         return util.run_linkbot_coroutine(self._amotors.angles(), self._loop)
 
-    def move(self, angles, mask=0x07, relative=True, timeouts=None,
+    def move(self, angles, *args, mask=0x07, relative=True, timeouts=None,
             states_on_timeout = None, wait=True):
         ''' Move a Linkbot's joints. 
 
@@ -614,6 +614,8 @@ class Motors():
                 immediately after receiving confirmation from the robot that the
                 joint has begun moving.
         '''
+        if len(args) == 2:
+            angles = (angles,) + args
         util.run_linkbot_coroutine(
                 self._amotors.move(angles, mask, relative, timeouts, 
                     states_on_timeout),
