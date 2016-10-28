@@ -783,6 +783,7 @@ class PrexChannel(metaclass=util.Singleton):
     def __image(self, data, format='SVG'):
         image = prex_pb.Image()
         image.payload = data
+        image.format = format
         msg = prex_pb.PrexMessage()
         msg.type = prex_pb.PrexMessage.IMAGE
         msg.payload = image.SerializeToString()
@@ -822,20 +823,22 @@ def scatter_plot_json(*args, **kwargs):
     data = []
     i = 0
 
+    port = os.environ['PREX_IPC_PORT']
     if not port:
         raise IOError('No PREX port detected. Is the PREX_IPC_PORT environment variable set?')
 
-    if args%2 != 0:
+    if len(args)%2 != 0:
         raise ValueError('Expected even number of arguments')
 
     for i,arg in enumerate(args):
         if 0 == (i%2):
             # Parse an "X" axis
             data.append({})
+            data[-1]['type'] = 'scatter'
             data[-1]['x'] = arg
         else:
             data[-1]['y'] = arg
 
     channel = PrexChannel()
-    channel.image(bytes(json.dumps(data)))
+    channel.image(json.dumps(data).encode(), format='JSON')
 
