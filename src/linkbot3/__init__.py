@@ -840,5 +840,6 @@ def scatter_plot_json(*args, **kwargs):
             data[-1]['y'] = arg
 
     channel = PrexChannel()
+    print(json.dumps(data).encode())
     channel.image(json.dumps(data).encode(), format='JSON')
 

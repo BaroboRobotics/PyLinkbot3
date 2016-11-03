@@ -1,6 +1,7 @@
 import asyncio
 import functools
 import linkbot3
+import logging
 from .. import _util as util
 from .. import peripherals
 import weakref
@@ -899,7 +900,7 @@ class Motors:
             value = payload.value
             timestamp = payload.timestamp
             try:
-                yield from self._handlers[joint](util.rad2deg(value), timestamp)
+                yield from self._handlers[joint](joint, util.rad2deg(value), timestamp)
             except IndexError as e:
                 # Don't care if the callback doesn't exist
                 pass
