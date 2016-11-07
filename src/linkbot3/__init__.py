@@ -11,7 +11,7 @@ import os
 import websockets
 
 __all__ = ['FormFactor', 'Linkbot', ]
-__all__ += [async.__all__, ]
+__all__ += async.__all__
 
 class Daemon():
     def __init__(self):
