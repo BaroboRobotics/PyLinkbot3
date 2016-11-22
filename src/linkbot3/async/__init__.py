@@ -29,18 +29,21 @@ def config(**kwargs):
         :type timeout: float
     '''
     my_config = util.Config()
-    use_sfp = kwargs.pop('use_sfp', False)
-    if use_sfp:
-        use_websockets = False
-    else:
-        use_websockets = True
-    my_config.use_websockets = use_websockets
+    if 'use_sfp' in kwargs:
+        use_sfp = kwargs.['use_sfp']
+        if use_sfp:
+            use_websockets = False
+        else:
+            use_websockets = True
+        my_config.use_websockets = use_websockets
 
-    daemon_host = kwargs.pop('daemon_hostport', 'localhost:42000')
-    my_config.daemon_host = daemon_host
+    if 'daemon_hostport' in kwargs:
+        daemon_host = kwargs['daemon_hostport']
+        my_config.daemon_host = daemon_host
 
-    timeout = kwargs.pop('timeout', 30)
-    my_config.timeout = timeout
+    if 'timeout' in kwargs:
+        timeout = kwargs['timeout']
+        my_config.timeout = timeout
 
 class _DaemonProxy(rb.Proxy):
     def __init__(self, *args, **kwargs):
