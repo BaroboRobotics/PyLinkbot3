@@ -30,7 +30,7 @@ def config(**kwargs):
     '''
     my_config = util.Config()
     if 'use_sfp' in kwargs:
-        use_sfp = kwargs.['use_sfp']
+        use_sfp = kwargs['use_sfp']
         if use_sfp:
             use_websockets = False
         else:
