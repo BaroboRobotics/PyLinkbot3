@@ -46,6 +46,30 @@ LINKBOT_DAEMON_HOSTPORT="hostname:port" # Makes PyLinkbot use the specified
 CHANGES
 =======
 
+Version 3.1.10
+--------------
+* Fixed bug where calling linkbot3.config() resets all config settings
+
+Version 3.1.9
+-------------
+* Added encoder event callbacks to CLinkbot
+* Changed PREX plotting to use plotly.js
+* Fixed bug setting daemon hostport via environment variable
+
+Version 3.1.8
+-------------
+* Changed serial ID in all code snippets to "ZRG6"
+* Fixed bug where _util.Config() sometimes ignores environment variables
+* Added top-level "linkbot" package; can now do "import linkbot". 
+
+Version 3.1.7
+-------------
+* Added Daemon.ping() method
+
+Version 3.1.6
+-------------
+* Fixed bug in begin_move()
+
 Version 3.1.5
 -------------
 * Fixed bug when calling Linkbot functions from within Linkbot event handlers
