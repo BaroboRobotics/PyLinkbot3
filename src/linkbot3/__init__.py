@@ -515,6 +515,43 @@ class CLinkbot(Linkbot):
         self.__set_controller(Motor.Controller.PID)
         self.motors.move([j1, j2, j3], mask=mask, wait=False, relative=False)
 
+    def drive_angle(self, angle):
+        self.drive_angle_nb(angle)
+        self.move_wait()
+
+    def drive_angle_nb(self, angle):
+        self.move_nb(angle, 0, -angle)
+
+    def drive_backward(self, angle):
+        self.drive_backward_nb(angle)
+        self.move_wait()
+
+    def drive_backward_nb(self, angle):
+        self.move_nb(-angle, 0, angle)
+
+    def drive_distance(self, distance, radius):
+        self.drive_distance_nb(distance, radius)
+        self.move_wait()
+
+    def drive_distance_nb(self, distance, radius):
+        angle = distance / radius
+        self.drive_angle_nb(angle)
+
+    def drive_forever_nb(self):
+        raise NotImplementedError
+
+    def drive_forward(self, angle):
+        self.drive_forward_nb(angle)
+        self.move_wait()
+
+    def drive_forward_nb(self, angle):
+        self.move_nb(angle, 0, -angle)
+
+    def drive_time(self, seconds):
+        raise NotImplementedError
+
+    def drive_time_nb(self, seconds):
+        raise NotImplementedError
 
     def move(self, j1, j2, j3, mask=0x07):
         '''Move the joints on a robot and wait until all movements are finished.
