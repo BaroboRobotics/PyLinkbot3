@@ -580,6 +580,39 @@ class Motors():
         '''
         return util.run_linkbot_coroutine(self._amotors.angles(), self._loop)
 
+    def begin_move(self, 
+        mask=0x07,
+        timeouts=(0, 0, 0),
+        forward=(True, True, True), 
+        states_on_timeout=(Motor.State.COAST,
+                           Motor.State.COAST,
+                           Motor.State.COAST,),
+        wait=True
+        ):
+        ''' Begin moving motors at constant velocity
+
+        The joint will begin moving at a constant velocity previously set by
+        :func:`linkbot3.async.peripherals.Motor.set_omega`. 
+
+        :param timeout: After ```timeout``` seconds, the motor will transition
+            states to the state specified by the parameter
+            ```state_on_timeout```.
+        :type timeout: (float, float, float)
+        :param forward: Whether to move the joint in the positive direction
+            (True) or negative direction (False).
+        :type forward: (bool, bool, bool)
+        :param state_on_timeout: State to transition to after the motion
+            times out.
+        :type state_on_timeout: (:class:`linkbot3.peripherals.Motor.State`,)*3
+        '''
+        util.run_linkbot_coroutine(
+                self._amotors.begin_move(
+                    mask, timeouts, forward, states_on_timeout),
+                self._loop
+                )
+        if wait:
+            self.move_wait(mask)
+
     def move(self, angles, *args, mask=0x07, relative=True, timeouts=None,
             states_on_timeout = None, wait=True):
         ''' Move a Linkbot's joints. 

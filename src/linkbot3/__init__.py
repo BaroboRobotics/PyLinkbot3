@@ -7,6 +7,7 @@ from .async import *
 from .async import message_pb2 as prex_pb
 from .peripherals import *
 
+import math
 import os
 import websockets
 
@@ -534,11 +535,17 @@ class CLinkbot(Linkbot):
         self.move_wait()
 
     def drive_distance_nb(self, distance, radius):
-        angle = distance / radius
+        angle = (distance / radius) * 180 / math.pi
         self.drive_angle_nb(angle)
 
     def drive_forever_nb(self):
-        raise NotImplementedError
+        self.motors.begin_move(
+            0x05,
+            timeouts = (0, 0, 0),
+            forward = (True, True, False),
+            states_on_timeout = (peripherals.Motor.State.HOLD,)*3,
+            wait=False
+            )
 
     def drive_forward(self, angle):
         self.drive_forward_nb(angle)
@@ -548,10 +555,17 @@ class CLinkbot(Linkbot):
         self.move_nb(angle, 0, -angle)
 
     def drive_time(self, seconds):
-        raise NotImplementedError
+        self.drive_time_nb(seconds)
+        self.move_wait(0x05)
 
     def drive_time_nb(self, seconds):
-        raise NotImplementedError
+        self.motors.begin_move(
+            0x05,
+            timeouts = (seconds, 0, seconds),
+            forward = (True, True, False),
+            states_on_timeout = (peripherals.Motor.State.HOLD,)*3,
+            wait=False)
+
 
     def move(self, j1, j2, j3, mask=0x07):
         '''Move the joints on a robot and wait until all movements are finished.
