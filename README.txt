@@ -46,6 +46,10 @@ LINKBOT_DAEMON_HOSTPORT="hostname:port" # Makes PyLinkbot use the specified
 CHANGES
 =======
 
+Version 3.1.11
+--------------
+* Added drive_* functions to CLinkbot class, based on C-STEM API.
+
 Version 3.1.10
 --------------
 * Fixed bug where calling linkbot3.config() resets all config settings
