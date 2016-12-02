@@ -512,33 +512,99 @@ class CLinkbot(Linkbot):
         self.motors.move([j1, j2, j3], mask=mask, relative=False)
 
     def drive_to_nb(self, j1, j2, j3, mask=0x07):
-        """Non-blocking version of :func:`CLinkbot.drive_to`"""
+        """Non-blocking version of :func:`linkbot3.CLinkbot.drive_to`"""
         self.__set_controller(Motor.Controller.PID)
         self.motors.move([j1, j2, j3], mask=mask, wait=False, relative=False)
 
     def drive_angle(self, angle):
+        """Drive the motors of a 2-wheeled Linkbot by "angle" degrees.
+
+        (Since v3.1.11)
+
+        :type angle: float
+        :param angle: An angle in degrees.
+        """
         self.drive_angle_nb(angle)
         self.move_wait()
 
     def drive_angle_nb(self, angle):
+        """Drive the motors of a 2-wheeled Linkbot by "angle" degrees.
+
+        (Since v3.1.11)
+
+        This is the non-blocking version of :func:`linkbot3.CLinkbot.drive_angle`.
+
+        :type angle: float
+        :param angle: An angle in degrees.
+        """
         self.move_nb(angle, 0, -angle)
 
     def drive_backward(self, angle):
+        """Drive the motors of a 2-wheeled Linkbot backward by "angle" degrees.
+
+        (Since v3.1.11)
+
+        :type angle: float
+        :param angle: An angle in degrees.
+        """
         self.drive_backward_nb(angle)
         self.move_wait()
 
     def drive_backward_nb(self, angle):
+        """Drive the motors of a 2-wheeled Linkbot backward by "angle" degrees.
+
+        (Since v3.1.11)
+
+        This is the non-blocking version of :func:`linkbot3.CLinkbot.drive_backward`.
+
+        :type angle: float
+        :param angle: An angle in degrees.
+        """
         self.move_nb(-angle, 0, angle)
 
     def drive_distance(self, distance, radius):
+        """Drive the motors of a 2-wheeled Linkbot to move forward by "distance"
+
+        (Since v3.1.11)
+
+        :type distance: float
+        :param distance: A distance. The units used here can be any unit of
+            length, as long as the same units are used for the "radius" parameter.
+        :type radius: float
+        :param radius: The radius of the Linkbot's wheels. The units of radius
+            can be anything as long as they are the same units as those used for
+            the "distance" parameter.
+        """
         self.drive_distance_nb(distance, radius)
         self.move_wait()
 
     def drive_distance_nb(self, distance, radius):
+        """Drive the motors of a 2-wheeled Linkbot to move forward by "distance"
+
+        (Since v3.1.11)
+
+        This is the non-blocking version of :func:`linkbot3.CLinkbot.drive_distance`.
+
+        :type distance: float
+        :param distance: A distance. The units used here can be any unit of
+            length, as long as the same units are used for the "radius" parameter.
+        :type radius: float
+        :param radius: The radius of the Linkbot's wheels. The units of radius
+            can be anything as long as they are the same units as those used for
+            the "distance" parameter.
+        """
         angle = (distance / radius) * 180 / math.pi
         self.drive_angle_nb(angle)
 
     def drive_forever_nb(self):
+        """Drive the motors of a 2-wheeled Linkbot forward ad-infinitum
+
+        (Since v3.1.11)
+        
+        This non-blocking function will make a 2-wheeled Linkbot-I begin
+        driving forward. It will remain driving forward until it receives other
+        movement commands.
+        """
         self.motors.begin_move(
             0x05,
             timeouts = (0, 0, 0),
@@ -548,17 +614,49 @@ class CLinkbot(Linkbot):
             )
 
     def drive_forward(self, angle):
+        """Drive the motors of a 2-wheeled Linkbot forward by "angle" degrees.
+
+        (Since v3.1.11)
+
+        :type angle: float
+        :param angle: An angle in degrees.
+        """
         self.drive_forward_nb(angle)
         self.move_wait()
 
     def drive_forward_nb(self, angle):
+        """Drive the motors of a 2-wheeled Linkbot forward by "angle" degrees.
+
+        (Since v3.1.11)
+
+        This is the non-blocking version of :func:`linkbot3.CLinkbot.drive_forward`.
+
+        :type angle: float
+        :param angle: An angle in degrees.
+        """
         self.move_nb(angle, 0, -angle)
 
     def drive_time(self, seconds):
+        """Drive the motors of a 2-wheeled Linkbot forward for a set amount of time.
+
+        (Since v3.1.11)
+
+        :type seconds: float
+        :param seconds: The number of seconds to drive the motors.
+        """
         self.drive_time_nb(seconds)
         self.move_wait(0x05)
 
     def drive_time_nb(self, seconds):
+        """Drive the motors of a 2-wheeled Linkbot forward for a set amount of time.
+
+        (Since v3.1.11)
+
+        This is the non-blocking version of :func:`linkbot3.CLinkbot.drive_time`.
+
+        :type seconds: float
+        :param seconds: The number of seconds to drive the motors.
+        """
         self.motors.begin_move(
             0x05,
             timeouts = (seconds, 0, seconds),
