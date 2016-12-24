@@ -170,7 +170,22 @@ class Linkbot():
         util.run_linkbot_coroutine(
             self._proxy.reboot(),
             self._loop)
-       
+    
+    def set_peripherals_reset(self, peripheral_mask, mask=0xff):   
+        '''
+        Specify which peripherals to reset when the robot is disconnected.
+
+        Values should be "1<<Linkbot.MOTOR1 | 1<<Linkbot.LED", etc. Valid peripheral_mask values are:
+
+        Linkbot.MOTOR1
+        Linkbot.MOTOR2
+        Linkbot.MOTOR3
+        Linkbot.LED
+        Linkbot.BUZZER
+
+        or any or'd combination thereof.
+        '''
+        return util.run_linkbot_coroutine(self._proxy.set_peripherals_reset(peripheral_mask, mask), self._loop)
 
     def version(self):
         '''

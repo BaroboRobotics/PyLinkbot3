@@ -919,6 +919,7 @@ class Motors:
     @asyncio.coroutine
     def create(cls, asynclinkbot_parent, motor_class=Motor):
         self = cls()
+        self._asynclinkbot = asynclinkbot_parent
         self._proxy = asynclinkbot_parent._proxy
         self.motors = []
         for i in range(3):
@@ -1114,6 +1115,35 @@ class Motors:
         '''
         fut = yield from self._proxy.resetEncoderRevs()
         return fut
+
+    @asyncio.coroutine
+    def set_hold_on_exit(self, hold=False):
+        ''' Set whether or not the motors should hold or relax when the Python
+            program exits.
+
+        As of PyLinkbot version 3.1.12 and firmware version 4.5.3, Linkbots will 
+        relax their joints when the Python program controlling the Linkbot 
+        disconnects or exits. Use this function to change that behavior.
+
+        :type hold: bool
+        :param hold: Whether or not to hold the joints at exit. "False" means
+            "relax the joints when the program exits". "True" means "If the 
+            the joints are being held at the time of exit, continue holding them
+            at their current positions."
+        '''
+        if hold:
+            fut = yield from self._asynclinkbot.set_peripherals_reset(
+                0 ,
+                1<<linkbot3.Linkbot.MOTOR1 | 1<<linkbot3.Linkbot.MOTOR2 | 1<<linkbot3.Linkbot.MOTOR3 
+                )
+        else:
+            fut = yield from self._asynclinkbot.set_peripherals_reset(
+                1<<linkbot3.Linkbot.MOTOR1 | 1<<linkbot3.Linkbot.MOTOR2 | 1<<linkbot3.Linkbot.MOTOR3 ,
+                1<<linkbot3.Linkbot.MOTOR1 | 1<<linkbot3.Linkbot.MOTOR2 | 1<<linkbot3.Linkbot.MOTOR3 
+                )
+
+        return fut
+
 
     @asyncio.coroutine
     def set_powers(self, powers, mask=0x07):

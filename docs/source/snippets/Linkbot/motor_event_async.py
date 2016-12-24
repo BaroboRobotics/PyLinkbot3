@@ -1,5 +1,4 @@
 import linkbot3 as linkbot
-import logging
 
 async def cb(*args, **kwargs):
     print('Callback!')

@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='robot.proto',
   package='barobo.Robot',
   syntax='proto2',
-  serialized_pb=_b('\n\x0brobot.proto\x12\x0c\x62\x61robo.Robot\x1a\x0cnanopb.proto\"G\n\x14getAccelerometerData\x1a\x04\n\x02In\x1a)\n\x06Result\x12\t\n\x01x\x18\x01 \x02(\x02\x12\t\n\x01y\x18\x02 \x02(\x02\x12\t\n\x01z\x18\x03 \x02(\x02\",\n\x0bgetLedColor\x1a\x04\n\x02In\x1a\x17\n\x06Result\x12\r\n\x05value\x18\x01 \x02(\r\",\n\x0bsetLedColor\x1a\x13\n\x02In\x12\r\n\x05value\x18\x01 \x02(\r\x1a\x08\n\x06Result\"3\n\x12getBuzzerFrequency\x1a\x04\n\x02In\x1a\x17\n\x06Result\x12\r\n\x05value\x18\x01 \x02(\x02\"3\n\x12setBuzzerFrequency\x1a\x13\n\x02In\x12\r\n\x05value\x18\x01 \x02(\x02\x1a\x08\n\x06Result\"3\n\x11\x65nableButtonEvent\x1a\x14\n\x02In\x12\x0e\n\x06\x65nable\x18\x01 \x02(\x08\x1a\x08\n\x06Result\"\xaa\x02\n\x12\x65nableEncoderEvent\x1a\x89\x02\n\x02In\x12\x43\n\nencoderOne\x18\x01 \x01(\x0b\x32/.barobo.Robot.enableEncoderEvent.In.SignalState\x12\x43\n\nencoderTwo\x18\x02 \x01(\x0b\x32/.barobo.Robot.enableEncoderEvent.In.SignalState\x12\x45\n\x0c\x65ncoderThree\x18\x03 \x01(\x0b\x32/.barobo.Robot.enableEncoderEvent.In.SignalState\x1a\x32\n\x0bSignalState\x12\x0e\n\x06\x65nable\x18\x01 \x02(\x08\x12\x13\n\x0bgranularity\x18\x02 \x02(\x02\x1a\x08\n\x06Result\"2\n\x10\x65nableJointEvent\x1a\x14\n\x02In\x12\x0e\n\x06\x65nable\x18\x01 \x02(\x08\x1a\x08\n\x06Result\"O\n\x18\x65nableAccelerometerEvent\x1a)\n\x02In\x12\x0e\n\x06\x65nable\x18\x01 \x02(\x08\x12\x13\n\x0bgranularity\x18\x02 \x02(\x02\x1a\x08\n\x06Result\"Z\n!setMotorControllerSafetyThreshold\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\rB\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"V\n\x1dsetMotorControllerSafetyAngle\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"Q\n\x18setMotorControllerAlphaI\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"Q\n\x18setMotorControllerAlphaF\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"P\n\x17setMotorControllerOmega\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"[\n\"setMotorControllerProportionalGain\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"Y\n setMotorControllerIntegratorGain\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"Y\n setMotorControllerDerivativeGain\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\".\n\x11getBatteryVoltage\x1a\x04\n\x02In\x1a\x13\n\x06Result\x12\t\n\x01v\x18\x01 \x02(\x02\"4\n\tgetAdcRaw\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\rB\x07\x10\x01\x92?\x02\x10 \"L\n!getMotorControllerSafetyThreshold\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\rB\x07\x10\x01\x92?\x02\x10 \"H\n\x1dgetMotorControllerSafetyAngle\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"C\n\x18getMotorControllerAlphaI\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"C\n\x18getMotorControllerAlphaF\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"B\n\x17getMotorControllerOmega\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"M\n\"getMotorControllerProportionalGain\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"K\n getMotorControllerIntegratorGain\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"K\n getMotorControllerDerivativeGain\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"N\n\x10getEncoderValues\x1a\x04\n\x02In\x1a\x34\n\x06Result\x12\x11\n\ttimestamp\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"f\n\x0egetJointStates\x1a\x04\n\x02In\x1aN\n\x06Result\x12\x11\n\ttimestamp\x18\x01 \x02(\r\x12\x31\n\x06values\x18\x02 \x03(\x0e\x32\x18.barobo.Robot.JointStateB\x07\x10\x01\x92?\x02\x10 \"\x85\x01\n\rgetFormFactor\x1a\x04\n\x02In\x1a?\n\x06Result\x12\x35\n\x05value\x18\x01 \x02(\x0e\x32&.barobo.Robot.getFormFactor.FormFactor\"-\n\nFormFactor\x12\x05\n\x01I\x10\x00\x12\x05\n\x01L\x10\x01\x12\x05\n\x01T\x10\x02\x12\n\n\x06\x44ONGLE\x10\x03\"\xbb\x02\n\x04Goal\x12%\n\x04type\x18\x01 \x02(\x0e\x32\x17.barobo.Robot.Goal.Type\x12\x0c\n\x04goal\x18\x02 \x02(\x02\x12\x31\n\ncontroller\x18\x03 \x01(\x0e\x32\x1d.barobo.Robot.Goal.Controller\x12\x0f\n\x07timeout\x18\x04 \x01(\x02\x12/\n\rmodeOnTimeout\x18\x05 \x01(\x0e\x32\x18.barobo.Robot.JointState\"0\n\x04Type\x12\x0c\n\x08\x41\x42SOLUTE\x10\x01\x12\x0c\n\x08RELATIVE\x10\x02\x12\x0c\n\x08INFINITE\x10\x03\"W\n\nController\x12\x07\n\x03PID\x10\x01\x12\x0c\n\x08\x43ONSTVEL\x10\x02\x12\n\n\x06SMOOTH\x10\x03\x12\t\n\x05\x41\x43\x43\x45L\x10\x04\x12\r\n\tCYCLOIDAL\x10\x05\x12\x0c\n\x08HARMONIC\x10\x06\"\x97\x01\n\x04move\x1a\x84\x01\n\x02In\x12(\n\x0cmotorOneGoal\x18\x01 \x01(\x0b\x32\x12.barobo.Robot.Goal\x12(\n\x0cmotorTwoGoal\x18\x02 \x01(\x0b\x32\x12.barobo.Robot.Goal\x12*\n\x0emotorThreeGoal\x18\x03 \x01(\x0b\x32\x12.barobo.Robot.Goal\x1a\x08\n\x06Result\"\"\n\x10resetEncoderRevs\x1a\x04\n\x02In\x1a\x08\n\x06Result\"$\n\x04stop\x1a\x12\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x1a\x08\n\x06Result\".\n\x0egetButtonState\x1a\x04\n\x02In\x1a\x16\n\x06Result\x12\x0c\n\x04mask\x18\x01 \x02(\r\"Q\n\x12getFirmwareVersion\x1a\x04\n\x02In\x1a\x35\n\x06Result\x12\r\n\x05major\x18\x01 \x02(\r\x12\r\n\x05minor\x18\x02 \x02(\r\x12\r\n\x05patch\x18\x03 \x02(\r\"A\n\x18getFirmwareVersionString\x1a\x04\n\x02In\x1a\x1f\n\x06Result\x12\x15\n\x05value\x18\x01 \x02(\tB\x06\x92?\x03\x08\x80\x01\"D\n\x0bwriteEeprom\x1a+\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x02(\r\x12\x14\n\x04\x64\x61ta\x18\x02 \x02(\x0c\x42\x06\x92?\x03\x08\x80\x01\x1a\x08\n\x06Result\"Q\n\nreadEeprom\x1a#\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x02(\r\x12\x0c\n\x04size\x18\x02 \x02(\r\x1a\x1e\n\x06Result\x12\x14\n\x04\x64\x61ta\x18\x01 \x02(\x0c\x42\x06\x92?\x03\x08\x80\x01\"A\n\x08writeTwi\x1a+\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x02(\r\x12\x14\n\x04\x64\x61ta\x18\x02 \x02(\x0c\x42\x06\x92?\x03\x08\x80\x01\x1a\x08\n\x06Result\"R\n\x07readTwi\x1a\'\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x02(\r\x12\x10\n\x08recvsize\x18\x02 \x02(\r\x1a\x1e\n\x06Result\x12\x14\n\x04\x64\x61ta\x18\x02 \x02(\x0c\x42\x06\x92?\x03\x08\x80\x01\"m\n\x0cwriteReadTwi\x1a=\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x02(\r\x12\x10\n\x08recvsize\x18\x02 \x02(\r\x12\x14\n\x04\x64\x61ta\x18\x03 \x02(\x0c\x42\x06\x92?\x03\x08\x80\x01\x1a\x1e\n\x06Result\x12\x14\n\x04\x64\x61ta\x18\x02 \x02(\x0c\x42\x06\x92?\x03\x08\x80\x01\"\x18\n\x06reboot\x1a\x04\n\x02In\x1a\x08\n\x06Result\"p\n\x0b\x62uttonEvent\x12\x11\n\ttimestamp\x18\x01 \x02(\r\x12$\n\x06\x62utton\x18\x02 \x02(\x0e\x32\x14.barobo.Robot.Button\x12(\n\x05state\x18\x03 \x02(\x0e\x32\x19.barobo.Robot.ButtonState\"A\n\x0c\x65ncoderEvent\x12\x11\n\ttimestamp\x18\x01 \x02(\r\x12\x0f\n\x07\x65ncoder\x18\x02 \x02(\r\x12\r\n\x05value\x18\x03 \x02(\x02\"H\n\x12\x61\x63\x63\x65lerometerEvent\x12\x11\n\ttimestamp\x18\x01 \x02(\r\x12\t\n\x01x\x18\x02 \x02(\x02\x12\t\n\x01y\x18\x03 \x02(\x02\x12\t\n\x01z\x18\x04 \x02(\x02\"f\n\njointEvent\x12\x11\n\ttimestamp\x18\x01 \x02(\r\x12\r\n\x05joint\x18\x02 \x02(\r\x12\'\n\x05\x65vent\x18\x03 \x02(\x0e\x32\x18.barobo.Robot.JointState\x12\r\n\x05\x61ngle\x18\x04 \x01(\x02\"B\n\x11\x64\x65\x62ugMessageEvent\x12\x11\n\ttimestamp\x18\x01 \x02(\r\x12\x1a\n\nbytestring\x18\x02 \x02(\tB\x06\x92?\x03\x08\x80\x01\")\n\x14\x63onnectionTerminated\x12\x11\n\ttimestamp\x18\x01 \x02(\r*8\n\nJointState\x12\t\n\x05\x43OAST\x10\x00\x12\x08\n\x04HOLD\x10\x01\x12\n\n\x06MOVING\x10\x02\x12\t\n\x05\x45RROR\x10\x04*!\n\x06\x42utton\x12\t\n\x05POWER\x10\x00\x12\x05\n\x01\x41\x10\x01\x12\x05\n\x01\x42\x10\x02*\x1f\n\x0b\x42uttonState\x12\x06\n\x02UP\x10\x00\x12\x08\n\x04\x44OWN\x10\x01')
+  serialized_pb=_b('\n\x0brobot.proto\x12\x0c\x62\x61robo.Robot\x1a\x0cnanopb.proto\"G\n\x14getAccelerometerData\x1a\x04\n\x02In\x1a)\n\x06Result\x12\t\n\x01x\x18\x01 \x02(\x02\x12\t\n\x01y\x18\x02 \x02(\x02\x12\t\n\x01z\x18\x03 \x02(\x02\",\n\x0bgetLedColor\x1a\x04\n\x02In\x1a\x17\n\x06Result\x12\r\n\x05value\x18\x01 \x02(\r\",\n\x0bsetLedColor\x1a\x13\n\x02In\x12\r\n\x05value\x18\x01 \x02(\r\x1a\x08\n\x06Result\"3\n\x12getBuzzerFrequency\x1a\x04\n\x02In\x1a\x17\n\x06Result\x12\r\n\x05value\x18\x01 \x02(\x02\"3\n\x12setBuzzerFrequency\x1a\x13\n\x02In\x12\r\n\x05value\x18\x01 \x02(\x02\x1a\x08\n\x06Result\"3\n\x11\x65nableButtonEvent\x1a\x14\n\x02In\x12\x0e\n\x06\x65nable\x18\x01 \x02(\x08\x1a\x08\n\x06Result\"\xaa\x02\n\x12\x65nableEncoderEvent\x1a\x89\x02\n\x02In\x12\x43\n\nencoderOne\x18\x01 \x01(\x0b\x32/.barobo.Robot.enableEncoderEvent.In.SignalState\x12\x43\n\nencoderTwo\x18\x02 \x01(\x0b\x32/.barobo.Robot.enableEncoderEvent.In.SignalState\x12\x45\n\x0c\x65ncoderThree\x18\x03 \x01(\x0b\x32/.barobo.Robot.enableEncoderEvent.In.SignalState\x1a\x32\n\x0bSignalState\x12\x0e\n\x06\x65nable\x18\x01 \x02(\x08\x12\x13\n\x0bgranularity\x18\x02 \x02(\x02\x1a\x08\n\x06Result\"2\n\x10\x65nableJointEvent\x1a\x14\n\x02In\x12\x0e\n\x06\x65nable\x18\x01 \x02(\x08\x1a\x08\n\x06Result\"O\n\x18\x65nableAccelerometerEvent\x1a)\n\x02In\x12\x0e\n\x06\x65nable\x18\x01 \x02(\x08\x12\x13\n\x0bgranularity\x18\x02 \x02(\x02\x1a\x08\n\x06Result\"Z\n!setMotorControllerSafetyThreshold\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\rB\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"V\n\x1dsetMotorControllerSafetyAngle\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"Q\n\x18setMotorControllerAlphaI\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"Q\n\x18setMotorControllerAlphaF\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"P\n\x17setMotorControllerOmega\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"[\n\"setMotorControllerProportionalGain\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"Y\n setMotorControllerIntegratorGain\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"Y\n setMotorControllerDerivativeGain\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"Q\n\x14setResetOnDisconnect\x1a/\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x1b\n\x13peripheralResetMask\x18\x02 \x02(\r\x1a\x08\n\x06Result\".\n\x11getBatteryVoltage\x1a\x04\n\x02In\x1a\x13\n\x06Result\x12\t\n\x01v\x18\x01 \x02(\x02\"4\n\tgetAdcRaw\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\rB\x07\x10\x01\x92?\x02\x10 \"L\n!getMotorControllerSafetyThreshold\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\rB\x07\x10\x01\x92?\x02\x10 \"H\n\x1dgetMotorControllerSafetyAngle\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"C\n\x18getMotorControllerAlphaI\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"C\n\x18getMotorControllerAlphaF\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"B\n\x17getMotorControllerOmega\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"M\n\"getMotorControllerProportionalGain\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"K\n getMotorControllerIntegratorGain\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"K\n getMotorControllerDerivativeGain\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"N\n\x10getEncoderValues\x1a\x04\n\x02In\x1a\x34\n\x06Result\x12\x11\n\ttimestamp\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"f\n\x0egetJointStates\x1a\x04\n\x02In\x1aN\n\x06Result\x12\x11\n\ttimestamp\x18\x01 \x02(\r\x12\x31\n\x06values\x18\x02 \x03(\x0e\x32\x18.barobo.Robot.JointStateB\x07\x10\x01\x92?\x02\x10 \"\x85\x01\n\rgetFormFactor\x1a\x04\n\x02In\x1a?\n\x06Result\x12\x35\n\x05value\x18\x01 \x02(\x0e\x32&.barobo.Robot.getFormFactor.FormFactor\"-\n\nFormFactor\x12\x05\n\x01I\x10\x00\x12\x05\n\x01L\x10\x01\x12\x05\n\x01T\x10\x02\x12\n\n\x06\x44ONGLE\x10\x03\"\xbb\x02\n\x04Goal\x12%\n\x04type\x18\x01 \x02(\x0e\x32\x17.barobo.Robot.Goal.Type\x12\x0c\n\x04goal\x18\x02 \x02(\x02\x12\x31\n\ncontroller\x18\x03 \x01(\x0e\x32\x1d.barobo.Robot.Goal.Controller\x12\x0f\n\x07timeout\x18\x04 \x01(\x02\x12/\n\rmodeOnTimeout\x18\x05 \x01(\x0e\x32\x18.barobo.Robot.JointState\"0\n\x04Type\x12\x0c\n\x08\x41\x42SOLUTE\x10\x01\x12\x0c\n\x08RELATIVE\x10\x02\x12\x0c\n\x08INFINITE\x10\x03\"W\n\nController\x12\x07\n\x03PID\x10\x01\x12\x0c\n\x08\x43ONSTVEL\x10\x02\x12\n\n\x06SMOOTH\x10\x03\x12\t\n\x05\x41\x43\x43\x45L\x10\x04\x12\r\n\tCYCLOIDAL\x10\x05\x12\x0c\n\x08HARMONIC\x10\x06\"\x97\x01\n\x04move\x1a\x84\x01\n\x02In\x12(\n\x0cmotorOneGoal\x18\x01 \x01(\x0b\x32\x12.barobo.Robot.Goal\x12(\n\x0cmotorTwoGoal\x18\x02 \x01(\x0b\x32\x12.barobo.Robot.Goal\x12*\n\x0emotorThreeGoal\x18\x03 \x01(\x0b\x32\x12.barobo.Robot.Goal\x1a\x08\n\x06Result\"\"\n\x10resetEncoderRevs\x1a\x04\n\x02In\x1a\x08\n\x06Result\"$\n\x04stop\x1a\x12\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x1a\x08\n\x06Result\".\n\x0egetButtonState\x1a\x04\n\x02In\x1a\x16\n\x06Result\x12\x0c\n\x04mask\x18\x01 \x02(\r\"Q\n\x12getFirmwareVersion\x1a\x04\n\x02In\x1a\x35\n\x06Result\x12\r\n\x05major\x18\x01 \x02(\r\x12\r\n\x05minor\x18\x02 \x02(\r\x12\r\n\x05patch\x18\x03 \x02(\r\"A\n\x18getFirmwareVersionString\x1a\x04\n\x02In\x1a\x1f\n\x06Result\x12\x15\n\x05value\x18\x01 \x02(\tB\x06\x92?\x03\x08\x80\x01\"D\n\x0bwriteEeprom\x1a+\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x02(\r\x12\x14\n\x04\x64\x61ta\x18\x02 \x02(\x0c\x42\x06\x92?\x03\x08\x80\x01\x1a\x08\n\x06Result\"Q\n\nreadEeprom\x1a#\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x02(\r\x12\x0c\n\x04size\x18\x02 \x02(\r\x1a\x1e\n\x06Result\x12\x14\n\x04\x64\x61ta\x18\x01 \x02(\x0c\x42\x06\x92?\x03\x08\x80\x01\"A\n\x08writeTwi\x1a+\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x02(\r\x12\x14\n\x04\x64\x61ta\x18\x02 \x02(\x0c\x42\x06\x92?\x03\x08\x80\x01\x1a\x08\n\x06Result\"R\n\x07readTwi\x1a\'\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x02(\r\x12\x10\n\x08recvsize\x18\x02 \x02(\r\x1a\x1e\n\x06Result\x12\x14\n\x04\x64\x61ta\x18\x02 \x02(\x0c\x42\x06\x92?\x03\x08\x80\x01\"m\n\x0cwriteReadTwi\x1a=\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x02(\r\x12\x10\n\x08recvsize\x18\x02 \x02(\r\x12\x14\n\x04\x64\x61ta\x18\x03 \x02(\x0c\x42\x06\x92?\x03\x08\x80\x01\x1a\x1e\n\x06Result\x12\x14\n\x04\x64\x61ta\x18\x02 \x02(\x0c\x42\x06\x92?\x03\x08\x80\x01\"\x18\n\x06reboot\x1a\x04\n\x02In\x1a\x08\n\x06Result\"p\n\x0b\x62uttonEvent\x12\x11\n\ttimestamp\x18\x01 \x02(\r\x12$\n\x06\x62utton\x18\x02 \x02(\x0e\x32\x14.barobo.Robot.Button\x12(\n\x05state\x18\x03 \x02(\x0e\x32\x19.barobo.Robot.ButtonState\"A\n\x0c\x65ncoderEvent\x12\x11\n\ttimestamp\x18\x01 \x02(\r\x12\x0f\n\x07\x65ncoder\x18\x02 \x02(\r\x12\r\n\x05value\x18\x03 \x02(\x02\"H\n\x12\x61\x63\x63\x65lerometerEvent\x12\x11\n\ttimestamp\x18\x01 \x02(\r\x12\t\n\x01x\x18\x02 \x02(\x02\x12\t\n\x01y\x18\x03 \x02(\x02\x12\t\n\x01z\x18\x04 \x02(\x02\"f\n\njointEvent\x12\x11\n\ttimestamp\x18\x01 \x02(\r\x12\r\n\x05joint\x18\x02 \x02(\r\x12\'\n\x05\x65vent\x18\x03 \x02(\x0e\x32\x18.barobo.Robot.JointState\x12\r\n\x05\x61ngle\x18\x04 \x01(\x02\"B\n\x11\x64\x65\x62ugMessageEvent\x12\x11\n\ttimestamp\x18\x01 \x02(\r\x12\x1a\n\nbytestring\x18\x02 \x02(\tB\x06\x92?\x03\x08\x80\x01\")\n\x14\x63onnectionTerminated\x12\x11\n\ttimestamp\x18\x01 \x02(\r*8\n\nJointState\x12\t\n\x05\x43OAST\x10\x00\x12\x08\n\x04HOLD\x10\x01\x12\n\n\x06MOVING\x10\x02\x12\t\n\x05\x45RROR\x10\x04*!\n\x06\x42utton\x12\t\n\x05POWER\x10\x00\x12\x05\n\x01\x41\x10\x01\x12\x05\n\x01\x42\x10\x02*\x1f\n\x0b\x42uttonState\x12\x06\n\x02UP\x10\x00\x12\x08\n\x04\x44OWN\x10\x01')
   ,
   dependencies=[nanopb__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -51,8 +51,8 @@ _JOINTSTATE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=4172,
-  serialized_end=4228,
+  serialized_start=4255,
+  serialized_end=4311,
 )
 _sym_db.RegisterEnumDescriptor(_JOINTSTATE)
 
@@ -78,8 +78,8 @@ _BUTTON = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=4230,
-  serialized_end=4263,
+  serialized_start=4313,
+  serialized_end=4346,
 )
 _sym_db.RegisterEnumDescriptor(_BUTTON)
 
@@ -101,8 +101,8 @@ _BUTTONSTATE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=4265,
-  serialized_end=4296,
+  serialized_start=4348,
+  serialized_end=4379,
 )
 _sym_db.RegisterEnumDescriptor(_BUTTONSTATE)
 
@@ -143,8 +143,8 @@ _GETFORMFACTOR_FORMFACTOR = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=2470,
-  serialized_end=2515,
+  serialized_start=2553,
+  serialized_end=2598,
 )
 _sym_db.RegisterEnumDescriptor(_GETFORMFACTOR_FORMFACTOR)
 
@@ -169,8 +169,8 @@ _GOAL_TYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=2696,
-  serialized_end=2744,
+  serialized_start=2779,
+  serialized_end=2827,
 )
 _sym_db.RegisterEnumDescriptor(_GOAL_TYPE)
 
@@ -207,8 +207,8 @@ _GOAL_CONTROLLER = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=2746,
-  serialized_end=2833,
+  serialized_start=2829,
+  serialized_end=2916,
 )
 _sym_db.RegisterEnumDescriptor(_GOAL_CONTROLLER)
 
@@ -1650,6 +1650,90 @@ _SETMOTORCONTROLLERDERIVATIVEGAIN = _descriptor.Descriptor(
 )
 
 
+_SETRESETONDISCONNECT_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='barobo.Robot.setResetOnDisconnect.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mask', full_name='barobo.Robot.setResetOnDisconnect.In.mask', index=0,
+      number=1, type=13, cpp_type=3, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='peripheralResetMask', full_name='barobo.Robot.setResetOnDisconnect.In.peripheralResetMask', index=1,
+      number=2, type=13, cpp_type=3, label=2,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1528,
+  serialized_end=1575,
+)
+
+_SETRESETONDISCONNECT_RESULT = _descriptor.Descriptor(
+  name='Result',
+  full_name='barobo.Robot.setResetOnDisconnect.Result',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=73,
+  serialized_end=81,
+)
+
+_SETRESETONDISCONNECT = _descriptor.Descriptor(
+  name='setResetOnDisconnect',
+  full_name='barobo.Robot.setResetOnDisconnect',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_SETRESETONDISCONNECT_IN, _SETRESETONDISCONNECT_RESULT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1504,
+  serialized_end=1585,
+)
+
+
 _GETBATTERYVOLTAGE_IN = _descriptor.Descriptor(
   name='In',
   full_name='barobo.Robot.getBatteryVoltage.In',
@@ -1699,8 +1783,8 @@ _GETBATTERYVOLTAGE_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1531,
-  serialized_end=1550,
+  serialized_start=1614,
+  serialized_end=1633,
 )
 
 _GETBATTERYVOLTAGE = _descriptor.Descriptor(
@@ -1722,8 +1806,8 @@ _GETBATTERYVOLTAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1504,
-  serialized_end=1550,
+  serialized_start=1587,
+  serialized_end=1633,
 )
 
 
@@ -1776,8 +1860,8 @@ _GETADCRAW_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1571,
-  serialized_end=1604,
+  serialized_start=1654,
+  serialized_end=1687,
 )
 
 _GETADCRAW = _descriptor.Descriptor(
@@ -1799,8 +1883,8 @@ _GETADCRAW = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1552,
-  serialized_end=1604,
+  serialized_start=1635,
+  serialized_end=1687,
 )
 
 
@@ -1853,8 +1937,8 @@ _GETMOTORCONTROLLERSAFETYTHRESHOLD_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1571,
-  serialized_end=1604,
+  serialized_start=1654,
+  serialized_end=1687,
 )
 
 _GETMOTORCONTROLLERSAFETYTHRESHOLD = _descriptor.Descriptor(
@@ -1876,8 +1960,8 @@ _GETMOTORCONTROLLERSAFETYTHRESHOLD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1606,
-  serialized_end=1682,
+  serialized_start=1689,
+  serialized_end=1765,
 )
 
 
@@ -1930,8 +2014,8 @@ _GETMOTORCONTROLLERSAFETYANGLE_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1723,
-  serialized_end=1756,
+  serialized_start=1806,
+  serialized_end=1839,
 )
 
 _GETMOTORCONTROLLERSAFETYANGLE = _descriptor.Descriptor(
@@ -1953,8 +2037,8 @@ _GETMOTORCONTROLLERSAFETYANGLE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1684,
-  serialized_end=1756,
+  serialized_start=1767,
+  serialized_end=1839,
 )
 
 
@@ -2007,8 +2091,8 @@ _GETMOTORCONTROLLERALPHAI_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1723,
-  serialized_end=1756,
+  serialized_start=1806,
+  serialized_end=1839,
 )
 
 _GETMOTORCONTROLLERALPHAI = _descriptor.Descriptor(
@@ -2030,8 +2114,8 @@ _GETMOTORCONTROLLERALPHAI = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1758,
-  serialized_end=1825,
+  serialized_start=1841,
+  serialized_end=1908,
 )
 
 
@@ -2084,8 +2168,8 @@ _GETMOTORCONTROLLERALPHAF_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1723,
-  serialized_end=1756,
+  serialized_start=1806,
+  serialized_end=1839,
 )
 
 _GETMOTORCONTROLLERALPHAF = _descriptor.Descriptor(
@@ -2107,8 +2191,8 @@ _GETMOTORCONTROLLERALPHAF = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1827,
-  serialized_end=1894,
+  serialized_start=1910,
+  serialized_end=1977,
 )
 
 
@@ -2161,8 +2245,8 @@ _GETMOTORCONTROLLEROMEGA_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1723,
-  serialized_end=1756,
+  serialized_start=1806,
+  serialized_end=1839,
 )
 
 _GETMOTORCONTROLLEROMEGA = _descriptor.Descriptor(
@@ -2184,8 +2268,8 @@ _GETMOTORCONTROLLEROMEGA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1896,
-  serialized_end=1962,
+  serialized_start=1979,
+  serialized_end=2045,
 )
 
 
@@ -2238,8 +2322,8 @@ _GETMOTORCONTROLLERPROPORTIONALGAIN_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1723,
-  serialized_end=1756,
+  serialized_start=1806,
+  serialized_end=1839,
 )
 
 _GETMOTORCONTROLLERPROPORTIONALGAIN = _descriptor.Descriptor(
@@ -2261,8 +2345,8 @@ _GETMOTORCONTROLLERPROPORTIONALGAIN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1964,
-  serialized_end=2041,
+  serialized_start=2047,
+  serialized_end=2124,
 )
 
 
@@ -2315,8 +2399,8 @@ _GETMOTORCONTROLLERINTEGRATORGAIN_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1723,
-  serialized_end=1756,
+  serialized_start=1806,
+  serialized_end=1839,
 )
 
 _GETMOTORCONTROLLERINTEGRATORGAIN = _descriptor.Descriptor(
@@ -2338,8 +2422,8 @@ _GETMOTORCONTROLLERINTEGRATORGAIN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2043,
-  serialized_end=2118,
+  serialized_start=2126,
+  serialized_end=2201,
 )
 
 
@@ -2392,8 +2476,8 @@ _GETMOTORCONTROLLERDERIVATIVEGAIN_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1723,
-  serialized_end=1756,
+  serialized_start=1806,
+  serialized_end=1839,
 )
 
 _GETMOTORCONTROLLERDERIVATIVEGAIN = _descriptor.Descriptor(
@@ -2415,8 +2499,8 @@ _GETMOTORCONTROLLERDERIVATIVEGAIN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2120,
-  serialized_end=2195,
+  serialized_start=2203,
+  serialized_end=2278,
 )
 
 
@@ -2476,8 +2560,8 @@ _GETENCODERVALUES_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2223,
-  serialized_end=2275,
+  serialized_start=2306,
+  serialized_end=2358,
 )
 
 _GETENCODERVALUES = _descriptor.Descriptor(
@@ -2499,8 +2583,8 @@ _GETENCODERVALUES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2197,
-  serialized_end=2275,
+  serialized_start=2280,
+  serialized_end=2358,
 )
 
 
@@ -2560,8 +2644,8 @@ _GETJOINTSTATES_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2301,
-  serialized_end=2379,
+  serialized_start=2384,
+  serialized_end=2462,
 )
 
 _GETJOINTSTATES = _descriptor.Descriptor(
@@ -2583,8 +2667,8 @@ _GETJOINTSTATES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2277,
-  serialized_end=2379,
+  serialized_start=2360,
+  serialized_end=2462,
 )
 
 
@@ -2637,8 +2721,8 @@ _GETFORMFACTOR_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2405,
-  serialized_end=2468,
+  serialized_start=2488,
+  serialized_end=2551,
 )
 
 _GETFORMFACTOR = _descriptor.Descriptor(
@@ -2661,8 +2745,8 @@ _GETFORMFACTOR = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2382,
-  serialized_end=2515,
+  serialized_start=2465,
+  serialized_end=2598,
 )
 
 
@@ -2722,8 +2806,8 @@ _GOAL = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2518,
-  serialized_end=2833,
+  serialized_start=2601,
+  serialized_end=2916,
 )
 
 
@@ -2767,8 +2851,8 @@ _MOVE_IN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2845,
-  serialized_end=2977,
+  serialized_start=2928,
+  serialized_end=3060,
 )
 
 _MOVE_RESULT = _descriptor.Descriptor(
@@ -2813,8 +2897,8 @@ _MOVE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2836,
-  serialized_end=2987,
+  serialized_start=2919,
+  serialized_end=3070,
 )
 
 
@@ -2883,8 +2967,8 @@ _RESETENCODERREVS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2989,
-  serialized_end=3023,
+  serialized_start=3072,
+  serialized_end=3106,
 )
 
 
@@ -2914,8 +2998,8 @@ _STOP_IN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3033,
-  serialized_end=3051,
+  serialized_start=3116,
+  serialized_end=3134,
 )
 
 _STOP_RESULT = _descriptor.Descriptor(
@@ -2960,8 +3044,8 @@ _STOP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3025,
-  serialized_end=3061,
+  serialized_start=3108,
+  serialized_end=3144,
 )
 
 
@@ -3014,8 +3098,8 @@ _GETBUTTONSTATE_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3087,
-  serialized_end=3109,
+  serialized_start=3170,
+  serialized_end=3192,
 )
 
 _GETBUTTONSTATE = _descriptor.Descriptor(
@@ -3037,8 +3121,8 @@ _GETBUTTONSTATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3063,
-  serialized_end=3109,
+  serialized_start=3146,
+  serialized_end=3192,
 )
 
 
@@ -3105,8 +3189,8 @@ _GETFIRMWAREVERSION_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3139,
-  serialized_end=3192,
+  serialized_start=3222,
+  serialized_end=3275,
 )
 
 _GETFIRMWAREVERSION = _descriptor.Descriptor(
@@ -3128,8 +3212,8 @@ _GETFIRMWAREVERSION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3111,
-  serialized_end=3192,
+  serialized_start=3194,
+  serialized_end=3275,
 )
 
 
@@ -3182,8 +3266,8 @@ _GETFIRMWAREVERSIONSTRING_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3228,
-  serialized_end=3259,
+  serialized_start=3311,
+  serialized_end=3342,
 )
 
 _GETFIRMWAREVERSIONSTRING = _descriptor.Descriptor(
@@ -3205,8 +3289,8 @@ _GETFIRMWAREVERSIONSTRING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3194,
-  serialized_end=3259,
+  serialized_start=3277,
+  serialized_end=3342,
 )
 
 
@@ -3243,8 +3327,8 @@ _WRITEEEPROM_IN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3276,
-  serialized_end=3319,
+  serialized_start=3359,
+  serialized_end=3402,
 )
 
 _WRITEEEPROM_RESULT = _descriptor.Descriptor(
@@ -3289,8 +3373,8 @@ _WRITEEEPROM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3261,
-  serialized_end=3329,
+  serialized_start=3344,
+  serialized_end=3412,
 )
 
 
@@ -3327,8 +3411,8 @@ _READEEPROM_IN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3345,
-  serialized_end=3380,
+  serialized_start=3428,
+  serialized_end=3463,
 )
 
 _READEEPROM_RESULT = _descriptor.Descriptor(
@@ -3357,8 +3441,8 @@ _READEEPROM_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3382,
-  serialized_end=3412,
+  serialized_start=3465,
+  serialized_end=3495,
 )
 
 _READEEPROM = _descriptor.Descriptor(
@@ -3380,8 +3464,8 @@ _READEEPROM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3331,
-  serialized_end=3412,
+  serialized_start=3414,
+  serialized_end=3495,
 )
 
 
@@ -3418,8 +3502,8 @@ _WRITETWI_IN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3276,
-  serialized_end=3319,
+  serialized_start=3359,
+  serialized_end=3402,
 )
 
 _WRITETWI_RESULT = _descriptor.Descriptor(
@@ -3464,8 +3548,8 @@ _WRITETWI = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3414,
-  serialized_end=3479,
+  serialized_start=3497,
+  serialized_end=3562,
 )
 
 
@@ -3502,8 +3586,8 @@ _READTWI_IN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3492,
-  serialized_end=3531,
+  serialized_start=3575,
+  serialized_end=3614,
 )
 
 _READTWI_RESULT = _descriptor.Descriptor(
@@ -3532,8 +3616,8 @@ _READTWI_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3533,
-  serialized_end=3563,
+  serialized_start=3616,
+  serialized_end=3646,
 )
 
 _READTWI = _descriptor.Descriptor(
@@ -3555,8 +3639,8 @@ _READTWI = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3481,
-  serialized_end=3563,
+  serialized_start=3564,
+  serialized_end=3646,
 )
 
 
@@ -3600,8 +3684,8 @@ _WRITEREADTWI_IN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3581,
-  serialized_end=3642,
+  serialized_start=3664,
+  serialized_end=3725,
 )
 
 _WRITEREADTWI_RESULT = _descriptor.Descriptor(
@@ -3630,8 +3714,8 @@ _WRITEREADTWI_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3533,
-  serialized_end=3563,
+  serialized_start=3616,
+  serialized_end=3646,
 )
 
 _WRITEREADTWI = _descriptor.Descriptor(
@@ -3653,8 +3737,8 @@ _WRITEREADTWI = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3565,
-  serialized_end=3674,
+  serialized_start=3648,
+  serialized_end=3757,
 )
 
 
@@ -3723,8 +3807,8 @@ _REBOOT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3676,
-  serialized_end=3700,
+  serialized_start=3759,
+  serialized_end=3783,
 )
 
 
@@ -3768,8 +3852,8 @@ _BUTTONEVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3702,
-  serialized_end=3814,
+  serialized_start=3785,
+  serialized_end=3897,
 )
 
 
@@ -3813,8 +3897,8 @@ _ENCODEREVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3816,
-  serialized_end=3881,
+  serialized_start=3899,
+  serialized_end=3964,
 )
 
 
@@ -3865,8 +3949,8 @@ _ACCELEROMETEREVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3883,
-  serialized_end=3955,
+  serialized_start=3966,
+  serialized_end=4038,
 )
 
 
@@ -3917,8 +4001,8 @@ _JOINTEVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3957,
-  serialized_end=4059,
+  serialized_start=4040,
+  serialized_end=4142,
 )
 
 
@@ -3955,8 +4039,8 @@ _DEBUGMESSAGEEVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4061,
-  serialized_end=4127,
+  serialized_start=4144,
+  serialized_end=4210,
 )
 
 
@@ -3986,8 +4070,8 @@ _CONNECTIONTERMINATED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4129,
-  serialized_end=4170,
+  serialized_start=4212,
+  serialized_end=4253,
 )
 
 _GETACCELEROMETERDATA_IN.containing_type = _GETACCELEROMETERDATA
@@ -4028,6 +4112,8 @@ _SETMOTORCONTROLLERINTEGRATORGAIN_IN.containing_type = _SETMOTORCONTROLLERINTEGR
 _SETMOTORCONTROLLERINTEGRATORGAIN_RESULT.containing_type = _SETMOTORCONTROLLERINTEGRATORGAIN
 _SETMOTORCONTROLLERDERIVATIVEGAIN_IN.containing_type = _SETMOTORCONTROLLERDERIVATIVEGAIN
 _SETMOTORCONTROLLERDERIVATIVEGAIN_RESULT.containing_type = _SETMOTORCONTROLLERDERIVATIVEGAIN
+_SETRESETONDISCONNECT_IN.containing_type = _SETRESETONDISCONNECT
+_SETRESETONDISCONNECT_RESULT.containing_type = _SETRESETONDISCONNECT
 _GETBATTERYVOLTAGE_IN.containing_type = _GETBATTERYVOLTAGE
 _GETBATTERYVOLTAGE_RESULT.containing_type = _GETBATTERYVOLTAGE
 _GETADCRAW_IN.containing_type = _GETADCRAW
@@ -4109,6 +4195,7 @@ DESCRIPTOR.message_types_by_name['setMotorControllerOmega'] = _SETMOTORCONTROLLE
 DESCRIPTOR.message_types_by_name['setMotorControllerProportionalGain'] = _SETMOTORCONTROLLERPROPORTIONALGAIN
 DESCRIPTOR.message_types_by_name['setMotorControllerIntegratorGain'] = _SETMOTORCONTROLLERINTEGRATORGAIN
 DESCRIPTOR.message_types_by_name['setMotorControllerDerivativeGain'] = _SETMOTORCONTROLLERDERIVATIVEGAIN
+DESCRIPTOR.message_types_by_name['setResetOnDisconnect'] = _SETRESETONDISCONNECT
 DESCRIPTOR.message_types_by_name['getBatteryVoltage'] = _GETBATTERYVOLTAGE
 DESCRIPTOR.message_types_by_name['getAdcRaw'] = _GETADCRAW
 DESCRIPTOR.message_types_by_name['getMotorControllerSafetyThreshold'] = _GETMOTORCONTROLLERSAFETYTHRESHOLD
@@ -4543,6 +4630,29 @@ setMotorControllerDerivativeGain = _reflection.GeneratedProtocolMessageType('set
 _sym_db.RegisterMessage(setMotorControllerDerivativeGain)
 _sym_db.RegisterMessage(setMotorControllerDerivativeGain.In)
 _sym_db.RegisterMessage(setMotorControllerDerivativeGain.Result)
+
+setResetOnDisconnect = _reflection.GeneratedProtocolMessageType('setResetOnDisconnect', (_message.Message,), dict(
+
+  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
+    DESCRIPTOR = _SETRESETONDISCONNECT_IN,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:barobo.Robot.setResetOnDisconnect.In)
+    ))
+  ,
+
+  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
+    DESCRIPTOR = _SETRESETONDISCONNECT_RESULT,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:barobo.Robot.setResetOnDisconnect.Result)
+    ))
+  ,
+  DESCRIPTOR = _SETRESETONDISCONNECT,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:barobo.Robot.setResetOnDisconnect)
+  ))
+_sym_db.RegisterMessage(setResetOnDisconnect)
+_sym_db.RegisterMessage(setResetOnDisconnect.In)
+_sym_db.RegisterMessage(setResetOnDisconnect.Result)
 
 getBatteryVoltage = _reflection.GeneratedProtocolMessageType('getBatteryVoltage', (_message.Message,), dict(
 

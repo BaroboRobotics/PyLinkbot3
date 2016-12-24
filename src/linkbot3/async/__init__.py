@@ -358,6 +358,24 @@ class AsyncLinkbot():
         util.chain_futures(fut, user_fut, conv=conv)
         return user_fut
 
+    @asyncio.coroutine
+    def set_peripherals_reset(self, peripheral_mask, mask=0xff):
+        '''
+        Specify which peripherals to reset when the robot is disconnected.
+
+        Values should be "1<<Linkbot.MOTOR1 | 1<<Linkbot.LED", etc. Valid peripheral_mask values are:
+
+        Linkbot.MOTOR1
+        Linkbot.MOTOR2
+        Linkbot.MOTOR3
+        Linkbot.LED
+        Linkbot.BUZZER
+        '''
+        args_obj = self._proxy.rb_get_args_obj('setResetOnDisconnect')
+        args_obj.peripheralResetMask = peripheral_mask
+        args_obj.mask = mask
+        fut = yield from self._proxy.setResetOnDisconnect(args_obj)
+        return fut
     
     @asyncio.coroutine    
     def __joint_event(self, payload):
