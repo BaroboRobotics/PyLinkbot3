@@ -11,7 +11,7 @@ import math
 import os
 import websockets
 
-__all__ = ['FormFactor', 'Linkbot', ]
+__all__ = ['FormFactor', 'Linkbot', 'Daemon', ]
 __all__ += async.__all__
 
 class Daemon():
