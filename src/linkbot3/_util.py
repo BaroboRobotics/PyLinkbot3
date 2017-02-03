@@ -77,6 +77,12 @@ class Config(metaclass=Singleton):
         except:
             self._daemon_host = 'localhost:42000'.split(':')
 
+        self._linkbot_ids_index = 0
+        try:
+            self._linkbot_ids = os.environ['ROBOTMANAGER_IDS'].split(',')[:-1]
+        except KeyError:
+            self._linkbot_ids = []
+
         self._timeout = DEFAULT_TIMEOUT
 
     @property
@@ -102,6 +108,17 @@ class Config(metaclass=Singleton):
     @timeout.setter
     def timeout(self, value):
         self._timeout = value
+
+    @property
+    def linkbot(self):
+        '''Returns the next ROBOTMANAGER ID or throws exception'''
+        try:
+            serial_id = self._linkbot_ids[self._linkbot_ids_index]
+            self._linkbot_ids_index += 1
+            return serial_id
+        except IndexError:
+            raise Exception("Insufficient robots connected in Robot Manager")
+            
 
 class IoCore(metaclass=Singleton):
     def __init__(self):

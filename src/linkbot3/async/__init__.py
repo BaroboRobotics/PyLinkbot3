@@ -69,6 +69,10 @@ class _AsyncLinkbot(rb.Proxy):
     @asyncio.coroutine
     def create(cls, serial_id):
         my_config = util.Config()
+
+        if serial_id is None:
+            serial_id = my_config.linkbot
+
         logging.info('Creating async Linkbot handle to ID:{}'.format(serial_id))
         logger=logging.getLogger('RBProxy.'+serial_id)
         self = cls( os.path.join(_dirname, 'robot_pb2.py'), logger=logger)

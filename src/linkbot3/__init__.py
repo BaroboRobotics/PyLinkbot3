@@ -50,7 +50,7 @@ class Linkbot():
     LED = 3
     BUZZER = 4
     
-    def __init__(self, serial_id='LOCL'):
+    def __init__(self, serial_id=None):
         ''' Create a new Linkbot handle.
 
         :param serial_id: The 4 digit alpha-numeric unique Linkbot identifier
