@@ -13,7 +13,7 @@ README = codecs.open(os.path.join(here, 'README.txt'), encoding='utf8').read()
 setup (name = 'PyLinkbot3',
        author = 'David Ko',
        author_email = 'david@barobo.com',
-       version = '3.1.13',
+       version = '3.1.14',
        description = "This is a pure Python implementation of PyLinkbot. See http://github.com/BaroboRobotics/PyLinkbot",
        long_description = README,
        package_dir = {'':'src'},
