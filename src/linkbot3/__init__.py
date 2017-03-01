@@ -187,6 +187,19 @@ class Linkbot():
         '''
         return util.run_linkbot_coroutine(self._proxy.set_peripherals_reset(peripheral_mask, mask), self._loop)
 
+    def get_bc_master(self):
+        '''
+        Gets the master's serial ID. If the robot is not part of a
+        bump-connected group, returns None.
+        '''
+        return util.run_linkbot_coroutine(self._proxy.get_bc_master(), self._loop)
+
+    def get_bc_remotes(self):
+        '''
+        Gets a bumpconnected robot's list of remote robots
+        '''
+        return util.run_linkbot_coroutine(self._proxy.get_bc_remotes(), self._loop)
+
     def version(self):
         '''
         Get the firmware version

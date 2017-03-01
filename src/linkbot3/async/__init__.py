@@ -380,6 +380,38 @@ class AsyncLinkbot():
         args_obj.mask = mask
         fut = yield from self._proxy.setResetOnDisconnect(args_obj)
         return fut
+
+    @asyncio.coroutine
+    def get_bc_master(self):
+        '''
+        Gets the master's serial ID. If the robot is not part of a
+        bump-connected group, returns None.
+        '''
+        def conv(payload):
+            if payload.HasField('serialId'):
+                return payload.serialId.value
+            else:
+                return None
+        fut = yield from self._proxy.getBCMaster()
+        user_fut = asyncio.Future()
+        util.chain_futures(fut, user_fut, conv=conv)
+        return user_fut
+
+    @asyncio.coroutine
+    def get_bc_remotes(self):
+        '''
+        Gets a bumpconnect robot's list of remote robots.
+        '''
+        def conv(payload):
+            remotes = []
+            for remote in payload.serialId:
+                remotes.append(remote.value)
+            return remotes
+
+        fut = yield from self._proxy.getBCRemotes()
+        user_fut = asyncio.Future()
+        util.chain_futures(fut, user_fut, conv=conv)
+        return user_fut
     
     @asyncio.coroutine    
     def __joint_event(self, payload):
