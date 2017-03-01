@@ -200,6 +200,12 @@ class Linkbot():
         '''
         return util.run_linkbot_coroutine(self._proxy.get_bc_remotes(), self._loop)
 
+    def get_bc_poses(self):
+        '''
+        Gets a bumpconnected robot's list of poses
+        '''
+        return util.run_linkbot_coroutine(self._proxy.get_bc_poses(), self._loop)
+
     def version(self):
         '''
         Get the firmware version

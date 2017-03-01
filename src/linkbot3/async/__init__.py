@@ -412,6 +412,23 @@ class AsyncLinkbot():
         user_fut = asyncio.Future()
         util.chain_futures(fut, user_fut, conv=conv)
         return user_fut
+
+    @asyncio.coroutine
+    def get_bc_poses(self):
+        '''
+        Get a list of a robot's saved poses
+        '''
+        def conv(payload):
+            poses = []
+            for pose in payload.angles:
+                angles = (pose.a1, pose.a2, pose.a2)
+                poses.append( tuple(map(util.rad2deg, angles)) )
+            return poses
+
+        fut = yield from self._proxy.getBCPoses()
+        user_fut = asyncio.Future()
+        util.chain_futures(fut, user_fut, conv=conv)
+        return user_fut
     
     @asyncio.coroutine    
     def __joint_event(self, payload):
