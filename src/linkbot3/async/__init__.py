@@ -237,6 +237,7 @@ class AsyncLinkbot():
             self._eeprom_obj = yield from peripherals.Eeprom.create(self)
             self._led = yield from peripherals.Led.create(self)
             self._motors = yield from peripherals.Motors.create(self)
+            self._twi = yield from peripherals.Twi.create(self)
             self._serial_id = serial_id
 
             # Enable joint events
@@ -324,6 +325,15 @@ class AsyncLinkbot():
         or similar. Also see :class:`linkbot3.async.peripherals.Motor`
         """
         return self._motors
+
+    @property
+    def twi(self):
+        """
+        Access the I2C two-wire interface of the Linkbot.
+
+        See :class:`linkbot3.async.peripherals.Twi` .
+        """
+        return self._twi
 
     @asyncio.coroutine
     def reboot(self):

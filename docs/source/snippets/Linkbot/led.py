@@ -1,9 +1,12 @@
 import linkbot3 as linkbot
 import math
 import time
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 # My Linkbot's ID is 'ZRG6'
-l = linkbot.Linkbot('ZRG6')
+l = linkbot.Linkbot('X4VZ')
 
 start_time = time.time()
 # Run a loop for 10 seconds

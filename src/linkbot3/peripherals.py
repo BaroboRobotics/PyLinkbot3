@@ -13,7 +13,8 @@ __all__ = [ 'Accelerometer',
             'Eeprom',
             'Led',
             'Motor', 
-            'Motors']
+            'Motors',
+            'Twi']
 
 class Peripheral():
     '''
@@ -758,11 +759,10 @@ class Motors():
                 self._amotors.stop(mask=mask), self._loop)
 
 class Twi():
-    def __init__(self, async_twi, loop):
-        self._proxy = async_twi
-        self._loop = loop
+    def __init__(self, linkbot_parent):
+        self._proxy = linkbot_parent._proxy.twi
+        self._loop = linkbot_parent._loop
 
-    @asyncio.coroutine
     def read(self, address, size):
         '''
         Read from an attached TWI device.
@@ -777,7 +777,6 @@ class Twi():
                 self._proxy.read(address, size),
                 self._loop)
 
-    @asyncio.coroutine
     def write(self, address, bytestring):
         '''
         Write to an attached TWI device.
@@ -789,7 +788,6 @@ class Twi():
                 self._proxy.write(address, bytestring),
                 self._loop)
     
-    @asyncio.coroutine
     def write_read(self, write_addr, write_data, recv_size):
         '''
         Write and read from a TWI device in one step without releasing the TWI

@@ -1186,9 +1186,9 @@ class Motors:
 class Twi:
     @classmethod
     @asyncio.coroutine
-    def create(cls, proxy):
+    def create(cls, asynclinkbot_parent):
         self = cls()
-        self._proxy = proxy
+        self._proxy = asynclinkbot_parent._proxy
         return self
 
     @asyncio.coroutine

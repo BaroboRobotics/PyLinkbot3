@@ -11,7 +11,7 @@ import math
 import os
 import websockets
 
-__all__ = ['FormFactor', 'Linkbot', 'Daemon', 'CLinkbot']
+__all__ = ['FormFactor', 'Linkbot', 'Daemon', 'CLinkbot', 'ArduinoLinkbot']
 __all__ += async.__all__
 
 class Daemon():
@@ -73,6 +73,7 @@ class Linkbot():
         self._eeprom_obj = Eeprom(self)
         self._led = Led(self)
         self._motors = Motors(self)
+        self._twi = Twi(self)
         self._serial_id = serial_id
 
     @property
@@ -165,6 +166,15 @@ class Linkbot():
         or similar. Also see :class:`linkbot3.peripherals.Motor`
         """
         return self._motors
+
+    @property
+    def twi(self):
+        """
+        Access the I2C two-wire interface of the Linkbot.
+
+        See :class:`linkbot3.peripherals.Twi` .
+        """
+        return self._twi
 
     def reboot(self):
         util.run_linkbot_coroutine(
@@ -900,6 +910,65 @@ class CLinkbot(Linkbot):
 
     def disable_encoder_events(self):
         self.motors.set_event_handler(None)
+
+class ArduinoLinkbot(Linkbot):
+    TWI_ADDR = 0x02
+
+    class PinMode:
+        input = 0
+        output = 1
+        input_pullup = 2
+
+    class Command:
+        header = 0x22
+        register_access = 0x01
+        pin_mode = 0x02
+        digital_write = 0x03
+        digital_read = 0x04
+        analog_write = 0x05
+        analog_read = 0x06
+        analog_ref = 0x07
+
+    def analog_write(self, pin, value):
+        buf = bytes([
+            self.Command.header,
+            self.Command.analog_write, 
+            pin, 
+            value])
+        self.twi.write(self.TWI_ADDR, buf)
+
+    def analog_read(self, pin):
+        buf = bytes([
+            self.Command.header,
+            self.Command.analog_read, 
+            pin])
+        data = self.twi.write_read(self.TWI_ADDR, buf, 2)
+        value = (data[0]<<8) + data[1]
+        return value
+
+    def digital_write(self, pin, value):
+        buf = bytes([
+            self.Command.header,
+            self.Command.digital_write, 
+            pin, 
+            value])
+        self.twi.write(self.TWI_ADDR, buf)
+    
+    def digital_read(self, pin):
+        buf = bytes([
+            self.Command.header,
+            self.Command.digital_read, 
+            pin])
+        value = self.twi.write_read(self.TWI_ADDR, buf, 1)
+        return value[0]
+
+    def pin_mode(self, pin, mode):
+        buf = bytes([
+            self.Command.header,
+            self.Command.pin_mode, 
+            pin, 
+            mode])
+        self.twi.write(self.TWI_ADDR, buf)
 
 class PrexChannel(metaclass=util.Singleton):
     def __init__(self):
