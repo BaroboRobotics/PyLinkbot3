@@ -892,6 +892,34 @@ class CLinkbot(Linkbot):
         '''Immediately stop and relax all joints on the Linkbot.'''
         self.motors.stop(mask=mask)
 
+    def turn_left(self, angle, radius, track_length):
+        '''
+        Turn a two-wheeled robot left by a number of degrees.
+
+        :param angle: The number of degrees you want to turn a two-wheeled Linkbot to the left
+        :param radius: The radius of the wheels
+        :param track_length: The distance between the wheels
+        '''
+        diameter = radius*2
+        self.motors.move([
+            track_length*(-1*angle)/diameter,
+            0,
+            track_length*(-1*angle)/diameter])
+
+    def turn_right(self, angle, radius, track_length):
+        '''
+        Turn a two-wheeled robot right by a number of degrees.
+
+        :param angle: The number of degrees you want to turn a two-wheeled Linkbot to the right
+        :param radius: The radius of the wheels
+        :param track_length: The distance between the wheels
+        '''
+        diameter = radius*2
+        self.motors.move([
+            track_length*(angle)/diameter,
+            0,
+            track_length*(angle)/diameter])
+
     # Events
     def enable_accelerometer_events(self, callback, granularity=0.05):
         self.accelerometer.set_event_handler(callback, granularity)

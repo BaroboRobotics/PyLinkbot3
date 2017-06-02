@@ -552,9 +552,18 @@ class Motor(Peripheral):
         This function blocks until the motor is either in a ```COAST``` state or
         ```HOLD``` state.
         '''
-        return util.run_linkbot_coroutine(
-                self._proxy.move_wait(),
-                self._loop)
+        # We can't use util.run_linkbot_coroutine here because it attaches a
+        # timeout to the future. Instead, we should just wait on the future
+        # forever.
+        #result = util.run_coroutine_threadsafe(asyncio.wait_for(self._proxy.move_wait(), None), self._loop)
+        #return result.result()
+
+        coro = self._proxy.move_wait()
+        fut = util.run_coroutine_threadsafe(coro, self._loop)
+        fut2 = fut.result(timeout=None)
+        result = util.run_coroutine_threadsafe(
+                asyncio.wait_for(fut2, timeout=None), self._loop)
+        return result.result()
 
 class Motors():
     def __init__(self, linkbot_parent, motor_class=Motor):
@@ -665,8 +674,18 @@ class Motors():
         ``mask`` argument is similar to the ``mask`` argument in 
         :func:`linkbot3.peripherals.Motors.move`.
         '''
-        return util.run_linkbot_coroutine(
-                self._amotors.move_wait(mask=mask), self._loop)
+        
+        # We can't use util.run_linkbot_coroutine here because it attaches a
+        # timeout to the future. Instead, we should just wait on the future
+        # forever.
+        #return util.run_linkbot_coroutine(
+        #        self._amotors.move_wait(mask=mask), self._loop)
+        coro = self._amotors.move_wait(mask=mask)
+        fut = util.run_coroutine_threadsafe(coro, self._loop)
+        fut2 = fut.result(timeout=None)
+        result = util.run_coroutine_threadsafe(
+                asyncio.wait_for(fut2, timeout=None), self._loop)
+        return result.result()
 
     def reset(self):
         ''' Reset the revolution-counter on the Linkbot.
