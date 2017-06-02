@@ -46,6 +46,24 @@ LINKBOT_DAEMON_HOSTPORT="hostname:port" # Makes PyLinkbot use the specified
 CHANGES
 =======
 
+Version 3.1.15
+--------------
+* Added CLinkbot.turn_left() and CLinkbot.turn_right()
+* Fixed bug in move_wait() waiting for long running movements
+
+Version 3.1.14
+--------------
+* Added CLinkbot class.
+
+Version 3.1.13
+--------------
+* Added way to accept new robot connections by reading serial ID's from an
+  environment variable.
+
+Version 3.1.12
+--------------
+* Added method to reset peripherals on disconnect.
+
 Version 3.1.11
 --------------
 * Added drive_* functions to CLinkbot class, based on C-STEM API.
