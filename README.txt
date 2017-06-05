@@ -46,6 +46,12 @@ LINKBOT_DAEMON_HOSTPORT="hostname:port" # Makes PyLinkbot use the specified
 CHANGES
 =======
 
+Version 3.1.16
+--------------
+* Added CLinkbot.turn_left_nb() and CLinkbot.turn_right_nb()
+* Gave "radius" and "tracklength" arguments for turn_* functions default values
+  of 1.75 and 3.7, respectively
+
 Version 3.1.15
 --------------
 * Added CLinkbot.turn_left() and CLinkbot.turn_right()
