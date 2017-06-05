@@ -892,7 +892,7 @@ class CLinkbot(Linkbot):
         '''Immediately stop and relax all joints on the Linkbot.'''
         self.motors.stop(mask=mask)
 
-    def turn_left(self, angle, radius, track_length):
+    def turn_left(self, angle, radius=1.75, track_length=3.7):
         '''
         Turn a two-wheeled robot left by a number of degrees.
 
@@ -906,7 +906,22 @@ class CLinkbot(Linkbot):
             0,
             track_length*(-1*angle)/diameter])
 
-    def turn_right(self, angle, radius, track_length):
+    def turn_left_nb(self, angle, radius=1.75, track_length=3.7):
+        '''
+        Non-blocking version of :func:`CLinkbot.turn_left`.
+
+        :param angle: The number of degrees you want to turn a two-wheeled Linkbot to the left
+        :param radius: The radius of the wheels
+        :param track_length: The distance between the wheels
+        '''
+        diameter = radius*2
+        self.motors.move([
+            track_length*(-1*angle)/diameter,
+            0,
+            track_length*(-1*angle)/diameter],
+            wait=False)
+
+    def turn_right(self, angle, radius=1.75, track_length=3.7):
         '''
         Turn a two-wheeled robot right by a number of degrees.
 
@@ -919,6 +934,21 @@ class CLinkbot(Linkbot):
             track_length*(angle)/diameter,
             0,
             track_length*(angle)/diameter])
+
+    def turn_right_nb(self, angle, radius=1.75, track_length=3.7):
+        '''
+        Non-blocking version of :func:`CLinkbot.turn_right`.
+
+        :param angle: The number of degrees you want to turn a two-wheeled Linkbot to the right
+        :param radius: The radius of the wheels
+        :param track_length: The distance between the wheels
+        '''
+        diameter = radius*2
+        self.motors.move([
+            track_length*(angle)/diameter,
+            0,
+            track_length*(angle)/diameter],
+            wait=False)
 
     # Events
     def enable_accelerometer_events(self, callback, granularity=0.05):
