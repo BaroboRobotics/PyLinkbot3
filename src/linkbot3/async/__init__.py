@@ -196,23 +196,6 @@ class _AsyncLinkbot(rb.Proxy):
     def __log(self, msg, logtype='info'):
         getattr(logging, logtype)(self._serial_id + ': ' + msg)
 
-    @asyncio.coroutine
-    def event_handler(self, payload):
-        joint = payload.encoder
-        value = payload.value
-        timestamp = payload.timestamp
-        try:
-            yield from self._handlers[joint](util.rad2deg(value), timestamp)
-        except IndexError:
-            # Don't care if the callback doesn't exist
-            pass
-        except TypeError:
-            pass
-
-    def set_event_handler(self, index, callback):
-        assert(index >= 0 and index < 3)
-        self._handlers[index] = callback
-
 class AsyncLinkbot():
     @classmethod
     @asyncio.coroutine
