@@ -5,6 +5,8 @@ import ribbonbridge as rb
 import sfp
 import sys
 import websockets
+import daemon_pb2
+import robot_pb2
 
 from . import peripherals
 from .. import _util as util
@@ -17,6 +19,27 @@ if sys.version_info < (3,4,4):
 __all__ = ['AsyncLinkbot', 'config', 'AsyncDaemon']
 
 _dirname = os.path.dirname(os.path.realpath(__file__))
+
+class RpcProxy():
+    def __init__(self, pb_module):
+        self._members = {}
+        for key,value in pb_module.items():
+            try:
+                if hasattr( value, 'In' ) and hasattr( value, 'Out', ):
+                    self._members[key] = value
+            except:
+                pass
+
+    def serialize(self, pb_in):
+        '''
+        This function should take an RPC "In" object and return the raw bytes
+        that should be sent to the RPC server. For example, in the robot
+        interface, pb_in might be an instance of "GetFormFactor.In". This
+        function should return an object of type "bytearray" serialized from a
+        ClientToRobot object.
+        '''
+        raise NotImplementedError('Required method not implemented.')
+
 
 def config(**kwargs):
     ''' Configure linkbot module settings
@@ -56,15 +79,7 @@ class _DaemonProxy(rb.Proxy):
     def rb_emit_to_server(self, bytestring):
         yield from self._protocol.send(bytestring)
 
-class _AsyncLinkbot(rb.Proxy):
-    '''
-    def __init__(self, *args, **kw):
-        super().__init__(*args, **kw)
-
-    def __del__(self):
-        self.close()
-    '''
-
+class _AsyncLinkbot():
     @classmethod
     @asyncio.coroutine
     def create(cls, serial_id):
@@ -75,7 +90,7 @@ class _AsyncLinkbot(rb.Proxy):
 
         logging.info('Creating async Linkbot handle to ID:{}'.format(serial_id))
         logger=logging.getLogger('RBProxy.'+serial_id)
-        self = cls( os.path.join(_dirname, 'robot_pb2.py'), logger=logger)
+        self = cls()
 
         serial_id = serial_id.upper()
         self._serial_id = serial_id

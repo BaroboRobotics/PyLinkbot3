@@ -23,6 +23,6 @@ async def task(serial_id):
     await l.accelerometer.set_event_handler()
 
 loop = asyncio.get_event_loop()
-loop.run_until_complete(task('7944'))
+loop.run_until_complete(task('ZRG6'))
 loop.close()
 
