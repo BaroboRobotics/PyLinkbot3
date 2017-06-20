@@ -48,10 +48,17 @@ class RpcProxy():
                 pass
         self._requests = {}
         self._request_id = 0
+        # self._event_handlers{ event_name i.e. dongleEvent : coroutine(DongleEvent) }
+        self._event_handlers = {}
         self.logger=logging.getLogger('RBProxy')
 
+    # Add a callback handler for Rpc events. For instance, for the daemon, one might do
+    #    on("dongleEvent", coro)
+    def on(self, name, coro):
+        self._event_handlers[name] = coro
+
     def rb_get_args_obj(self, name):
-        return self._members[name]['In']
+        return getattr(self._members[name], 'In')()
 
     def __getattr__(self, name):
         if name not in self._members:
@@ -87,18 +94,23 @@ class RpcProxy():
         self.logger.info('Scheduled call to: {}'.format(procedure_name))
         return user_fut
 
-    def _handle_rpcReply(self, rpcReply):
-        # Call this function to handle rpc replies
-        rpc_reply_id = rpcReply.requestId
-        rpc_method = rpcReply.WhichOneof('arg')
-        request_fut = self._requests[rpc_reply_id]
-        request_fut.set_result(getattr(rpcReply, rpcReply.WhichOneof('arg')))
+    def _handle_rpcReply(self, rpc_name, rpcReply):
+        # This function should turn rpcReply objects into an instantiation of
+        # the child oneof object.
+        try:
+            return getattr(rpcReply, rpcReply.WhichOneof('arg'))
+        except KeyError as e:
+            self.logger.warning('Received unexpected reply. Current requests: {}'.format(self._requests.items()))
 
-    def deliver(self, bytestring):
-        '''
-        Pass all data from underlying transport to this function.
-        '''
-        raise NotImplementedError('Required method not implemented.')
+    def deliver(self, rpc_reply):
+        # If we receive rpcReply objects from the server, pass them to this function for processing.
+        logging.info('RpcProxy.deliver()')
+        try:
+            request_id = rpc_reply.requestId
+            fut = self._requests.pop(request_id)
+            fut.set_result( rpc_reply )
+        except KeyError:
+            logging.warning('Received spurious rpcReply with id: {}'.format(request_id))
 
     def serialize(self, method_name, pb_in, request_id):
         '''
@@ -130,23 +142,51 @@ class Daemon(RpcProxy):
         c_to_d.rpcRequest.CopyFrom(request)
         return c_to_d.SerializeToString()
 
+    def set_io(self, io):
+        self.protocol = io
+        # Start the in-pump
+        self.__pump_handle = asyncio.ensure_future(self.pump())
+
     @asyncio.coroutine
     def emit_to_server(self, bytestring):
         # This override requires the "protocol" field to be set, and expects it
         # to be an asyncio Protocol object
         yield from self.protocol.send(bytestring)
 
-    def deliver(self, bytestring):
+    @asyncio.coroutine
+    def pump(self):
         '''
         Pass all data from underlying transport to this function.
         '''
-        daemon_to_client = daemon_pb2.DaemonToClient()
-        dameon_to_client.ParseFromString(bytestring)
-        method = daemon_to_client.WhichOneof('arg')
-        if method:
-            func = getattr(self, '_handle_'+method)
-            func( getattr(daemon_to_client, method) )
-
+        logging.info('Daemon in-pump starting...')
+        while True:
+            try:
+                msg = yield from self.protocol.recv()
+                if msg is None:
+                    continue
+                logging.info('Daemon in-pump received message...')
+            except asyncio.CancelledError:
+                logging.warning('Daemon consumer received asyncio.CancelledError')
+                return
+            except websockets.exceptions.ConnectionClosed:
+                logging.info('Daemon consumer connection closed.')
+                return
+            daemon_to_client = self._pb_module.DaemonToClient()
+            daemon_to_client.ParseFromString(msg)
+            method = daemon_to_client.WhichOneof('arg')
+            logging.info('Parsed DaemonToClient message. SubMessage: {}'.format(daemon_to_client.WhichOneof('arg')))
+            if method == "rpcReply":
+                logging.info('Daemon in-pump delivering message to RpcProxy...')
+                self.deliver(daemon_to_client.rpcReply)
+                logging.info('Daemon in-pump delivering message to RpcProxy...done')
+            else:
+                try:
+                    arg = getattr(daemon_to_client, method)
+                    yield from self._event_handlers[method](arg)
+                except:
+                    # FIXME
+                    logging.warning('Could not handle exception')
+                    raise
 
 def config(**kwargs):
     ''' Configure linkbot module settings
@@ -186,7 +226,7 @@ class _DaemonProxy(rb.Proxy):
     def rb_emit_to_server(self, bytestring):
         yield from self._protocol.send(bytestring)
 
-class _AsyncLinkbot():
+class _AsyncLinkbot(RpcProxy):
     @classmethod
     @asyncio.coroutine
     def create(cls, serial_id):
@@ -197,13 +237,15 @@ class _AsyncLinkbot():
 
         logging.info('Creating async Linkbot handle to ID:{}'.format(serial_id))
         logger=logging.getLogger('RBProxy.'+serial_id)
-        self = cls()
+        self = cls(load_pb2_file('daemon_pb2.py').robot__pb2)
 
         serial_id = serial_id.upper()
         self._serial_id = serial_id
         self._loop = asyncio.get_event_loop()
 
         self.__daemon = Daemon()
+
+        self.__daemon.on('receive', self.on_receive)
 
         if my_config.use_websockets:
             self.__log('Creating Websocket connection to daemon...')
@@ -217,9 +259,8 @@ class _AsyncLinkbot():
         self.__log('Daemon TCP connection established.')
         protocol.connection_lost = self.__connection_closed
 
-        self.__daemon.protocol = protocol
+        self.__daemon.set_io(protocol)
         self._daemon_protocol = protocol
-        daemon_consumer = asyncio.ensure_future(self.__daemon_consumer(protocol))
         '''
         self.__log('Initiating daemon handshake...')
         yield from asyncio.sleep(0.5)
@@ -233,28 +274,20 @@ class _AsyncLinkbot():
         _serial_id = args.serialIds.add()
         _serial_id.value = serial_id
         result_fut = yield from self.__daemon.addRobotRefs(args)
-        yield from result_fut
+        self.__log('Waiting for addRobotRefs result...')
+        status_result = yield from result_fut
+        self.__log('Waiting for addRobotRefs result...done')
+        try:
+            assert(status_result.status == self.__daemon._pb_module.OK)
+        except:
+            self.__log('Received unexpected status from daemon: {}'.format(repr(status)))
+            raise
         return self
 
     @asyncio.coroutine
     def disconnect(self):
         yield from self._linkbot_protocol.close()
         yield from self._daemon_protocol.close()
-
-    @asyncio.coroutine
-    def __daemon_consumer(self, protocol):
-        while True:
-            try:
-                msg = yield from protocol.recv()
-                if msg is None:
-                    continue
-            except asyncio.CancelledError:
-                logging.warning('Daemon consumer received asyncio.CancelledError')
-                return
-            except websockets.exceptions.ConnectionClosed:
-                logging.info('Daemon consumer connection closed.')
-                return
-            yield from self.__daemon.rb_deliver(msg)
 
     @asyncio.coroutine
     def __linkbot_consumer(self, protocol):
@@ -285,9 +318,28 @@ class _AsyncLinkbot():
             self.__log('Remote closed connection gracefully.')
         self.rb_close()
 
+    def serialize(self, method_name, pb_in, request_id):
+        request = self._pb_module.RpcRequest()
+        getattr(request, method_name).CopyFrom(pb_in)
+        request.requestId = request_id
+        c_to_r = self._pb_module.ClientToRobot()
+        c_to_r.rpcRequest.CopyFrom(request)
+        return c_to_r
+
     @asyncio.coroutine
-    def rb_emit_to_server(self, bytestring):
-        yield from self._linkbot_protocol.send(bytestring)
+    def emit_to_server(self, client_to_robot):
+        self.__log('emit_to_server')
+        transmit = self.__daemon.rb_get_args_obj('transmit')
+        serial_id = transmit.destinations.add()
+        serial_id.value = self._serial_id
+        transmit.payload.CopyFrom(client_to_robot)
+        self.__log('robot emitting "transmit" message to daemon...')
+        fut = yield from self.__daemon.transmit( transmit )
+        yield from fut
+
+    @asyncio.coroutine
+    def on_receive(self, stuff):
+        self.__log('_AsyncLinkbot received data from robot!')
 
     def __log(self, msg, logtype='info'):
         getattr(logging, logtype)(self._serial_id + ': ' + msg)
@@ -306,7 +358,9 @@ class AsyncLinkbot():
             self = cls()
             self._proxy = yield from asyncio.wait_for( _AsyncLinkbot.create(serial_id), 
                                                   util.DEFAULT_TIMEOUT )
-            self.rb_add_broadcast_handler = self._proxy.rb_add_broadcast_handler
+            form_factor_fut = yield from self._proxy.getFormFactor()
+            form_factor = yield from form_factor_fut
+            self.rb_add_broadcast_handler = self._proxy.on
             self.close = self._proxy.close
             self.enableButtonEvent = self._proxy.enableButtonEvent
             self._accelerometer = yield from peripherals.Accelerometer.create(self)
