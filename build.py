@@ -42,6 +42,7 @@ class NanoPbResource(ExternalResource):
         pb_files = [
             os.path.join('linkbot-interfaces', 'robot.proto'),
             os.path.join('linkbot-interfaces', 'daemon.proto'),
+            os.path.join('linkbot-interfaces', 'commontypes.proto'),
             os.path.join('python-prex', 'proto', 'message.proto'),
         ]
         for f in pb_files:

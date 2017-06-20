@@ -1,12 +1,12 @@
 import asyncio
+import functools
+import importlib.util
 import logging
 import os
 import ribbonbridge as rb
 import sfp
 import sys
 import websockets
-import daemon_pb2
-import robot_pb2
 
 from . import peripherals
 from .. import _util as util
@@ -20,17 +20,87 @@ __all__ = ['AsyncLinkbot', 'config', 'AsyncDaemon']
 
 _dirname = os.path.dirname(os.path.realpath(__file__))
 
+def load_pb2_file(filename):
+    filepath = os.path.abspath(os.path.join(_dirname, filename))
+    sys.path.append(os.path.dirname(filepath))
+
+    basename = os.path.basename(filepath) 
+    modulename = os.path.splitext(basename)[0]
+    if sys.version_info >= (3,5):
+        spec = importlib.util.spec_from_file_location(modulename,
+                filepath)
+        pb2 = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(pb2)
+        return pb2
+    else:
+        from importlib.machinery import SourceFileLoader
+        return SourceFileLoader(modulename, filepath).load_module()
+
 class RpcProxy():
     def __init__(self, pb_module):
         self._members = {}
-        for key,value in pb_module.items():
+        self._pb_module = pb_module
+        for key,value in pb_module.__dict__.items():
             try:
                 if hasattr( value, 'In' ) and hasattr( value, 'Out', ):
                     self._members[key] = value
             except:
                 pass
+        self._requests = {}
+        self._request_id = 0
+        self.logger=logging.getLogger('RBProxy')
 
-    def serialize(self, pb_in):
+    def rb_get_args_obj(self, name):
+        return self._members[name]['In']
+
+    def __getattr__(self, name):
+        if name not in self._members:
+            raise AttributeError('{} is not a method of this RPC proxy.'
+                    .format(name))
+        return functools.partial(self._handle_call, name)
+
+    @asyncio.coroutine
+    def _handle_call(self, procedure_name, pb2_obj=None, **kwargs):
+        '''
+        Handle a call.
+        '''
+        if not pb2_obj:
+            pb2_obj = self._members[procedure_name].In()
+            for k,v in kwargs.items():
+                setattr(pb2_obj, k, v)
+        fut = asyncio.Future()
+        self._requests[self._request_id] = fut
+        
+        user_fut = asyncio.Future()
+        util.chain_futures(fut, user_fut, 
+                functools.partial(
+                    self._handle_rpcReply,
+                    procedure_name)
+                )
+
+        # Serialize and send the message to the RPC server
+        #result = yield from self._rpc.fire(procedure_name, pb2_obj.SerializeToString())
+        b = self.serialize(procedure_name, pb2_obj, self._request_id)
+        yield from self.emit_to_server(b)
+        self._request_id += 1
+
+        self.logger.info('Scheduled call to: {}'.format(procedure_name))
+        return user_fut
+
+    def _handle_rpcReply(self, rpcReply):
+        # Call this function to handle rpc replies
+        rpc_reply_id = rpcReply.requestId
+        rpc_method = rpcReply.WhichOneof('arg')
+        request_fut = self._requests[rpc_reply_id]
+        request_fut.set_result(getattr(rpcReply, rpcReply.WhichOneof('arg')))
+
+    def deliver(self, bytestring):
+        '''
+        Pass all data from underlying transport to this function.
+        '''
+        raise NotImplementedError('Required method not implemented.')
+
+    def serialize(self, method_name, pb_in, request_id):
         '''
         This function should take an RPC "In" object and return the raw bytes
         that should be sent to the RPC server. For example, in the robot
@@ -39,6 +109,43 @@ class RpcProxy():
         ClientToRobot object.
         '''
         raise NotImplementedError('Required method not implemented.')
+
+    @asyncio.coroutine
+    def emit_to_server(self, bytestring):
+        '''
+        This function should take the "bytestring" argument and send it to the
+        connected RPC server.
+        '''
+        raise NotImplementedError('Required method not implemented.')
+
+class Daemon(RpcProxy):
+    def __init__(self):
+        super().__init__(load_pb2_file('daemon_pb2.py'))
+
+    def serialize(self, method_name, pb_in, request_id):
+        request = self._pb_module.RpcRequest()
+        getattr(request, method_name).CopyFrom(pb_in)
+        request.requestId = request_id
+        c_to_d = self._pb_module.ClientToDaemon()
+        c_to_d.rpcRequest.CopyFrom(request)
+        return c_to_d.SerializeToString()
+
+    @asyncio.coroutine
+    def emit_to_server(self, bytestring):
+        # This override requires the "protocol" field to be set, and expects it
+        # to be an asyncio Protocol object
+        yield from self.protocol.send(bytestring)
+
+    def deliver(self, bytestring):
+        '''
+        Pass all data from underlying transport to this function.
+        '''
+        daemon_to_client = daemon_pb2.DaemonToClient()
+        dameon_to_client.ParseFromString(bytestring)
+        method = daemon_to_client.WhichOneof('arg')
+        if method:
+            func = getattr(self, '_handle_'+method)
+            func( getattr(daemon_to_client, method) )
 
 
 def config(**kwargs):
@@ -96,8 +203,7 @@ class _AsyncLinkbot():
         self._serial_id = serial_id
         self._loop = asyncio.get_event_loop()
 
-        self.__daemon = _DaemonProxy(
-                os.path.join(_dirname, 'daemon_pb2.py'))
+        self.__daemon = Daemon()
 
         if my_config.use_websockets:
             self.__log('Creating Websocket connection to daemon...')
@@ -111,48 +217,23 @@ class _AsyncLinkbot():
         self.__log('Daemon TCP connection established.')
         protocol.connection_lost = self.__connection_closed
 
-        self.__daemon.set_protocol(protocol)
+        self.__daemon.protocol = protocol
         self._daemon_protocol = protocol
         daemon_consumer = asyncio.ensure_future(self.__daemon_consumer(protocol))
+        '''
         self.__log('Initiating daemon handshake...')
         yield from asyncio.sleep(0.5)
         yield from self.__daemon.rb_connect()
         self.__log('Daemon handshake finished.')
+        '''
 
         yield from asyncio.sleep(0.5)
         self.__log('Resolving serial id: ' + serial_id)
-        args = self.__daemon.rb_get_args_obj('resolveSerialId')
-        args.serialId.value = serial_id
-        result_fut = yield from self.__daemon.resolveSerialId(args)
-        tcp_endpoint = yield from result_fut
-        if tcp_endpoint.status != rbcommon.OK:
-            self.logger.warning('Could not connect to robot: {}'.format(
-                rbcommon.Status.Name(tcp_endpoint.status)))
-            raise RuntimeError('Could not connect to remote robot: {}'.format(
-                rbcommon.Status.Name(tcp_endpoint.status)))
-        self.__log('Connecting to robot endpoint:'+my_config.daemon_host[0]+':'+str(tcp_endpoint.endpoint.port)) 
-        if my_config.use_websockets:
-            linkbot_protocol = yield from websockets.client.connect(
-                    'ws://'+my_config.daemon_host[0]+':'+str(tcp_endpoint.endpoint.port),
-                    loop=self._loop)
-        else:
-            (_, linkbot_protocol) = \
-                    yield from sfp.client.connect(
-                            tcp_endpoint.endpoint.address,
-                            tcp_endpoint.endpoint.port)
-        self.__linkbot_consumer_handle = \
-            asyncio.ensure_future(self.__linkbot_consumer(linkbot_protocol))
-        self.__log('Connected to robot endpoint.')
-        self._linkbot_protocol = linkbot_protocol
-        self.__log('Sending connect request to robot...')
-        yield from asyncio.sleep(0.5)
-        yield from self.rb_connect()
-        self.__log('Done sending connect request to robot.')
-
-        #Get the form factor
-        fut = yield from self.getFormFactor()
-        result_obj = yield from fut
-        self.form_factor = result_obj.value
+        args = self.__daemon._pb_module.addRobotRefs.In()
+        _serial_id = args.serialIds.add()
+        _serial_id.value = serial_id
+        result_fut = yield from self.__daemon.addRobotRefs(args)
+        yield from result_fut
         return self
 
     @asyncio.coroutine

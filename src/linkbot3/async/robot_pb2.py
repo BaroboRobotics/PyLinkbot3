@@ -19,108 +19,16 @@ import nanopb_pb2 as nanopb__pb2
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='robot.proto',
-  package='barobo.Robot',
+  package='linkbot.robot',
   syntax='proto2',
-  serialized_pb=_b('\n\x0brobot.proto\x12\x0c\x62\x61robo.Robot\x1a\x0cnanopb.proto\"G\n\x14getAccelerometerData\x1a\x04\n\x02In\x1a)\n\x06Result\x12\t\n\x01x\x18\x01 \x02(\x02\x12\t\n\x01y\x18\x02 \x02(\x02\x12\t\n\x01z\x18\x03 \x02(\x02\",\n\x0bgetLedColor\x1a\x04\n\x02In\x1a\x17\n\x06Result\x12\r\n\x05value\x18\x01 \x02(\r\",\n\x0bsetLedColor\x1a\x13\n\x02In\x12\r\n\x05value\x18\x01 \x02(\r\x1a\x08\n\x06Result\"3\n\x12getBuzzerFrequency\x1a\x04\n\x02In\x1a\x17\n\x06Result\x12\r\n\x05value\x18\x01 \x02(\x02\"3\n\x12setBuzzerFrequency\x1a\x13\n\x02In\x12\r\n\x05value\x18\x01 \x02(\x02\x1a\x08\n\x06Result\"3\n\x11\x65nableButtonEvent\x1a\x14\n\x02In\x12\x0e\n\x06\x65nable\x18\x01 \x02(\x08\x1a\x08\n\x06Result\"\xaa\x02\n\x12\x65nableEncoderEvent\x1a\x89\x02\n\x02In\x12\x43\n\nencoderOne\x18\x01 \x01(\x0b\x32/.barobo.Robot.enableEncoderEvent.In.SignalState\x12\x43\n\nencoderTwo\x18\x02 \x01(\x0b\x32/.barobo.Robot.enableEncoderEvent.In.SignalState\x12\x45\n\x0c\x65ncoderThree\x18\x03 \x01(\x0b\x32/.barobo.Robot.enableEncoderEvent.In.SignalState\x1a\x32\n\x0bSignalState\x12\x0e\n\x06\x65nable\x18\x01 \x02(\x08\x12\x13\n\x0bgranularity\x18\x02 \x02(\x02\x1a\x08\n\x06Result\"2\n\x10\x65nableJointEvent\x1a\x14\n\x02In\x12\x0e\n\x06\x65nable\x18\x01 \x02(\x08\x1a\x08\n\x06Result\"O\n\x18\x65nableAccelerometerEvent\x1a)\n\x02In\x12\x0e\n\x06\x65nable\x18\x01 \x02(\x08\x12\x13\n\x0bgranularity\x18\x02 \x02(\x02\x1a\x08\n\x06Result\"Z\n!setMotorControllerSafetyThreshold\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\rB\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"V\n\x1dsetMotorControllerSafetyAngle\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"Q\n\x18setMotorControllerAlphaI\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"Q\n\x18setMotorControllerAlphaF\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"P\n\x17setMotorControllerOmega\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"[\n\"setMotorControllerProportionalGain\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"Y\n setMotorControllerIntegratorGain\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"Y\n setMotorControllerDerivativeGain\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x08\n\x06Result\"Q\n\x14setResetOnDisconnect\x1a/\n\x02In\x12\x0c\n\x04mask\x18\x01 \x02(\r\x12\x1b\n\x13peripheralResetMask\x18\x02 \x02(\r\x1a\x08\n\x06Result\".\n\x11getBatteryVoltage\x1a\x04\n\x02In\x1a\x13\n\x06Result\x12\t\n\x01v\x18\x01 \x02(\x02\"4\n\tgetAdcRaw\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\rB\x07\x10\x01\x92?\x02\x10 \"L\n!getMotorControllerSafetyThreshold\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\rB\x07\x10\x01\x92?\x02\x10 \"H\n\x1dgetMotorControllerSafetyAngle\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"C\n\x18getMotorControllerAlphaI\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"C\n\x18getMotorControllerAlphaF\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"B\n\x17getMotorControllerOmega\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"M\n\"getMotorControllerProportionalGain\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"K\n getMotorControllerIntegratorGain\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"K\n getMotorControllerDerivativeGain\x1a\x04\n\x02In\x1a!\n\x06Result\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"N\n\x10getEncoderValues\x1a\x04\n\x02In\x1a\x34\n\x06Result\x12\x11\n\ttimestamp\x18\x01 \x02(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"f\n\x0egetJointStates\x1a\x04\n\x02In\x1aN\n\x06Result\x12\x11\n\ttimestamp\x18\x01 \x02(\r\x12\x31\n\x06values\x18\x02 \x03(\x0e\x32\x18.barobo.Robot.JointStateB\x07\x10\x01\x92?\x02\x10 \"\x85\x01\n\rgetFormFactor\x1a\x04\n\x02In\x1a?\n\x06Result\x12\x35\n\x05value\x18\x01 \x02(\x0e\x32&.barobo.Robot.getFormFactor.FormFactor\"-\n\nFormFactor\x12\x05\n\x01I\x10\x00\x12\x05\n\x01L\x10\x01\x12\x05\n\x01T\x10\x02\x12\n\n\x06\x44ONGLE\x10\x03\"\xbb\x02\n\x04Goal\x12%\n\x04type\x18\x01 \x02(\x0e\x32\x17.barobo.Robot.Goal.Type\x12\x0c\n\x04goal\x18\x02 \x02(\x02\x12\x31\n\ncontroller\x18\x03 \x01(\x0e\x32\x1d.barobo.Robot.Goal.Controller\x12\x0f\n\x07timeout\x18\x04 \x01(\x02\x12/\n\rmodeOnTimeout\x18\x05 \x01(\x0e\x32\x18.barobo.Robot.JointState\"0\n\x04Type\x12\x0c\n\x08\x41\x42SOLUTE\x10\x01\x12\x0c\n\x08RELATIVE\x10\x02\x12\x0c\n\x08INFINITE\x10\x03\"W\n\nController\x12\x07\n\x03PID\x10\x01\x12\x0c\n\x08\x43ONSTVEL\x10\x02\x12\n\n\x06SMOOTH\x10\x03\x12\t\n\x05\x41\x43\x43\x45L\x10\x04\x12\r\n\tCYCLOIDAL\x10\x05\x12\x0c\n\x08HARMONIC\x10\x06\"\x97\x01\n\x04move\x1a\x84\x01\n\x02In\x12(\n\x0cmotorOneGoal\x18\x01 \x01(\x0b\x32\x12.barobo.Robot.Goal\x12(\n\x0cmotorTwoGoal\x18\x02 \x01(\x0b\x32\x12.barobo.Robot.Goal\x12*\n\x0emotorThreeGoal\x18\x03 \x01(\x0b\x32\x12.barobo.Robot.Goal\x1a\x08\n\x06Result\"\"\n\x10resetEncoderRevs\x1a\x04\n\x02In\x1a\x08\n\x06Result\"$\n\x04stop\x1a\x12\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x1a\x08\n\x06Result\".\n\x0egetButtonState\x1a\x04\n\x02In\x1a\x16\n\x06Result\x12\x0c\n\x04mask\x18\x01 \x02(\r\"Q\n\x12getFirmwareVersion\x1a\x04\n\x02In\x1a\x35\n\x06Result\x12\r\n\x05major\x18\x01 \x02(\r\x12\r\n\x05minor\x18\x02 \x02(\r\x12\r\n\x05patch\x18\x03 \x02(\r\"A\n\x18getFirmwareVersionString\x1a\x04\n\x02In\x1a\x1f\n\x06Result\x12\x15\n\x05value\x18\x01 \x02(\tB\x06\x92?\x03\x08\x80\x01\"D\n\x0bwriteEeprom\x1a+\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x02(\r\x12\x14\n\x04\x64\x61ta\x18\x02 \x02(\x0c\x42\x06\x92?\x03\x08\x80\x01\x1a\x08\n\x06Result\"Q\n\nreadEeprom\x1a#\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x02(\r\x12\x0c\n\x04size\x18\x02 \x02(\r\x1a\x1e\n\x06Result\x12\x14\n\x04\x64\x61ta\x18\x01 \x02(\x0c\x42\x06\x92?\x03\x08\x80\x01\"A\n\x08writeTwi\x1a+\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x02(\r\x12\x14\n\x04\x64\x61ta\x18\x02 \x02(\x0c\x42\x06\x92?\x03\x08\x80\x01\x1a\x08\n\x06Result\"R\n\x07readTwi\x1a\'\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x02(\r\x12\x10\n\x08recvsize\x18\x02 \x02(\r\x1a\x1e\n\x06Result\x12\x14\n\x04\x64\x61ta\x18\x02 \x02(\x0c\x42\x06\x92?\x03\x08\x80\x01\"m\n\x0cwriteReadTwi\x1a=\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x02(\r\x12\x10\n\x08recvsize\x18\x02 \x02(\r\x12\x14\n\x04\x64\x61ta\x18\x03 \x02(\x0c\x42\x06\x92?\x03\x08\x80\x01\x1a\x1e\n\x06Result\x12\x14\n\x04\x64\x61ta\x18\x02 \x02(\x0c\x42\x06\x92?\x03\x08\x80\x01\"\x18\n\x06reboot\x1a\x04\n\x02In\x1a\x08\n\x06Result\"p\n\x0b\x62uttonEvent\x12\x11\n\ttimestamp\x18\x01 \x02(\r\x12$\n\x06\x62utton\x18\x02 \x02(\x0e\x32\x14.barobo.Robot.Button\x12(\n\x05state\x18\x03 \x02(\x0e\x32\x19.barobo.Robot.ButtonState\"A\n\x0c\x65ncoderEvent\x12\x11\n\ttimestamp\x18\x01 \x02(\r\x12\x0f\n\x07\x65ncoder\x18\x02 \x02(\r\x12\r\n\x05value\x18\x03 \x02(\x02\"H\n\x12\x61\x63\x63\x65lerometerEvent\x12\x11\n\ttimestamp\x18\x01 \x02(\r\x12\t\n\x01x\x18\x02 \x02(\x02\x12\t\n\x01y\x18\x03 \x02(\x02\x12\t\n\x01z\x18\x04 \x02(\x02\"f\n\njointEvent\x12\x11\n\ttimestamp\x18\x01 \x02(\r\x12\r\n\x05joint\x18\x02 \x02(\r\x12\'\n\x05\x65vent\x18\x03 \x02(\x0e\x32\x18.barobo.Robot.JointState\x12\r\n\x05\x61ngle\x18\x04 \x01(\x02\"B\n\x11\x64\x65\x62ugMessageEvent\x12\x11\n\ttimestamp\x18\x01 \x02(\r\x12\x1a\n\nbytestring\x18\x02 \x02(\tB\x06\x92?\x03\x08\x80\x01\")\n\x14\x63onnectionTerminated\x12\x11\n\ttimestamp\x18\x01 \x02(\r*8\n\nJointState\x12\t\n\x05\x43OAST\x10\x00\x12\x08\n\x04HOLD\x10\x01\x12\n\n\x06MOVING\x10\x02\x12\t\n\x05\x45RROR\x10\x04*!\n\x06\x42utton\x12\t\n\x05POWER\x10\x00\x12\x05\n\x01\x41\x10\x01\x12\x05\n\x01\x42\x10\x02*\x1f\n\x0b\x42uttonState\x12\x06\n\x02UP\x10\x00\x12\x08\n\x04\x44OWN\x10\x01')
+  serialized_pb=_b('\n\x0brobot.proto\x12\rlinkbot.robot\x1a\x0cnanopb.proto\"D\n\x14getAccelerometerData\x1a\x04\n\x02In\x1a&\n\x03Out\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01z\x18\x03 \x01(\x02\"+\n\x11getBatteryVoltage\x1a\x04\n\x02In\x1a\x10\n\x03Out\x12\t\n\x01v\x18\x01 \x01(\x02\"1\n\tgetAdcRaw\x1a\x04\n\x02In\x1a\x1e\n\x03Out\x12\x17\n\x06values\x18\x01 \x03(\rB\x07\x10\x01\x92?\x02\x10 \"+\n\x0egetButtonState\x1a\x04\n\x02In\x1a\x13\n\x03Out\x12\x0c\n\x04mask\x18\x01 \x01(\r\"0\n\x12getBuzzerFrequency\x1a\x04\n\x02In\x1a\x14\n\x03Out\x12\r\n\x05value\x18\x01 \x01(\x02\"K\n\x10getEncoderValues\x1a\x04\n\x02In\x1a\x31\n\x03Out\x12\x11\n\ttimestamp\x18\x01 \x01(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \">\n\x18getFirmwareVersionString\x1a\x04\n\x02In\x1a\x1c\n\x03Out\x12\x15\n\x05value\x18\x01 \x01(\tB\x06\x92?\x03\x08\x80\x01\"F\n\rgetFormFactor\x1a\x04\n\x02In\x1a/\n\x03Out\x12(\n\x05value\x18\x01 \x01(\x0e\x32\x19.linkbot.robot.FormFactor\"d\n\x0egetJointStates\x1a\x04\n\x02In\x1aL\n\x03Out\x12\x11\n\ttimestamp\x18\x01 \x01(\r\x12\x32\n\x06values\x18\x02 \x03(\x0e\x32\x19.linkbot.robot.JointStateB\x07\x10\x01\x92?\x02\x10 \")\n\x0bgetLedColor\x1a\x04\n\x02In\x1a\x14\n\x03Out\x12\r\n\x05value\x18\x01 \x01(\r\"?\n\x17getMotorControllerOmega\x1a\x04\n\x02In\x1a\x1e\n\x03Out\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"@\n\x18getMotorControllerAlphaI\x1a\x04\n\x02In\x1a\x1e\n\x03Out\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"@\n\x18getMotorControllerAlphaF\x1a\x04\n\x02In\x1a\x1e\n\x03Out\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"J\n\"getMotorControllerProportionalGain\x1a\x04\n\x02In\x1a\x1e\n\x03Out\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"H\n getMotorControllerIntegratorGain\x1a\x04\n\x02In\x1a\x1e\n\x03Out\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"H\n getMotorControllerDerivativeGain\x1a\x04\n\x02In\x1a\x1e\n\x03Out\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"I\n!getMotorControllerSafetyThreshold\x1a\x04\n\x02In\x1a\x1e\n\x03Out\x12\x17\n\x06values\x18\x01 \x03(\rB\x07\x10\x01\x92?\x02\x10 \"E\n\x1dgetMotorControllerSafetyAngle\x1a\x04\n\x02In\x1a\x1e\n\x03Out\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"M\n\x17setMotorControllerOmega\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x05\n\x03Out\"N\n\x18setMotorControllerAlphaI\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x05\n\x03Out\"N\n\x18setMotorControllerAlphaF\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x05\n\x03Out\"X\n\"setMotorControllerProportionalGain\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x05\n\x03Out\"V\n setMotorControllerIntegratorGain\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x05\n\x03Out\"V\n setMotorControllerDerivativeGain\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x05\n\x03Out\"W\n!setMotorControllerSafetyThreshold\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x12\x17\n\x06values\x18\x02 \x03(\rB\x07\x10\x01\x92?\x02\x10 \x1a\x05\n\x03Out\"S\n\x1dsetMotorControllerSafetyAngle\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x05\n\x03Out\"N\n\x14setResetOnDisconnect\x1a/\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x12\x1b\n\x13peripheralResetMask\x18\x02 \x01(\r\x1a\x05\n\x03Out\"\x1f\n\x10resetEncoderRevs\x1a\x04\n\x02In\x1a\x05\n\x03Out\"0\n\x12setBuzzerFrequency\x1a\x13\n\x02In\x12\r\n\x05value\x18\x01 \x01(\x02\x1a\x05\n\x03Out\")\n\x0bsetLedColor\x1a\x13\n\x02In\x12\r\n\x05value\x18\x01 \x01(\r\x1a\x05\n\x03Out\"!\n\x04stop\x1a\x12\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x1a\x05\n\x03Out\"\xbe\x02\n\x04Goal\x12&\n\x04type\x18\x01 \x01(\x0e\x32\x18.linkbot.robot.Goal.Type\x12\x0c\n\x04goal\x18\x02 \x01(\x02\x12\x32\n\ncontroller\x18\x03 \x01(\x0e\x32\x1e.linkbot.robot.Goal.Controller\x12\x0f\n\x07timeout\x18\x04 \x01(\x02\x12\x30\n\rmodeOnTimeout\x18\x05 \x01(\x0e\x32\x19.linkbot.robot.JointState\"0\n\x04Type\x12\x0c\n\x08\x41\x42SOLUTE\x10\x01\x12\x0c\n\x08RELATIVE\x10\x02\x12\x0c\n\x08INFINITE\x10\x03\"W\n\nController\x12\x07\n\x03PID\x10\x01\x12\x0c\n\x08\x43ONSTVEL\x10\x02\x12\n\n\x06SMOOTH\x10\x03\x12\t\n\x05\x41\x43\x43\x45L\x10\x04\x12\r\n\tCYCLOIDAL\x10\x05\x12\x0c\n\x08HARMONIC\x10\x06\"\x97\x01\n\x04move\x1a\x87\x01\n\x02In\x12)\n\x0cmotorOneGoal\x18\x01 \x01(\x0b\x32\x13.linkbot.robot.Goal\x12)\n\x0cmotorTwoGoal\x18\x02 \x01(\x0b\x32\x13.linkbot.robot.Goal\x12+\n\x0emotorThreeGoal\x18\x03 \x01(\x0b\x32\x13.linkbot.robot.Goal\x1a\x05\n\x03Out\"L\n\x18\x65nableAccelerometerEvent\x1a)\n\x02In\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\x12\x13\n\x0bgranularity\x18\x02 \x01(\x02\x1a\x05\n\x03Out\"0\n\x11\x65nableButtonEvent\x1a\x14\n\x02In\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\x1a\x05\n\x03Out\"\xaa\x02\n\x12\x65nableEncoderEvent\x1a\x8c\x02\n\x02In\x12\x44\n\nencoderOne\x18\x01 \x01(\x0b\x32\x30.linkbot.robot.enableEncoderEvent.In.SignalState\x12\x44\n\nencoderTwo\x18\x02 \x01(\x0b\x32\x30.linkbot.robot.enableEncoderEvent.In.SignalState\x12\x46\n\x0c\x65ncoderThree\x18\x03 \x01(\x0b\x32\x30.linkbot.robot.enableEncoderEvent.In.SignalState\x1a\x32\n\x0bSignalState\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\x12\x13\n\x0bgranularity\x18\x02 \x01(\x02\x1a\x05\n\x03Out\"/\n\x10\x65nableJointEvent\x1a\x14\n\x02In\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\x1a\x05\n\x03Out\"A\n\x0bwriteEeprom\x1a+\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\r\x12\x14\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x42\x06\x92?\x03\x08\x80\x01\x1a\x05\n\x03Out\"N\n\nreadEeprom\x1a#\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\r\x12\x0c\n\x04size\x18\x02 \x01(\r\x1a\x1b\n\x03Out\x12\x14\n\x04\x64\x61ta\x18\x01 \x01(\x0c\x42\x06\x92?\x03\x08\x80\x01\">\n\x08writeTwi\x1a+\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\r\x12\x14\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x42\x06\x92?\x03\x08\x80\x01\x1a\x05\n\x03Out\"O\n\x07readTwi\x1a\'\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\r\x12\x10\n\x08recvsize\x18\x02 \x01(\r\x1a\x1b\n\x03Out\x12\x14\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x42\x06\x92?\x03\x08\x80\x01\"j\n\x0cwriteReadTwi\x1a=\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\r\x12\x10\n\x08recvsize\x18\x02 \x01(\r\x12\x14\n\x04\x64\x61ta\x18\x03 \x01(\x0c\x42\x06\x92?\x03\x08\x80\x01\x1a\x1b\n\x03Out\x12\x14\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x42\x06\x92?\x03\x08\x80\x01\"\x15\n\x06reboot\x1a\x04\n\x02In\x1a\x05\n\x03Out\"\xce\x17\n\nRpcRequest\x12\x11\n\trequestId\x18\x01 \x01(\r\x12N\n\x18getFirmwareVersionString\x18\x10 \x01(\x0b\x32*.linkbot.robot.getFirmwareVersionString.InH\x00\x12\x38\n\rgetFormFactor\x18\x11 \x01(\x0b\x32\x1f.linkbot.robot.getFormFactor.InH\x00\x12\x30\n\tgetAdcRaw\x18\x12 \x01(\x0b\x32\x1b.linkbot.robot.getAdcRaw.InH\x00\x12@\n\x11getBatteryVoltage\x18\x13 \x01(\x0b\x32#.linkbot.robot.getBatteryVoltage.InH\x00\x12\x46\n\x14getAccelerometerData\x18\x14 \x01(\x0b\x32&.linkbot.robot.getAccelerometerData.InH\x00\x12:\n\x0egetButtonState\x18\x15 \x01(\x0b\x32 .linkbot.robot.getButtonState.InH\x00\x12>\n\x10getEncoderValues\x18\x16 \x01(\x0b\x32\".linkbot.robot.getEncoderValues.InH\x00\x12:\n\x0egetJointStates\x18\x17 \x01(\x0b\x32 .linkbot.robot.getJointStates.InH\x00\x12N\n\x18\x65nableAccelerometerEvent\x18\x18 \x01(\x0b\x32*.linkbot.robot.enableAccelerometerEvent.InH\x00\x12@\n\x11\x65nableButtonEvent\x18\x19 \x01(\x0b\x32#.linkbot.robot.enableButtonEvent.InH\x00\x12\x42\n\x12\x65nableEncoderEvent\x18\x1a \x01(\x0b\x32$.linkbot.robot.enableEncoderEvent.InH\x00\x12>\n\x10\x65nableJointEvent\x18\x1b \x01(\x0b\x32\".linkbot.robot.enableJointEvent.InH\x00\x12\x42\n\x12getBuzzerFrequency\x18\x02 \x01(\x0b\x32$.linkbot.robot.getBuzzerFrequency.InH\x00\x12\x34\n\x0bgetLedColor\x18\x03 \x01(\x0b\x32\x1d.linkbot.robot.getLedColor.InH\x00\x12L\n\x17getMotorControllerOmega\x18\x1c \x01(\x0b\x32).linkbot.robot.getMotorControllerOmega.InH\x00\x12N\n\x18getMotorControllerAlphaI\x18\x1d \x01(\x0b\x32*.linkbot.robot.getMotorControllerAlphaI.InH\x00\x12N\n\x18getMotorControllerAlphaF\x18\x1e \x01(\x0b\x32*.linkbot.robot.getMotorControllerAlphaF.InH\x00\x12\x62\n\"getMotorControllerProportionalGain\x18\x1f \x01(\x0b\x32\x34.linkbot.robot.getMotorControllerProportionalGain.InH\x00\x12^\n getMotorControllerIntegratorGain\x18  \x01(\x0b\x32\x32.linkbot.robot.getMotorControllerIntegratorGain.InH\x00\x12^\n getMotorControllerDerivativeGain\x18! \x01(\x0b\x32\x32.linkbot.robot.getMotorControllerDerivativeGain.InH\x00\x12`\n!getMotorControllerSafetyThreshold\x18\" \x01(\x0b\x32\x33.linkbot.robot.getMotorControllerSafetyThreshold.InH\x00\x12X\n\x1dgetMotorControllerSafetyAngle\x18# \x01(\x0b\x32/.linkbot.robot.getMotorControllerSafetyAngle.InH\x00\x12\x42\n\x12setBuzzerFrequency\x18\x04 \x01(\x0b\x32$.linkbot.robot.setBuzzerFrequency.InH\x00\x12\x34\n\x0bsetLedColor\x18\x05 \x01(\x0b\x32\x1d.linkbot.robot.setLedColor.InH\x00\x12L\n\x17setMotorControllerOmega\x18$ \x01(\x0b\x32).linkbot.robot.setMotorControllerOmega.InH\x00\x12N\n\x18setMotorControllerAlphaI\x18% \x01(\x0b\x32*.linkbot.robot.setMotorControllerAlphaI.InH\x00\x12N\n\x18setMotorControllerAlphaF\x18& \x01(\x0b\x32*.linkbot.robot.setMotorControllerAlphaF.InH\x00\x12\x62\n\"setMotorControllerProportionalGain\x18\' \x01(\x0b\x32\x34.linkbot.robot.setMotorControllerProportionalGain.InH\x00\x12^\n setMotorControllerIntegratorGain\x18( \x01(\x0b\x32\x32.linkbot.robot.setMotorControllerIntegratorGain.InH\x00\x12^\n setMotorControllerDerivativeGain\x18) \x01(\x0b\x32\x32.linkbot.robot.setMotorControllerDerivativeGain.InH\x00\x12`\n!setMotorControllerSafetyThreshold\x18* \x01(\x0b\x32\x33.linkbot.robot.setMotorControllerSafetyThreshold.InH\x00\x12X\n\x1dsetMotorControllerSafetyAngle\x18+ \x01(\x0b\x32/.linkbot.robot.setMotorControllerSafetyAngle.InH\x00\x12\x46\n\x14setResetOnDisconnect\x18\x35 \x01(\x0b\x32&.linkbot.robot.setResetOnDisconnect.InH\x00\x12>\n\x10resetEncoderRevs\x18, \x01(\x0b\x32\".linkbot.robot.resetEncoderRevs.InH\x00\x12&\n\x04move\x18- \x01(\x0b\x32\x16.linkbot.robot.move.InH\x00\x12&\n\x04stop\x18. \x01(\x0b\x32\x16.linkbot.robot.stop.InH\x00\x12*\n\x06reboot\x18/ \x01(\x0b\x32\x18.linkbot.robot.reboot.InH\x00\x12\x34\n\x0bwriteEeprom\x18\x30 \x01(\x0b\x32\x1d.linkbot.robot.writeEeprom.InH\x00\x12\x32\n\nreadEeprom\x18\x31 \x01(\x0b\x32\x1c.linkbot.robot.readEeprom.InH\x00\x12.\n\x08writeTwi\x18\x32 \x01(\x0b\x32\x1a.linkbot.robot.writeTwi.InH\x00\x12,\n\x07readTwi\x18\x33 \x01(\x0b\x32\x19.linkbot.robot.readTwi.InH\x00\x12\x36\n\x0cwriteReadTwi\x18\x34 \x01(\x0b\x32\x1e.linkbot.robot.writeReadTwi.InH\x00\x42\x05\n\x03\x61rg\"\xf6\x17\n\x08RpcReply\x12\x11\n\trequestId\x18\x01 \x01(\r\x12O\n\x18getFirmwareVersionString\x18\x10 \x01(\x0b\x32+.linkbot.robot.getFirmwareVersionString.OutH\x00\x12\x39\n\rgetFormFactor\x18\x11 \x01(\x0b\x32 .linkbot.robot.getFormFactor.OutH\x00\x12\x31\n\tgetAdcRaw\x18\x12 \x01(\x0b\x32\x1c.linkbot.robot.getAdcRaw.OutH\x00\x12\x41\n\x11getBatteryVoltage\x18\x13 \x01(\x0b\x32$.linkbot.robot.getBatteryVoltage.OutH\x00\x12G\n\x14getAccelerometerData\x18\x14 \x01(\x0b\x32\'.linkbot.robot.getAccelerometerData.OutH\x00\x12;\n\x0egetButtonState\x18\x15 \x01(\x0b\x32!.linkbot.robot.getButtonState.OutH\x00\x12?\n\x10getEncoderValues\x18\x16 \x01(\x0b\x32#.linkbot.robot.getEncoderValues.OutH\x00\x12;\n\x0egetJointStates\x18\x17 \x01(\x0b\x32!.linkbot.robot.getJointStates.OutH\x00\x12O\n\x18\x65nableAccelerometerEvent\x18\x18 \x01(\x0b\x32+.linkbot.robot.enableAccelerometerEvent.OutH\x00\x12\x41\n\x11\x65nableButtonEvent\x18\x19 \x01(\x0b\x32$.linkbot.robot.enableButtonEvent.OutH\x00\x12\x43\n\x12\x65nableEncoderEvent\x18\x1a \x01(\x0b\x32%.linkbot.robot.enableEncoderEvent.OutH\x00\x12?\n\x10\x65nableJointEvent\x18\x1b \x01(\x0b\x32#.linkbot.robot.enableJointEvent.OutH\x00\x12\x43\n\x12getBuzzerFrequency\x18\x02 \x01(\x0b\x32%.linkbot.robot.getBuzzerFrequency.OutH\x00\x12\x35\n\x0bgetLedColor\x18\x03 \x01(\x0b\x32\x1e.linkbot.robot.getLedColor.OutH\x00\x12M\n\x17getMotorControllerOmega\x18\x1c \x01(\x0b\x32*.linkbot.robot.getMotorControllerOmega.OutH\x00\x12O\n\x18getMotorControllerAlphaI\x18\x1d \x01(\x0b\x32+.linkbot.robot.getMotorControllerAlphaI.OutH\x00\x12O\n\x18getMotorControllerAlphaF\x18\x1e \x01(\x0b\x32+.linkbot.robot.getMotorControllerAlphaF.OutH\x00\x12\x63\n\"getMotorControllerProportionalGain\x18\x1f \x01(\x0b\x32\x35.linkbot.robot.getMotorControllerProportionalGain.OutH\x00\x12_\n getMotorControllerIntegratorGain\x18  \x01(\x0b\x32\x33.linkbot.robot.getMotorControllerIntegratorGain.OutH\x00\x12_\n getMotorControllerDerivativeGain\x18! \x01(\x0b\x32\x33.linkbot.robot.getMotorControllerDerivativeGain.OutH\x00\x12\x61\n!getMotorControllerSafetyThreshold\x18\" \x01(\x0b\x32\x34.linkbot.robot.getMotorControllerSafetyThreshold.OutH\x00\x12Y\n\x1dgetMotorControllerSafetyAngle\x18# \x01(\x0b\x32\x30.linkbot.robot.getMotorControllerSafetyAngle.OutH\x00\x12\x43\n\x12setBuzzerFrequency\x18\x04 \x01(\x0b\x32%.linkbot.robot.setBuzzerFrequency.OutH\x00\x12\x35\n\x0bsetLedColor\x18\x05 \x01(\x0b\x32\x1e.linkbot.robot.setLedColor.OutH\x00\x12M\n\x17setMotorControllerOmega\x18$ \x01(\x0b\x32*.linkbot.robot.setMotorControllerOmega.OutH\x00\x12O\n\x18setMotorControllerAlphaI\x18% \x01(\x0b\x32+.linkbot.robot.setMotorControllerAlphaI.OutH\x00\x12O\n\x18setMotorControllerAlphaF\x18& \x01(\x0b\x32+.linkbot.robot.setMotorControllerAlphaF.OutH\x00\x12\x63\n\"setMotorControllerProportionalGain\x18\' \x01(\x0b\x32\x35.linkbot.robot.setMotorControllerProportionalGain.OutH\x00\x12_\n setMotorControllerIntegratorGain\x18( \x01(\x0b\x32\x33.linkbot.robot.setMotorControllerIntegratorGain.OutH\x00\x12_\n setMotorControllerDerivativeGain\x18) \x01(\x0b\x32\x33.linkbot.robot.setMotorControllerDerivativeGain.OutH\x00\x12\x61\n!setMotorControllerSafetyThreshold\x18* \x01(\x0b\x32\x34.linkbot.robot.setMotorControllerSafetyThreshold.OutH\x00\x12Y\n\x1dsetMotorControllerSafetyAngle\x18+ \x01(\x0b\x32\x30.linkbot.robot.setMotorControllerSafetyAngle.OutH\x00\x12G\n\x14setResetOnDisconnect\x18\x35 \x01(\x0b\x32\'.linkbot.robot.setResetOnDisconnect.OutH\x00\x12?\n\x10resetEncoderRevs\x18, \x01(\x0b\x32#.linkbot.robot.resetEncoderRevs.OutH\x00\x12\'\n\x04move\x18- \x01(\x0b\x32\x17.linkbot.robot.move.OutH\x00\x12\'\n\x04stop\x18. \x01(\x0b\x32\x17.linkbot.robot.stop.OutH\x00\x12+\n\x06reboot\x18/ \x01(\x0b\x32\x19.linkbot.robot.reboot.OutH\x00\x12\x35\n\x0bwriteEeprom\x18\x30 \x01(\x0b\x32\x1e.linkbot.robot.writeEeprom.OutH\x00\x12\x33\n\nreadEeprom\x18\x31 \x01(\x0b\x32\x1d.linkbot.robot.readEeprom.OutH\x00\x12/\n\x08writeTwi\x18\x32 \x01(\x0b\x32\x1b.linkbot.robot.writeTwi.OutH\x00\x12-\n\x07readTwi\x18\x33 \x01(\x0b\x32\x1a.linkbot.robot.readTwi.OutH\x00\x12\x37\n\x0cwriteReadTwi\x18\x34 \x01(\x0b\x32\x1f.linkbot.robot.writeReadTwi.OutH\x00\x42\x05\n\x03\x61rg\"r\n\x0b\x42uttonEvent\x12\x11\n\ttimestamp\x18\x01 \x01(\r\x12%\n\x06\x62utton\x18\x02 \x01(\x0e\x32\x15.linkbot.robot.Button\x12)\n\x05state\x18\x03 \x01(\x0e\x32\x1a.linkbot.robot.ButtonState\"A\n\x0c\x45ncoderEvent\x12\x11\n\ttimestamp\x18\x01 \x01(\r\x12\x0f\n\x07\x65ncoder\x18\x02 \x01(\r\x12\r\n\x05value\x18\x03 \x01(\x02\"H\n\x12\x41\x63\x63\x65lerometerEvent\x12\x11\n\ttimestamp\x18\x01 \x01(\r\x12\t\n\x01x\x18\x02 \x01(\x02\x12\t\n\x01y\x18\x03 \x01(\x02\x12\t\n\x01z\x18\x04 \x01(\x02\"g\n\nJointEvent\x12\x11\n\ttimestamp\x18\x01 \x01(\r\x12\r\n\x05joint\x18\x02 \x01(\r\x12(\n\x05\x65vent\x18\x03 \x01(\x0e\x32\x19.linkbot.robot.JointState\x12\r\n\x05\x61ngle\x18\x04 \x01(\x02\"B\n\x11\x44\x65\x62ugMessageEvent\x12\x11\n\ttimestamp\x18\x01 \x01(\r\x12\x1a\n\nbytestring\x18\x02 \x01(\tB\x06\x92?\x03\x08\x80\x01\")\n\x14\x43onnectionTerminated\x12\x11\n\ttimestamp\x18\x01 \x01(\r\"\'\n\x0cPowerOnEvent\x12\x17\n\x07version\x18\x01 \x01(\tB\x06\x92?\x03\x08\x80\x01\"#\n\x04Ping\x12\x1b\n\x13peripheralResetMask\x18\x02 \x01(\r\"l\n\rClientToRobot\x12/\n\nrpcRequest\x18\x01 \x01(\x0b\x32\x19.linkbot.robot.RpcRequestH\x00\x12#\n\x04ping\x18\x02 \x01(\x0b\x32\x13.linkbot.robot.PingH\x00\x42\x05\n\x03\x61rg\"\xd6\x03\n\rRobotToClient\x12+\n\x08rpcReply\x18\x01 \x01(\x0b\x32\x17.linkbot.robot.RpcReplyH\x00\x12?\n\x12\x61\x63\x63\x65lerometerEvent\x18\x02 \x01(\x0b\x32!.linkbot.robot.AccelerometerEventH\x00\x12\x31\n\x0b\x62uttonEvent\x18\x03 \x01(\x0b\x32\x1a.linkbot.robot.ButtonEventH\x00\x12\x33\n\x0c\x65ncoderEvent\x18\x04 \x01(\x0b\x32\x1b.linkbot.robot.EncoderEventH\x00\x12/\n\njointEvent\x18\x05 \x01(\x0b\x32\x19.linkbot.robot.JointEventH\x00\x12=\n\x11\x64\x65\x62ugMessageEvent\x18\x06 \x01(\x0b\x32 .linkbot.robot.DebugMessageEventH\x00\x12\x43\n\x14\x63onnectionTerminated\x18\x07 \x01(\x0b\x32#.linkbot.robot.ConnectionTerminatedH\x00\x12\x33\n\x0cpowerOnEvent\x18\x08 \x01(\x0b\x32\x1b.linkbot.robot.PowerOnEventH\x00\x42\x05\n\x03\x61rg*-\n\nFormFactor\x12\x05\n\x01I\x10\x00\x12\x05\n\x01L\x10\x01\x12\x05\n\x01T\x10\x02\x12\n\n\x06\x44ONGLE\x10\x03*8\n\nJointState\x12\t\n\x05\x43OAST\x10\x00\x12\x08\n\x04HOLD\x10\x01\x12\n\n\x06MOVING\x10\x02\x12\t\n\x05\x45RROR\x10\x04*!\n\x06\x42utton\x12\t\n\x05POWER\x10\x00\x12\x05\n\x01\x41\x10\x01\x12\x05\n\x01\x42\x10\x02*\x1f\n\x0b\x42uttonState\x12\x06\n\x02UP\x10\x00\x12\x08\n\x04\x44OWN\x10\x01*E\n\nPeripheral\x12\n\n\x06MOTOR1\x10\x00\x12\n\n\x06MOTOR2\x10\x01\x12\n\n\x06MOTOR3\x10\x02\x12\x07\n\x03LED\x10\x03\x12\n\n\x06\x42UZZER\x10\x04')
   ,
   dependencies=[nanopb__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
-_JOINTSTATE = _descriptor.EnumDescriptor(
-  name='JointState',
-  full_name='barobo.Robot.JointState',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='COAST', index=0, number=0,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='HOLD', index=1, number=1,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='MOVING', index=2, number=2,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='ERROR', index=3, number=4,
-      options=None,
-      type=None),
-  ],
-  containing_type=None,
-  options=None,
-  serialized_start=4255,
-  serialized_end=4311,
-)
-_sym_db.RegisterEnumDescriptor(_JOINTSTATE)
-
-JointState = enum_type_wrapper.EnumTypeWrapper(_JOINTSTATE)
-_BUTTON = _descriptor.EnumDescriptor(
-  name='Button',
-  full_name='barobo.Robot.Button',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='POWER', index=0, number=0,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='A', index=1, number=1,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='B', index=2, number=2,
-      options=None,
-      type=None),
-  ],
-  containing_type=None,
-  options=None,
-  serialized_start=4313,
-  serialized_end=4346,
-)
-_sym_db.RegisterEnumDescriptor(_BUTTON)
-
-Button = enum_type_wrapper.EnumTypeWrapper(_BUTTON)
-_BUTTONSTATE = _descriptor.EnumDescriptor(
-  name='ButtonState',
-  full_name='barobo.Robot.ButtonState',
-  filename=None,
-  file=DESCRIPTOR,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='UP', index=0, number=0,
-      options=None,
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='DOWN', index=1, number=1,
-      options=None,
-      type=None),
-  ],
-  containing_type=None,
-  options=None,
-  serialized_start=4348,
-  serialized_end=4379,
-)
-_sym_db.RegisterEnumDescriptor(_BUTTONSTATE)
-
-ButtonState = enum_type_wrapper.EnumTypeWrapper(_BUTTONSTATE)
-COAST = 0
-HOLD = 1
-MOVING = 2
-ERROR = 4
-POWER = 0
-A = 1
-B = 2
-UP = 0
-DOWN = 1
-
-
-_GETFORMFACTOR_FORMFACTOR = _descriptor.EnumDescriptor(
+_FORMFACTOR = _descriptor.EnumDescriptor(
   name='FormFactor',
-  full_name='barobo.Robot.getFormFactor.FormFactor',
+  full_name='linkbot.robot.FormFactor',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -143,14 +51,151 @@ _GETFORMFACTOR_FORMFACTOR = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=2553,
-  serialized_end=2598,
+  serialized_start=10750,
+  serialized_end=10795,
 )
-_sym_db.RegisterEnumDescriptor(_GETFORMFACTOR_FORMFACTOR)
+_sym_db.RegisterEnumDescriptor(_FORMFACTOR)
+
+FormFactor = enum_type_wrapper.EnumTypeWrapper(_FORMFACTOR)
+_JOINTSTATE = _descriptor.EnumDescriptor(
+  name='JointState',
+  full_name='linkbot.robot.JointState',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='COAST', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='HOLD', index=1, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='MOVING', index=2, number=2,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='ERROR', index=3, number=4,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=10797,
+  serialized_end=10853,
+)
+_sym_db.RegisterEnumDescriptor(_JOINTSTATE)
+
+JointState = enum_type_wrapper.EnumTypeWrapper(_JOINTSTATE)
+_BUTTON = _descriptor.EnumDescriptor(
+  name='Button',
+  full_name='linkbot.robot.Button',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='POWER', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='A', index=1, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='B', index=2, number=2,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=10855,
+  serialized_end=10888,
+)
+_sym_db.RegisterEnumDescriptor(_BUTTON)
+
+Button = enum_type_wrapper.EnumTypeWrapper(_BUTTON)
+_BUTTONSTATE = _descriptor.EnumDescriptor(
+  name='ButtonState',
+  full_name='linkbot.robot.ButtonState',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='UP', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='DOWN', index=1, number=1,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=10890,
+  serialized_end=10921,
+)
+_sym_db.RegisterEnumDescriptor(_BUTTONSTATE)
+
+ButtonState = enum_type_wrapper.EnumTypeWrapper(_BUTTONSTATE)
+_PERIPHERAL = _descriptor.EnumDescriptor(
+  name='Peripheral',
+  full_name='linkbot.robot.Peripheral',
+  filename=None,
+  file=DESCRIPTOR,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='MOTOR1', index=0, number=0,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='MOTOR2', index=1, number=1,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='MOTOR3', index=2, number=2,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='LED', index=3, number=3,
+      options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='BUZZER', index=4, number=4,
+      options=None,
+      type=None),
+  ],
+  containing_type=None,
+  options=None,
+  serialized_start=10923,
+  serialized_end=10992,
+)
+_sym_db.RegisterEnumDescriptor(_PERIPHERAL)
+
+Peripheral = enum_type_wrapper.EnumTypeWrapper(_PERIPHERAL)
+I = 0
+L = 1
+T = 2
+DONGLE = 3
+COAST = 0
+HOLD = 1
+MOVING = 2
+ERROR = 4
+POWER = 0
+A = 1
+B = 2
+UP = 0
+DOWN = 1
+MOTOR1 = 0
+MOTOR2 = 1
+MOTOR3 = 2
+LED = 3
+BUZZER = 4
+
 
 _GOAL_TYPE = _descriptor.EnumDescriptor(
   name='Type',
-  full_name='barobo.Robot.Goal.Type',
+  full_name='linkbot.robot.Goal.Type',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -169,14 +214,14 @@ _GOAL_TYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=2779,
-  serialized_end=2827,
+  serialized_start=2332,
+  serialized_end=2380,
 )
 _sym_db.RegisterEnumDescriptor(_GOAL_TYPE)
 
 _GOAL_CONTROLLER = _descriptor.EnumDescriptor(
   name='Controller',
-  full_name='barobo.Robot.Goal.Controller',
+  full_name='linkbot.robot.Goal.Controller',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -207,15 +252,15 @@ _GOAL_CONTROLLER = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=2829,
-  serialized_end=2916,
+  serialized_start=2382,
+  serialized_end=2469,
 )
 _sym_db.RegisterEnumDescriptor(_GOAL_CONTROLLER)
 
 
 _GETACCELEROMETERDATA_IN = _descriptor.Descriptor(
   name='In',
-  full_name='barobo.Robot.getAccelerometerData.In',
+  full_name='linkbot.robot.getAccelerometerData.In',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -232,34 +277,34 @@ _GETACCELEROMETERDATA_IN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=67,
-  serialized_end=71,
+  serialized_start=68,
+  serialized_end=72,
 )
 
-_GETACCELEROMETERDATA_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.getAccelerometerData.Result',
+_GETACCELEROMETERDATA_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.getAccelerometerData.Out',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='x', full_name='barobo.Robot.getAccelerometerData.Result.x', index=0,
-      number=1, type=2, cpp_type=6, label=2,
+      name='x', full_name='linkbot.robot.getAccelerometerData.Out.x', index=0,
+      number=1, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='y', full_name='barobo.Robot.getAccelerometerData.Result.y', index=1,
-      number=2, type=2, cpp_type=6, label=2,
+      name='y', full_name='linkbot.robot.getAccelerometerData.Out.y', index=1,
+      number=2, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='z', full_name='barobo.Robot.getAccelerometerData.Result.z', index=2,
-      number=3, type=2, cpp_type=6, label=2,
+      name='z', full_name='linkbot.robot.getAccelerometerData.Out.z', index=2,
+      number=3, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -276,13 +321,13 @@ _GETACCELEROMETERDATA_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=73,
-  serialized_end=114,
+  serialized_start=74,
+  serialized_end=112,
 )
 
 _GETACCELEROMETERDATA = _descriptor.Descriptor(
   name='getAccelerometerData',
-  full_name='barobo.Robot.getAccelerometerData',
+  full_name='linkbot.robot.getAccelerometerData',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -290,7 +335,7 @@ _GETACCELEROMETERDATA = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[_GETACCELEROMETERDATA_IN, _GETACCELEROMETERDATA_RESULT, ],
+  nested_types=[_GETACCELEROMETERDATA_IN, _GETACCELEROMETERDATA_OUT, ],
   enum_types=[
   ],
   options=None,
@@ -299,14 +344,14 @@ _GETACCELEROMETERDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=43,
-  serialized_end=114,
+  serialized_start=44,
+  serialized_end=112,
 )
 
 
-_GETLEDCOLOR_IN = _descriptor.Descriptor(
+_GETBATTERYVOLTAGE_IN = _descriptor.Descriptor(
   name='In',
-  full_name='barobo.Robot.getLedColor.In',
+  full_name='linkbot.robot.getBatteryVoltage.In',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -323,20 +368,174 @@ _GETLEDCOLOR_IN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=67,
-  serialized_end=71,
+  serialized_start=68,
+  serialized_end=72,
 )
 
-_GETLEDCOLOR_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.getLedColor.Result',
+_GETBATTERYVOLTAGE_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.getBatteryVoltage.Out',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='value', full_name='barobo.Robot.getLedColor.Result.value', index=0,
-      number=1, type=13, cpp_type=3, label=2,
+      name='v', full_name='linkbot.robot.getBatteryVoltage.Out.v', index=0,
+      number=1, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=141,
+  serialized_end=157,
+)
+
+_GETBATTERYVOLTAGE = _descriptor.Descriptor(
+  name='getBatteryVoltage',
+  full_name='linkbot.robot.getBatteryVoltage',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_GETBATTERYVOLTAGE_IN, _GETBATTERYVOLTAGE_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=114,
+  serialized_end=157,
+)
+
+
+_GETADCRAW_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.getAdcRaw.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=68,
+  serialized_end=72,
+)
+
+_GETADCRAW_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.getAdcRaw.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='values', full_name='linkbot.robot.getAdcRaw.Out.values', index=0,
+      number=1, type=13, cpp_type=3, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=178,
+  serialized_end=208,
+)
+
+_GETADCRAW = _descriptor.Descriptor(
+  name='getAdcRaw',
+  full_name='linkbot.robot.getAdcRaw',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_GETADCRAW_IN, _GETADCRAW_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=159,
+  serialized_end=208,
+)
+
+
+_GETBUTTONSTATE_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.getButtonState.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=68,
+  serialized_end=72,
+)
+
+_GETBUTTONSTATE_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.getButtonState.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mask', full_name='linkbot.robot.getButtonState.Out.mask', index=0,
+      number=1, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -353,13 +552,13 @@ _GETLEDCOLOR_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=137,
-  serialized_end=160,
+  serialized_start=234,
+  serialized_end=253,
 )
 
-_GETLEDCOLOR = _descriptor.Descriptor(
-  name='getLedColor',
-  full_name='barobo.Robot.getLedColor',
+_GETBUTTONSTATE = _descriptor.Descriptor(
+  name='getButtonState',
+  full_name='linkbot.robot.getButtonState',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -367,7 +566,7 @@ _GETLEDCOLOR = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[_GETLEDCOLOR_IN, _GETLEDCOLOR_RESULT, ],
+  nested_types=[_GETBUTTONSTATE_IN, _GETBUTTONSTATE_OUT, ],
   enum_types=[
   ],
   options=None,
@@ -376,91 +575,14 @@ _GETLEDCOLOR = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=116,
-  serialized_end=160,
-)
-
-
-_SETLEDCOLOR_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.setLedColor.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='value', full_name='barobo.Robot.setLedColor.In.value', index=0,
-      number=1, type=13, cpp_type=3, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=177,
-  serialized_end=196,
-)
-
-_SETLEDCOLOR_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.setLedColor.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=73,
-  serialized_end=81,
-)
-
-_SETLEDCOLOR = _descriptor.Descriptor(
-  name='setLedColor',
-  full_name='barobo.Robot.setLedColor',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_SETLEDCOLOR_IN, _SETLEDCOLOR_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=162,
-  serialized_end=206,
+  serialized_start=210,
+  serialized_end=253,
 )
 
 
 _GETBUZZERFREQUENCY_IN = _descriptor.Descriptor(
   name='In',
-  full_name='barobo.Robot.getBuzzerFrequency.In',
+  full_name='linkbot.robot.getBuzzerFrequency.In',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -477,74 +599,20 @@ _GETBUZZERFREQUENCY_IN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=67,
-  serialized_end=71,
+  serialized_start=68,
+  serialized_end=72,
 )
 
-_GETBUZZERFREQUENCY_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.getBuzzerFrequency.Result',
+_GETBUZZERFREQUENCY_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.getBuzzerFrequency.Out',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='value', full_name='barobo.Robot.getBuzzerFrequency.Result.value', index=0,
-      number=1, type=2, cpp_type=6, label=2,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=236,
-  serialized_end=259,
-)
-
-_GETBUZZERFREQUENCY = _descriptor.Descriptor(
-  name='getBuzzerFrequency',
-  full_name='barobo.Robot.getBuzzerFrequency',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_GETBUZZERFREQUENCY_IN, _GETBUZZERFREQUENCY_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=208,
-  serialized_end=259,
-)
-
-
-_SETBUZZERFREQUENCY_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.setBuzzerFrequency.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='value', full_name='barobo.Robot.setBuzzerFrequency.In.value', index=0,
-      number=1, type=2, cpp_type=6, label=2,
+      name='value', full_name='linkbot.robot.getBuzzerFrequency.Out.value', index=0,
+      number=1, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -562,12 +630,12 @@ _SETBUZZERFREQUENCY_IN = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=283,
-  serialized_end=302,
+  serialized_end=303,
 )
 
-_SETBUZZERFREQUENCY_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.setBuzzerFrequency.Result',
+_GETBUZZERFREQUENCY = _descriptor.Descriptor(
+  name='getBuzzerFrequency',
+  full_name='linkbot.robot.getBuzzerFrequency',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -575,7 +643,7 @@ _SETBUZZERFREQUENCY_RESULT = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[],
+  nested_types=[_GETBUZZERFREQUENCY_IN, _GETBUZZERFREQUENCY_OUT, ],
   enum_types=[
   ],
   options=None,
@@ -584,1929 +652,14 @@ _SETBUZZERFREQUENCY_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=73,
-  serialized_end=81,
-)
-
-_SETBUZZERFREQUENCY = _descriptor.Descriptor(
-  name='setBuzzerFrequency',
-  full_name='barobo.Robot.setBuzzerFrequency',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_SETBUZZERFREQUENCY_IN, _SETBUZZERFREQUENCY_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=261,
-  serialized_end=312,
-)
-
-
-_ENABLEBUTTONEVENT_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.enableButtonEvent.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='enable', full_name='barobo.Robot.enableButtonEvent.In.enable', index=0,
-      number=1, type=8, cpp_type=7, label=2,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=335,
-  serialized_end=355,
-)
-
-_ENABLEBUTTONEVENT_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.enableButtonEvent.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=73,
-  serialized_end=81,
-)
-
-_ENABLEBUTTONEVENT = _descriptor.Descriptor(
-  name='enableButtonEvent',
-  full_name='barobo.Robot.enableButtonEvent',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_ENABLEBUTTONEVENT_IN, _ENABLEBUTTONEVENT_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=314,
-  serialized_end=365,
-)
-
-
-_ENABLEENCODEREVENT_IN_SIGNALSTATE = _descriptor.Descriptor(
-  name='SignalState',
-  full_name='barobo.Robot.enableEncoderEvent.In.SignalState',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='enable', full_name='barobo.Robot.enableEncoderEvent.In.SignalState.enable', index=0,
-      number=1, type=8, cpp_type=7, label=2,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='granularity', full_name='barobo.Robot.enableEncoderEvent.In.SignalState.granularity', index=1,
-      number=2, type=2, cpp_type=6, label=2,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=606,
-  serialized_end=656,
-)
-
-_ENABLEENCODEREVENT_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.enableEncoderEvent.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='encoderOne', full_name='barobo.Robot.enableEncoderEvent.In.encoderOne', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='encoderTwo', full_name='barobo.Robot.enableEncoderEvent.In.encoderTwo', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='encoderThree', full_name='barobo.Robot.enableEncoderEvent.In.encoderThree', index=2,
-      number=3, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[_ENABLEENCODEREVENT_IN_SIGNALSTATE, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=391,
-  serialized_end=656,
-)
-
-_ENABLEENCODEREVENT_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.enableEncoderEvent.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=73,
-  serialized_end=81,
-)
-
-_ENABLEENCODEREVENT = _descriptor.Descriptor(
-  name='enableEncoderEvent',
-  full_name='barobo.Robot.enableEncoderEvent',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_ENABLEENCODEREVENT_IN, _ENABLEENCODEREVENT_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=368,
-  serialized_end=666,
-)
-
-
-_ENABLEJOINTEVENT_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.enableJointEvent.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='enable', full_name='barobo.Robot.enableJointEvent.In.enable', index=0,
-      number=1, type=8, cpp_type=7, label=2,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=335,
-  serialized_end=355,
-)
-
-_ENABLEJOINTEVENT_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.enableJointEvent.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=73,
-  serialized_end=81,
-)
-
-_ENABLEJOINTEVENT = _descriptor.Descriptor(
-  name='enableJointEvent',
-  full_name='barobo.Robot.enableJointEvent',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_ENABLEJOINTEVENT_IN, _ENABLEJOINTEVENT_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=668,
-  serialized_end=718,
-)
-
-
-_ENABLEACCELEROMETEREVENT_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.enableAccelerometerEvent.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='enable', full_name='barobo.Robot.enableAccelerometerEvent.In.enable', index=0,
-      number=1, type=8, cpp_type=7, label=2,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='granularity', full_name='barobo.Robot.enableAccelerometerEvent.In.granularity', index=1,
-      number=2, type=2, cpp_type=6, label=2,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=748,
-  serialized_end=789,
-)
-
-_ENABLEACCELEROMETEREVENT_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.enableAccelerometerEvent.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=73,
-  serialized_end=81,
-)
-
-_ENABLEACCELEROMETEREVENT = _descriptor.Descriptor(
-  name='enableAccelerometerEvent',
-  full_name='barobo.Robot.enableAccelerometerEvent',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_ENABLEACCELEROMETEREVENT_IN, _ENABLEACCELEROMETEREVENT_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=720,
-  serialized_end=799,
-)
-
-
-_SETMOTORCONTROLLERSAFETYTHRESHOLD_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.setMotorControllerSafetyThreshold.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='mask', full_name='barobo.Robot.setMotorControllerSafetyThreshold.In.mask', index=0,
-      number=1, type=13, cpp_type=3, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='values', full_name='barobo.Robot.setMotorControllerSafetyThreshold.In.values', index=1,
-      number=2, type=13, cpp_type=3, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=838,
-  serialized_end=881,
-)
-
-_SETMOTORCONTROLLERSAFETYTHRESHOLD_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.setMotorControllerSafetyThreshold.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=73,
-  serialized_end=81,
-)
-
-_SETMOTORCONTROLLERSAFETYTHRESHOLD = _descriptor.Descriptor(
-  name='setMotorControllerSafetyThreshold',
-  full_name='barobo.Robot.setMotorControllerSafetyThreshold',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_SETMOTORCONTROLLERSAFETYTHRESHOLD_IN, _SETMOTORCONTROLLERSAFETYTHRESHOLD_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=801,
-  serialized_end=891,
-)
-
-
-_SETMOTORCONTROLLERSAFETYANGLE_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.setMotorControllerSafetyAngle.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='mask', full_name='barobo.Robot.setMotorControllerSafetyAngle.In.mask', index=0,
-      number=1, type=13, cpp_type=3, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='values', full_name='barobo.Robot.setMotorControllerSafetyAngle.In.values', index=1,
-      number=2, type=2, cpp_type=6, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=926,
-  serialized_end=969,
-)
-
-_SETMOTORCONTROLLERSAFETYANGLE_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.setMotorControllerSafetyAngle.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=73,
-  serialized_end=81,
-)
-
-_SETMOTORCONTROLLERSAFETYANGLE = _descriptor.Descriptor(
-  name='setMotorControllerSafetyAngle',
-  full_name='barobo.Robot.setMotorControllerSafetyAngle',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_SETMOTORCONTROLLERSAFETYANGLE_IN, _SETMOTORCONTROLLERSAFETYANGLE_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=893,
-  serialized_end=979,
-)
-
-
-_SETMOTORCONTROLLERALPHAI_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.setMotorControllerAlphaI.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='mask', full_name='barobo.Robot.setMotorControllerAlphaI.In.mask', index=0,
-      number=1, type=13, cpp_type=3, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='values', full_name='barobo.Robot.setMotorControllerAlphaI.In.values', index=1,
-      number=2, type=2, cpp_type=6, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=926,
-  serialized_end=969,
-)
-
-_SETMOTORCONTROLLERALPHAI_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.setMotorControllerAlphaI.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=73,
-  serialized_end=81,
-)
-
-_SETMOTORCONTROLLERALPHAI = _descriptor.Descriptor(
-  name='setMotorControllerAlphaI',
-  full_name='barobo.Robot.setMotorControllerAlphaI',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_SETMOTORCONTROLLERALPHAI_IN, _SETMOTORCONTROLLERALPHAI_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=981,
-  serialized_end=1062,
-)
-
-
-_SETMOTORCONTROLLERALPHAF_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.setMotorControllerAlphaF.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='mask', full_name='barobo.Robot.setMotorControllerAlphaF.In.mask', index=0,
-      number=1, type=13, cpp_type=3, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='values', full_name='barobo.Robot.setMotorControllerAlphaF.In.values', index=1,
-      number=2, type=2, cpp_type=6, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=926,
-  serialized_end=969,
-)
-
-_SETMOTORCONTROLLERALPHAF_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.setMotorControllerAlphaF.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=73,
-  serialized_end=81,
-)
-
-_SETMOTORCONTROLLERALPHAF = _descriptor.Descriptor(
-  name='setMotorControllerAlphaF',
-  full_name='barobo.Robot.setMotorControllerAlphaF',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_SETMOTORCONTROLLERALPHAF_IN, _SETMOTORCONTROLLERALPHAF_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1064,
-  serialized_end=1145,
-)
-
-
-_SETMOTORCONTROLLEROMEGA_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.setMotorControllerOmega.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='mask', full_name='barobo.Robot.setMotorControllerOmega.In.mask', index=0,
-      number=1, type=13, cpp_type=3, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='values', full_name='barobo.Robot.setMotorControllerOmega.In.values', index=1,
-      number=2, type=2, cpp_type=6, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=926,
-  serialized_end=969,
-)
-
-_SETMOTORCONTROLLEROMEGA_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.setMotorControllerOmega.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=73,
-  serialized_end=81,
-)
-
-_SETMOTORCONTROLLEROMEGA = _descriptor.Descriptor(
-  name='setMotorControllerOmega',
-  full_name='barobo.Robot.setMotorControllerOmega',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_SETMOTORCONTROLLEROMEGA_IN, _SETMOTORCONTROLLEROMEGA_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1147,
-  serialized_end=1227,
-)
-
-
-_SETMOTORCONTROLLERPROPORTIONALGAIN_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.setMotorControllerProportionalGain.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='mask', full_name='barobo.Robot.setMotorControllerProportionalGain.In.mask', index=0,
-      number=1, type=13, cpp_type=3, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='values', full_name='barobo.Robot.setMotorControllerProportionalGain.In.values', index=1,
-      number=2, type=2, cpp_type=6, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=926,
-  serialized_end=969,
-)
-
-_SETMOTORCONTROLLERPROPORTIONALGAIN_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.setMotorControllerProportionalGain.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=73,
-  serialized_end=81,
-)
-
-_SETMOTORCONTROLLERPROPORTIONALGAIN = _descriptor.Descriptor(
-  name='setMotorControllerProportionalGain',
-  full_name='barobo.Robot.setMotorControllerProportionalGain',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_SETMOTORCONTROLLERPROPORTIONALGAIN_IN, _SETMOTORCONTROLLERPROPORTIONALGAIN_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1229,
-  serialized_end=1320,
-)
-
-
-_SETMOTORCONTROLLERINTEGRATORGAIN_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.setMotorControllerIntegratorGain.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='mask', full_name='barobo.Robot.setMotorControllerIntegratorGain.In.mask', index=0,
-      number=1, type=13, cpp_type=3, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='values', full_name='barobo.Robot.setMotorControllerIntegratorGain.In.values', index=1,
-      number=2, type=2, cpp_type=6, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=926,
-  serialized_end=969,
-)
-
-_SETMOTORCONTROLLERINTEGRATORGAIN_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.setMotorControllerIntegratorGain.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=73,
-  serialized_end=81,
-)
-
-_SETMOTORCONTROLLERINTEGRATORGAIN = _descriptor.Descriptor(
-  name='setMotorControllerIntegratorGain',
-  full_name='barobo.Robot.setMotorControllerIntegratorGain',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_SETMOTORCONTROLLERINTEGRATORGAIN_IN, _SETMOTORCONTROLLERINTEGRATORGAIN_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1322,
-  serialized_end=1411,
-)
-
-
-_SETMOTORCONTROLLERDERIVATIVEGAIN_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.setMotorControllerDerivativeGain.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='mask', full_name='barobo.Robot.setMotorControllerDerivativeGain.In.mask', index=0,
-      number=1, type=13, cpp_type=3, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='values', full_name='barobo.Robot.setMotorControllerDerivativeGain.In.values', index=1,
-      number=2, type=2, cpp_type=6, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=926,
-  serialized_end=969,
-)
-
-_SETMOTORCONTROLLERDERIVATIVEGAIN_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.setMotorControllerDerivativeGain.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=73,
-  serialized_end=81,
-)
-
-_SETMOTORCONTROLLERDERIVATIVEGAIN = _descriptor.Descriptor(
-  name='setMotorControllerDerivativeGain',
-  full_name='barobo.Robot.setMotorControllerDerivativeGain',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_SETMOTORCONTROLLERDERIVATIVEGAIN_IN, _SETMOTORCONTROLLERDERIVATIVEGAIN_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1413,
-  serialized_end=1502,
-)
-
-
-_SETRESETONDISCONNECT_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.setResetOnDisconnect.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='mask', full_name='barobo.Robot.setResetOnDisconnect.In.mask', index=0,
-      number=1, type=13, cpp_type=3, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='peripheralResetMask', full_name='barobo.Robot.setResetOnDisconnect.In.peripheralResetMask', index=1,
-      number=2, type=13, cpp_type=3, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1528,
-  serialized_end=1575,
-)
-
-_SETRESETONDISCONNECT_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.setResetOnDisconnect.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=73,
-  serialized_end=81,
-)
-
-_SETRESETONDISCONNECT = _descriptor.Descriptor(
-  name='setResetOnDisconnect',
-  full_name='barobo.Robot.setResetOnDisconnect',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_SETRESETONDISCONNECT_IN, _SETRESETONDISCONNECT_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1504,
-  serialized_end=1585,
-)
-
-
-_GETBATTERYVOLTAGE_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.getBatteryVoltage.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=67,
-  serialized_end=71,
-)
-
-_GETBATTERYVOLTAGE_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.getBatteryVoltage.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='v', full_name='barobo.Robot.getBatteryVoltage.Result.v', index=0,
-      number=1, type=2, cpp_type=6, label=2,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1614,
-  serialized_end=1633,
-)
-
-_GETBATTERYVOLTAGE = _descriptor.Descriptor(
-  name='getBatteryVoltage',
-  full_name='barobo.Robot.getBatteryVoltage',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_GETBATTERYVOLTAGE_IN, _GETBATTERYVOLTAGE_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1587,
-  serialized_end=1633,
-)
-
-
-_GETADCRAW_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.getAdcRaw.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=67,
-  serialized_end=71,
-)
-
-_GETADCRAW_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.getAdcRaw.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='values', full_name='barobo.Robot.getAdcRaw.Result.values', index=0,
-      number=1, type=13, cpp_type=3, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1654,
-  serialized_end=1687,
-)
-
-_GETADCRAW = _descriptor.Descriptor(
-  name='getAdcRaw',
-  full_name='barobo.Robot.getAdcRaw',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_GETADCRAW_IN, _GETADCRAW_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1635,
-  serialized_end=1687,
-)
-
-
-_GETMOTORCONTROLLERSAFETYTHRESHOLD_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.getMotorControllerSafetyThreshold.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=67,
-  serialized_end=71,
-)
-
-_GETMOTORCONTROLLERSAFETYTHRESHOLD_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.getMotorControllerSafetyThreshold.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='values', full_name='barobo.Robot.getMotorControllerSafetyThreshold.Result.values', index=0,
-      number=1, type=13, cpp_type=3, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1654,
-  serialized_end=1687,
-)
-
-_GETMOTORCONTROLLERSAFETYTHRESHOLD = _descriptor.Descriptor(
-  name='getMotorControllerSafetyThreshold',
-  full_name='barobo.Robot.getMotorControllerSafetyThreshold',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_GETMOTORCONTROLLERSAFETYTHRESHOLD_IN, _GETMOTORCONTROLLERSAFETYTHRESHOLD_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1689,
-  serialized_end=1765,
-)
-
-
-_GETMOTORCONTROLLERSAFETYANGLE_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.getMotorControllerSafetyAngle.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=67,
-  serialized_end=71,
-)
-
-_GETMOTORCONTROLLERSAFETYANGLE_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.getMotorControllerSafetyAngle.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='values', full_name='barobo.Robot.getMotorControllerSafetyAngle.Result.values', index=0,
-      number=1, type=2, cpp_type=6, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1806,
-  serialized_end=1839,
-)
-
-_GETMOTORCONTROLLERSAFETYANGLE = _descriptor.Descriptor(
-  name='getMotorControllerSafetyAngle',
-  full_name='barobo.Robot.getMotorControllerSafetyAngle',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_GETMOTORCONTROLLERSAFETYANGLE_IN, _GETMOTORCONTROLLERSAFETYANGLE_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1767,
-  serialized_end=1839,
-)
-
-
-_GETMOTORCONTROLLERALPHAI_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.getMotorControllerAlphaI.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=67,
-  serialized_end=71,
-)
-
-_GETMOTORCONTROLLERALPHAI_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.getMotorControllerAlphaI.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='values', full_name='barobo.Robot.getMotorControllerAlphaI.Result.values', index=0,
-      number=1, type=2, cpp_type=6, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1806,
-  serialized_end=1839,
-)
-
-_GETMOTORCONTROLLERALPHAI = _descriptor.Descriptor(
-  name='getMotorControllerAlphaI',
-  full_name='barobo.Robot.getMotorControllerAlphaI',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_GETMOTORCONTROLLERALPHAI_IN, _GETMOTORCONTROLLERALPHAI_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1841,
-  serialized_end=1908,
-)
-
-
-_GETMOTORCONTROLLERALPHAF_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.getMotorControllerAlphaF.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=67,
-  serialized_end=71,
-)
-
-_GETMOTORCONTROLLERALPHAF_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.getMotorControllerAlphaF.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='values', full_name='barobo.Robot.getMotorControllerAlphaF.Result.values', index=0,
-      number=1, type=2, cpp_type=6, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1806,
-  serialized_end=1839,
-)
-
-_GETMOTORCONTROLLERALPHAF = _descriptor.Descriptor(
-  name='getMotorControllerAlphaF',
-  full_name='barobo.Robot.getMotorControllerAlphaF',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_GETMOTORCONTROLLERALPHAF_IN, _GETMOTORCONTROLLERALPHAF_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1910,
-  serialized_end=1977,
-)
-
-
-_GETMOTORCONTROLLEROMEGA_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.getMotorControllerOmega.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=67,
-  serialized_end=71,
-)
-
-_GETMOTORCONTROLLEROMEGA_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.getMotorControllerOmega.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='values', full_name='barobo.Robot.getMotorControllerOmega.Result.values', index=0,
-      number=1, type=2, cpp_type=6, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1806,
-  serialized_end=1839,
-)
-
-_GETMOTORCONTROLLEROMEGA = _descriptor.Descriptor(
-  name='getMotorControllerOmega',
-  full_name='barobo.Robot.getMotorControllerOmega',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_GETMOTORCONTROLLEROMEGA_IN, _GETMOTORCONTROLLEROMEGA_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1979,
-  serialized_end=2045,
-)
-
-
-_GETMOTORCONTROLLERPROPORTIONALGAIN_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.getMotorControllerProportionalGain.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=67,
-  serialized_end=71,
-)
-
-_GETMOTORCONTROLLERPROPORTIONALGAIN_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.getMotorControllerProportionalGain.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='values', full_name='barobo.Robot.getMotorControllerProportionalGain.Result.values', index=0,
-      number=1, type=2, cpp_type=6, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1806,
-  serialized_end=1839,
-)
-
-_GETMOTORCONTROLLERPROPORTIONALGAIN = _descriptor.Descriptor(
-  name='getMotorControllerProportionalGain',
-  full_name='barobo.Robot.getMotorControllerProportionalGain',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_GETMOTORCONTROLLERPROPORTIONALGAIN_IN, _GETMOTORCONTROLLERPROPORTIONALGAIN_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2047,
-  serialized_end=2124,
-)
-
-
-_GETMOTORCONTROLLERINTEGRATORGAIN_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.getMotorControllerIntegratorGain.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=67,
-  serialized_end=71,
-)
-
-_GETMOTORCONTROLLERINTEGRATORGAIN_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.getMotorControllerIntegratorGain.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='values', full_name='barobo.Robot.getMotorControllerIntegratorGain.Result.values', index=0,
-      number=1, type=2, cpp_type=6, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1806,
-  serialized_end=1839,
-)
-
-_GETMOTORCONTROLLERINTEGRATORGAIN = _descriptor.Descriptor(
-  name='getMotorControllerIntegratorGain',
-  full_name='barobo.Robot.getMotorControllerIntegratorGain',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_GETMOTORCONTROLLERINTEGRATORGAIN_IN, _GETMOTORCONTROLLERINTEGRATORGAIN_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2126,
-  serialized_end=2201,
-)
-
-
-_GETMOTORCONTROLLERDERIVATIVEGAIN_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.getMotorControllerDerivativeGain.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=67,
-  serialized_end=71,
-)
-
-_GETMOTORCONTROLLERDERIVATIVEGAIN_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.getMotorControllerDerivativeGain.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='values', full_name='barobo.Robot.getMotorControllerDerivativeGain.Result.values', index=0,
-      number=1, type=2, cpp_type=6, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1806,
-  serialized_end=1839,
-)
-
-_GETMOTORCONTROLLERDERIVATIVEGAIN = _descriptor.Descriptor(
-  name='getMotorControllerDerivativeGain',
-  full_name='barobo.Robot.getMotorControllerDerivativeGain',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_GETMOTORCONTROLLERDERIVATIVEGAIN_IN, _GETMOTORCONTROLLERDERIVATIVEGAIN_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2203,
-  serialized_end=2278,
+  serialized_start=255,
+  serialized_end=303,
 )
 
 
 _GETENCODERVALUES_IN = _descriptor.Descriptor(
   name='In',
-  full_name='barobo.Robot.getEncoderValues.In',
+  full_name='linkbot.robot.getEncoderValues.In',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -2523,26 +676,26 @@ _GETENCODERVALUES_IN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=67,
-  serialized_end=71,
+  serialized_start=68,
+  serialized_end=72,
 )
 
-_GETENCODERVALUES_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.getEncoderValues.Result',
+_GETENCODERVALUES_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.getEncoderValues.Out',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='timestamp', full_name='barobo.Robot.getEncoderValues.Result.timestamp', index=0,
-      number=1, type=13, cpp_type=3, label=2,
+      name='timestamp', full_name='linkbot.robot.getEncoderValues.Out.timestamp', index=0,
+      number=1, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='values', full_name='barobo.Robot.getEncoderValues.Result.values', index=1,
+      name='values', full_name='linkbot.robot.getEncoderValues.Out.values', index=1,
       number=2, type=2, cpp_type=6, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -2560,13 +713,13 @@ _GETENCODERVALUES_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2306,
-  serialized_end=2358,
+  serialized_start=331,
+  serialized_end=380,
 )
 
 _GETENCODERVALUES = _descriptor.Descriptor(
   name='getEncoderValues',
-  full_name='barobo.Robot.getEncoderValues',
+  full_name='linkbot.robot.getEncoderValues',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -2574,7 +727,7 @@ _GETENCODERVALUES = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[_GETENCODERVALUES_IN, _GETENCODERVALUES_RESULT, ],
+  nested_types=[_GETENCODERVALUES_IN, _GETENCODERVALUES_OUT, ],
   enum_types=[
   ],
   options=None,
@@ -2583,14 +736,14 @@ _GETENCODERVALUES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2280,
-  serialized_end=2358,
+  serialized_start=305,
+  serialized_end=380,
 )
 
 
-_GETJOINTSTATES_IN = _descriptor.Descriptor(
+_GETFIRMWAREVERSIONSTRING_IN = _descriptor.Descriptor(
   name='In',
-  full_name='barobo.Robot.getJointStates.In',
+  full_name='linkbot.robot.getFirmwareVersionString.In',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -2607,26 +760,180 @@ _GETJOINTSTATES_IN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=67,
-  serialized_end=71,
+  serialized_start=68,
+  serialized_end=72,
 )
 
-_GETJOINTSTATES_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.getJointStates.Result',
+_GETFIRMWAREVERSIONSTRING_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.getFirmwareVersionString.Out',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='timestamp', full_name='barobo.Robot.getJointStates.Result.timestamp', index=0,
-      number=1, type=13, cpp_type=3, label=2,
+      name='value', full_name='linkbot.robot.getFirmwareVersionString.Out.value', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=416,
+  serialized_end=444,
+)
+
+_GETFIRMWAREVERSIONSTRING = _descriptor.Descriptor(
+  name='getFirmwareVersionString',
+  full_name='linkbot.robot.getFirmwareVersionString',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_GETFIRMWAREVERSIONSTRING_IN, _GETFIRMWAREVERSIONSTRING_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=382,
+  serialized_end=444,
+)
+
+
+_GETFORMFACTOR_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.getFormFactor.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=68,
+  serialized_end=72,
+)
+
+_GETFORMFACTOR_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.getFormFactor.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='value', full_name='linkbot.robot.getFormFactor.Out.value', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=469,
+  serialized_end=516,
+)
+
+_GETFORMFACTOR = _descriptor.Descriptor(
+  name='getFormFactor',
+  full_name='linkbot.robot.getFormFactor',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_GETFORMFACTOR_IN, _GETFORMFACTOR_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=446,
+  serialized_end=516,
+)
+
+
+_GETJOINTSTATES_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.getJointStates.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=68,
+  serialized_end=72,
+)
+
+_GETJOINTSTATES_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.getJointStates.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='timestamp', full_name='linkbot.robot.getJointStates.Out.timestamp', index=0,
+      number=1, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='values', full_name='barobo.Robot.getJointStates.Result.values', index=1,
+      name='values', full_name='linkbot.robot.getJointStates.Out.values', index=1,
       number=2, type=14, cpp_type=8, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -2644,13 +951,13 @@ _GETJOINTSTATES_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2384,
-  serialized_end=2462,
+  serialized_start=542,
+  serialized_end=618,
 )
 
 _GETJOINTSTATES = _descriptor.Descriptor(
   name='getJointStates',
-  full_name='barobo.Robot.getJointStates',
+  full_name='linkbot.robot.getJointStates',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -2658,7 +965,7 @@ _GETJOINTSTATES = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[_GETJOINTSTATES_IN, _GETJOINTSTATES_RESULT, ],
+  nested_types=[_GETJOINTSTATES_IN, _GETJOINTSTATES_OUT, ],
   enum_types=[
   ],
   options=None,
@@ -2667,14 +974,14 @@ _GETJOINTSTATES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2360,
-  serialized_end=2462,
+  serialized_start=518,
+  serialized_end=618,
 )
 
 
-_GETFORMFACTOR_IN = _descriptor.Descriptor(
+_GETLEDCOLOR_IN = _descriptor.Descriptor(
   name='In',
-  full_name='barobo.Robot.getFormFactor.In',
+  full_name='linkbot.robot.getLedColor.In',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -2691,20 +998,20 @@ _GETFORMFACTOR_IN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=67,
-  serialized_end=71,
+  serialized_start=68,
+  serialized_end=72,
 )
 
-_GETFORMFACTOR_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.getFormFactor.Result',
+_GETLEDCOLOR_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.getLedColor.Out',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='value', full_name='barobo.Robot.getFormFactor.Result.value', index=0,
-      number=1, type=14, cpp_type=8, label=2,
+      name='value', full_name='linkbot.robot.getLedColor.Out.value', index=0,
+      number=1, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -2721,13 +1028,13 @@ _GETFORMFACTOR_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2488,
-  serialized_end=2551,
+  serialized_start=641,
+  serialized_end=661,
 )
 
-_GETFORMFACTOR = _descriptor.Descriptor(
-  name='getFormFactor',
-  full_name='barobo.Robot.getFormFactor',
+_GETLEDCOLOR = _descriptor.Descriptor(
+  name='getLedColor',
+  full_name='linkbot.robot.getLedColor',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -2735,9 +1042,8 @@ _GETFORMFACTOR = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[_GETFORMFACTOR_IN, _GETFORMFACTOR_RESULT, ],
+  nested_types=[_GETLEDCOLOR_IN, _GETLEDCOLOR_OUT, ],
   enum_types=[
-    _GETFORMFACTOR_FORMFACTOR,
   ],
   options=None,
   is_extendable=False,
@@ -2745,48 +1051,1721 @@ _GETFORMFACTOR = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2465,
-  serialized_end=2598,
+  serialized_start=620,
+  serialized_end=661,
 )
 
 
-_GOAL = _descriptor.Descriptor(
-  name='Goal',
-  full_name='barobo.Robot.Goal',
+_GETMOTORCONTROLLEROMEGA_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.getMotorControllerOmega.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=68,
+  serialized_end=72,
+)
+
+_GETMOTORCONTROLLEROMEGA_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.getMotorControllerOmega.Out',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='type', full_name='barobo.Robot.Goal.type', index=0,
-      number=1, type=14, cpp_type=8, label=2,
+      name='values', full_name='linkbot.robot.getMotorControllerOmega.Out.values', index=0,
+      number=1, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=696,
+  serialized_end=726,
+)
+
+_GETMOTORCONTROLLEROMEGA = _descriptor.Descriptor(
+  name='getMotorControllerOmega',
+  full_name='linkbot.robot.getMotorControllerOmega',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_GETMOTORCONTROLLEROMEGA_IN, _GETMOTORCONTROLLEROMEGA_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=663,
+  serialized_end=726,
+)
+
+
+_GETMOTORCONTROLLERALPHAI_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.getMotorControllerAlphaI.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=68,
+  serialized_end=72,
+)
+
+_GETMOTORCONTROLLERALPHAI_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.getMotorControllerAlphaI.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='values', full_name='linkbot.robot.getMotorControllerAlphaI.Out.values', index=0,
+      number=1, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=696,
+  serialized_end=726,
+)
+
+_GETMOTORCONTROLLERALPHAI = _descriptor.Descriptor(
+  name='getMotorControllerAlphaI',
+  full_name='linkbot.robot.getMotorControllerAlphaI',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_GETMOTORCONTROLLERALPHAI_IN, _GETMOTORCONTROLLERALPHAI_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=728,
+  serialized_end=792,
+)
+
+
+_GETMOTORCONTROLLERALPHAF_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.getMotorControllerAlphaF.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=68,
+  serialized_end=72,
+)
+
+_GETMOTORCONTROLLERALPHAF_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.getMotorControllerAlphaF.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='values', full_name='linkbot.robot.getMotorControllerAlphaF.Out.values', index=0,
+      number=1, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=696,
+  serialized_end=726,
+)
+
+_GETMOTORCONTROLLERALPHAF = _descriptor.Descriptor(
+  name='getMotorControllerAlphaF',
+  full_name='linkbot.robot.getMotorControllerAlphaF',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_GETMOTORCONTROLLERALPHAF_IN, _GETMOTORCONTROLLERALPHAF_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=794,
+  serialized_end=858,
+)
+
+
+_GETMOTORCONTROLLERPROPORTIONALGAIN_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.getMotorControllerProportionalGain.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=68,
+  serialized_end=72,
+)
+
+_GETMOTORCONTROLLERPROPORTIONALGAIN_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.getMotorControllerProportionalGain.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='values', full_name='linkbot.robot.getMotorControllerProportionalGain.Out.values', index=0,
+      number=1, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=696,
+  serialized_end=726,
+)
+
+_GETMOTORCONTROLLERPROPORTIONALGAIN = _descriptor.Descriptor(
+  name='getMotorControllerProportionalGain',
+  full_name='linkbot.robot.getMotorControllerProportionalGain',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_GETMOTORCONTROLLERPROPORTIONALGAIN_IN, _GETMOTORCONTROLLERPROPORTIONALGAIN_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=860,
+  serialized_end=934,
+)
+
+
+_GETMOTORCONTROLLERINTEGRATORGAIN_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.getMotorControllerIntegratorGain.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=68,
+  serialized_end=72,
+)
+
+_GETMOTORCONTROLLERINTEGRATORGAIN_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.getMotorControllerIntegratorGain.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='values', full_name='linkbot.robot.getMotorControllerIntegratorGain.Out.values', index=0,
+      number=1, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=696,
+  serialized_end=726,
+)
+
+_GETMOTORCONTROLLERINTEGRATORGAIN = _descriptor.Descriptor(
+  name='getMotorControllerIntegratorGain',
+  full_name='linkbot.robot.getMotorControllerIntegratorGain',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_GETMOTORCONTROLLERINTEGRATORGAIN_IN, _GETMOTORCONTROLLERINTEGRATORGAIN_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=936,
+  serialized_end=1008,
+)
+
+
+_GETMOTORCONTROLLERDERIVATIVEGAIN_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.getMotorControllerDerivativeGain.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=68,
+  serialized_end=72,
+)
+
+_GETMOTORCONTROLLERDERIVATIVEGAIN_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.getMotorControllerDerivativeGain.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='values', full_name='linkbot.robot.getMotorControllerDerivativeGain.Out.values', index=0,
+      number=1, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=696,
+  serialized_end=726,
+)
+
+_GETMOTORCONTROLLERDERIVATIVEGAIN = _descriptor.Descriptor(
+  name='getMotorControllerDerivativeGain',
+  full_name='linkbot.robot.getMotorControllerDerivativeGain',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_GETMOTORCONTROLLERDERIVATIVEGAIN_IN, _GETMOTORCONTROLLERDERIVATIVEGAIN_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1010,
+  serialized_end=1082,
+)
+
+
+_GETMOTORCONTROLLERSAFETYTHRESHOLD_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.getMotorControllerSafetyThreshold.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=68,
+  serialized_end=72,
+)
+
+_GETMOTORCONTROLLERSAFETYTHRESHOLD_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.getMotorControllerSafetyThreshold.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='values', full_name='linkbot.robot.getMotorControllerSafetyThreshold.Out.values', index=0,
+      number=1, type=13, cpp_type=3, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=178,
+  serialized_end=208,
+)
+
+_GETMOTORCONTROLLERSAFETYTHRESHOLD = _descriptor.Descriptor(
+  name='getMotorControllerSafetyThreshold',
+  full_name='linkbot.robot.getMotorControllerSafetyThreshold',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_GETMOTORCONTROLLERSAFETYTHRESHOLD_IN, _GETMOTORCONTROLLERSAFETYTHRESHOLD_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1084,
+  serialized_end=1157,
+)
+
+
+_GETMOTORCONTROLLERSAFETYANGLE_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.getMotorControllerSafetyAngle.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=68,
+  serialized_end=72,
+)
+
+_GETMOTORCONTROLLERSAFETYANGLE_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.getMotorControllerSafetyAngle.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='values', full_name='linkbot.robot.getMotorControllerSafetyAngle.Out.values', index=0,
+      number=1, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=696,
+  serialized_end=726,
+)
+
+_GETMOTORCONTROLLERSAFETYANGLE = _descriptor.Descriptor(
+  name='getMotorControllerSafetyAngle',
+  full_name='linkbot.robot.getMotorControllerSafetyAngle',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_GETMOTORCONTROLLERSAFETYANGLE_IN, _GETMOTORCONTROLLERSAFETYANGLE_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1159,
+  serialized_end=1228,
+)
+
+
+_SETMOTORCONTROLLEROMEGA_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.setMotorControllerOmega.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mask', full_name='linkbot.robot.setMotorControllerOmega.In.mask', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='values', full_name='linkbot.robot.setMotorControllerOmega.In.values', index=1,
+      number=2, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1257,
+  serialized_end=1300,
+)
+
+_SETMOTORCONTROLLEROMEGA_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.setMotorControllerOmega.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=74,
+  serialized_end=79,
+)
+
+_SETMOTORCONTROLLEROMEGA = _descriptor.Descriptor(
+  name='setMotorControllerOmega',
+  full_name='linkbot.robot.setMotorControllerOmega',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_SETMOTORCONTROLLEROMEGA_IN, _SETMOTORCONTROLLEROMEGA_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1230,
+  serialized_end=1307,
+)
+
+
+_SETMOTORCONTROLLERALPHAI_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.setMotorControllerAlphaI.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mask', full_name='linkbot.robot.setMotorControllerAlphaI.In.mask', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='values', full_name='linkbot.robot.setMotorControllerAlphaI.In.values', index=1,
+      number=2, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1257,
+  serialized_end=1300,
+)
+
+_SETMOTORCONTROLLERALPHAI_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.setMotorControllerAlphaI.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=74,
+  serialized_end=79,
+)
+
+_SETMOTORCONTROLLERALPHAI = _descriptor.Descriptor(
+  name='setMotorControllerAlphaI',
+  full_name='linkbot.robot.setMotorControllerAlphaI',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_SETMOTORCONTROLLERALPHAI_IN, _SETMOTORCONTROLLERALPHAI_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1309,
+  serialized_end=1387,
+)
+
+
+_SETMOTORCONTROLLERALPHAF_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.setMotorControllerAlphaF.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mask', full_name='linkbot.robot.setMotorControllerAlphaF.In.mask', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='values', full_name='linkbot.robot.setMotorControllerAlphaF.In.values', index=1,
+      number=2, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1257,
+  serialized_end=1300,
+)
+
+_SETMOTORCONTROLLERALPHAF_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.setMotorControllerAlphaF.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=74,
+  serialized_end=79,
+)
+
+_SETMOTORCONTROLLERALPHAF = _descriptor.Descriptor(
+  name='setMotorControllerAlphaF',
+  full_name='linkbot.robot.setMotorControllerAlphaF',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_SETMOTORCONTROLLERALPHAF_IN, _SETMOTORCONTROLLERALPHAF_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1389,
+  serialized_end=1467,
+)
+
+
+_SETMOTORCONTROLLERPROPORTIONALGAIN_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.setMotorControllerProportionalGain.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mask', full_name='linkbot.robot.setMotorControllerProportionalGain.In.mask', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='values', full_name='linkbot.robot.setMotorControllerProportionalGain.In.values', index=1,
+      number=2, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1257,
+  serialized_end=1300,
+)
+
+_SETMOTORCONTROLLERPROPORTIONALGAIN_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.setMotorControllerProportionalGain.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=74,
+  serialized_end=79,
+)
+
+_SETMOTORCONTROLLERPROPORTIONALGAIN = _descriptor.Descriptor(
+  name='setMotorControllerProportionalGain',
+  full_name='linkbot.robot.setMotorControllerProportionalGain',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_SETMOTORCONTROLLERPROPORTIONALGAIN_IN, _SETMOTORCONTROLLERPROPORTIONALGAIN_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1469,
+  serialized_end=1557,
+)
+
+
+_SETMOTORCONTROLLERINTEGRATORGAIN_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.setMotorControllerIntegratorGain.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mask', full_name='linkbot.robot.setMotorControllerIntegratorGain.In.mask', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='values', full_name='linkbot.robot.setMotorControllerIntegratorGain.In.values', index=1,
+      number=2, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1257,
+  serialized_end=1300,
+)
+
+_SETMOTORCONTROLLERINTEGRATORGAIN_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.setMotorControllerIntegratorGain.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=74,
+  serialized_end=79,
+)
+
+_SETMOTORCONTROLLERINTEGRATORGAIN = _descriptor.Descriptor(
+  name='setMotorControllerIntegratorGain',
+  full_name='linkbot.robot.setMotorControllerIntegratorGain',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_SETMOTORCONTROLLERINTEGRATORGAIN_IN, _SETMOTORCONTROLLERINTEGRATORGAIN_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1559,
+  serialized_end=1645,
+)
+
+
+_SETMOTORCONTROLLERDERIVATIVEGAIN_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.setMotorControllerDerivativeGain.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mask', full_name='linkbot.robot.setMotorControllerDerivativeGain.In.mask', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='values', full_name='linkbot.robot.setMotorControllerDerivativeGain.In.values', index=1,
+      number=2, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1257,
+  serialized_end=1300,
+)
+
+_SETMOTORCONTROLLERDERIVATIVEGAIN_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.setMotorControllerDerivativeGain.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=74,
+  serialized_end=79,
+)
+
+_SETMOTORCONTROLLERDERIVATIVEGAIN = _descriptor.Descriptor(
+  name='setMotorControllerDerivativeGain',
+  full_name='linkbot.robot.setMotorControllerDerivativeGain',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_SETMOTORCONTROLLERDERIVATIVEGAIN_IN, _SETMOTORCONTROLLERDERIVATIVEGAIN_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1647,
+  serialized_end=1733,
+)
+
+
+_SETMOTORCONTROLLERSAFETYTHRESHOLD_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.setMotorControllerSafetyThreshold.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mask', full_name='linkbot.robot.setMotorControllerSafetyThreshold.In.mask', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='values', full_name='linkbot.robot.setMotorControllerSafetyThreshold.In.values', index=1,
+      number=2, type=13, cpp_type=3, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1772,
+  serialized_end=1815,
+)
+
+_SETMOTORCONTROLLERSAFETYTHRESHOLD_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.setMotorControllerSafetyThreshold.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=74,
+  serialized_end=79,
+)
+
+_SETMOTORCONTROLLERSAFETYTHRESHOLD = _descriptor.Descriptor(
+  name='setMotorControllerSafetyThreshold',
+  full_name='linkbot.robot.setMotorControllerSafetyThreshold',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_SETMOTORCONTROLLERSAFETYTHRESHOLD_IN, _SETMOTORCONTROLLERSAFETYTHRESHOLD_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1735,
+  serialized_end=1822,
+)
+
+
+_SETMOTORCONTROLLERSAFETYANGLE_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.setMotorControllerSafetyAngle.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mask', full_name='linkbot.robot.setMotorControllerSafetyAngle.In.mask', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='values', full_name='linkbot.robot.setMotorControllerSafetyAngle.In.values', index=1,
+      number=2, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1257,
+  serialized_end=1300,
+)
+
+_SETMOTORCONTROLLERSAFETYANGLE_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.setMotorControllerSafetyAngle.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=74,
+  serialized_end=79,
+)
+
+_SETMOTORCONTROLLERSAFETYANGLE = _descriptor.Descriptor(
+  name='setMotorControllerSafetyAngle',
+  full_name='linkbot.robot.setMotorControllerSafetyAngle',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_SETMOTORCONTROLLERSAFETYANGLE_IN, _SETMOTORCONTROLLERSAFETYANGLE_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1824,
+  serialized_end=1907,
+)
+
+
+_SETRESETONDISCONNECT_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.setResetOnDisconnect.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mask', full_name='linkbot.robot.setResetOnDisconnect.In.mask', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='peripheralResetMask', full_name='linkbot.robot.setResetOnDisconnect.In.peripheralResetMask', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1933,
+  serialized_end=1980,
+)
+
+_SETRESETONDISCONNECT_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.setResetOnDisconnect.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=74,
+  serialized_end=79,
+)
+
+_SETRESETONDISCONNECT = _descriptor.Descriptor(
+  name='setResetOnDisconnect',
+  full_name='linkbot.robot.setResetOnDisconnect',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_SETRESETONDISCONNECT_IN, _SETRESETONDISCONNECT_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1909,
+  serialized_end=1987,
+)
+
+
+_RESETENCODERREVS_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.resetEncoderRevs.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=68,
+  serialized_end=72,
+)
+
+_RESETENCODERREVS_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.resetEncoderRevs.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=74,
+  serialized_end=79,
+)
+
+_RESETENCODERREVS = _descriptor.Descriptor(
+  name='resetEncoderRevs',
+  full_name='linkbot.robot.resetEncoderRevs',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_RESETENCODERREVS_IN, _RESETENCODERREVS_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1989,
+  serialized_end=2020,
+)
+
+
+_SETBUZZERFREQUENCY_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.setBuzzerFrequency.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='value', full_name='linkbot.robot.setBuzzerFrequency.In.value', index=0,
+      number=1, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2044,
+  serialized_end=2063,
+)
+
+_SETBUZZERFREQUENCY_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.setBuzzerFrequency.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=74,
+  serialized_end=79,
+)
+
+_SETBUZZERFREQUENCY = _descriptor.Descriptor(
+  name='setBuzzerFrequency',
+  full_name='linkbot.robot.setBuzzerFrequency',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_SETBUZZERFREQUENCY_IN, _SETBUZZERFREQUENCY_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2022,
+  serialized_end=2070,
+)
+
+
+_SETLEDCOLOR_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.setLedColor.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='value', full_name='linkbot.robot.setLedColor.In.value', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2087,
+  serialized_end=2106,
+)
+
+_SETLEDCOLOR_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.setLedColor.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=74,
+  serialized_end=79,
+)
+
+_SETLEDCOLOR = _descriptor.Descriptor(
+  name='setLedColor',
+  full_name='linkbot.robot.setLedColor',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_SETLEDCOLOR_IN, _SETLEDCOLOR_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2072,
+  serialized_end=2113,
+)
+
+
+_STOP_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.stop.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='mask', full_name='linkbot.robot.stop.In.mask', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1257,
+  serialized_end=1275,
+)
+
+_STOP_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.stop.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=74,
+  serialized_end=79,
+)
+
+_STOP = _descriptor.Descriptor(
+  name='stop',
+  full_name='linkbot.robot.stop',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_STOP_IN, _STOP_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2115,
+  serialized_end=2148,
+)
+
+
+_GOAL = _descriptor.Descriptor(
+  name='Goal',
+  full_name='linkbot.robot.Goal',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='type', full_name='linkbot.robot.Goal.type', index=0,
+      number=1, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=1,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='goal', full_name='barobo.Robot.Goal.goal', index=1,
-      number=2, type=2, cpp_type=6, label=2,
+      name='goal', full_name='linkbot.robot.Goal.goal', index=1,
+      number=2, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='controller', full_name='barobo.Robot.Goal.controller', index=2,
+      name='controller', full_name='linkbot.robot.Goal.controller', index=2,
       number=3, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=1,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='timeout', full_name='barobo.Robot.Goal.timeout', index=3,
+      name='timeout', full_name='linkbot.robot.Goal.timeout', index=3,
       number=4, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='modeOnTimeout', full_name='barobo.Robot.Goal.modeOnTimeout', index=4,
+      name='modeOnTimeout', full_name='linkbot.robot.Goal.modeOnTimeout', index=4,
       number=5, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -2806,34 +2785,34 @@ _GOAL = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2601,
-  serialized_end=2916,
+  serialized_start=2151,
+  serialized_end=2469,
 )
 
 
 _MOVE_IN = _descriptor.Descriptor(
   name='In',
-  full_name='barobo.Robot.move.In',
+  full_name='linkbot.robot.move.In',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='motorOneGoal', full_name='barobo.Robot.move.In.motorOneGoal', index=0,
+      name='motorOneGoal', full_name='linkbot.robot.move.In.motorOneGoal', index=0,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='motorTwoGoal', full_name='barobo.Robot.move.In.motorTwoGoal', index=1,
+      name='motorTwoGoal', full_name='linkbot.robot.move.In.motorTwoGoal', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='motorThreeGoal', full_name='barobo.Robot.move.In.motorThreeGoal', index=2,
+      name='motorThreeGoal', full_name='linkbot.robot.move.In.motorThreeGoal', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -2851,13 +2830,13 @@ _MOVE_IN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2928,
-  serialized_end=3060,
+  serialized_start=2481,
+  serialized_end=2616,
 )
 
-_MOVE_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.move.Result',
+_MOVE_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.move.Out',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -2874,13 +2853,13 @@ _MOVE_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=73,
-  serialized_end=81,
+  serialized_start=74,
+  serialized_end=79,
 )
 
 _MOVE = _descriptor.Descriptor(
   name='move',
-  full_name='barobo.Robot.move',
+  full_name='linkbot.robot.move',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -2888,7 +2867,7 @@ _MOVE = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[_MOVE_IN, _MOVE_RESULT, ],
+  nested_types=[_MOVE_IN, _MOVE_OUT, ],
   enum_types=[
   ],
   options=None,
@@ -2897,95 +2876,398 @@ _MOVE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2919,
-  serialized_end=3070,
+  serialized_start=2472,
+  serialized_end=2623,
 )
 
 
-_RESETENCODERREVS_IN = _descriptor.Descriptor(
+_ENABLEACCELEROMETEREVENT_IN = _descriptor.Descriptor(
   name='In',
-  full_name='barobo.Robot.resetEncoderRevs.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=67,
-  serialized_end=71,
-)
-
-_RESETENCODERREVS_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.resetEncoderRevs.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=73,
-  serialized_end=81,
-)
-
-_RESETENCODERREVS = _descriptor.Descriptor(
-  name='resetEncoderRevs',
-  full_name='barobo.Robot.resetEncoderRevs',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_RESETENCODERREVS_IN, _RESETENCODERREVS_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3072,
-  serialized_end=3106,
-)
-
-
-_STOP_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.stop.In',
+  full_name='linkbot.robot.enableAccelerometerEvent.In',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='mask', full_name='barobo.Robot.stop.In.mask', index=0,
+      name='enable', full_name='linkbot.robot.enableAccelerometerEvent.In.enable', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='granularity', full_name='linkbot.robot.enableAccelerometerEvent.In.granularity', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2653,
+  serialized_end=2694,
+)
+
+_ENABLEACCELEROMETEREVENT_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.enableAccelerometerEvent.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=74,
+  serialized_end=79,
+)
+
+_ENABLEACCELEROMETEREVENT = _descriptor.Descriptor(
+  name='enableAccelerometerEvent',
+  full_name='linkbot.robot.enableAccelerometerEvent',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_ENABLEACCELEROMETEREVENT_IN, _ENABLEACCELEROMETEREVENT_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2625,
+  serialized_end=2701,
+)
+
+
+_ENABLEBUTTONEVENT_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.enableButtonEvent.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='enable', full_name='linkbot.robot.enableButtonEvent.In.enable', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2653,
+  serialized_end=2673,
+)
+
+_ENABLEBUTTONEVENT_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.enableButtonEvent.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=74,
+  serialized_end=79,
+)
+
+_ENABLEBUTTONEVENT = _descriptor.Descriptor(
+  name='enableButtonEvent',
+  full_name='linkbot.robot.enableButtonEvent',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_ENABLEBUTTONEVENT_IN, _ENABLEBUTTONEVENT_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2703,
+  serialized_end=2751,
+)
+
+
+_ENABLEENCODEREVENT_IN_SIGNALSTATE = _descriptor.Descriptor(
+  name='SignalState',
+  full_name='linkbot.robot.enableEncoderEvent.In.SignalState',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='enable', full_name='linkbot.robot.enableEncoderEvent.In.SignalState.enable', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='granularity', full_name='linkbot.robot.enableEncoderEvent.In.SignalState.granularity', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2995,
+  serialized_end=3045,
+)
+
+_ENABLEENCODEREVENT_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.enableEncoderEvent.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='encoderOne', full_name='linkbot.robot.enableEncoderEvent.In.encoderOne', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='encoderTwo', full_name='linkbot.robot.enableEncoderEvent.In.encoderTwo', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='encoderThree', full_name='linkbot.robot.enableEncoderEvent.In.encoderThree', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[_ENABLEENCODEREVENT_IN_SIGNALSTATE, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2777,
+  serialized_end=3045,
+)
+
+_ENABLEENCODEREVENT_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.enableEncoderEvent.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=74,
+  serialized_end=79,
+)
+
+_ENABLEENCODEREVENT = _descriptor.Descriptor(
+  name='enableEncoderEvent',
+  full_name='linkbot.robot.enableEncoderEvent',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_ENABLEENCODEREVENT_IN, _ENABLEENCODEREVENT_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2754,
+  serialized_end=3052,
+)
+
+
+_ENABLEJOINTEVENT_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.enableJointEvent.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='enable', full_name='linkbot.robot.enableJointEvent.In.enable', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2653,
+  serialized_end=2673,
+)
+
+_ENABLEJOINTEVENT_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.enableJointEvent.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=74,
+  serialized_end=79,
+)
+
+_ENABLEJOINTEVENT = _descriptor.Descriptor(
+  name='enableJointEvent',
+  full_name='linkbot.robot.enableJointEvent',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_ENABLEJOINTEVENT_IN, _ENABLEJOINTEVENT_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3054,
+  serialized_end=3101,
+)
+
+
+_WRITEEEPROM_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.robot.writeEeprom.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='address', full_name='linkbot.robot.writeEeprom.In.address', index=0,
       number=1, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='data', full_name='linkbot.robot.writeEeprom.In.data', index=1,
+      number=2, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))),
   ],
   extensions=[
   ],
@@ -2998,13 +3280,13 @@ _STOP_IN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3116,
-  serialized_end=3134,
+  serialized_start=3118,
+  serialized_end=3161,
 )
 
-_STOP_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.stop.Result',
+_WRITEEEPROM_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.writeEeprom.Out',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -3021,13 +3303,13 @@ _STOP_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=73,
-  serialized_end=81,
+  serialized_start=74,
+  serialized_end=79,
 )
 
-_STOP = _descriptor.Descriptor(
-  name='stop',
-  full_name='barobo.Robot.stop',
+_WRITEEEPROM = _descriptor.Descriptor(
+  name='writeEeprom',
+  full_name='linkbot.robot.writeEeprom',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -3035,7 +3317,7 @@ _STOP = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[_STOP_IN, _STOP_RESULT, ],
+  nested_types=[_WRITEEEPROM_IN, _WRITEEEPROM_OUT, ],
   enum_types=[
   ],
   options=None,
@@ -3044,44 +3326,28 @@ _STOP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3108,
-  serialized_end=3144,
+  serialized_start=3103,
+  serialized_end=3168,
 )
 
 
-_GETBUTTONSTATE_IN = _descriptor.Descriptor(
+_READEEPROM_IN = _descriptor.Descriptor(
   name='In',
-  full_name='barobo.Robot.getButtonState.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=67,
-  serialized_end=71,
-)
-
-_GETBUTTONSTATE_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.getButtonState.Result',
+  full_name='linkbot.robot.readEeprom.In',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='mask', full_name='barobo.Robot.getButtonState.Result.mask', index=0,
-      number=1, type=13, cpp_type=3, label=2,
+      name='address', full_name='linkbot.robot.readEeprom.In.address', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='size', full_name='linkbot.robot.readEeprom.In.size', index=1,
+      number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -3090,6 +3356,59 @@ _GETBUTTONSTATE_RESULT = _descriptor.Descriptor(
   extensions=[
   ],
   nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3184,
+  serialized_end=3219,
+)
+
+_READEEPROM_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.readEeprom.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='data', full_name='linkbot.robot.readEeprom.Out.data', index=0,
+      number=1, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3221,
+  serialized_end=3248,
+)
+
+_READEEPROM = _descriptor.Descriptor(
+  name='readEeprom',
+  full_name='linkbot.robot.readEeprom',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_READEEPROM_IN, _READEEPROM_OUT, ],
   enum_types=[
   ],
   options=None,
@@ -3099,393 +3418,27 @@ _GETBUTTONSTATE_RESULT = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=3170,
-  serialized_end=3192,
-)
-
-_GETBUTTONSTATE = _descriptor.Descriptor(
-  name='getButtonState',
-  full_name='barobo.Robot.getButtonState',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_GETBUTTONSTATE_IN, _GETBUTTONSTATE_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3146,
-  serialized_end=3192,
-)
-
-
-_GETFIRMWAREVERSION_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.getFirmwareVersion.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=67,
-  serialized_end=71,
-)
-
-_GETFIRMWAREVERSION_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.getFirmwareVersion.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='major', full_name='barobo.Robot.getFirmwareVersion.Result.major', index=0,
-      number=1, type=13, cpp_type=3, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='minor', full_name='barobo.Robot.getFirmwareVersion.Result.minor', index=1,
-      number=2, type=13, cpp_type=3, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='patch', full_name='barobo.Robot.getFirmwareVersion.Result.patch', index=2,
-      number=3, type=13, cpp_type=3, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3222,
-  serialized_end=3275,
-)
-
-_GETFIRMWAREVERSION = _descriptor.Descriptor(
-  name='getFirmwareVersion',
-  full_name='barobo.Robot.getFirmwareVersion',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_GETFIRMWAREVERSION_IN, _GETFIRMWAREVERSION_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3194,
-  serialized_end=3275,
-)
-
-
-_GETFIRMWAREVERSIONSTRING_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.getFirmwareVersionString.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=67,
-  serialized_end=71,
-)
-
-_GETFIRMWAREVERSIONSTRING_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.getFirmwareVersionString.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='value', full_name='barobo.Robot.getFirmwareVersionString.Result.value', index=0,
-      number=1, type=9, cpp_type=9, label=2,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3311,
-  serialized_end=3342,
-)
-
-_GETFIRMWAREVERSIONSTRING = _descriptor.Descriptor(
-  name='getFirmwareVersionString',
-  full_name='barobo.Robot.getFirmwareVersionString',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_GETFIRMWAREVERSIONSTRING_IN, _GETFIRMWAREVERSIONSTRING_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3277,
-  serialized_end=3342,
-)
-
-
-_WRITEEEPROM_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.writeEeprom.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='address', full_name='barobo.Robot.writeEeprom.In.address', index=0,
-      number=1, type=13, cpp_type=3, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='data', full_name='barobo.Robot.writeEeprom.In.data', index=1,
-      number=2, type=12, cpp_type=9, label=2,
-      has_default_value=False, default_value=_b(""),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3359,
-  serialized_end=3402,
-)
-
-_WRITEEEPROM_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.writeEeprom.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=73,
-  serialized_end=81,
-)
-
-_WRITEEEPROM = _descriptor.Descriptor(
-  name='writeEeprom',
-  full_name='barobo.Robot.writeEeprom',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_WRITEEEPROM_IN, _WRITEEEPROM_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3344,
-  serialized_end=3412,
-)
-
-
-_READEEPROM_IN = _descriptor.Descriptor(
-  name='In',
-  full_name='barobo.Robot.readEeprom.In',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='address', full_name='barobo.Robot.readEeprom.In.address', index=0,
-      number=1, type=13, cpp_type=3, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='size', full_name='barobo.Robot.readEeprom.In.size', index=1,
-      number=2, type=13, cpp_type=3, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3428,
-  serialized_end=3463,
-)
-
-_READEEPROM_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.readEeprom.Result',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='data', full_name='barobo.Robot.readEeprom.Result.data', index=0,
-      number=1, type=12, cpp_type=9, label=2,
-      has_default_value=False, default_value=_b(""),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3465,
-  serialized_end=3495,
-)
-
-_READEEPROM = _descriptor.Descriptor(
-  name='readEeprom',
-  full_name='barobo.Robot.readEeprom',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[_READEEPROM_IN, _READEEPROM_RESULT, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3414,
-  serialized_end=3495,
+  serialized_end=3248,
 )
 
 
 _WRITETWI_IN = _descriptor.Descriptor(
   name='In',
-  full_name='barobo.Robot.writeTwi.In',
+  full_name='linkbot.robot.writeTwi.In',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='address', full_name='barobo.Robot.writeTwi.In.address', index=0,
-      number=1, type=13, cpp_type=3, label=2,
+      name='address', full_name='linkbot.robot.writeTwi.In.address', index=0,
+      number=1, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='data', full_name='barobo.Robot.writeTwi.In.data', index=1,
-      number=2, type=12, cpp_type=9, label=2,
+      name='data', full_name='linkbot.robot.writeTwi.In.data', index=1,
+      number=2, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -3502,13 +3455,13 @@ _WRITETWI_IN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3359,
-  serialized_end=3402,
+  serialized_start=3118,
+  serialized_end=3161,
 )
 
-_WRITETWI_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.writeTwi.Result',
+_WRITETWI_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.writeTwi.Out',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -3525,13 +3478,13 @@ _WRITETWI_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=73,
-  serialized_end=81,
+  serialized_start=74,
+  serialized_end=79,
 )
 
 _WRITETWI = _descriptor.Descriptor(
   name='writeTwi',
-  full_name='barobo.Robot.writeTwi',
+  full_name='linkbot.robot.writeTwi',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -3539,7 +3492,7 @@ _WRITETWI = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[_WRITETWI_IN, _WRITETWI_RESULT, ],
+  nested_types=[_WRITETWI_IN, _WRITETWI_OUT, ],
   enum_types=[
   ],
   options=None,
@@ -3548,28 +3501,28 @@ _WRITETWI = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3497,
-  serialized_end=3562,
+  serialized_start=3250,
+  serialized_end=3312,
 )
 
 
 _READTWI_IN = _descriptor.Descriptor(
   name='In',
-  full_name='barobo.Robot.readTwi.In',
+  full_name='linkbot.robot.readTwi.In',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='address', full_name='barobo.Robot.readTwi.In.address', index=0,
-      number=1, type=13, cpp_type=3, label=2,
+      name='address', full_name='linkbot.robot.readTwi.In.address', index=0,
+      number=1, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='recvsize', full_name='barobo.Robot.readTwi.In.recvsize', index=1,
-      number=2, type=13, cpp_type=3, label=2,
+      name='recvsize', full_name='linkbot.robot.readTwi.In.recvsize', index=1,
+      number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -3586,20 +3539,20 @@ _READTWI_IN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3575,
-  serialized_end=3614,
+  serialized_start=3325,
+  serialized_end=3364,
 )
 
-_READTWI_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.readTwi.Result',
+_READTWI_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.readTwi.Out',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='data', full_name='barobo.Robot.readTwi.Result.data', index=0,
-      number=2, type=12, cpp_type=9, label=2,
+      name='data', full_name='linkbot.robot.readTwi.Out.data', index=0,
+      number=2, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -3616,13 +3569,13 @@ _READTWI_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3616,
-  serialized_end=3646,
+  serialized_start=3366,
+  serialized_end=3393,
 )
 
 _READTWI = _descriptor.Descriptor(
   name='readTwi',
-  full_name='barobo.Robot.readTwi',
+  full_name='linkbot.robot.readTwi',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -3630,7 +3583,7 @@ _READTWI = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[_READTWI_IN, _READTWI_RESULT, ],
+  nested_types=[_READTWI_IN, _READTWI_OUT, ],
   enum_types=[
   ],
   options=None,
@@ -3639,35 +3592,35 @@ _READTWI = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3564,
-  serialized_end=3646,
+  serialized_start=3314,
+  serialized_end=3393,
 )
 
 
 _WRITEREADTWI_IN = _descriptor.Descriptor(
   name='In',
-  full_name='barobo.Robot.writeReadTwi.In',
+  full_name='linkbot.robot.writeReadTwi.In',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='address', full_name='barobo.Robot.writeReadTwi.In.address', index=0,
-      number=1, type=13, cpp_type=3, label=2,
+      name='address', full_name='linkbot.robot.writeReadTwi.In.address', index=0,
+      number=1, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='recvsize', full_name='barobo.Robot.writeReadTwi.In.recvsize', index=1,
-      number=2, type=13, cpp_type=3, label=2,
+      name='recvsize', full_name='linkbot.robot.writeReadTwi.In.recvsize', index=1,
+      number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='data', full_name='barobo.Robot.writeReadTwi.In.data', index=2,
-      number=3, type=12, cpp_type=9, label=2,
+      name='data', full_name='linkbot.robot.writeReadTwi.In.data', index=2,
+      number=3, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -3684,20 +3637,20 @@ _WRITEREADTWI_IN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3664,
-  serialized_end=3725,
+  serialized_start=3411,
+  serialized_end=3472,
 )
 
-_WRITEREADTWI_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.writeReadTwi.Result',
+_WRITEREADTWI_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.writeReadTwi.Out',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='data', full_name='barobo.Robot.writeReadTwi.Result.data', index=0,
-      number=2, type=12, cpp_type=9, label=2,
+      name='data', full_name='linkbot.robot.writeReadTwi.Out.data', index=0,
+      number=2, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -3714,13 +3667,13 @@ _WRITEREADTWI_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3616,
-  serialized_end=3646,
+  serialized_start=3366,
+  serialized_end=3393,
 )
 
 _WRITEREADTWI = _descriptor.Descriptor(
   name='writeReadTwi',
-  full_name='barobo.Robot.writeReadTwi',
+  full_name='linkbot.robot.writeReadTwi',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -3728,7 +3681,7 @@ _WRITEREADTWI = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[_WRITEREADTWI_IN, _WRITEREADTWI_RESULT, ],
+  nested_types=[_WRITEREADTWI_IN, _WRITEREADTWI_OUT, ],
   enum_types=[
   ],
   options=None,
@@ -3737,14 +3690,14 @@ _WRITEREADTWI = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3648,
-  serialized_end=3757,
+  serialized_start=3395,
+  serialized_end=3501,
 )
 
 
 _REBOOT_IN = _descriptor.Descriptor(
   name='In',
-  full_name='barobo.Robot.reboot.In',
+  full_name='linkbot.robot.reboot.In',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -3761,13 +3714,13 @@ _REBOOT_IN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=67,
-  serialized_end=71,
+  serialized_start=68,
+  serialized_end=72,
 )
 
-_REBOOT_RESULT = _descriptor.Descriptor(
-  name='Result',
-  full_name='barobo.Robot.reboot.Result',
+_REBOOT_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.robot.reboot.Out',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -3784,13 +3737,13 @@ _REBOOT_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=73,
-  serialized_end=81,
+  serialized_start=74,
+  serialized_end=79,
 )
 
 _REBOOT = _descriptor.Descriptor(
   name='reboot',
-  full_name='barobo.Robot.reboot',
+  full_name='linkbot.robot.reboot',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
@@ -3798,7 +3751,7 @@ _REBOOT = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[_REBOOT_IN, _REBOOT_RESULT, ],
+  nested_types=[_REBOOT_IN, _REBOOT_OUT, ],
   enum_types=[
   ],
   options=None,
@@ -3807,35 +3760,691 @@ _REBOOT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3759,
-  serialized_end=3783,
+  serialized_start=3503,
+  serialized_end=3524,
+)
+
+
+_RPCREQUEST = _descriptor.Descriptor(
+  name='RpcRequest',
+  full_name='linkbot.robot.RpcRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='requestId', full_name='linkbot.robot.RpcRequest.requestId', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getFirmwareVersionString', full_name='linkbot.robot.RpcRequest.getFirmwareVersionString', index=1,
+      number=16, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getFormFactor', full_name='linkbot.robot.RpcRequest.getFormFactor', index=2,
+      number=17, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getAdcRaw', full_name='linkbot.robot.RpcRequest.getAdcRaw', index=3,
+      number=18, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getBatteryVoltage', full_name='linkbot.robot.RpcRequest.getBatteryVoltage', index=4,
+      number=19, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getAccelerometerData', full_name='linkbot.robot.RpcRequest.getAccelerometerData', index=5,
+      number=20, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getButtonState', full_name='linkbot.robot.RpcRequest.getButtonState', index=6,
+      number=21, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getEncoderValues', full_name='linkbot.robot.RpcRequest.getEncoderValues', index=7,
+      number=22, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getJointStates', full_name='linkbot.robot.RpcRequest.getJointStates', index=8,
+      number=23, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='enableAccelerometerEvent', full_name='linkbot.robot.RpcRequest.enableAccelerometerEvent', index=9,
+      number=24, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='enableButtonEvent', full_name='linkbot.robot.RpcRequest.enableButtonEvent', index=10,
+      number=25, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='enableEncoderEvent', full_name='linkbot.robot.RpcRequest.enableEncoderEvent', index=11,
+      number=26, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='enableJointEvent', full_name='linkbot.robot.RpcRequest.enableJointEvent', index=12,
+      number=27, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getBuzzerFrequency', full_name='linkbot.robot.RpcRequest.getBuzzerFrequency', index=13,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getLedColor', full_name='linkbot.robot.RpcRequest.getLedColor', index=14,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getMotorControllerOmega', full_name='linkbot.robot.RpcRequest.getMotorControllerOmega', index=15,
+      number=28, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getMotorControllerAlphaI', full_name='linkbot.robot.RpcRequest.getMotorControllerAlphaI', index=16,
+      number=29, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getMotorControllerAlphaF', full_name='linkbot.robot.RpcRequest.getMotorControllerAlphaF', index=17,
+      number=30, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getMotorControllerProportionalGain', full_name='linkbot.robot.RpcRequest.getMotorControllerProportionalGain', index=18,
+      number=31, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getMotorControllerIntegratorGain', full_name='linkbot.robot.RpcRequest.getMotorControllerIntegratorGain', index=19,
+      number=32, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getMotorControllerDerivativeGain', full_name='linkbot.robot.RpcRequest.getMotorControllerDerivativeGain', index=20,
+      number=33, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getMotorControllerSafetyThreshold', full_name='linkbot.robot.RpcRequest.getMotorControllerSafetyThreshold', index=21,
+      number=34, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getMotorControllerSafetyAngle', full_name='linkbot.robot.RpcRequest.getMotorControllerSafetyAngle', index=22,
+      number=35, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='setBuzzerFrequency', full_name='linkbot.robot.RpcRequest.setBuzzerFrequency', index=23,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='setLedColor', full_name='linkbot.robot.RpcRequest.setLedColor', index=24,
+      number=5, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='setMotorControllerOmega', full_name='linkbot.robot.RpcRequest.setMotorControllerOmega', index=25,
+      number=36, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='setMotorControllerAlphaI', full_name='linkbot.robot.RpcRequest.setMotorControllerAlphaI', index=26,
+      number=37, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='setMotorControllerAlphaF', full_name='linkbot.robot.RpcRequest.setMotorControllerAlphaF', index=27,
+      number=38, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='setMotorControllerProportionalGain', full_name='linkbot.robot.RpcRequest.setMotorControllerProportionalGain', index=28,
+      number=39, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='setMotorControllerIntegratorGain', full_name='linkbot.robot.RpcRequest.setMotorControllerIntegratorGain', index=29,
+      number=40, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='setMotorControllerDerivativeGain', full_name='linkbot.robot.RpcRequest.setMotorControllerDerivativeGain', index=30,
+      number=41, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='setMotorControllerSafetyThreshold', full_name='linkbot.robot.RpcRequest.setMotorControllerSafetyThreshold', index=31,
+      number=42, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='setMotorControllerSafetyAngle', full_name='linkbot.robot.RpcRequest.setMotorControllerSafetyAngle', index=32,
+      number=43, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='setResetOnDisconnect', full_name='linkbot.robot.RpcRequest.setResetOnDisconnect', index=33,
+      number=53, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='resetEncoderRevs', full_name='linkbot.robot.RpcRequest.resetEncoderRevs', index=34,
+      number=44, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='move', full_name='linkbot.robot.RpcRequest.move', index=35,
+      number=45, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='stop', full_name='linkbot.robot.RpcRequest.stop', index=36,
+      number=46, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='reboot', full_name='linkbot.robot.RpcRequest.reboot', index=37,
+      number=47, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='writeEeprom', full_name='linkbot.robot.RpcRequest.writeEeprom', index=38,
+      number=48, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='readEeprom', full_name='linkbot.robot.RpcRequest.readEeprom', index=39,
+      number=49, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='writeTwi', full_name='linkbot.robot.RpcRequest.writeTwi', index=40,
+      number=50, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='readTwi', full_name='linkbot.robot.RpcRequest.readTwi', index=41,
+      number=51, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='writeReadTwi', full_name='linkbot.robot.RpcRequest.writeReadTwi', index=42,
+      number=52, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='arg', full_name='linkbot.robot.RpcRequest.arg',
+      index=0, containing_type=None, fields=[]),
+  ],
+  serialized_start=3527,
+  serialized_end=6549,
+)
+
+
+_RPCREPLY = _descriptor.Descriptor(
+  name='RpcReply',
+  full_name='linkbot.robot.RpcReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='requestId', full_name='linkbot.robot.RpcReply.requestId', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getFirmwareVersionString', full_name='linkbot.robot.RpcReply.getFirmwareVersionString', index=1,
+      number=16, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getFormFactor', full_name='linkbot.robot.RpcReply.getFormFactor', index=2,
+      number=17, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getAdcRaw', full_name='linkbot.robot.RpcReply.getAdcRaw', index=3,
+      number=18, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getBatteryVoltage', full_name='linkbot.robot.RpcReply.getBatteryVoltage', index=4,
+      number=19, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getAccelerometerData', full_name='linkbot.robot.RpcReply.getAccelerometerData', index=5,
+      number=20, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getButtonState', full_name='linkbot.robot.RpcReply.getButtonState', index=6,
+      number=21, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getEncoderValues', full_name='linkbot.robot.RpcReply.getEncoderValues', index=7,
+      number=22, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getJointStates', full_name='linkbot.robot.RpcReply.getJointStates', index=8,
+      number=23, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='enableAccelerometerEvent', full_name='linkbot.robot.RpcReply.enableAccelerometerEvent', index=9,
+      number=24, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='enableButtonEvent', full_name='linkbot.robot.RpcReply.enableButtonEvent', index=10,
+      number=25, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='enableEncoderEvent', full_name='linkbot.robot.RpcReply.enableEncoderEvent', index=11,
+      number=26, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='enableJointEvent', full_name='linkbot.robot.RpcReply.enableJointEvent', index=12,
+      number=27, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getBuzzerFrequency', full_name='linkbot.robot.RpcReply.getBuzzerFrequency', index=13,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getLedColor', full_name='linkbot.robot.RpcReply.getLedColor', index=14,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getMotorControllerOmega', full_name='linkbot.robot.RpcReply.getMotorControllerOmega', index=15,
+      number=28, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getMotorControllerAlphaI', full_name='linkbot.robot.RpcReply.getMotorControllerAlphaI', index=16,
+      number=29, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getMotorControllerAlphaF', full_name='linkbot.robot.RpcReply.getMotorControllerAlphaF', index=17,
+      number=30, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getMotorControllerProportionalGain', full_name='linkbot.robot.RpcReply.getMotorControllerProportionalGain', index=18,
+      number=31, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getMotorControllerIntegratorGain', full_name='linkbot.robot.RpcReply.getMotorControllerIntegratorGain', index=19,
+      number=32, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getMotorControllerDerivativeGain', full_name='linkbot.robot.RpcReply.getMotorControllerDerivativeGain', index=20,
+      number=33, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getMotorControllerSafetyThreshold', full_name='linkbot.robot.RpcReply.getMotorControllerSafetyThreshold', index=21,
+      number=34, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='getMotorControllerSafetyAngle', full_name='linkbot.robot.RpcReply.getMotorControllerSafetyAngle', index=22,
+      number=35, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='setBuzzerFrequency', full_name='linkbot.robot.RpcReply.setBuzzerFrequency', index=23,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='setLedColor', full_name='linkbot.robot.RpcReply.setLedColor', index=24,
+      number=5, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='setMotorControllerOmega', full_name='linkbot.robot.RpcReply.setMotorControllerOmega', index=25,
+      number=36, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='setMotorControllerAlphaI', full_name='linkbot.robot.RpcReply.setMotorControllerAlphaI', index=26,
+      number=37, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='setMotorControllerAlphaF', full_name='linkbot.robot.RpcReply.setMotorControllerAlphaF', index=27,
+      number=38, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='setMotorControllerProportionalGain', full_name='linkbot.robot.RpcReply.setMotorControllerProportionalGain', index=28,
+      number=39, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='setMotorControllerIntegratorGain', full_name='linkbot.robot.RpcReply.setMotorControllerIntegratorGain', index=29,
+      number=40, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='setMotorControllerDerivativeGain', full_name='linkbot.robot.RpcReply.setMotorControllerDerivativeGain', index=30,
+      number=41, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='setMotorControllerSafetyThreshold', full_name='linkbot.robot.RpcReply.setMotorControllerSafetyThreshold', index=31,
+      number=42, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='setMotorControllerSafetyAngle', full_name='linkbot.robot.RpcReply.setMotorControllerSafetyAngle', index=32,
+      number=43, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='setResetOnDisconnect', full_name='linkbot.robot.RpcReply.setResetOnDisconnect', index=33,
+      number=53, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='resetEncoderRevs', full_name='linkbot.robot.RpcReply.resetEncoderRevs', index=34,
+      number=44, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='move', full_name='linkbot.robot.RpcReply.move', index=35,
+      number=45, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='stop', full_name='linkbot.robot.RpcReply.stop', index=36,
+      number=46, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='reboot', full_name='linkbot.robot.RpcReply.reboot', index=37,
+      number=47, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='writeEeprom', full_name='linkbot.robot.RpcReply.writeEeprom', index=38,
+      number=48, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='readEeprom', full_name='linkbot.robot.RpcReply.readEeprom', index=39,
+      number=49, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='writeTwi', full_name='linkbot.robot.RpcReply.writeTwi', index=40,
+      number=50, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='readTwi', full_name='linkbot.robot.RpcReply.readTwi', index=41,
+      number=51, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='writeReadTwi', full_name='linkbot.robot.RpcReply.writeReadTwi', index=42,
+      number=52, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='arg', full_name='linkbot.robot.RpcReply.arg',
+      index=0, containing_type=None, fields=[]),
+  ],
+  serialized_start=6552,
+  serialized_end=9614,
 )
 
 
 _BUTTONEVENT = _descriptor.Descriptor(
-  name='buttonEvent',
-  full_name='barobo.Robot.buttonEvent',
+  name='ButtonEvent',
+  full_name='linkbot.robot.ButtonEvent',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='timestamp', full_name='barobo.Robot.buttonEvent.timestamp', index=0,
-      number=1, type=13, cpp_type=3, label=2,
+      name='timestamp', full_name='linkbot.robot.ButtonEvent.timestamp', index=0,
+      number=1, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='button', full_name='barobo.Robot.buttonEvent.button', index=1,
-      number=2, type=14, cpp_type=8, label=2,
+      name='button', full_name='linkbot.robot.ButtonEvent.button', index=1,
+      number=2, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='state', full_name='barobo.Robot.buttonEvent.state', index=2,
-      number=3, type=14, cpp_type=8, label=2,
+      name='state', full_name='linkbot.robot.ButtonEvent.state', index=2,
+      number=3, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -3852,35 +4461,35 @@ _BUTTONEVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3785,
-  serialized_end=3897,
+  serialized_start=9616,
+  serialized_end=9730,
 )
 
 
 _ENCODEREVENT = _descriptor.Descriptor(
-  name='encoderEvent',
-  full_name='barobo.Robot.encoderEvent',
+  name='EncoderEvent',
+  full_name='linkbot.robot.EncoderEvent',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='timestamp', full_name='barobo.Robot.encoderEvent.timestamp', index=0,
-      number=1, type=13, cpp_type=3, label=2,
+      name='timestamp', full_name='linkbot.robot.EncoderEvent.timestamp', index=0,
+      number=1, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='encoder', full_name='barobo.Robot.encoderEvent.encoder', index=1,
-      number=2, type=13, cpp_type=3, label=2,
+      name='encoder', full_name='linkbot.robot.EncoderEvent.encoder', index=1,
+      number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='value', full_name='barobo.Robot.encoderEvent.value', index=2,
-      number=3, type=2, cpp_type=6, label=2,
+      name='value', full_name='linkbot.robot.EncoderEvent.value', index=2,
+      number=3, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -3897,93 +4506,41 @@ _ENCODEREVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3899,
-  serialized_end=3964,
+  serialized_start=9732,
+  serialized_end=9797,
 )
 
 
 _ACCELEROMETEREVENT = _descriptor.Descriptor(
-  name='accelerometerEvent',
-  full_name='barobo.Robot.accelerometerEvent',
+  name='AccelerometerEvent',
+  full_name='linkbot.robot.AccelerometerEvent',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='timestamp', full_name='barobo.Robot.accelerometerEvent.timestamp', index=0,
-      number=1, type=13, cpp_type=3, label=2,
+      name='timestamp', full_name='linkbot.robot.AccelerometerEvent.timestamp', index=0,
+      number=1, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='x', full_name='barobo.Robot.accelerometerEvent.x', index=1,
-      number=2, type=2, cpp_type=6, label=2,
+      name='x', full_name='linkbot.robot.AccelerometerEvent.x', index=1,
+      number=2, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='y', full_name='barobo.Robot.accelerometerEvent.y', index=2,
-      number=3, type=2, cpp_type=6, label=2,
+      name='y', full_name='linkbot.robot.AccelerometerEvent.y', index=2,
+      number=3, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='z', full_name='barobo.Robot.accelerometerEvent.z', index=3,
-      number=4, type=2, cpp_type=6, label=2,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=3966,
-  serialized_end=4038,
-)
-
-
-_JOINTEVENT = _descriptor.Descriptor(
-  name='jointEvent',
-  full_name='barobo.Robot.jointEvent',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='timestamp', full_name='barobo.Robot.jointEvent.timestamp', index=0,
-      number=1, type=13, cpp_type=3, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='joint', full_name='barobo.Robot.jointEvent.joint', index=1,
-      number=2, type=13, cpp_type=3, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='event', full_name='barobo.Robot.jointEvent.event', index=2,
-      number=3, type=14, cpp_type=8, label=2,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='angle', full_name='barobo.Robot.jointEvent.angle', index=3,
+      name='z', full_name='linkbot.robot.AccelerometerEvent.z', index=3,
       number=4, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
@@ -4001,28 +4558,80 @@ _JOINTEVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4040,
-  serialized_end=4142,
+  serialized_start=9799,
+  serialized_end=9871,
 )
 
 
-_DEBUGMESSAGEEVENT = _descriptor.Descriptor(
-  name='debugMessageEvent',
-  full_name='barobo.Robot.debugMessageEvent',
+_JOINTEVENT = _descriptor.Descriptor(
+  name='JointEvent',
+  full_name='linkbot.robot.JointEvent',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='timestamp', full_name='barobo.Robot.debugMessageEvent.timestamp', index=0,
-      number=1, type=13, cpp_type=3, label=2,
+      name='timestamp', full_name='linkbot.robot.JointEvent.timestamp', index=0,
+      number=1, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='bytestring', full_name='barobo.Robot.debugMessageEvent.bytestring', index=1,
-      number=2, type=9, cpp_type=9, label=2,
+      name='joint', full_name='linkbot.robot.JointEvent.joint', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='event', full_name='linkbot.robot.JointEvent.event', index=2,
+      number=3, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='angle', full_name='linkbot.robot.JointEvent.angle', index=3,
+      number=4, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=9873,
+  serialized_end=9976,
+)
+
+
+_DEBUGMESSAGEEVENT = _descriptor.Descriptor(
+  name='DebugMessageEvent',
+  full_name='linkbot.robot.DebugMessageEvent',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='timestamp', full_name='linkbot.robot.DebugMessageEvent.timestamp', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='bytestring', full_name='linkbot.robot.DebugMessageEvent.bytestring', index=1,
+      number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -4039,21 +4648,21 @@ _DEBUGMESSAGEEVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4144,
-  serialized_end=4210,
+  serialized_start=9978,
+  serialized_end=10044,
 )
 
 
 _CONNECTIONTERMINATED = _descriptor.Descriptor(
-  name='connectionTerminated',
-  full_name='barobo.Robot.connectionTerminated',
+  name='ConnectionTerminated',
+  full_name='linkbot.robot.ConnectionTerminated',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='timestamp', full_name='barobo.Robot.connectionTerminated.timestamp', index=0,
-      number=1, type=13, cpp_type=3, label=2,
+      name='timestamp', full_name='linkbot.robot.ConnectionTerminated.timestamp', index=0,
+      number=1, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -4070,79 +4679,260 @@ _CONNECTIONTERMINATED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4212,
-  serialized_end=4253,
+  serialized_start=10046,
+  serialized_end=10087,
+)
+
+
+_POWERONEVENT = _descriptor.Descriptor(
+  name='PowerOnEvent',
+  full_name='linkbot.robot.PowerOnEvent',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='version', full_name='linkbot.robot.PowerOnEvent.version', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=10089,
+  serialized_end=10128,
+)
+
+
+_PING = _descriptor.Descriptor(
+  name='Ping',
+  full_name='linkbot.robot.Ping',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='peripheralResetMask', full_name='linkbot.robot.Ping.peripheralResetMask', index=0,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=10130,
+  serialized_end=10165,
+)
+
+
+_CLIENTTOROBOT = _descriptor.Descriptor(
+  name='ClientToRobot',
+  full_name='linkbot.robot.ClientToRobot',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='rpcRequest', full_name='linkbot.robot.ClientToRobot.rpcRequest', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='ping', full_name='linkbot.robot.ClientToRobot.ping', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='arg', full_name='linkbot.robot.ClientToRobot.arg',
+      index=0, containing_type=None, fields=[]),
+  ],
+  serialized_start=10167,
+  serialized_end=10275,
+)
+
+
+_ROBOTTOCLIENT = _descriptor.Descriptor(
+  name='RobotToClient',
+  full_name='linkbot.robot.RobotToClient',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='rpcReply', full_name='linkbot.robot.RobotToClient.rpcReply', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='accelerometerEvent', full_name='linkbot.robot.RobotToClient.accelerometerEvent', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='buttonEvent', full_name='linkbot.robot.RobotToClient.buttonEvent', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='encoderEvent', full_name='linkbot.robot.RobotToClient.encoderEvent', index=3,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='jointEvent', full_name='linkbot.robot.RobotToClient.jointEvent', index=4,
+      number=5, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='debugMessageEvent', full_name='linkbot.robot.RobotToClient.debugMessageEvent', index=5,
+      number=6, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='connectionTerminated', full_name='linkbot.robot.RobotToClient.connectionTerminated', index=6,
+      number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='powerOnEvent', full_name='linkbot.robot.RobotToClient.powerOnEvent', index=7,
+      number=8, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='arg', full_name='linkbot.robot.RobotToClient.arg',
+      index=0, containing_type=None, fields=[]),
+  ],
+  serialized_start=10278,
+  serialized_end=10748,
 )
 
 _GETACCELEROMETERDATA_IN.containing_type = _GETACCELEROMETERDATA
-_GETACCELEROMETERDATA_RESULT.containing_type = _GETACCELEROMETERDATA
-_GETLEDCOLOR_IN.containing_type = _GETLEDCOLOR
-_GETLEDCOLOR_RESULT.containing_type = _GETLEDCOLOR
-_SETLEDCOLOR_IN.containing_type = _SETLEDCOLOR
-_SETLEDCOLOR_RESULT.containing_type = _SETLEDCOLOR
-_GETBUZZERFREQUENCY_IN.containing_type = _GETBUZZERFREQUENCY
-_GETBUZZERFREQUENCY_RESULT.containing_type = _GETBUZZERFREQUENCY
-_SETBUZZERFREQUENCY_IN.containing_type = _SETBUZZERFREQUENCY
-_SETBUZZERFREQUENCY_RESULT.containing_type = _SETBUZZERFREQUENCY
-_ENABLEBUTTONEVENT_IN.containing_type = _ENABLEBUTTONEVENT
-_ENABLEBUTTONEVENT_RESULT.containing_type = _ENABLEBUTTONEVENT
-_ENABLEENCODEREVENT_IN_SIGNALSTATE.containing_type = _ENABLEENCODEREVENT_IN
-_ENABLEENCODEREVENT_IN.fields_by_name['encoderOne'].message_type = _ENABLEENCODEREVENT_IN_SIGNALSTATE
-_ENABLEENCODEREVENT_IN.fields_by_name['encoderTwo'].message_type = _ENABLEENCODEREVENT_IN_SIGNALSTATE
-_ENABLEENCODEREVENT_IN.fields_by_name['encoderThree'].message_type = _ENABLEENCODEREVENT_IN_SIGNALSTATE
-_ENABLEENCODEREVENT_IN.containing_type = _ENABLEENCODEREVENT
-_ENABLEENCODEREVENT_RESULT.containing_type = _ENABLEENCODEREVENT
-_ENABLEJOINTEVENT_IN.containing_type = _ENABLEJOINTEVENT
-_ENABLEJOINTEVENT_RESULT.containing_type = _ENABLEJOINTEVENT
-_ENABLEACCELEROMETEREVENT_IN.containing_type = _ENABLEACCELEROMETEREVENT
-_ENABLEACCELEROMETEREVENT_RESULT.containing_type = _ENABLEACCELEROMETEREVENT
-_SETMOTORCONTROLLERSAFETYTHRESHOLD_IN.containing_type = _SETMOTORCONTROLLERSAFETYTHRESHOLD
-_SETMOTORCONTROLLERSAFETYTHRESHOLD_RESULT.containing_type = _SETMOTORCONTROLLERSAFETYTHRESHOLD
-_SETMOTORCONTROLLERSAFETYANGLE_IN.containing_type = _SETMOTORCONTROLLERSAFETYANGLE
-_SETMOTORCONTROLLERSAFETYANGLE_RESULT.containing_type = _SETMOTORCONTROLLERSAFETYANGLE
-_SETMOTORCONTROLLERALPHAI_IN.containing_type = _SETMOTORCONTROLLERALPHAI
-_SETMOTORCONTROLLERALPHAI_RESULT.containing_type = _SETMOTORCONTROLLERALPHAI
-_SETMOTORCONTROLLERALPHAF_IN.containing_type = _SETMOTORCONTROLLERALPHAF
-_SETMOTORCONTROLLERALPHAF_RESULT.containing_type = _SETMOTORCONTROLLERALPHAF
-_SETMOTORCONTROLLEROMEGA_IN.containing_type = _SETMOTORCONTROLLEROMEGA
-_SETMOTORCONTROLLEROMEGA_RESULT.containing_type = _SETMOTORCONTROLLEROMEGA
-_SETMOTORCONTROLLERPROPORTIONALGAIN_IN.containing_type = _SETMOTORCONTROLLERPROPORTIONALGAIN
-_SETMOTORCONTROLLERPROPORTIONALGAIN_RESULT.containing_type = _SETMOTORCONTROLLERPROPORTIONALGAIN
-_SETMOTORCONTROLLERINTEGRATORGAIN_IN.containing_type = _SETMOTORCONTROLLERINTEGRATORGAIN
-_SETMOTORCONTROLLERINTEGRATORGAIN_RESULT.containing_type = _SETMOTORCONTROLLERINTEGRATORGAIN
-_SETMOTORCONTROLLERDERIVATIVEGAIN_IN.containing_type = _SETMOTORCONTROLLERDERIVATIVEGAIN
-_SETMOTORCONTROLLERDERIVATIVEGAIN_RESULT.containing_type = _SETMOTORCONTROLLERDERIVATIVEGAIN
-_SETRESETONDISCONNECT_IN.containing_type = _SETRESETONDISCONNECT
-_SETRESETONDISCONNECT_RESULT.containing_type = _SETRESETONDISCONNECT
+_GETACCELEROMETERDATA_OUT.containing_type = _GETACCELEROMETERDATA
 _GETBATTERYVOLTAGE_IN.containing_type = _GETBATTERYVOLTAGE
-_GETBATTERYVOLTAGE_RESULT.containing_type = _GETBATTERYVOLTAGE
+_GETBATTERYVOLTAGE_OUT.containing_type = _GETBATTERYVOLTAGE
 _GETADCRAW_IN.containing_type = _GETADCRAW
-_GETADCRAW_RESULT.containing_type = _GETADCRAW
-_GETMOTORCONTROLLERSAFETYTHRESHOLD_IN.containing_type = _GETMOTORCONTROLLERSAFETYTHRESHOLD
-_GETMOTORCONTROLLERSAFETYTHRESHOLD_RESULT.containing_type = _GETMOTORCONTROLLERSAFETYTHRESHOLD
-_GETMOTORCONTROLLERSAFETYANGLE_IN.containing_type = _GETMOTORCONTROLLERSAFETYANGLE
-_GETMOTORCONTROLLERSAFETYANGLE_RESULT.containing_type = _GETMOTORCONTROLLERSAFETYANGLE
-_GETMOTORCONTROLLERALPHAI_IN.containing_type = _GETMOTORCONTROLLERALPHAI
-_GETMOTORCONTROLLERALPHAI_RESULT.containing_type = _GETMOTORCONTROLLERALPHAI
-_GETMOTORCONTROLLERALPHAF_IN.containing_type = _GETMOTORCONTROLLERALPHAF
-_GETMOTORCONTROLLERALPHAF_RESULT.containing_type = _GETMOTORCONTROLLERALPHAF
-_GETMOTORCONTROLLEROMEGA_IN.containing_type = _GETMOTORCONTROLLEROMEGA
-_GETMOTORCONTROLLEROMEGA_RESULT.containing_type = _GETMOTORCONTROLLEROMEGA
-_GETMOTORCONTROLLERPROPORTIONALGAIN_IN.containing_type = _GETMOTORCONTROLLERPROPORTIONALGAIN
-_GETMOTORCONTROLLERPROPORTIONALGAIN_RESULT.containing_type = _GETMOTORCONTROLLERPROPORTIONALGAIN
-_GETMOTORCONTROLLERINTEGRATORGAIN_IN.containing_type = _GETMOTORCONTROLLERINTEGRATORGAIN
-_GETMOTORCONTROLLERINTEGRATORGAIN_RESULT.containing_type = _GETMOTORCONTROLLERINTEGRATORGAIN
-_GETMOTORCONTROLLERDERIVATIVEGAIN_IN.containing_type = _GETMOTORCONTROLLERDERIVATIVEGAIN
-_GETMOTORCONTROLLERDERIVATIVEGAIN_RESULT.containing_type = _GETMOTORCONTROLLERDERIVATIVEGAIN
+_GETADCRAW_OUT.containing_type = _GETADCRAW
+_GETBUTTONSTATE_IN.containing_type = _GETBUTTONSTATE
+_GETBUTTONSTATE_OUT.containing_type = _GETBUTTONSTATE
+_GETBUZZERFREQUENCY_IN.containing_type = _GETBUZZERFREQUENCY
+_GETBUZZERFREQUENCY_OUT.containing_type = _GETBUZZERFREQUENCY
 _GETENCODERVALUES_IN.containing_type = _GETENCODERVALUES
-_GETENCODERVALUES_RESULT.containing_type = _GETENCODERVALUES
-_GETJOINTSTATES_IN.containing_type = _GETJOINTSTATES
-_GETJOINTSTATES_RESULT.fields_by_name['values'].enum_type = _JOINTSTATE
-_GETJOINTSTATES_RESULT.containing_type = _GETJOINTSTATES
+_GETENCODERVALUES_OUT.containing_type = _GETENCODERVALUES
+_GETFIRMWAREVERSIONSTRING_IN.containing_type = _GETFIRMWAREVERSIONSTRING
+_GETFIRMWAREVERSIONSTRING_OUT.containing_type = _GETFIRMWAREVERSIONSTRING
 _GETFORMFACTOR_IN.containing_type = _GETFORMFACTOR
-_GETFORMFACTOR_RESULT.fields_by_name['value'].enum_type = _GETFORMFACTOR_FORMFACTOR
-_GETFORMFACTOR_RESULT.containing_type = _GETFORMFACTOR
-_GETFORMFACTOR_FORMFACTOR.containing_type = _GETFORMFACTOR
+_GETFORMFACTOR_OUT.fields_by_name['value'].enum_type = _FORMFACTOR
+_GETFORMFACTOR_OUT.containing_type = _GETFORMFACTOR
+_GETJOINTSTATES_IN.containing_type = _GETJOINTSTATES
+_GETJOINTSTATES_OUT.fields_by_name['values'].enum_type = _JOINTSTATE
+_GETJOINTSTATES_OUT.containing_type = _GETJOINTSTATES
+_GETLEDCOLOR_IN.containing_type = _GETLEDCOLOR
+_GETLEDCOLOR_OUT.containing_type = _GETLEDCOLOR
+_GETMOTORCONTROLLEROMEGA_IN.containing_type = _GETMOTORCONTROLLEROMEGA
+_GETMOTORCONTROLLEROMEGA_OUT.containing_type = _GETMOTORCONTROLLEROMEGA
+_GETMOTORCONTROLLERALPHAI_IN.containing_type = _GETMOTORCONTROLLERALPHAI
+_GETMOTORCONTROLLERALPHAI_OUT.containing_type = _GETMOTORCONTROLLERALPHAI
+_GETMOTORCONTROLLERALPHAF_IN.containing_type = _GETMOTORCONTROLLERALPHAF
+_GETMOTORCONTROLLERALPHAF_OUT.containing_type = _GETMOTORCONTROLLERALPHAF
+_GETMOTORCONTROLLERPROPORTIONALGAIN_IN.containing_type = _GETMOTORCONTROLLERPROPORTIONALGAIN
+_GETMOTORCONTROLLERPROPORTIONALGAIN_OUT.containing_type = _GETMOTORCONTROLLERPROPORTIONALGAIN
+_GETMOTORCONTROLLERINTEGRATORGAIN_IN.containing_type = _GETMOTORCONTROLLERINTEGRATORGAIN
+_GETMOTORCONTROLLERINTEGRATORGAIN_OUT.containing_type = _GETMOTORCONTROLLERINTEGRATORGAIN
+_GETMOTORCONTROLLERDERIVATIVEGAIN_IN.containing_type = _GETMOTORCONTROLLERDERIVATIVEGAIN
+_GETMOTORCONTROLLERDERIVATIVEGAIN_OUT.containing_type = _GETMOTORCONTROLLERDERIVATIVEGAIN
+_GETMOTORCONTROLLERSAFETYTHRESHOLD_IN.containing_type = _GETMOTORCONTROLLERSAFETYTHRESHOLD
+_GETMOTORCONTROLLERSAFETYTHRESHOLD_OUT.containing_type = _GETMOTORCONTROLLERSAFETYTHRESHOLD
+_GETMOTORCONTROLLERSAFETYANGLE_IN.containing_type = _GETMOTORCONTROLLERSAFETYANGLE
+_GETMOTORCONTROLLERSAFETYANGLE_OUT.containing_type = _GETMOTORCONTROLLERSAFETYANGLE
+_SETMOTORCONTROLLEROMEGA_IN.containing_type = _SETMOTORCONTROLLEROMEGA
+_SETMOTORCONTROLLEROMEGA_OUT.containing_type = _SETMOTORCONTROLLEROMEGA
+_SETMOTORCONTROLLERALPHAI_IN.containing_type = _SETMOTORCONTROLLERALPHAI
+_SETMOTORCONTROLLERALPHAI_OUT.containing_type = _SETMOTORCONTROLLERALPHAI
+_SETMOTORCONTROLLERALPHAF_IN.containing_type = _SETMOTORCONTROLLERALPHAF
+_SETMOTORCONTROLLERALPHAF_OUT.containing_type = _SETMOTORCONTROLLERALPHAF
+_SETMOTORCONTROLLERPROPORTIONALGAIN_IN.containing_type = _SETMOTORCONTROLLERPROPORTIONALGAIN
+_SETMOTORCONTROLLERPROPORTIONALGAIN_OUT.containing_type = _SETMOTORCONTROLLERPROPORTIONALGAIN
+_SETMOTORCONTROLLERINTEGRATORGAIN_IN.containing_type = _SETMOTORCONTROLLERINTEGRATORGAIN
+_SETMOTORCONTROLLERINTEGRATORGAIN_OUT.containing_type = _SETMOTORCONTROLLERINTEGRATORGAIN
+_SETMOTORCONTROLLERDERIVATIVEGAIN_IN.containing_type = _SETMOTORCONTROLLERDERIVATIVEGAIN
+_SETMOTORCONTROLLERDERIVATIVEGAIN_OUT.containing_type = _SETMOTORCONTROLLERDERIVATIVEGAIN
+_SETMOTORCONTROLLERSAFETYTHRESHOLD_IN.containing_type = _SETMOTORCONTROLLERSAFETYTHRESHOLD
+_SETMOTORCONTROLLERSAFETYTHRESHOLD_OUT.containing_type = _SETMOTORCONTROLLERSAFETYTHRESHOLD
+_SETMOTORCONTROLLERSAFETYANGLE_IN.containing_type = _SETMOTORCONTROLLERSAFETYANGLE
+_SETMOTORCONTROLLERSAFETYANGLE_OUT.containing_type = _SETMOTORCONTROLLERSAFETYANGLE
+_SETRESETONDISCONNECT_IN.containing_type = _SETRESETONDISCONNECT
+_SETRESETONDISCONNECT_OUT.containing_type = _SETRESETONDISCONNECT
+_RESETENCODERREVS_IN.containing_type = _RESETENCODERREVS
+_RESETENCODERREVS_OUT.containing_type = _RESETENCODERREVS
+_SETBUZZERFREQUENCY_IN.containing_type = _SETBUZZERFREQUENCY
+_SETBUZZERFREQUENCY_OUT.containing_type = _SETBUZZERFREQUENCY
+_SETLEDCOLOR_IN.containing_type = _SETLEDCOLOR
+_SETLEDCOLOR_OUT.containing_type = _SETLEDCOLOR
+_STOP_IN.containing_type = _STOP
+_STOP_OUT.containing_type = _STOP
 _GOAL.fields_by_name['type'].enum_type = _GOAL_TYPE
 _GOAL.fields_by_name['controller'].enum_type = _GOAL_CONTROLLER
 _GOAL.fields_by_name['modeOnTimeout'].enum_type = _JOINTSTATE
@@ -4152,811 +4942,1188 @@ _MOVE_IN.fields_by_name['motorOneGoal'].message_type = _GOAL
 _MOVE_IN.fields_by_name['motorTwoGoal'].message_type = _GOAL
 _MOVE_IN.fields_by_name['motorThreeGoal'].message_type = _GOAL
 _MOVE_IN.containing_type = _MOVE
-_MOVE_RESULT.containing_type = _MOVE
-_RESETENCODERREVS_IN.containing_type = _RESETENCODERREVS
-_RESETENCODERREVS_RESULT.containing_type = _RESETENCODERREVS
-_STOP_IN.containing_type = _STOP
-_STOP_RESULT.containing_type = _STOP
-_GETBUTTONSTATE_IN.containing_type = _GETBUTTONSTATE
-_GETBUTTONSTATE_RESULT.containing_type = _GETBUTTONSTATE
-_GETFIRMWAREVERSION_IN.containing_type = _GETFIRMWAREVERSION
-_GETFIRMWAREVERSION_RESULT.containing_type = _GETFIRMWAREVERSION
-_GETFIRMWAREVERSIONSTRING_IN.containing_type = _GETFIRMWAREVERSIONSTRING
-_GETFIRMWAREVERSIONSTRING_RESULT.containing_type = _GETFIRMWAREVERSIONSTRING
+_MOVE_OUT.containing_type = _MOVE
+_ENABLEACCELEROMETEREVENT_IN.containing_type = _ENABLEACCELEROMETEREVENT
+_ENABLEACCELEROMETEREVENT_OUT.containing_type = _ENABLEACCELEROMETEREVENT
+_ENABLEBUTTONEVENT_IN.containing_type = _ENABLEBUTTONEVENT
+_ENABLEBUTTONEVENT_OUT.containing_type = _ENABLEBUTTONEVENT
+_ENABLEENCODEREVENT_IN_SIGNALSTATE.containing_type = _ENABLEENCODEREVENT_IN
+_ENABLEENCODEREVENT_IN.fields_by_name['encoderOne'].message_type = _ENABLEENCODEREVENT_IN_SIGNALSTATE
+_ENABLEENCODEREVENT_IN.fields_by_name['encoderTwo'].message_type = _ENABLEENCODEREVENT_IN_SIGNALSTATE
+_ENABLEENCODEREVENT_IN.fields_by_name['encoderThree'].message_type = _ENABLEENCODEREVENT_IN_SIGNALSTATE
+_ENABLEENCODEREVENT_IN.containing_type = _ENABLEENCODEREVENT
+_ENABLEENCODEREVENT_OUT.containing_type = _ENABLEENCODEREVENT
+_ENABLEJOINTEVENT_IN.containing_type = _ENABLEJOINTEVENT
+_ENABLEJOINTEVENT_OUT.containing_type = _ENABLEJOINTEVENT
 _WRITEEEPROM_IN.containing_type = _WRITEEEPROM
-_WRITEEEPROM_RESULT.containing_type = _WRITEEEPROM
+_WRITEEEPROM_OUT.containing_type = _WRITEEEPROM
 _READEEPROM_IN.containing_type = _READEEPROM
-_READEEPROM_RESULT.containing_type = _READEEPROM
+_READEEPROM_OUT.containing_type = _READEEPROM
 _WRITETWI_IN.containing_type = _WRITETWI
-_WRITETWI_RESULT.containing_type = _WRITETWI
+_WRITETWI_OUT.containing_type = _WRITETWI
 _READTWI_IN.containing_type = _READTWI
-_READTWI_RESULT.containing_type = _READTWI
+_READTWI_OUT.containing_type = _READTWI
 _WRITEREADTWI_IN.containing_type = _WRITEREADTWI
-_WRITEREADTWI_RESULT.containing_type = _WRITEREADTWI
+_WRITEREADTWI_OUT.containing_type = _WRITEREADTWI
 _REBOOT_IN.containing_type = _REBOOT
-_REBOOT_RESULT.containing_type = _REBOOT
+_REBOOT_OUT.containing_type = _REBOOT
+_RPCREQUEST.fields_by_name['getFirmwareVersionString'].message_type = _GETFIRMWAREVERSIONSTRING_IN
+_RPCREQUEST.fields_by_name['getFormFactor'].message_type = _GETFORMFACTOR_IN
+_RPCREQUEST.fields_by_name['getAdcRaw'].message_type = _GETADCRAW_IN
+_RPCREQUEST.fields_by_name['getBatteryVoltage'].message_type = _GETBATTERYVOLTAGE_IN
+_RPCREQUEST.fields_by_name['getAccelerometerData'].message_type = _GETACCELEROMETERDATA_IN
+_RPCREQUEST.fields_by_name['getButtonState'].message_type = _GETBUTTONSTATE_IN
+_RPCREQUEST.fields_by_name['getEncoderValues'].message_type = _GETENCODERVALUES_IN
+_RPCREQUEST.fields_by_name['getJointStates'].message_type = _GETJOINTSTATES_IN
+_RPCREQUEST.fields_by_name['enableAccelerometerEvent'].message_type = _ENABLEACCELEROMETEREVENT_IN
+_RPCREQUEST.fields_by_name['enableButtonEvent'].message_type = _ENABLEBUTTONEVENT_IN
+_RPCREQUEST.fields_by_name['enableEncoderEvent'].message_type = _ENABLEENCODEREVENT_IN
+_RPCREQUEST.fields_by_name['enableJointEvent'].message_type = _ENABLEJOINTEVENT_IN
+_RPCREQUEST.fields_by_name['getBuzzerFrequency'].message_type = _GETBUZZERFREQUENCY_IN
+_RPCREQUEST.fields_by_name['getLedColor'].message_type = _GETLEDCOLOR_IN
+_RPCREQUEST.fields_by_name['getMotorControllerOmega'].message_type = _GETMOTORCONTROLLEROMEGA_IN
+_RPCREQUEST.fields_by_name['getMotorControllerAlphaI'].message_type = _GETMOTORCONTROLLERALPHAI_IN
+_RPCREQUEST.fields_by_name['getMotorControllerAlphaF'].message_type = _GETMOTORCONTROLLERALPHAF_IN
+_RPCREQUEST.fields_by_name['getMotorControllerProportionalGain'].message_type = _GETMOTORCONTROLLERPROPORTIONALGAIN_IN
+_RPCREQUEST.fields_by_name['getMotorControllerIntegratorGain'].message_type = _GETMOTORCONTROLLERINTEGRATORGAIN_IN
+_RPCREQUEST.fields_by_name['getMotorControllerDerivativeGain'].message_type = _GETMOTORCONTROLLERDERIVATIVEGAIN_IN
+_RPCREQUEST.fields_by_name['getMotorControllerSafetyThreshold'].message_type = _GETMOTORCONTROLLERSAFETYTHRESHOLD_IN
+_RPCREQUEST.fields_by_name['getMotorControllerSafetyAngle'].message_type = _GETMOTORCONTROLLERSAFETYANGLE_IN
+_RPCREQUEST.fields_by_name['setBuzzerFrequency'].message_type = _SETBUZZERFREQUENCY_IN
+_RPCREQUEST.fields_by_name['setLedColor'].message_type = _SETLEDCOLOR_IN
+_RPCREQUEST.fields_by_name['setMotorControllerOmega'].message_type = _SETMOTORCONTROLLEROMEGA_IN
+_RPCREQUEST.fields_by_name['setMotorControllerAlphaI'].message_type = _SETMOTORCONTROLLERALPHAI_IN
+_RPCREQUEST.fields_by_name['setMotorControllerAlphaF'].message_type = _SETMOTORCONTROLLERALPHAF_IN
+_RPCREQUEST.fields_by_name['setMotorControllerProportionalGain'].message_type = _SETMOTORCONTROLLERPROPORTIONALGAIN_IN
+_RPCREQUEST.fields_by_name['setMotorControllerIntegratorGain'].message_type = _SETMOTORCONTROLLERINTEGRATORGAIN_IN
+_RPCREQUEST.fields_by_name['setMotorControllerDerivativeGain'].message_type = _SETMOTORCONTROLLERDERIVATIVEGAIN_IN
+_RPCREQUEST.fields_by_name['setMotorControllerSafetyThreshold'].message_type = _SETMOTORCONTROLLERSAFETYTHRESHOLD_IN
+_RPCREQUEST.fields_by_name['setMotorControllerSafetyAngle'].message_type = _SETMOTORCONTROLLERSAFETYANGLE_IN
+_RPCREQUEST.fields_by_name['setResetOnDisconnect'].message_type = _SETRESETONDISCONNECT_IN
+_RPCREQUEST.fields_by_name['resetEncoderRevs'].message_type = _RESETENCODERREVS_IN
+_RPCREQUEST.fields_by_name['move'].message_type = _MOVE_IN
+_RPCREQUEST.fields_by_name['stop'].message_type = _STOP_IN
+_RPCREQUEST.fields_by_name['reboot'].message_type = _REBOOT_IN
+_RPCREQUEST.fields_by_name['writeEeprom'].message_type = _WRITEEEPROM_IN
+_RPCREQUEST.fields_by_name['readEeprom'].message_type = _READEEPROM_IN
+_RPCREQUEST.fields_by_name['writeTwi'].message_type = _WRITETWI_IN
+_RPCREQUEST.fields_by_name['readTwi'].message_type = _READTWI_IN
+_RPCREQUEST.fields_by_name['writeReadTwi'].message_type = _WRITEREADTWI_IN
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['getFirmwareVersionString'])
+_RPCREQUEST.fields_by_name['getFirmwareVersionString'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['getFormFactor'])
+_RPCREQUEST.fields_by_name['getFormFactor'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['getAdcRaw'])
+_RPCREQUEST.fields_by_name['getAdcRaw'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['getBatteryVoltage'])
+_RPCREQUEST.fields_by_name['getBatteryVoltage'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['getAccelerometerData'])
+_RPCREQUEST.fields_by_name['getAccelerometerData'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['getButtonState'])
+_RPCREQUEST.fields_by_name['getButtonState'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['getEncoderValues'])
+_RPCREQUEST.fields_by_name['getEncoderValues'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['getJointStates'])
+_RPCREQUEST.fields_by_name['getJointStates'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['enableAccelerometerEvent'])
+_RPCREQUEST.fields_by_name['enableAccelerometerEvent'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['enableButtonEvent'])
+_RPCREQUEST.fields_by_name['enableButtonEvent'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['enableEncoderEvent'])
+_RPCREQUEST.fields_by_name['enableEncoderEvent'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['enableJointEvent'])
+_RPCREQUEST.fields_by_name['enableJointEvent'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['getBuzzerFrequency'])
+_RPCREQUEST.fields_by_name['getBuzzerFrequency'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['getLedColor'])
+_RPCREQUEST.fields_by_name['getLedColor'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['getMotorControllerOmega'])
+_RPCREQUEST.fields_by_name['getMotorControllerOmega'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['getMotorControllerAlphaI'])
+_RPCREQUEST.fields_by_name['getMotorControllerAlphaI'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['getMotorControllerAlphaF'])
+_RPCREQUEST.fields_by_name['getMotorControllerAlphaF'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['getMotorControllerProportionalGain'])
+_RPCREQUEST.fields_by_name['getMotorControllerProportionalGain'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['getMotorControllerIntegratorGain'])
+_RPCREQUEST.fields_by_name['getMotorControllerIntegratorGain'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['getMotorControllerDerivativeGain'])
+_RPCREQUEST.fields_by_name['getMotorControllerDerivativeGain'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['getMotorControllerSafetyThreshold'])
+_RPCREQUEST.fields_by_name['getMotorControllerSafetyThreshold'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['getMotorControllerSafetyAngle'])
+_RPCREQUEST.fields_by_name['getMotorControllerSafetyAngle'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['setBuzzerFrequency'])
+_RPCREQUEST.fields_by_name['setBuzzerFrequency'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['setLedColor'])
+_RPCREQUEST.fields_by_name['setLedColor'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['setMotorControllerOmega'])
+_RPCREQUEST.fields_by_name['setMotorControllerOmega'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['setMotorControllerAlphaI'])
+_RPCREQUEST.fields_by_name['setMotorControllerAlphaI'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['setMotorControllerAlphaF'])
+_RPCREQUEST.fields_by_name['setMotorControllerAlphaF'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['setMotorControllerProportionalGain'])
+_RPCREQUEST.fields_by_name['setMotorControllerProportionalGain'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['setMotorControllerIntegratorGain'])
+_RPCREQUEST.fields_by_name['setMotorControllerIntegratorGain'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['setMotorControllerDerivativeGain'])
+_RPCREQUEST.fields_by_name['setMotorControllerDerivativeGain'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['setMotorControllerSafetyThreshold'])
+_RPCREQUEST.fields_by_name['setMotorControllerSafetyThreshold'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['setMotorControllerSafetyAngle'])
+_RPCREQUEST.fields_by_name['setMotorControllerSafetyAngle'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['setResetOnDisconnect'])
+_RPCREQUEST.fields_by_name['setResetOnDisconnect'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['resetEncoderRevs'])
+_RPCREQUEST.fields_by_name['resetEncoderRevs'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['move'])
+_RPCREQUEST.fields_by_name['move'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['stop'])
+_RPCREQUEST.fields_by_name['stop'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['reboot'])
+_RPCREQUEST.fields_by_name['reboot'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['writeEeprom'])
+_RPCREQUEST.fields_by_name['writeEeprom'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['readEeprom'])
+_RPCREQUEST.fields_by_name['readEeprom'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['writeTwi'])
+_RPCREQUEST.fields_by_name['writeTwi'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['readTwi'])
+_RPCREQUEST.fields_by_name['readTwi'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['writeReadTwi'])
+_RPCREQUEST.fields_by_name['writeReadTwi'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREPLY.fields_by_name['getFirmwareVersionString'].message_type = _GETFIRMWAREVERSIONSTRING_OUT
+_RPCREPLY.fields_by_name['getFormFactor'].message_type = _GETFORMFACTOR_OUT
+_RPCREPLY.fields_by_name['getAdcRaw'].message_type = _GETADCRAW_OUT
+_RPCREPLY.fields_by_name['getBatteryVoltage'].message_type = _GETBATTERYVOLTAGE_OUT
+_RPCREPLY.fields_by_name['getAccelerometerData'].message_type = _GETACCELEROMETERDATA_OUT
+_RPCREPLY.fields_by_name['getButtonState'].message_type = _GETBUTTONSTATE_OUT
+_RPCREPLY.fields_by_name['getEncoderValues'].message_type = _GETENCODERVALUES_OUT
+_RPCREPLY.fields_by_name['getJointStates'].message_type = _GETJOINTSTATES_OUT
+_RPCREPLY.fields_by_name['enableAccelerometerEvent'].message_type = _ENABLEACCELEROMETEREVENT_OUT
+_RPCREPLY.fields_by_name['enableButtonEvent'].message_type = _ENABLEBUTTONEVENT_OUT
+_RPCREPLY.fields_by_name['enableEncoderEvent'].message_type = _ENABLEENCODEREVENT_OUT
+_RPCREPLY.fields_by_name['enableJointEvent'].message_type = _ENABLEJOINTEVENT_OUT
+_RPCREPLY.fields_by_name['getBuzzerFrequency'].message_type = _GETBUZZERFREQUENCY_OUT
+_RPCREPLY.fields_by_name['getLedColor'].message_type = _GETLEDCOLOR_OUT
+_RPCREPLY.fields_by_name['getMotorControllerOmega'].message_type = _GETMOTORCONTROLLEROMEGA_OUT
+_RPCREPLY.fields_by_name['getMotorControllerAlphaI'].message_type = _GETMOTORCONTROLLERALPHAI_OUT
+_RPCREPLY.fields_by_name['getMotorControllerAlphaF'].message_type = _GETMOTORCONTROLLERALPHAF_OUT
+_RPCREPLY.fields_by_name['getMotorControllerProportionalGain'].message_type = _GETMOTORCONTROLLERPROPORTIONALGAIN_OUT
+_RPCREPLY.fields_by_name['getMotorControllerIntegratorGain'].message_type = _GETMOTORCONTROLLERINTEGRATORGAIN_OUT
+_RPCREPLY.fields_by_name['getMotorControllerDerivativeGain'].message_type = _GETMOTORCONTROLLERDERIVATIVEGAIN_OUT
+_RPCREPLY.fields_by_name['getMotorControllerSafetyThreshold'].message_type = _GETMOTORCONTROLLERSAFETYTHRESHOLD_OUT
+_RPCREPLY.fields_by_name['getMotorControllerSafetyAngle'].message_type = _GETMOTORCONTROLLERSAFETYANGLE_OUT
+_RPCREPLY.fields_by_name['setBuzzerFrequency'].message_type = _SETBUZZERFREQUENCY_OUT
+_RPCREPLY.fields_by_name['setLedColor'].message_type = _SETLEDCOLOR_OUT
+_RPCREPLY.fields_by_name['setMotorControllerOmega'].message_type = _SETMOTORCONTROLLEROMEGA_OUT
+_RPCREPLY.fields_by_name['setMotorControllerAlphaI'].message_type = _SETMOTORCONTROLLERALPHAI_OUT
+_RPCREPLY.fields_by_name['setMotorControllerAlphaF'].message_type = _SETMOTORCONTROLLERALPHAF_OUT
+_RPCREPLY.fields_by_name['setMotorControllerProportionalGain'].message_type = _SETMOTORCONTROLLERPROPORTIONALGAIN_OUT
+_RPCREPLY.fields_by_name['setMotorControllerIntegratorGain'].message_type = _SETMOTORCONTROLLERINTEGRATORGAIN_OUT
+_RPCREPLY.fields_by_name['setMotorControllerDerivativeGain'].message_type = _SETMOTORCONTROLLERDERIVATIVEGAIN_OUT
+_RPCREPLY.fields_by_name['setMotorControllerSafetyThreshold'].message_type = _SETMOTORCONTROLLERSAFETYTHRESHOLD_OUT
+_RPCREPLY.fields_by_name['setMotorControllerSafetyAngle'].message_type = _SETMOTORCONTROLLERSAFETYANGLE_OUT
+_RPCREPLY.fields_by_name['setResetOnDisconnect'].message_type = _SETRESETONDISCONNECT_OUT
+_RPCREPLY.fields_by_name['resetEncoderRevs'].message_type = _RESETENCODERREVS_OUT
+_RPCREPLY.fields_by_name['move'].message_type = _MOVE_OUT
+_RPCREPLY.fields_by_name['stop'].message_type = _STOP_OUT
+_RPCREPLY.fields_by_name['reboot'].message_type = _REBOOT_OUT
+_RPCREPLY.fields_by_name['writeEeprom'].message_type = _WRITEEEPROM_OUT
+_RPCREPLY.fields_by_name['readEeprom'].message_type = _READEEPROM_OUT
+_RPCREPLY.fields_by_name['writeTwi'].message_type = _WRITETWI_OUT
+_RPCREPLY.fields_by_name['readTwi'].message_type = _READTWI_OUT
+_RPCREPLY.fields_by_name['writeReadTwi'].message_type = _WRITEREADTWI_OUT
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['getFirmwareVersionString'])
+_RPCREPLY.fields_by_name['getFirmwareVersionString'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['getFormFactor'])
+_RPCREPLY.fields_by_name['getFormFactor'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['getAdcRaw'])
+_RPCREPLY.fields_by_name['getAdcRaw'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['getBatteryVoltage'])
+_RPCREPLY.fields_by_name['getBatteryVoltage'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['getAccelerometerData'])
+_RPCREPLY.fields_by_name['getAccelerometerData'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['getButtonState'])
+_RPCREPLY.fields_by_name['getButtonState'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['getEncoderValues'])
+_RPCREPLY.fields_by_name['getEncoderValues'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['getJointStates'])
+_RPCREPLY.fields_by_name['getJointStates'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['enableAccelerometerEvent'])
+_RPCREPLY.fields_by_name['enableAccelerometerEvent'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['enableButtonEvent'])
+_RPCREPLY.fields_by_name['enableButtonEvent'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['enableEncoderEvent'])
+_RPCREPLY.fields_by_name['enableEncoderEvent'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['enableJointEvent'])
+_RPCREPLY.fields_by_name['enableJointEvent'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['getBuzzerFrequency'])
+_RPCREPLY.fields_by_name['getBuzzerFrequency'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['getLedColor'])
+_RPCREPLY.fields_by_name['getLedColor'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['getMotorControllerOmega'])
+_RPCREPLY.fields_by_name['getMotorControllerOmega'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['getMotorControllerAlphaI'])
+_RPCREPLY.fields_by_name['getMotorControllerAlphaI'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['getMotorControllerAlphaF'])
+_RPCREPLY.fields_by_name['getMotorControllerAlphaF'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['getMotorControllerProportionalGain'])
+_RPCREPLY.fields_by_name['getMotorControllerProportionalGain'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['getMotorControllerIntegratorGain'])
+_RPCREPLY.fields_by_name['getMotorControllerIntegratorGain'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['getMotorControllerDerivativeGain'])
+_RPCREPLY.fields_by_name['getMotorControllerDerivativeGain'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['getMotorControllerSafetyThreshold'])
+_RPCREPLY.fields_by_name['getMotorControllerSafetyThreshold'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['getMotorControllerSafetyAngle'])
+_RPCREPLY.fields_by_name['getMotorControllerSafetyAngle'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['setBuzzerFrequency'])
+_RPCREPLY.fields_by_name['setBuzzerFrequency'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['setLedColor'])
+_RPCREPLY.fields_by_name['setLedColor'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['setMotorControllerOmega'])
+_RPCREPLY.fields_by_name['setMotorControllerOmega'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['setMotorControllerAlphaI'])
+_RPCREPLY.fields_by_name['setMotorControllerAlphaI'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['setMotorControllerAlphaF'])
+_RPCREPLY.fields_by_name['setMotorControllerAlphaF'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['setMotorControllerProportionalGain'])
+_RPCREPLY.fields_by_name['setMotorControllerProportionalGain'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['setMotorControllerIntegratorGain'])
+_RPCREPLY.fields_by_name['setMotorControllerIntegratorGain'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['setMotorControllerDerivativeGain'])
+_RPCREPLY.fields_by_name['setMotorControllerDerivativeGain'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['setMotorControllerSafetyThreshold'])
+_RPCREPLY.fields_by_name['setMotorControllerSafetyThreshold'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['setMotorControllerSafetyAngle'])
+_RPCREPLY.fields_by_name['setMotorControllerSafetyAngle'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['setResetOnDisconnect'])
+_RPCREPLY.fields_by_name['setResetOnDisconnect'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['resetEncoderRevs'])
+_RPCREPLY.fields_by_name['resetEncoderRevs'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['move'])
+_RPCREPLY.fields_by_name['move'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['stop'])
+_RPCREPLY.fields_by_name['stop'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['reboot'])
+_RPCREPLY.fields_by_name['reboot'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['writeEeprom'])
+_RPCREPLY.fields_by_name['writeEeprom'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['readEeprom'])
+_RPCREPLY.fields_by_name['readEeprom'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['writeTwi'])
+_RPCREPLY.fields_by_name['writeTwi'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['readTwi'])
+_RPCREPLY.fields_by_name['readTwi'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['writeReadTwi'])
+_RPCREPLY.fields_by_name['writeReadTwi'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
 _BUTTONEVENT.fields_by_name['button'].enum_type = _BUTTON
 _BUTTONEVENT.fields_by_name['state'].enum_type = _BUTTONSTATE
 _JOINTEVENT.fields_by_name['event'].enum_type = _JOINTSTATE
+_CLIENTTOROBOT.fields_by_name['rpcRequest'].message_type = _RPCREQUEST
+_CLIENTTOROBOT.fields_by_name['ping'].message_type = _PING
+_CLIENTTOROBOT.oneofs_by_name['arg'].fields.append(
+  _CLIENTTOROBOT.fields_by_name['rpcRequest'])
+_CLIENTTOROBOT.fields_by_name['rpcRequest'].containing_oneof = _CLIENTTOROBOT.oneofs_by_name['arg']
+_CLIENTTOROBOT.oneofs_by_name['arg'].fields.append(
+  _CLIENTTOROBOT.fields_by_name['ping'])
+_CLIENTTOROBOT.fields_by_name['ping'].containing_oneof = _CLIENTTOROBOT.oneofs_by_name['arg']
+_ROBOTTOCLIENT.fields_by_name['rpcReply'].message_type = _RPCREPLY
+_ROBOTTOCLIENT.fields_by_name['accelerometerEvent'].message_type = _ACCELEROMETEREVENT
+_ROBOTTOCLIENT.fields_by_name['buttonEvent'].message_type = _BUTTONEVENT
+_ROBOTTOCLIENT.fields_by_name['encoderEvent'].message_type = _ENCODEREVENT
+_ROBOTTOCLIENT.fields_by_name['jointEvent'].message_type = _JOINTEVENT
+_ROBOTTOCLIENT.fields_by_name['debugMessageEvent'].message_type = _DEBUGMESSAGEEVENT
+_ROBOTTOCLIENT.fields_by_name['connectionTerminated'].message_type = _CONNECTIONTERMINATED
+_ROBOTTOCLIENT.fields_by_name['powerOnEvent'].message_type = _POWERONEVENT
+_ROBOTTOCLIENT.oneofs_by_name['arg'].fields.append(
+  _ROBOTTOCLIENT.fields_by_name['rpcReply'])
+_ROBOTTOCLIENT.fields_by_name['rpcReply'].containing_oneof = _ROBOTTOCLIENT.oneofs_by_name['arg']
+_ROBOTTOCLIENT.oneofs_by_name['arg'].fields.append(
+  _ROBOTTOCLIENT.fields_by_name['accelerometerEvent'])
+_ROBOTTOCLIENT.fields_by_name['accelerometerEvent'].containing_oneof = _ROBOTTOCLIENT.oneofs_by_name['arg']
+_ROBOTTOCLIENT.oneofs_by_name['arg'].fields.append(
+  _ROBOTTOCLIENT.fields_by_name['buttonEvent'])
+_ROBOTTOCLIENT.fields_by_name['buttonEvent'].containing_oneof = _ROBOTTOCLIENT.oneofs_by_name['arg']
+_ROBOTTOCLIENT.oneofs_by_name['arg'].fields.append(
+  _ROBOTTOCLIENT.fields_by_name['encoderEvent'])
+_ROBOTTOCLIENT.fields_by_name['encoderEvent'].containing_oneof = _ROBOTTOCLIENT.oneofs_by_name['arg']
+_ROBOTTOCLIENT.oneofs_by_name['arg'].fields.append(
+  _ROBOTTOCLIENT.fields_by_name['jointEvent'])
+_ROBOTTOCLIENT.fields_by_name['jointEvent'].containing_oneof = _ROBOTTOCLIENT.oneofs_by_name['arg']
+_ROBOTTOCLIENT.oneofs_by_name['arg'].fields.append(
+  _ROBOTTOCLIENT.fields_by_name['debugMessageEvent'])
+_ROBOTTOCLIENT.fields_by_name['debugMessageEvent'].containing_oneof = _ROBOTTOCLIENT.oneofs_by_name['arg']
+_ROBOTTOCLIENT.oneofs_by_name['arg'].fields.append(
+  _ROBOTTOCLIENT.fields_by_name['connectionTerminated'])
+_ROBOTTOCLIENT.fields_by_name['connectionTerminated'].containing_oneof = _ROBOTTOCLIENT.oneofs_by_name['arg']
+_ROBOTTOCLIENT.oneofs_by_name['arg'].fields.append(
+  _ROBOTTOCLIENT.fields_by_name['powerOnEvent'])
+_ROBOTTOCLIENT.fields_by_name['powerOnEvent'].containing_oneof = _ROBOTTOCLIENT.oneofs_by_name['arg']
 DESCRIPTOR.message_types_by_name['getAccelerometerData'] = _GETACCELEROMETERDATA
-DESCRIPTOR.message_types_by_name['getLedColor'] = _GETLEDCOLOR
-DESCRIPTOR.message_types_by_name['setLedColor'] = _SETLEDCOLOR
-DESCRIPTOR.message_types_by_name['getBuzzerFrequency'] = _GETBUZZERFREQUENCY
-DESCRIPTOR.message_types_by_name['setBuzzerFrequency'] = _SETBUZZERFREQUENCY
-DESCRIPTOR.message_types_by_name['enableButtonEvent'] = _ENABLEBUTTONEVENT
-DESCRIPTOR.message_types_by_name['enableEncoderEvent'] = _ENABLEENCODEREVENT
-DESCRIPTOR.message_types_by_name['enableJointEvent'] = _ENABLEJOINTEVENT
-DESCRIPTOR.message_types_by_name['enableAccelerometerEvent'] = _ENABLEACCELEROMETEREVENT
-DESCRIPTOR.message_types_by_name['setMotorControllerSafetyThreshold'] = _SETMOTORCONTROLLERSAFETYTHRESHOLD
-DESCRIPTOR.message_types_by_name['setMotorControllerSafetyAngle'] = _SETMOTORCONTROLLERSAFETYANGLE
-DESCRIPTOR.message_types_by_name['setMotorControllerAlphaI'] = _SETMOTORCONTROLLERALPHAI
-DESCRIPTOR.message_types_by_name['setMotorControllerAlphaF'] = _SETMOTORCONTROLLERALPHAF
-DESCRIPTOR.message_types_by_name['setMotorControllerOmega'] = _SETMOTORCONTROLLEROMEGA
-DESCRIPTOR.message_types_by_name['setMotorControllerProportionalGain'] = _SETMOTORCONTROLLERPROPORTIONALGAIN
-DESCRIPTOR.message_types_by_name['setMotorControllerIntegratorGain'] = _SETMOTORCONTROLLERINTEGRATORGAIN
-DESCRIPTOR.message_types_by_name['setMotorControllerDerivativeGain'] = _SETMOTORCONTROLLERDERIVATIVEGAIN
-DESCRIPTOR.message_types_by_name['setResetOnDisconnect'] = _SETRESETONDISCONNECT
 DESCRIPTOR.message_types_by_name['getBatteryVoltage'] = _GETBATTERYVOLTAGE
 DESCRIPTOR.message_types_by_name['getAdcRaw'] = _GETADCRAW
-DESCRIPTOR.message_types_by_name['getMotorControllerSafetyThreshold'] = _GETMOTORCONTROLLERSAFETYTHRESHOLD
-DESCRIPTOR.message_types_by_name['getMotorControllerSafetyAngle'] = _GETMOTORCONTROLLERSAFETYANGLE
+DESCRIPTOR.message_types_by_name['getButtonState'] = _GETBUTTONSTATE
+DESCRIPTOR.message_types_by_name['getBuzzerFrequency'] = _GETBUZZERFREQUENCY
+DESCRIPTOR.message_types_by_name['getEncoderValues'] = _GETENCODERVALUES
+DESCRIPTOR.message_types_by_name['getFirmwareVersionString'] = _GETFIRMWAREVERSIONSTRING
+DESCRIPTOR.message_types_by_name['getFormFactor'] = _GETFORMFACTOR
+DESCRIPTOR.message_types_by_name['getJointStates'] = _GETJOINTSTATES
+DESCRIPTOR.message_types_by_name['getLedColor'] = _GETLEDCOLOR
+DESCRIPTOR.message_types_by_name['getMotorControllerOmega'] = _GETMOTORCONTROLLEROMEGA
 DESCRIPTOR.message_types_by_name['getMotorControllerAlphaI'] = _GETMOTORCONTROLLERALPHAI
 DESCRIPTOR.message_types_by_name['getMotorControllerAlphaF'] = _GETMOTORCONTROLLERALPHAF
-DESCRIPTOR.message_types_by_name['getMotorControllerOmega'] = _GETMOTORCONTROLLEROMEGA
 DESCRIPTOR.message_types_by_name['getMotorControllerProportionalGain'] = _GETMOTORCONTROLLERPROPORTIONALGAIN
 DESCRIPTOR.message_types_by_name['getMotorControllerIntegratorGain'] = _GETMOTORCONTROLLERINTEGRATORGAIN
 DESCRIPTOR.message_types_by_name['getMotorControllerDerivativeGain'] = _GETMOTORCONTROLLERDERIVATIVEGAIN
-DESCRIPTOR.message_types_by_name['getEncoderValues'] = _GETENCODERVALUES
-DESCRIPTOR.message_types_by_name['getJointStates'] = _GETJOINTSTATES
-DESCRIPTOR.message_types_by_name['getFormFactor'] = _GETFORMFACTOR
+DESCRIPTOR.message_types_by_name['getMotorControllerSafetyThreshold'] = _GETMOTORCONTROLLERSAFETYTHRESHOLD
+DESCRIPTOR.message_types_by_name['getMotorControllerSafetyAngle'] = _GETMOTORCONTROLLERSAFETYANGLE
+DESCRIPTOR.message_types_by_name['setMotorControllerOmega'] = _SETMOTORCONTROLLEROMEGA
+DESCRIPTOR.message_types_by_name['setMotorControllerAlphaI'] = _SETMOTORCONTROLLERALPHAI
+DESCRIPTOR.message_types_by_name['setMotorControllerAlphaF'] = _SETMOTORCONTROLLERALPHAF
+DESCRIPTOR.message_types_by_name['setMotorControllerProportionalGain'] = _SETMOTORCONTROLLERPROPORTIONALGAIN
+DESCRIPTOR.message_types_by_name['setMotorControllerIntegratorGain'] = _SETMOTORCONTROLLERINTEGRATORGAIN
+DESCRIPTOR.message_types_by_name['setMotorControllerDerivativeGain'] = _SETMOTORCONTROLLERDERIVATIVEGAIN
+DESCRIPTOR.message_types_by_name['setMotorControllerSafetyThreshold'] = _SETMOTORCONTROLLERSAFETYTHRESHOLD
+DESCRIPTOR.message_types_by_name['setMotorControllerSafetyAngle'] = _SETMOTORCONTROLLERSAFETYANGLE
+DESCRIPTOR.message_types_by_name['setResetOnDisconnect'] = _SETRESETONDISCONNECT
+DESCRIPTOR.message_types_by_name['resetEncoderRevs'] = _RESETENCODERREVS
+DESCRIPTOR.message_types_by_name['setBuzzerFrequency'] = _SETBUZZERFREQUENCY
+DESCRIPTOR.message_types_by_name['setLedColor'] = _SETLEDCOLOR
+DESCRIPTOR.message_types_by_name['stop'] = _STOP
 DESCRIPTOR.message_types_by_name['Goal'] = _GOAL
 DESCRIPTOR.message_types_by_name['move'] = _MOVE
-DESCRIPTOR.message_types_by_name['resetEncoderRevs'] = _RESETENCODERREVS
-DESCRIPTOR.message_types_by_name['stop'] = _STOP
-DESCRIPTOR.message_types_by_name['getButtonState'] = _GETBUTTONSTATE
-DESCRIPTOR.message_types_by_name['getFirmwareVersion'] = _GETFIRMWAREVERSION
-DESCRIPTOR.message_types_by_name['getFirmwareVersionString'] = _GETFIRMWAREVERSIONSTRING
+DESCRIPTOR.message_types_by_name['enableAccelerometerEvent'] = _ENABLEACCELEROMETEREVENT
+DESCRIPTOR.message_types_by_name['enableButtonEvent'] = _ENABLEBUTTONEVENT
+DESCRIPTOR.message_types_by_name['enableEncoderEvent'] = _ENABLEENCODEREVENT
+DESCRIPTOR.message_types_by_name['enableJointEvent'] = _ENABLEJOINTEVENT
 DESCRIPTOR.message_types_by_name['writeEeprom'] = _WRITEEEPROM
 DESCRIPTOR.message_types_by_name['readEeprom'] = _READEEPROM
 DESCRIPTOR.message_types_by_name['writeTwi'] = _WRITETWI
 DESCRIPTOR.message_types_by_name['readTwi'] = _READTWI
 DESCRIPTOR.message_types_by_name['writeReadTwi'] = _WRITEREADTWI
 DESCRIPTOR.message_types_by_name['reboot'] = _REBOOT
-DESCRIPTOR.message_types_by_name['buttonEvent'] = _BUTTONEVENT
-DESCRIPTOR.message_types_by_name['encoderEvent'] = _ENCODEREVENT
-DESCRIPTOR.message_types_by_name['accelerometerEvent'] = _ACCELEROMETEREVENT
-DESCRIPTOR.message_types_by_name['jointEvent'] = _JOINTEVENT
-DESCRIPTOR.message_types_by_name['debugMessageEvent'] = _DEBUGMESSAGEEVENT
-DESCRIPTOR.message_types_by_name['connectionTerminated'] = _CONNECTIONTERMINATED
+DESCRIPTOR.message_types_by_name['RpcRequest'] = _RPCREQUEST
+DESCRIPTOR.message_types_by_name['RpcReply'] = _RPCREPLY
+DESCRIPTOR.message_types_by_name['ButtonEvent'] = _BUTTONEVENT
+DESCRIPTOR.message_types_by_name['EncoderEvent'] = _ENCODEREVENT
+DESCRIPTOR.message_types_by_name['AccelerometerEvent'] = _ACCELEROMETEREVENT
+DESCRIPTOR.message_types_by_name['JointEvent'] = _JOINTEVENT
+DESCRIPTOR.message_types_by_name['DebugMessageEvent'] = _DEBUGMESSAGEEVENT
+DESCRIPTOR.message_types_by_name['ConnectionTerminated'] = _CONNECTIONTERMINATED
+DESCRIPTOR.message_types_by_name['PowerOnEvent'] = _POWERONEVENT
+DESCRIPTOR.message_types_by_name['Ping'] = _PING
+DESCRIPTOR.message_types_by_name['ClientToRobot'] = _CLIENTTOROBOT
+DESCRIPTOR.message_types_by_name['RobotToClient'] = _ROBOTTOCLIENT
+DESCRIPTOR.enum_types_by_name['FormFactor'] = _FORMFACTOR
 DESCRIPTOR.enum_types_by_name['JointState'] = _JOINTSTATE
 DESCRIPTOR.enum_types_by_name['Button'] = _BUTTON
 DESCRIPTOR.enum_types_by_name['ButtonState'] = _BUTTONSTATE
+DESCRIPTOR.enum_types_by_name['Peripheral'] = _PERIPHERAL
 
 getAccelerometerData = _reflection.GeneratedProtocolMessageType('getAccelerometerData', (_message.Message,), dict(
 
   In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
     DESCRIPTOR = _GETACCELEROMETERDATA_IN,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getAccelerometerData.In)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getAccelerometerData.In)
     ))
   ,
 
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _GETACCELEROMETERDATA_RESULT,
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _GETACCELEROMETERDATA_OUT,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getAccelerometerData.Result)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getAccelerometerData.Out)
     ))
   ,
   DESCRIPTOR = _GETACCELEROMETERDATA,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.getAccelerometerData)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.getAccelerometerData)
   ))
 _sym_db.RegisterMessage(getAccelerometerData)
 _sym_db.RegisterMessage(getAccelerometerData.In)
-_sym_db.RegisterMessage(getAccelerometerData.Result)
-
-getLedColor = _reflection.GeneratedProtocolMessageType('getLedColor', (_message.Message,), dict(
-
-  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _GETLEDCOLOR_IN,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getLedColor.In)
-    ))
-  ,
-
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _GETLEDCOLOR_RESULT,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getLedColor.Result)
-    ))
-  ,
-  DESCRIPTOR = _GETLEDCOLOR,
-  __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.getLedColor)
-  ))
-_sym_db.RegisterMessage(getLedColor)
-_sym_db.RegisterMessage(getLedColor.In)
-_sym_db.RegisterMessage(getLedColor.Result)
-
-setLedColor = _reflection.GeneratedProtocolMessageType('setLedColor', (_message.Message,), dict(
-
-  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _SETLEDCOLOR_IN,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.setLedColor.In)
-    ))
-  ,
-
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _SETLEDCOLOR_RESULT,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.setLedColor.Result)
-    ))
-  ,
-  DESCRIPTOR = _SETLEDCOLOR,
-  __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.setLedColor)
-  ))
-_sym_db.RegisterMessage(setLedColor)
-_sym_db.RegisterMessage(setLedColor.In)
-_sym_db.RegisterMessage(setLedColor.Result)
-
-getBuzzerFrequency = _reflection.GeneratedProtocolMessageType('getBuzzerFrequency', (_message.Message,), dict(
-
-  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _GETBUZZERFREQUENCY_IN,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getBuzzerFrequency.In)
-    ))
-  ,
-
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _GETBUZZERFREQUENCY_RESULT,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getBuzzerFrequency.Result)
-    ))
-  ,
-  DESCRIPTOR = _GETBUZZERFREQUENCY,
-  __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.getBuzzerFrequency)
-  ))
-_sym_db.RegisterMessage(getBuzzerFrequency)
-_sym_db.RegisterMessage(getBuzzerFrequency.In)
-_sym_db.RegisterMessage(getBuzzerFrequency.Result)
-
-setBuzzerFrequency = _reflection.GeneratedProtocolMessageType('setBuzzerFrequency', (_message.Message,), dict(
-
-  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _SETBUZZERFREQUENCY_IN,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.setBuzzerFrequency.In)
-    ))
-  ,
-
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _SETBUZZERFREQUENCY_RESULT,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.setBuzzerFrequency.Result)
-    ))
-  ,
-  DESCRIPTOR = _SETBUZZERFREQUENCY,
-  __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.setBuzzerFrequency)
-  ))
-_sym_db.RegisterMessage(setBuzzerFrequency)
-_sym_db.RegisterMessage(setBuzzerFrequency.In)
-_sym_db.RegisterMessage(setBuzzerFrequency.Result)
-
-enableButtonEvent = _reflection.GeneratedProtocolMessageType('enableButtonEvent', (_message.Message,), dict(
-
-  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _ENABLEBUTTONEVENT_IN,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.enableButtonEvent.In)
-    ))
-  ,
-
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _ENABLEBUTTONEVENT_RESULT,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.enableButtonEvent.Result)
-    ))
-  ,
-  DESCRIPTOR = _ENABLEBUTTONEVENT,
-  __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.enableButtonEvent)
-  ))
-_sym_db.RegisterMessage(enableButtonEvent)
-_sym_db.RegisterMessage(enableButtonEvent.In)
-_sym_db.RegisterMessage(enableButtonEvent.Result)
-
-enableEncoderEvent = _reflection.GeneratedProtocolMessageType('enableEncoderEvent', (_message.Message,), dict(
-
-  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-
-    SignalState = _reflection.GeneratedProtocolMessageType('SignalState', (_message.Message,), dict(
-      DESCRIPTOR = _ENABLEENCODEREVENT_IN_SIGNALSTATE,
-      __module__ = 'robot_pb2'
-      # @@protoc_insertion_point(class_scope:barobo.Robot.enableEncoderEvent.In.SignalState)
-      ))
-    ,
-    DESCRIPTOR = _ENABLEENCODEREVENT_IN,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.enableEncoderEvent.In)
-    ))
-  ,
-
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _ENABLEENCODEREVENT_RESULT,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.enableEncoderEvent.Result)
-    ))
-  ,
-  DESCRIPTOR = _ENABLEENCODEREVENT,
-  __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.enableEncoderEvent)
-  ))
-_sym_db.RegisterMessage(enableEncoderEvent)
-_sym_db.RegisterMessage(enableEncoderEvent.In)
-_sym_db.RegisterMessage(enableEncoderEvent.In.SignalState)
-_sym_db.RegisterMessage(enableEncoderEvent.Result)
-
-enableJointEvent = _reflection.GeneratedProtocolMessageType('enableJointEvent', (_message.Message,), dict(
-
-  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _ENABLEJOINTEVENT_IN,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.enableJointEvent.In)
-    ))
-  ,
-
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _ENABLEJOINTEVENT_RESULT,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.enableJointEvent.Result)
-    ))
-  ,
-  DESCRIPTOR = _ENABLEJOINTEVENT,
-  __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.enableJointEvent)
-  ))
-_sym_db.RegisterMessage(enableJointEvent)
-_sym_db.RegisterMessage(enableJointEvent.In)
-_sym_db.RegisterMessage(enableJointEvent.Result)
-
-enableAccelerometerEvent = _reflection.GeneratedProtocolMessageType('enableAccelerometerEvent', (_message.Message,), dict(
-
-  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _ENABLEACCELEROMETEREVENT_IN,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.enableAccelerometerEvent.In)
-    ))
-  ,
-
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _ENABLEACCELEROMETEREVENT_RESULT,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.enableAccelerometerEvent.Result)
-    ))
-  ,
-  DESCRIPTOR = _ENABLEACCELEROMETEREVENT,
-  __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.enableAccelerometerEvent)
-  ))
-_sym_db.RegisterMessage(enableAccelerometerEvent)
-_sym_db.RegisterMessage(enableAccelerometerEvent.In)
-_sym_db.RegisterMessage(enableAccelerometerEvent.Result)
-
-setMotorControllerSafetyThreshold = _reflection.GeneratedProtocolMessageType('setMotorControllerSafetyThreshold', (_message.Message,), dict(
-
-  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _SETMOTORCONTROLLERSAFETYTHRESHOLD_IN,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.setMotorControllerSafetyThreshold.In)
-    ))
-  ,
-
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _SETMOTORCONTROLLERSAFETYTHRESHOLD_RESULT,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.setMotorControllerSafetyThreshold.Result)
-    ))
-  ,
-  DESCRIPTOR = _SETMOTORCONTROLLERSAFETYTHRESHOLD,
-  __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.setMotorControllerSafetyThreshold)
-  ))
-_sym_db.RegisterMessage(setMotorControllerSafetyThreshold)
-_sym_db.RegisterMessage(setMotorControllerSafetyThreshold.In)
-_sym_db.RegisterMessage(setMotorControllerSafetyThreshold.Result)
-
-setMotorControllerSafetyAngle = _reflection.GeneratedProtocolMessageType('setMotorControllerSafetyAngle', (_message.Message,), dict(
-
-  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _SETMOTORCONTROLLERSAFETYANGLE_IN,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.setMotorControllerSafetyAngle.In)
-    ))
-  ,
-
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _SETMOTORCONTROLLERSAFETYANGLE_RESULT,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.setMotorControllerSafetyAngle.Result)
-    ))
-  ,
-  DESCRIPTOR = _SETMOTORCONTROLLERSAFETYANGLE,
-  __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.setMotorControllerSafetyAngle)
-  ))
-_sym_db.RegisterMessage(setMotorControllerSafetyAngle)
-_sym_db.RegisterMessage(setMotorControllerSafetyAngle.In)
-_sym_db.RegisterMessage(setMotorControllerSafetyAngle.Result)
-
-setMotorControllerAlphaI = _reflection.GeneratedProtocolMessageType('setMotorControllerAlphaI', (_message.Message,), dict(
-
-  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _SETMOTORCONTROLLERALPHAI_IN,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.setMotorControllerAlphaI.In)
-    ))
-  ,
-
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _SETMOTORCONTROLLERALPHAI_RESULT,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.setMotorControllerAlphaI.Result)
-    ))
-  ,
-  DESCRIPTOR = _SETMOTORCONTROLLERALPHAI,
-  __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.setMotorControllerAlphaI)
-  ))
-_sym_db.RegisterMessage(setMotorControllerAlphaI)
-_sym_db.RegisterMessage(setMotorControllerAlphaI.In)
-_sym_db.RegisterMessage(setMotorControllerAlphaI.Result)
-
-setMotorControllerAlphaF = _reflection.GeneratedProtocolMessageType('setMotorControllerAlphaF', (_message.Message,), dict(
-
-  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _SETMOTORCONTROLLERALPHAF_IN,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.setMotorControllerAlphaF.In)
-    ))
-  ,
-
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _SETMOTORCONTROLLERALPHAF_RESULT,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.setMotorControllerAlphaF.Result)
-    ))
-  ,
-  DESCRIPTOR = _SETMOTORCONTROLLERALPHAF,
-  __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.setMotorControllerAlphaF)
-  ))
-_sym_db.RegisterMessage(setMotorControllerAlphaF)
-_sym_db.RegisterMessage(setMotorControllerAlphaF.In)
-_sym_db.RegisterMessage(setMotorControllerAlphaF.Result)
-
-setMotorControllerOmega = _reflection.GeneratedProtocolMessageType('setMotorControllerOmega', (_message.Message,), dict(
-
-  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _SETMOTORCONTROLLEROMEGA_IN,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.setMotorControllerOmega.In)
-    ))
-  ,
-
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _SETMOTORCONTROLLEROMEGA_RESULT,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.setMotorControllerOmega.Result)
-    ))
-  ,
-  DESCRIPTOR = _SETMOTORCONTROLLEROMEGA,
-  __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.setMotorControllerOmega)
-  ))
-_sym_db.RegisterMessage(setMotorControllerOmega)
-_sym_db.RegisterMessage(setMotorControllerOmega.In)
-_sym_db.RegisterMessage(setMotorControllerOmega.Result)
-
-setMotorControllerProportionalGain = _reflection.GeneratedProtocolMessageType('setMotorControllerProportionalGain', (_message.Message,), dict(
-
-  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _SETMOTORCONTROLLERPROPORTIONALGAIN_IN,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.setMotorControllerProportionalGain.In)
-    ))
-  ,
-
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _SETMOTORCONTROLLERPROPORTIONALGAIN_RESULT,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.setMotorControllerProportionalGain.Result)
-    ))
-  ,
-  DESCRIPTOR = _SETMOTORCONTROLLERPROPORTIONALGAIN,
-  __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.setMotorControllerProportionalGain)
-  ))
-_sym_db.RegisterMessage(setMotorControllerProportionalGain)
-_sym_db.RegisterMessage(setMotorControllerProportionalGain.In)
-_sym_db.RegisterMessage(setMotorControllerProportionalGain.Result)
-
-setMotorControllerIntegratorGain = _reflection.GeneratedProtocolMessageType('setMotorControllerIntegratorGain', (_message.Message,), dict(
-
-  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _SETMOTORCONTROLLERINTEGRATORGAIN_IN,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.setMotorControllerIntegratorGain.In)
-    ))
-  ,
-
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _SETMOTORCONTROLLERINTEGRATORGAIN_RESULT,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.setMotorControllerIntegratorGain.Result)
-    ))
-  ,
-  DESCRIPTOR = _SETMOTORCONTROLLERINTEGRATORGAIN,
-  __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.setMotorControllerIntegratorGain)
-  ))
-_sym_db.RegisterMessage(setMotorControllerIntegratorGain)
-_sym_db.RegisterMessage(setMotorControllerIntegratorGain.In)
-_sym_db.RegisterMessage(setMotorControllerIntegratorGain.Result)
-
-setMotorControllerDerivativeGain = _reflection.GeneratedProtocolMessageType('setMotorControllerDerivativeGain', (_message.Message,), dict(
-
-  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _SETMOTORCONTROLLERDERIVATIVEGAIN_IN,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.setMotorControllerDerivativeGain.In)
-    ))
-  ,
-
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _SETMOTORCONTROLLERDERIVATIVEGAIN_RESULT,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.setMotorControllerDerivativeGain.Result)
-    ))
-  ,
-  DESCRIPTOR = _SETMOTORCONTROLLERDERIVATIVEGAIN,
-  __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.setMotorControllerDerivativeGain)
-  ))
-_sym_db.RegisterMessage(setMotorControllerDerivativeGain)
-_sym_db.RegisterMessage(setMotorControllerDerivativeGain.In)
-_sym_db.RegisterMessage(setMotorControllerDerivativeGain.Result)
-
-setResetOnDisconnect = _reflection.GeneratedProtocolMessageType('setResetOnDisconnect', (_message.Message,), dict(
-
-  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _SETRESETONDISCONNECT_IN,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.setResetOnDisconnect.In)
-    ))
-  ,
-
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _SETRESETONDISCONNECT_RESULT,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.setResetOnDisconnect.Result)
-    ))
-  ,
-  DESCRIPTOR = _SETRESETONDISCONNECT,
-  __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.setResetOnDisconnect)
-  ))
-_sym_db.RegisterMessage(setResetOnDisconnect)
-_sym_db.RegisterMessage(setResetOnDisconnect.In)
-_sym_db.RegisterMessage(setResetOnDisconnect.Result)
+_sym_db.RegisterMessage(getAccelerometerData.Out)
 
 getBatteryVoltage = _reflection.GeneratedProtocolMessageType('getBatteryVoltage', (_message.Message,), dict(
 
   In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
     DESCRIPTOR = _GETBATTERYVOLTAGE_IN,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getBatteryVoltage.In)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getBatteryVoltage.In)
     ))
   ,
 
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _GETBATTERYVOLTAGE_RESULT,
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _GETBATTERYVOLTAGE_OUT,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getBatteryVoltage.Result)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getBatteryVoltage.Out)
     ))
   ,
   DESCRIPTOR = _GETBATTERYVOLTAGE,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.getBatteryVoltage)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.getBatteryVoltage)
   ))
 _sym_db.RegisterMessage(getBatteryVoltage)
 _sym_db.RegisterMessage(getBatteryVoltage.In)
-_sym_db.RegisterMessage(getBatteryVoltage.Result)
+_sym_db.RegisterMessage(getBatteryVoltage.Out)
 
 getAdcRaw = _reflection.GeneratedProtocolMessageType('getAdcRaw', (_message.Message,), dict(
 
   In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
     DESCRIPTOR = _GETADCRAW_IN,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getAdcRaw.In)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getAdcRaw.In)
     ))
   ,
 
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _GETADCRAW_RESULT,
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _GETADCRAW_OUT,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getAdcRaw.Result)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getAdcRaw.Out)
     ))
   ,
   DESCRIPTOR = _GETADCRAW,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.getAdcRaw)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.getAdcRaw)
   ))
 _sym_db.RegisterMessage(getAdcRaw)
 _sym_db.RegisterMessage(getAdcRaw.In)
-_sym_db.RegisterMessage(getAdcRaw.Result)
+_sym_db.RegisterMessage(getAdcRaw.Out)
 
-getMotorControllerSafetyThreshold = _reflection.GeneratedProtocolMessageType('getMotorControllerSafetyThreshold', (_message.Message,), dict(
-
-  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _GETMOTORCONTROLLERSAFETYTHRESHOLD_IN,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getMotorControllerSafetyThreshold.In)
-    ))
-  ,
-
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _GETMOTORCONTROLLERSAFETYTHRESHOLD_RESULT,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getMotorControllerSafetyThreshold.Result)
-    ))
-  ,
-  DESCRIPTOR = _GETMOTORCONTROLLERSAFETYTHRESHOLD,
-  __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.getMotorControllerSafetyThreshold)
-  ))
-_sym_db.RegisterMessage(getMotorControllerSafetyThreshold)
-_sym_db.RegisterMessage(getMotorControllerSafetyThreshold.In)
-_sym_db.RegisterMessage(getMotorControllerSafetyThreshold.Result)
-
-getMotorControllerSafetyAngle = _reflection.GeneratedProtocolMessageType('getMotorControllerSafetyAngle', (_message.Message,), dict(
+getButtonState = _reflection.GeneratedProtocolMessageType('getButtonState', (_message.Message,), dict(
 
   In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _GETMOTORCONTROLLERSAFETYANGLE_IN,
+    DESCRIPTOR = _GETBUTTONSTATE_IN,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getMotorControllerSafetyAngle.In)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getButtonState.In)
     ))
   ,
 
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _GETMOTORCONTROLLERSAFETYANGLE_RESULT,
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _GETBUTTONSTATE_OUT,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getMotorControllerSafetyAngle.Result)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getButtonState.Out)
     ))
   ,
-  DESCRIPTOR = _GETMOTORCONTROLLERSAFETYANGLE,
+  DESCRIPTOR = _GETBUTTONSTATE,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.getMotorControllerSafetyAngle)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.getButtonState)
   ))
-_sym_db.RegisterMessage(getMotorControllerSafetyAngle)
-_sym_db.RegisterMessage(getMotorControllerSafetyAngle.In)
-_sym_db.RegisterMessage(getMotorControllerSafetyAngle.Result)
+_sym_db.RegisterMessage(getButtonState)
+_sym_db.RegisterMessage(getButtonState.In)
+_sym_db.RegisterMessage(getButtonState.Out)
 
-getMotorControllerAlphaI = _reflection.GeneratedProtocolMessageType('getMotorControllerAlphaI', (_message.Message,), dict(
+getBuzzerFrequency = _reflection.GeneratedProtocolMessageType('getBuzzerFrequency', (_message.Message,), dict(
 
   In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _GETMOTORCONTROLLERALPHAI_IN,
+    DESCRIPTOR = _GETBUZZERFREQUENCY_IN,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getMotorControllerAlphaI.In)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getBuzzerFrequency.In)
     ))
   ,
 
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _GETMOTORCONTROLLERALPHAI_RESULT,
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _GETBUZZERFREQUENCY_OUT,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getMotorControllerAlphaI.Result)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getBuzzerFrequency.Out)
     ))
   ,
-  DESCRIPTOR = _GETMOTORCONTROLLERALPHAI,
+  DESCRIPTOR = _GETBUZZERFREQUENCY,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.getMotorControllerAlphaI)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.getBuzzerFrequency)
   ))
-_sym_db.RegisterMessage(getMotorControllerAlphaI)
-_sym_db.RegisterMessage(getMotorControllerAlphaI.In)
-_sym_db.RegisterMessage(getMotorControllerAlphaI.Result)
-
-getMotorControllerAlphaF = _reflection.GeneratedProtocolMessageType('getMotorControllerAlphaF', (_message.Message,), dict(
-
-  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _GETMOTORCONTROLLERALPHAF_IN,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getMotorControllerAlphaF.In)
-    ))
-  ,
-
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _GETMOTORCONTROLLERALPHAF_RESULT,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getMotorControllerAlphaF.Result)
-    ))
-  ,
-  DESCRIPTOR = _GETMOTORCONTROLLERALPHAF,
-  __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.getMotorControllerAlphaF)
-  ))
-_sym_db.RegisterMessage(getMotorControllerAlphaF)
-_sym_db.RegisterMessage(getMotorControllerAlphaF.In)
-_sym_db.RegisterMessage(getMotorControllerAlphaF.Result)
-
-getMotorControllerOmega = _reflection.GeneratedProtocolMessageType('getMotorControllerOmega', (_message.Message,), dict(
-
-  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _GETMOTORCONTROLLEROMEGA_IN,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getMotorControllerOmega.In)
-    ))
-  ,
-
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _GETMOTORCONTROLLEROMEGA_RESULT,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getMotorControllerOmega.Result)
-    ))
-  ,
-  DESCRIPTOR = _GETMOTORCONTROLLEROMEGA,
-  __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.getMotorControllerOmega)
-  ))
-_sym_db.RegisterMessage(getMotorControllerOmega)
-_sym_db.RegisterMessage(getMotorControllerOmega.In)
-_sym_db.RegisterMessage(getMotorControllerOmega.Result)
-
-getMotorControllerProportionalGain = _reflection.GeneratedProtocolMessageType('getMotorControllerProportionalGain', (_message.Message,), dict(
-
-  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _GETMOTORCONTROLLERPROPORTIONALGAIN_IN,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getMotorControllerProportionalGain.In)
-    ))
-  ,
-
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _GETMOTORCONTROLLERPROPORTIONALGAIN_RESULT,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getMotorControllerProportionalGain.Result)
-    ))
-  ,
-  DESCRIPTOR = _GETMOTORCONTROLLERPROPORTIONALGAIN,
-  __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.getMotorControllerProportionalGain)
-  ))
-_sym_db.RegisterMessage(getMotorControllerProportionalGain)
-_sym_db.RegisterMessage(getMotorControllerProportionalGain.In)
-_sym_db.RegisterMessage(getMotorControllerProportionalGain.Result)
-
-getMotorControllerIntegratorGain = _reflection.GeneratedProtocolMessageType('getMotorControllerIntegratorGain', (_message.Message,), dict(
-
-  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _GETMOTORCONTROLLERINTEGRATORGAIN_IN,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getMotorControllerIntegratorGain.In)
-    ))
-  ,
-
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _GETMOTORCONTROLLERINTEGRATORGAIN_RESULT,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getMotorControllerIntegratorGain.Result)
-    ))
-  ,
-  DESCRIPTOR = _GETMOTORCONTROLLERINTEGRATORGAIN,
-  __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.getMotorControllerIntegratorGain)
-  ))
-_sym_db.RegisterMessage(getMotorControllerIntegratorGain)
-_sym_db.RegisterMessage(getMotorControllerIntegratorGain.In)
-_sym_db.RegisterMessage(getMotorControllerIntegratorGain.Result)
-
-getMotorControllerDerivativeGain = _reflection.GeneratedProtocolMessageType('getMotorControllerDerivativeGain', (_message.Message,), dict(
-
-  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _GETMOTORCONTROLLERDERIVATIVEGAIN_IN,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getMotorControllerDerivativeGain.In)
-    ))
-  ,
-
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _GETMOTORCONTROLLERDERIVATIVEGAIN_RESULT,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getMotorControllerDerivativeGain.Result)
-    ))
-  ,
-  DESCRIPTOR = _GETMOTORCONTROLLERDERIVATIVEGAIN,
-  __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.getMotorControllerDerivativeGain)
-  ))
-_sym_db.RegisterMessage(getMotorControllerDerivativeGain)
-_sym_db.RegisterMessage(getMotorControllerDerivativeGain.In)
-_sym_db.RegisterMessage(getMotorControllerDerivativeGain.Result)
+_sym_db.RegisterMessage(getBuzzerFrequency)
+_sym_db.RegisterMessage(getBuzzerFrequency.In)
+_sym_db.RegisterMessage(getBuzzerFrequency.Out)
 
 getEncoderValues = _reflection.GeneratedProtocolMessageType('getEncoderValues', (_message.Message,), dict(
 
   In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
     DESCRIPTOR = _GETENCODERVALUES_IN,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getEncoderValues.In)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getEncoderValues.In)
     ))
   ,
 
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _GETENCODERVALUES_RESULT,
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _GETENCODERVALUES_OUT,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getEncoderValues.Result)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getEncoderValues.Out)
     ))
   ,
   DESCRIPTOR = _GETENCODERVALUES,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.getEncoderValues)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.getEncoderValues)
   ))
 _sym_db.RegisterMessage(getEncoderValues)
 _sym_db.RegisterMessage(getEncoderValues.In)
-_sym_db.RegisterMessage(getEncoderValues.Result)
+_sym_db.RegisterMessage(getEncoderValues.Out)
 
-getJointStates = _reflection.GeneratedProtocolMessageType('getJointStates', (_message.Message,), dict(
+getFirmwareVersionString = _reflection.GeneratedProtocolMessageType('getFirmwareVersionString', (_message.Message,), dict(
 
   In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _GETJOINTSTATES_IN,
+    DESCRIPTOR = _GETFIRMWAREVERSIONSTRING_IN,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getJointStates.In)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getFirmwareVersionString.In)
     ))
   ,
 
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _GETJOINTSTATES_RESULT,
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _GETFIRMWAREVERSIONSTRING_OUT,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getJointStates.Result)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getFirmwareVersionString.Out)
     ))
   ,
-  DESCRIPTOR = _GETJOINTSTATES,
+  DESCRIPTOR = _GETFIRMWAREVERSIONSTRING,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.getJointStates)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.getFirmwareVersionString)
   ))
-_sym_db.RegisterMessage(getJointStates)
-_sym_db.RegisterMessage(getJointStates.In)
-_sym_db.RegisterMessage(getJointStates.Result)
+_sym_db.RegisterMessage(getFirmwareVersionString)
+_sym_db.RegisterMessage(getFirmwareVersionString.In)
+_sym_db.RegisterMessage(getFirmwareVersionString.Out)
 
 getFormFactor = _reflection.GeneratedProtocolMessageType('getFormFactor', (_message.Message,), dict(
 
   In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
     DESCRIPTOR = _GETFORMFACTOR_IN,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getFormFactor.In)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getFormFactor.In)
     ))
   ,
 
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _GETFORMFACTOR_RESULT,
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _GETFORMFACTOR_OUT,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getFormFactor.Result)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getFormFactor.Out)
     ))
   ,
   DESCRIPTOR = _GETFORMFACTOR,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.getFormFactor)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.getFormFactor)
   ))
 _sym_db.RegisterMessage(getFormFactor)
 _sym_db.RegisterMessage(getFormFactor.In)
-_sym_db.RegisterMessage(getFormFactor.Result)
+_sym_db.RegisterMessage(getFormFactor.Out)
+
+getJointStates = _reflection.GeneratedProtocolMessageType('getJointStates', (_message.Message,), dict(
+
+  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
+    DESCRIPTOR = _GETJOINTSTATES_IN,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getJointStates.In)
+    ))
+  ,
+
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _GETJOINTSTATES_OUT,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getJointStates.Out)
+    ))
+  ,
+  DESCRIPTOR = _GETJOINTSTATES,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.getJointStates)
+  ))
+_sym_db.RegisterMessage(getJointStates)
+_sym_db.RegisterMessage(getJointStates.In)
+_sym_db.RegisterMessage(getJointStates.Out)
+
+getLedColor = _reflection.GeneratedProtocolMessageType('getLedColor', (_message.Message,), dict(
+
+  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
+    DESCRIPTOR = _GETLEDCOLOR_IN,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getLedColor.In)
+    ))
+  ,
+
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _GETLEDCOLOR_OUT,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getLedColor.Out)
+    ))
+  ,
+  DESCRIPTOR = _GETLEDCOLOR,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.getLedColor)
+  ))
+_sym_db.RegisterMessage(getLedColor)
+_sym_db.RegisterMessage(getLedColor.In)
+_sym_db.RegisterMessage(getLedColor.Out)
+
+getMotorControllerOmega = _reflection.GeneratedProtocolMessageType('getMotorControllerOmega', (_message.Message,), dict(
+
+  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
+    DESCRIPTOR = _GETMOTORCONTROLLEROMEGA_IN,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getMotorControllerOmega.In)
+    ))
+  ,
+
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _GETMOTORCONTROLLEROMEGA_OUT,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getMotorControllerOmega.Out)
+    ))
+  ,
+  DESCRIPTOR = _GETMOTORCONTROLLEROMEGA,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.getMotorControllerOmega)
+  ))
+_sym_db.RegisterMessage(getMotorControllerOmega)
+_sym_db.RegisterMessage(getMotorControllerOmega.In)
+_sym_db.RegisterMessage(getMotorControllerOmega.Out)
+
+getMotorControllerAlphaI = _reflection.GeneratedProtocolMessageType('getMotorControllerAlphaI', (_message.Message,), dict(
+
+  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
+    DESCRIPTOR = _GETMOTORCONTROLLERALPHAI_IN,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getMotorControllerAlphaI.In)
+    ))
+  ,
+
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _GETMOTORCONTROLLERALPHAI_OUT,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getMotorControllerAlphaI.Out)
+    ))
+  ,
+  DESCRIPTOR = _GETMOTORCONTROLLERALPHAI,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.getMotorControllerAlphaI)
+  ))
+_sym_db.RegisterMessage(getMotorControllerAlphaI)
+_sym_db.RegisterMessage(getMotorControllerAlphaI.In)
+_sym_db.RegisterMessage(getMotorControllerAlphaI.Out)
+
+getMotorControllerAlphaF = _reflection.GeneratedProtocolMessageType('getMotorControllerAlphaF', (_message.Message,), dict(
+
+  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
+    DESCRIPTOR = _GETMOTORCONTROLLERALPHAF_IN,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getMotorControllerAlphaF.In)
+    ))
+  ,
+
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _GETMOTORCONTROLLERALPHAF_OUT,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getMotorControllerAlphaF.Out)
+    ))
+  ,
+  DESCRIPTOR = _GETMOTORCONTROLLERALPHAF,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.getMotorControllerAlphaF)
+  ))
+_sym_db.RegisterMessage(getMotorControllerAlphaF)
+_sym_db.RegisterMessage(getMotorControllerAlphaF.In)
+_sym_db.RegisterMessage(getMotorControllerAlphaF.Out)
+
+getMotorControllerProportionalGain = _reflection.GeneratedProtocolMessageType('getMotorControllerProportionalGain', (_message.Message,), dict(
+
+  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
+    DESCRIPTOR = _GETMOTORCONTROLLERPROPORTIONALGAIN_IN,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getMotorControllerProportionalGain.In)
+    ))
+  ,
+
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _GETMOTORCONTROLLERPROPORTIONALGAIN_OUT,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getMotorControllerProportionalGain.Out)
+    ))
+  ,
+  DESCRIPTOR = _GETMOTORCONTROLLERPROPORTIONALGAIN,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.getMotorControllerProportionalGain)
+  ))
+_sym_db.RegisterMessage(getMotorControllerProportionalGain)
+_sym_db.RegisterMessage(getMotorControllerProportionalGain.In)
+_sym_db.RegisterMessage(getMotorControllerProportionalGain.Out)
+
+getMotorControllerIntegratorGain = _reflection.GeneratedProtocolMessageType('getMotorControllerIntegratorGain', (_message.Message,), dict(
+
+  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
+    DESCRIPTOR = _GETMOTORCONTROLLERINTEGRATORGAIN_IN,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getMotorControllerIntegratorGain.In)
+    ))
+  ,
+
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _GETMOTORCONTROLLERINTEGRATORGAIN_OUT,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getMotorControllerIntegratorGain.Out)
+    ))
+  ,
+  DESCRIPTOR = _GETMOTORCONTROLLERINTEGRATORGAIN,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.getMotorControllerIntegratorGain)
+  ))
+_sym_db.RegisterMessage(getMotorControllerIntegratorGain)
+_sym_db.RegisterMessage(getMotorControllerIntegratorGain.In)
+_sym_db.RegisterMessage(getMotorControllerIntegratorGain.Out)
+
+getMotorControllerDerivativeGain = _reflection.GeneratedProtocolMessageType('getMotorControllerDerivativeGain', (_message.Message,), dict(
+
+  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
+    DESCRIPTOR = _GETMOTORCONTROLLERDERIVATIVEGAIN_IN,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getMotorControllerDerivativeGain.In)
+    ))
+  ,
+
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _GETMOTORCONTROLLERDERIVATIVEGAIN_OUT,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getMotorControllerDerivativeGain.Out)
+    ))
+  ,
+  DESCRIPTOR = _GETMOTORCONTROLLERDERIVATIVEGAIN,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.getMotorControllerDerivativeGain)
+  ))
+_sym_db.RegisterMessage(getMotorControllerDerivativeGain)
+_sym_db.RegisterMessage(getMotorControllerDerivativeGain.In)
+_sym_db.RegisterMessage(getMotorControllerDerivativeGain.Out)
+
+getMotorControllerSafetyThreshold = _reflection.GeneratedProtocolMessageType('getMotorControllerSafetyThreshold', (_message.Message,), dict(
+
+  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
+    DESCRIPTOR = _GETMOTORCONTROLLERSAFETYTHRESHOLD_IN,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getMotorControllerSafetyThreshold.In)
+    ))
+  ,
+
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _GETMOTORCONTROLLERSAFETYTHRESHOLD_OUT,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getMotorControllerSafetyThreshold.Out)
+    ))
+  ,
+  DESCRIPTOR = _GETMOTORCONTROLLERSAFETYTHRESHOLD,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.getMotorControllerSafetyThreshold)
+  ))
+_sym_db.RegisterMessage(getMotorControllerSafetyThreshold)
+_sym_db.RegisterMessage(getMotorControllerSafetyThreshold.In)
+_sym_db.RegisterMessage(getMotorControllerSafetyThreshold.Out)
+
+getMotorControllerSafetyAngle = _reflection.GeneratedProtocolMessageType('getMotorControllerSafetyAngle', (_message.Message,), dict(
+
+  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
+    DESCRIPTOR = _GETMOTORCONTROLLERSAFETYANGLE_IN,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getMotorControllerSafetyAngle.In)
+    ))
+  ,
+
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _GETMOTORCONTROLLERSAFETYANGLE_OUT,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.getMotorControllerSafetyAngle.Out)
+    ))
+  ,
+  DESCRIPTOR = _GETMOTORCONTROLLERSAFETYANGLE,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.getMotorControllerSafetyAngle)
+  ))
+_sym_db.RegisterMessage(getMotorControllerSafetyAngle)
+_sym_db.RegisterMessage(getMotorControllerSafetyAngle.In)
+_sym_db.RegisterMessage(getMotorControllerSafetyAngle.Out)
+
+setMotorControllerOmega = _reflection.GeneratedProtocolMessageType('setMotorControllerOmega', (_message.Message,), dict(
+
+  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
+    DESCRIPTOR = _SETMOTORCONTROLLEROMEGA_IN,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.setMotorControllerOmega.In)
+    ))
+  ,
+
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _SETMOTORCONTROLLEROMEGA_OUT,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.setMotorControllerOmega.Out)
+    ))
+  ,
+  DESCRIPTOR = _SETMOTORCONTROLLEROMEGA,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.setMotorControllerOmega)
+  ))
+_sym_db.RegisterMessage(setMotorControllerOmega)
+_sym_db.RegisterMessage(setMotorControllerOmega.In)
+_sym_db.RegisterMessage(setMotorControllerOmega.Out)
+
+setMotorControllerAlphaI = _reflection.GeneratedProtocolMessageType('setMotorControllerAlphaI', (_message.Message,), dict(
+
+  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
+    DESCRIPTOR = _SETMOTORCONTROLLERALPHAI_IN,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.setMotorControllerAlphaI.In)
+    ))
+  ,
+
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _SETMOTORCONTROLLERALPHAI_OUT,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.setMotorControllerAlphaI.Out)
+    ))
+  ,
+  DESCRIPTOR = _SETMOTORCONTROLLERALPHAI,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.setMotorControllerAlphaI)
+  ))
+_sym_db.RegisterMessage(setMotorControllerAlphaI)
+_sym_db.RegisterMessage(setMotorControllerAlphaI.In)
+_sym_db.RegisterMessage(setMotorControllerAlphaI.Out)
+
+setMotorControllerAlphaF = _reflection.GeneratedProtocolMessageType('setMotorControllerAlphaF', (_message.Message,), dict(
+
+  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
+    DESCRIPTOR = _SETMOTORCONTROLLERALPHAF_IN,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.setMotorControllerAlphaF.In)
+    ))
+  ,
+
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _SETMOTORCONTROLLERALPHAF_OUT,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.setMotorControllerAlphaF.Out)
+    ))
+  ,
+  DESCRIPTOR = _SETMOTORCONTROLLERALPHAF,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.setMotorControllerAlphaF)
+  ))
+_sym_db.RegisterMessage(setMotorControllerAlphaF)
+_sym_db.RegisterMessage(setMotorControllerAlphaF.In)
+_sym_db.RegisterMessage(setMotorControllerAlphaF.Out)
+
+setMotorControllerProportionalGain = _reflection.GeneratedProtocolMessageType('setMotorControllerProportionalGain', (_message.Message,), dict(
+
+  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
+    DESCRIPTOR = _SETMOTORCONTROLLERPROPORTIONALGAIN_IN,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.setMotorControllerProportionalGain.In)
+    ))
+  ,
+
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _SETMOTORCONTROLLERPROPORTIONALGAIN_OUT,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.setMotorControllerProportionalGain.Out)
+    ))
+  ,
+  DESCRIPTOR = _SETMOTORCONTROLLERPROPORTIONALGAIN,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.setMotorControllerProportionalGain)
+  ))
+_sym_db.RegisterMessage(setMotorControllerProportionalGain)
+_sym_db.RegisterMessage(setMotorControllerProportionalGain.In)
+_sym_db.RegisterMessage(setMotorControllerProportionalGain.Out)
+
+setMotorControllerIntegratorGain = _reflection.GeneratedProtocolMessageType('setMotorControllerIntegratorGain', (_message.Message,), dict(
+
+  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
+    DESCRIPTOR = _SETMOTORCONTROLLERINTEGRATORGAIN_IN,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.setMotorControllerIntegratorGain.In)
+    ))
+  ,
+
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _SETMOTORCONTROLLERINTEGRATORGAIN_OUT,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.setMotorControllerIntegratorGain.Out)
+    ))
+  ,
+  DESCRIPTOR = _SETMOTORCONTROLLERINTEGRATORGAIN,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.setMotorControllerIntegratorGain)
+  ))
+_sym_db.RegisterMessage(setMotorControllerIntegratorGain)
+_sym_db.RegisterMessage(setMotorControllerIntegratorGain.In)
+_sym_db.RegisterMessage(setMotorControllerIntegratorGain.Out)
+
+setMotorControllerDerivativeGain = _reflection.GeneratedProtocolMessageType('setMotorControllerDerivativeGain', (_message.Message,), dict(
+
+  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
+    DESCRIPTOR = _SETMOTORCONTROLLERDERIVATIVEGAIN_IN,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.setMotorControllerDerivativeGain.In)
+    ))
+  ,
+
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _SETMOTORCONTROLLERDERIVATIVEGAIN_OUT,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.setMotorControllerDerivativeGain.Out)
+    ))
+  ,
+  DESCRIPTOR = _SETMOTORCONTROLLERDERIVATIVEGAIN,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.setMotorControllerDerivativeGain)
+  ))
+_sym_db.RegisterMessage(setMotorControllerDerivativeGain)
+_sym_db.RegisterMessage(setMotorControllerDerivativeGain.In)
+_sym_db.RegisterMessage(setMotorControllerDerivativeGain.Out)
+
+setMotorControllerSafetyThreshold = _reflection.GeneratedProtocolMessageType('setMotorControllerSafetyThreshold', (_message.Message,), dict(
+
+  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
+    DESCRIPTOR = _SETMOTORCONTROLLERSAFETYTHRESHOLD_IN,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.setMotorControllerSafetyThreshold.In)
+    ))
+  ,
+
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _SETMOTORCONTROLLERSAFETYTHRESHOLD_OUT,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.setMotorControllerSafetyThreshold.Out)
+    ))
+  ,
+  DESCRIPTOR = _SETMOTORCONTROLLERSAFETYTHRESHOLD,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.setMotorControllerSafetyThreshold)
+  ))
+_sym_db.RegisterMessage(setMotorControllerSafetyThreshold)
+_sym_db.RegisterMessage(setMotorControllerSafetyThreshold.In)
+_sym_db.RegisterMessage(setMotorControllerSafetyThreshold.Out)
+
+setMotorControllerSafetyAngle = _reflection.GeneratedProtocolMessageType('setMotorControllerSafetyAngle', (_message.Message,), dict(
+
+  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
+    DESCRIPTOR = _SETMOTORCONTROLLERSAFETYANGLE_IN,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.setMotorControllerSafetyAngle.In)
+    ))
+  ,
+
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _SETMOTORCONTROLLERSAFETYANGLE_OUT,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.setMotorControllerSafetyAngle.Out)
+    ))
+  ,
+  DESCRIPTOR = _SETMOTORCONTROLLERSAFETYANGLE,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.setMotorControllerSafetyAngle)
+  ))
+_sym_db.RegisterMessage(setMotorControllerSafetyAngle)
+_sym_db.RegisterMessage(setMotorControllerSafetyAngle.In)
+_sym_db.RegisterMessage(setMotorControllerSafetyAngle.Out)
+
+setResetOnDisconnect = _reflection.GeneratedProtocolMessageType('setResetOnDisconnect', (_message.Message,), dict(
+
+  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
+    DESCRIPTOR = _SETRESETONDISCONNECT_IN,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.setResetOnDisconnect.In)
+    ))
+  ,
+
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _SETRESETONDISCONNECT_OUT,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.setResetOnDisconnect.Out)
+    ))
+  ,
+  DESCRIPTOR = _SETRESETONDISCONNECT,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.setResetOnDisconnect)
+  ))
+_sym_db.RegisterMessage(setResetOnDisconnect)
+_sym_db.RegisterMessage(setResetOnDisconnect.In)
+_sym_db.RegisterMessage(setResetOnDisconnect.Out)
+
+resetEncoderRevs = _reflection.GeneratedProtocolMessageType('resetEncoderRevs', (_message.Message,), dict(
+
+  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
+    DESCRIPTOR = _RESETENCODERREVS_IN,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.resetEncoderRevs.In)
+    ))
+  ,
+
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _RESETENCODERREVS_OUT,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.resetEncoderRevs.Out)
+    ))
+  ,
+  DESCRIPTOR = _RESETENCODERREVS,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.resetEncoderRevs)
+  ))
+_sym_db.RegisterMessage(resetEncoderRevs)
+_sym_db.RegisterMessage(resetEncoderRevs.In)
+_sym_db.RegisterMessage(resetEncoderRevs.Out)
+
+setBuzzerFrequency = _reflection.GeneratedProtocolMessageType('setBuzzerFrequency', (_message.Message,), dict(
+
+  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
+    DESCRIPTOR = _SETBUZZERFREQUENCY_IN,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.setBuzzerFrequency.In)
+    ))
+  ,
+
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _SETBUZZERFREQUENCY_OUT,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.setBuzzerFrequency.Out)
+    ))
+  ,
+  DESCRIPTOR = _SETBUZZERFREQUENCY,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.setBuzzerFrequency)
+  ))
+_sym_db.RegisterMessage(setBuzzerFrequency)
+_sym_db.RegisterMessage(setBuzzerFrequency.In)
+_sym_db.RegisterMessage(setBuzzerFrequency.Out)
+
+setLedColor = _reflection.GeneratedProtocolMessageType('setLedColor', (_message.Message,), dict(
+
+  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
+    DESCRIPTOR = _SETLEDCOLOR_IN,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.setLedColor.In)
+    ))
+  ,
+
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _SETLEDCOLOR_OUT,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.setLedColor.Out)
+    ))
+  ,
+  DESCRIPTOR = _SETLEDCOLOR,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.setLedColor)
+  ))
+_sym_db.RegisterMessage(setLedColor)
+_sym_db.RegisterMessage(setLedColor.In)
+_sym_db.RegisterMessage(setLedColor.Out)
+
+stop = _reflection.GeneratedProtocolMessageType('stop', (_message.Message,), dict(
+
+  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
+    DESCRIPTOR = _STOP_IN,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.stop.In)
+    ))
+  ,
+
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _STOP_OUT,
+    __module__ = 'robot_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.robot.stop.Out)
+    ))
+  ,
+  DESCRIPTOR = _STOP,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.stop)
+  ))
+_sym_db.RegisterMessage(stop)
+_sym_db.RegisterMessage(stop.In)
+_sym_db.RegisterMessage(stop.Out)
 
 Goal = _reflection.GeneratedProtocolMessageType('Goal', (_message.Message,), dict(
   DESCRIPTOR = _GOAL,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.Goal)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.Goal)
   ))
 _sym_db.RegisterMessage(Goal)
 
@@ -4965,372 +6132,401 @@ move = _reflection.GeneratedProtocolMessageType('move', (_message.Message,), dic
   In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
     DESCRIPTOR = _MOVE_IN,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.move.In)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.move.In)
     ))
   ,
 
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _MOVE_RESULT,
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _MOVE_OUT,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.move.Result)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.move.Out)
     ))
   ,
   DESCRIPTOR = _MOVE,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.move)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.move)
   ))
 _sym_db.RegisterMessage(move)
 _sym_db.RegisterMessage(move.In)
-_sym_db.RegisterMessage(move.Result)
+_sym_db.RegisterMessage(move.Out)
 
-resetEncoderRevs = _reflection.GeneratedProtocolMessageType('resetEncoderRevs', (_message.Message,), dict(
-
-  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _RESETENCODERREVS_IN,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.resetEncoderRevs.In)
-    ))
-  ,
-
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _RESETENCODERREVS_RESULT,
-    __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.resetEncoderRevs.Result)
-    ))
-  ,
-  DESCRIPTOR = _RESETENCODERREVS,
-  __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.resetEncoderRevs)
-  ))
-_sym_db.RegisterMessage(resetEncoderRevs)
-_sym_db.RegisterMessage(resetEncoderRevs.In)
-_sym_db.RegisterMessage(resetEncoderRevs.Result)
-
-stop = _reflection.GeneratedProtocolMessageType('stop', (_message.Message,), dict(
+enableAccelerometerEvent = _reflection.GeneratedProtocolMessageType('enableAccelerometerEvent', (_message.Message,), dict(
 
   In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _STOP_IN,
+    DESCRIPTOR = _ENABLEACCELEROMETEREVENT_IN,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.stop.In)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.enableAccelerometerEvent.In)
     ))
   ,
 
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _STOP_RESULT,
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _ENABLEACCELEROMETEREVENT_OUT,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.stop.Result)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.enableAccelerometerEvent.Out)
     ))
   ,
-  DESCRIPTOR = _STOP,
+  DESCRIPTOR = _ENABLEACCELEROMETEREVENT,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.stop)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.enableAccelerometerEvent)
   ))
-_sym_db.RegisterMessage(stop)
-_sym_db.RegisterMessage(stop.In)
-_sym_db.RegisterMessage(stop.Result)
+_sym_db.RegisterMessage(enableAccelerometerEvent)
+_sym_db.RegisterMessage(enableAccelerometerEvent.In)
+_sym_db.RegisterMessage(enableAccelerometerEvent.Out)
 
-getButtonState = _reflection.GeneratedProtocolMessageType('getButtonState', (_message.Message,), dict(
+enableButtonEvent = _reflection.GeneratedProtocolMessageType('enableButtonEvent', (_message.Message,), dict(
 
   In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _GETBUTTONSTATE_IN,
+    DESCRIPTOR = _ENABLEBUTTONEVENT_IN,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getButtonState.In)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.enableButtonEvent.In)
     ))
   ,
 
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _GETBUTTONSTATE_RESULT,
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _ENABLEBUTTONEVENT_OUT,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getButtonState.Result)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.enableButtonEvent.Out)
     ))
   ,
-  DESCRIPTOR = _GETBUTTONSTATE,
+  DESCRIPTOR = _ENABLEBUTTONEVENT,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.getButtonState)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.enableButtonEvent)
   ))
-_sym_db.RegisterMessage(getButtonState)
-_sym_db.RegisterMessage(getButtonState.In)
-_sym_db.RegisterMessage(getButtonState.Result)
+_sym_db.RegisterMessage(enableButtonEvent)
+_sym_db.RegisterMessage(enableButtonEvent.In)
+_sym_db.RegisterMessage(enableButtonEvent.Out)
 
-getFirmwareVersion = _reflection.GeneratedProtocolMessageType('getFirmwareVersion', (_message.Message,), dict(
+enableEncoderEvent = _reflection.GeneratedProtocolMessageType('enableEncoderEvent', (_message.Message,), dict(
 
   In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _GETFIRMWAREVERSION_IN,
+
+    SignalState = _reflection.GeneratedProtocolMessageType('SignalState', (_message.Message,), dict(
+      DESCRIPTOR = _ENABLEENCODEREVENT_IN_SIGNALSTATE,
+      __module__ = 'robot_pb2'
+      # @@protoc_insertion_point(class_scope:linkbot.robot.enableEncoderEvent.In.SignalState)
+      ))
+    ,
+    DESCRIPTOR = _ENABLEENCODEREVENT_IN,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getFirmwareVersion.In)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.enableEncoderEvent.In)
     ))
   ,
 
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _GETFIRMWAREVERSION_RESULT,
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _ENABLEENCODEREVENT_OUT,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getFirmwareVersion.Result)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.enableEncoderEvent.Out)
     ))
   ,
-  DESCRIPTOR = _GETFIRMWAREVERSION,
+  DESCRIPTOR = _ENABLEENCODEREVENT,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.getFirmwareVersion)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.enableEncoderEvent)
   ))
-_sym_db.RegisterMessage(getFirmwareVersion)
-_sym_db.RegisterMessage(getFirmwareVersion.In)
-_sym_db.RegisterMessage(getFirmwareVersion.Result)
+_sym_db.RegisterMessage(enableEncoderEvent)
+_sym_db.RegisterMessage(enableEncoderEvent.In)
+_sym_db.RegisterMessage(enableEncoderEvent.In.SignalState)
+_sym_db.RegisterMessage(enableEncoderEvent.Out)
 
-getFirmwareVersionString = _reflection.GeneratedProtocolMessageType('getFirmwareVersionString', (_message.Message,), dict(
+enableJointEvent = _reflection.GeneratedProtocolMessageType('enableJointEvent', (_message.Message,), dict(
 
   In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
-    DESCRIPTOR = _GETFIRMWAREVERSIONSTRING_IN,
+    DESCRIPTOR = _ENABLEJOINTEVENT_IN,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getFirmwareVersionString.In)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.enableJointEvent.In)
     ))
   ,
 
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _GETFIRMWAREVERSIONSTRING_RESULT,
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _ENABLEJOINTEVENT_OUT,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.getFirmwareVersionString.Result)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.enableJointEvent.Out)
     ))
   ,
-  DESCRIPTOR = _GETFIRMWAREVERSIONSTRING,
+  DESCRIPTOR = _ENABLEJOINTEVENT,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.getFirmwareVersionString)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.enableJointEvent)
   ))
-_sym_db.RegisterMessage(getFirmwareVersionString)
-_sym_db.RegisterMessage(getFirmwareVersionString.In)
-_sym_db.RegisterMessage(getFirmwareVersionString.Result)
+_sym_db.RegisterMessage(enableJointEvent)
+_sym_db.RegisterMessage(enableJointEvent.In)
+_sym_db.RegisterMessage(enableJointEvent.Out)
 
 writeEeprom = _reflection.GeneratedProtocolMessageType('writeEeprom', (_message.Message,), dict(
 
   In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
     DESCRIPTOR = _WRITEEEPROM_IN,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.writeEeprom.In)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.writeEeprom.In)
     ))
   ,
 
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _WRITEEEPROM_RESULT,
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _WRITEEEPROM_OUT,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.writeEeprom.Result)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.writeEeprom.Out)
     ))
   ,
   DESCRIPTOR = _WRITEEEPROM,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.writeEeprom)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.writeEeprom)
   ))
 _sym_db.RegisterMessage(writeEeprom)
 _sym_db.RegisterMessage(writeEeprom.In)
-_sym_db.RegisterMessage(writeEeprom.Result)
+_sym_db.RegisterMessage(writeEeprom.Out)
 
 readEeprom = _reflection.GeneratedProtocolMessageType('readEeprom', (_message.Message,), dict(
 
   In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
     DESCRIPTOR = _READEEPROM_IN,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.readEeprom.In)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.readEeprom.In)
     ))
   ,
 
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _READEEPROM_RESULT,
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _READEEPROM_OUT,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.readEeprom.Result)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.readEeprom.Out)
     ))
   ,
   DESCRIPTOR = _READEEPROM,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.readEeprom)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.readEeprom)
   ))
 _sym_db.RegisterMessage(readEeprom)
 _sym_db.RegisterMessage(readEeprom.In)
-_sym_db.RegisterMessage(readEeprom.Result)
+_sym_db.RegisterMessage(readEeprom.Out)
 
 writeTwi = _reflection.GeneratedProtocolMessageType('writeTwi', (_message.Message,), dict(
 
   In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
     DESCRIPTOR = _WRITETWI_IN,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.writeTwi.In)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.writeTwi.In)
     ))
   ,
 
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _WRITETWI_RESULT,
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _WRITETWI_OUT,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.writeTwi.Result)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.writeTwi.Out)
     ))
   ,
   DESCRIPTOR = _WRITETWI,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.writeTwi)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.writeTwi)
   ))
 _sym_db.RegisterMessage(writeTwi)
 _sym_db.RegisterMessage(writeTwi.In)
-_sym_db.RegisterMessage(writeTwi.Result)
+_sym_db.RegisterMessage(writeTwi.Out)
 
 readTwi = _reflection.GeneratedProtocolMessageType('readTwi', (_message.Message,), dict(
 
   In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
     DESCRIPTOR = _READTWI_IN,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.readTwi.In)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.readTwi.In)
     ))
   ,
 
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _READTWI_RESULT,
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _READTWI_OUT,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.readTwi.Result)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.readTwi.Out)
     ))
   ,
   DESCRIPTOR = _READTWI,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.readTwi)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.readTwi)
   ))
 _sym_db.RegisterMessage(readTwi)
 _sym_db.RegisterMessage(readTwi.In)
-_sym_db.RegisterMessage(readTwi.Result)
+_sym_db.RegisterMessage(readTwi.Out)
 
 writeReadTwi = _reflection.GeneratedProtocolMessageType('writeReadTwi', (_message.Message,), dict(
 
   In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
     DESCRIPTOR = _WRITEREADTWI_IN,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.writeReadTwi.In)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.writeReadTwi.In)
     ))
   ,
 
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _WRITEREADTWI_RESULT,
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _WRITEREADTWI_OUT,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.writeReadTwi.Result)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.writeReadTwi.Out)
     ))
   ,
   DESCRIPTOR = _WRITEREADTWI,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.writeReadTwi)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.writeReadTwi)
   ))
 _sym_db.RegisterMessage(writeReadTwi)
 _sym_db.RegisterMessage(writeReadTwi.In)
-_sym_db.RegisterMessage(writeReadTwi.Result)
+_sym_db.RegisterMessage(writeReadTwi.Out)
 
 reboot = _reflection.GeneratedProtocolMessageType('reboot', (_message.Message,), dict(
 
   In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
     DESCRIPTOR = _REBOOT_IN,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.reboot.In)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.reboot.In)
     ))
   ,
 
-  Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), dict(
-    DESCRIPTOR = _REBOOT_RESULT,
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _REBOOT_OUT,
     __module__ = 'robot_pb2'
-    # @@protoc_insertion_point(class_scope:barobo.Robot.reboot.Result)
+    # @@protoc_insertion_point(class_scope:linkbot.robot.reboot.Out)
     ))
   ,
   DESCRIPTOR = _REBOOT,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.reboot)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.reboot)
   ))
 _sym_db.RegisterMessage(reboot)
 _sym_db.RegisterMessage(reboot.In)
-_sym_db.RegisterMessage(reboot.Result)
+_sym_db.RegisterMessage(reboot.Out)
 
-buttonEvent = _reflection.GeneratedProtocolMessageType('buttonEvent', (_message.Message,), dict(
+RpcRequest = _reflection.GeneratedProtocolMessageType('RpcRequest', (_message.Message,), dict(
+  DESCRIPTOR = _RPCREQUEST,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.RpcRequest)
+  ))
+_sym_db.RegisterMessage(RpcRequest)
+
+RpcReply = _reflection.GeneratedProtocolMessageType('RpcReply', (_message.Message,), dict(
+  DESCRIPTOR = _RPCREPLY,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.RpcReply)
+  ))
+_sym_db.RegisterMessage(RpcReply)
+
+ButtonEvent = _reflection.GeneratedProtocolMessageType('ButtonEvent', (_message.Message,), dict(
   DESCRIPTOR = _BUTTONEVENT,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.buttonEvent)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.ButtonEvent)
   ))
-_sym_db.RegisterMessage(buttonEvent)
+_sym_db.RegisterMessage(ButtonEvent)
 
-encoderEvent = _reflection.GeneratedProtocolMessageType('encoderEvent', (_message.Message,), dict(
+EncoderEvent = _reflection.GeneratedProtocolMessageType('EncoderEvent', (_message.Message,), dict(
   DESCRIPTOR = _ENCODEREVENT,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.encoderEvent)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.EncoderEvent)
   ))
-_sym_db.RegisterMessage(encoderEvent)
+_sym_db.RegisterMessage(EncoderEvent)
 
-accelerometerEvent = _reflection.GeneratedProtocolMessageType('accelerometerEvent', (_message.Message,), dict(
+AccelerometerEvent = _reflection.GeneratedProtocolMessageType('AccelerometerEvent', (_message.Message,), dict(
   DESCRIPTOR = _ACCELEROMETEREVENT,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.accelerometerEvent)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.AccelerometerEvent)
   ))
-_sym_db.RegisterMessage(accelerometerEvent)
+_sym_db.RegisterMessage(AccelerometerEvent)
 
-jointEvent = _reflection.GeneratedProtocolMessageType('jointEvent', (_message.Message,), dict(
+JointEvent = _reflection.GeneratedProtocolMessageType('JointEvent', (_message.Message,), dict(
   DESCRIPTOR = _JOINTEVENT,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.jointEvent)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.JointEvent)
   ))
-_sym_db.RegisterMessage(jointEvent)
+_sym_db.RegisterMessage(JointEvent)
 
-debugMessageEvent = _reflection.GeneratedProtocolMessageType('debugMessageEvent', (_message.Message,), dict(
+DebugMessageEvent = _reflection.GeneratedProtocolMessageType('DebugMessageEvent', (_message.Message,), dict(
   DESCRIPTOR = _DEBUGMESSAGEEVENT,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.debugMessageEvent)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.DebugMessageEvent)
   ))
-_sym_db.RegisterMessage(debugMessageEvent)
+_sym_db.RegisterMessage(DebugMessageEvent)
 
-connectionTerminated = _reflection.GeneratedProtocolMessageType('connectionTerminated', (_message.Message,), dict(
+ConnectionTerminated = _reflection.GeneratedProtocolMessageType('ConnectionTerminated', (_message.Message,), dict(
   DESCRIPTOR = _CONNECTIONTERMINATED,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:barobo.Robot.connectionTerminated)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.ConnectionTerminated)
   ))
-_sym_db.RegisterMessage(connectionTerminated)
+_sym_db.RegisterMessage(ConnectionTerminated)
+
+PowerOnEvent = _reflection.GeneratedProtocolMessageType('PowerOnEvent', (_message.Message,), dict(
+  DESCRIPTOR = _POWERONEVENT,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.PowerOnEvent)
+  ))
+_sym_db.RegisterMessage(PowerOnEvent)
+
+Ping = _reflection.GeneratedProtocolMessageType('Ping', (_message.Message,), dict(
+  DESCRIPTOR = _PING,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.Ping)
+  ))
+_sym_db.RegisterMessage(Ping)
+
+ClientToRobot = _reflection.GeneratedProtocolMessageType('ClientToRobot', (_message.Message,), dict(
+  DESCRIPTOR = _CLIENTTOROBOT,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.ClientToRobot)
+  ))
+_sym_db.RegisterMessage(ClientToRobot)
+
+RobotToClient = _reflection.GeneratedProtocolMessageType('RobotToClient', (_message.Message,), dict(
+  DESCRIPTOR = _ROBOTTOCLIENT,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.RobotToClient)
+  ))
+_sym_db.RegisterMessage(RobotToClient)
 
 
-_SETMOTORCONTROLLERSAFETYTHRESHOLD_IN.fields_by_name['values'].has_options = True
-_SETMOTORCONTROLLERSAFETYTHRESHOLD_IN.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
-_SETMOTORCONTROLLERSAFETYANGLE_IN.fields_by_name['values'].has_options = True
-_SETMOTORCONTROLLERSAFETYANGLE_IN.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
+_GETADCRAW_OUT.fields_by_name['values'].has_options = True
+_GETADCRAW_OUT.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
+_GETENCODERVALUES_OUT.fields_by_name['values'].has_options = True
+_GETENCODERVALUES_OUT.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
+_GETFIRMWAREVERSIONSTRING_OUT.fields_by_name['value'].has_options = True
+_GETFIRMWAREVERSIONSTRING_OUT.fields_by_name['value']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))
+_GETJOINTSTATES_OUT.fields_by_name['values'].has_options = True
+_GETJOINTSTATES_OUT.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
+_GETMOTORCONTROLLEROMEGA_OUT.fields_by_name['values'].has_options = True
+_GETMOTORCONTROLLEROMEGA_OUT.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
+_GETMOTORCONTROLLERALPHAI_OUT.fields_by_name['values'].has_options = True
+_GETMOTORCONTROLLERALPHAI_OUT.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
+_GETMOTORCONTROLLERALPHAF_OUT.fields_by_name['values'].has_options = True
+_GETMOTORCONTROLLERALPHAF_OUT.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
+_GETMOTORCONTROLLERPROPORTIONALGAIN_OUT.fields_by_name['values'].has_options = True
+_GETMOTORCONTROLLERPROPORTIONALGAIN_OUT.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
+_GETMOTORCONTROLLERINTEGRATORGAIN_OUT.fields_by_name['values'].has_options = True
+_GETMOTORCONTROLLERINTEGRATORGAIN_OUT.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
+_GETMOTORCONTROLLERDERIVATIVEGAIN_OUT.fields_by_name['values'].has_options = True
+_GETMOTORCONTROLLERDERIVATIVEGAIN_OUT.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
+_GETMOTORCONTROLLERSAFETYTHRESHOLD_OUT.fields_by_name['values'].has_options = True
+_GETMOTORCONTROLLERSAFETYTHRESHOLD_OUT.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
+_GETMOTORCONTROLLERSAFETYANGLE_OUT.fields_by_name['values'].has_options = True
+_GETMOTORCONTROLLERSAFETYANGLE_OUT.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
+_SETMOTORCONTROLLEROMEGA_IN.fields_by_name['values'].has_options = True
+_SETMOTORCONTROLLEROMEGA_IN.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
 _SETMOTORCONTROLLERALPHAI_IN.fields_by_name['values'].has_options = True
 _SETMOTORCONTROLLERALPHAI_IN.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
 _SETMOTORCONTROLLERALPHAF_IN.fields_by_name['values'].has_options = True
 _SETMOTORCONTROLLERALPHAF_IN.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
-_SETMOTORCONTROLLEROMEGA_IN.fields_by_name['values'].has_options = True
-_SETMOTORCONTROLLEROMEGA_IN.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
 _SETMOTORCONTROLLERPROPORTIONALGAIN_IN.fields_by_name['values'].has_options = True
 _SETMOTORCONTROLLERPROPORTIONALGAIN_IN.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
 _SETMOTORCONTROLLERINTEGRATORGAIN_IN.fields_by_name['values'].has_options = True
 _SETMOTORCONTROLLERINTEGRATORGAIN_IN.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
 _SETMOTORCONTROLLERDERIVATIVEGAIN_IN.fields_by_name['values'].has_options = True
 _SETMOTORCONTROLLERDERIVATIVEGAIN_IN.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
-_GETADCRAW_RESULT.fields_by_name['values'].has_options = True
-_GETADCRAW_RESULT.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
-_GETMOTORCONTROLLERSAFETYTHRESHOLD_RESULT.fields_by_name['values'].has_options = True
-_GETMOTORCONTROLLERSAFETYTHRESHOLD_RESULT.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
-_GETMOTORCONTROLLERSAFETYANGLE_RESULT.fields_by_name['values'].has_options = True
-_GETMOTORCONTROLLERSAFETYANGLE_RESULT.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
-_GETMOTORCONTROLLERALPHAI_RESULT.fields_by_name['values'].has_options = True
-_GETMOTORCONTROLLERALPHAI_RESULT.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
-_GETMOTORCONTROLLERALPHAF_RESULT.fields_by_name['values'].has_options = True
-_GETMOTORCONTROLLERALPHAF_RESULT.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
-_GETMOTORCONTROLLEROMEGA_RESULT.fields_by_name['values'].has_options = True
-_GETMOTORCONTROLLEROMEGA_RESULT.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
-_GETMOTORCONTROLLERPROPORTIONALGAIN_RESULT.fields_by_name['values'].has_options = True
-_GETMOTORCONTROLLERPROPORTIONALGAIN_RESULT.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
-_GETMOTORCONTROLLERINTEGRATORGAIN_RESULT.fields_by_name['values'].has_options = True
-_GETMOTORCONTROLLERINTEGRATORGAIN_RESULT.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
-_GETMOTORCONTROLLERDERIVATIVEGAIN_RESULT.fields_by_name['values'].has_options = True
-_GETMOTORCONTROLLERDERIVATIVEGAIN_RESULT.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
-_GETENCODERVALUES_RESULT.fields_by_name['values'].has_options = True
-_GETENCODERVALUES_RESULT.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
-_GETJOINTSTATES_RESULT.fields_by_name['values'].has_options = True
-_GETJOINTSTATES_RESULT.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
-_GETFIRMWAREVERSIONSTRING_RESULT.fields_by_name['value'].has_options = True
-_GETFIRMWAREVERSIONSTRING_RESULT.fields_by_name['value']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))
+_SETMOTORCONTROLLERSAFETYTHRESHOLD_IN.fields_by_name['values'].has_options = True
+_SETMOTORCONTROLLERSAFETYTHRESHOLD_IN.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
+_SETMOTORCONTROLLERSAFETYANGLE_IN.fields_by_name['values'].has_options = True
+_SETMOTORCONTROLLERSAFETYANGLE_IN.fields_by_name['values']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\020\001\222?\002\020 '))
 _WRITEEEPROM_IN.fields_by_name['data'].has_options = True
 _WRITEEEPROM_IN.fields_by_name['data']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))
-_READEEPROM_RESULT.fields_by_name['data'].has_options = True
-_READEEPROM_RESULT.fields_by_name['data']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))
+_READEEPROM_OUT.fields_by_name['data'].has_options = True
+_READEEPROM_OUT.fields_by_name['data']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))
 _WRITETWI_IN.fields_by_name['data'].has_options = True
 _WRITETWI_IN.fields_by_name['data']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))
-_READTWI_RESULT.fields_by_name['data'].has_options = True
-_READTWI_RESULT.fields_by_name['data']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))
+_READTWI_OUT.fields_by_name['data'].has_options = True
+_READTWI_OUT.fields_by_name['data']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))
 _WRITEREADTWI_IN.fields_by_name['data'].has_options = True
 _WRITEREADTWI_IN.fields_by_name['data']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))
-_WRITEREADTWI_RESULT.fields_by_name['data'].has_options = True
-_WRITEREADTWI_RESULT.fields_by_name['data']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))
+_WRITEREADTWI_OUT.fields_by_name['data'].has_options = True
+_WRITEREADTWI_OUT.fields_by_name['data']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))
 _DEBUGMESSAGEEVENT.fields_by_name['bytestring'].has_options = True
 _DEBUGMESSAGEEVENT.fields_by_name['bytestring']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))
+_POWERONEVENT.fields_by_name['version'].has_options = True
+_POWERONEVENT.fields_by_name['version']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))
 # @@protoc_insertion_point(module_scope)
