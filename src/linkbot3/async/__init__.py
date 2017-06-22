@@ -61,6 +61,7 @@ class RpcProxy():
         return getattr(self._members[name], 'In')()
 
     def __getattr__(self, name):
+        logging.info('__getattr__')
         if name not in self._members:
             raise AttributeError('{} is not a method of this RPC proxy.'
                     .format(name))
@@ -81,7 +82,7 @@ class RpcProxy():
         user_fut = asyncio.Future()
         util.chain_futures(fut, user_fut, 
                 functools.partial(
-                    self._handle_rpcReply,
+                    self._convert_rpcReply,
                     procedure_name)
                 )
 
@@ -94,7 +95,7 @@ class RpcProxy():
         self.logger.info('Scheduled call to: {}'.format(procedure_name))
         return user_fut
 
-    def _handle_rpcReply(self, rpc_name, rpcReply):
+    def _convert_rpcReply(self, rpc_name, rpcReply):
         # This function should turn rpcReply objects into an instantiation of
         # the child oneof object.
         try:
@@ -102,15 +103,36 @@ class RpcProxy():
         except KeyError as e:
             self.logger.warning('Received unexpected reply. Current requests: {}'.format(self._requests.items()))
 
-    def deliver(self, rpc_reply):
+    @asyncio.coroutine
+    def deliver(self, server_to_proxy):
+        self.logger.warning('moop')
+        try:
+            method = server_to_proxy.WhichOneof('arg')
+        except Exception as e:
+            self.logger.warning('Could not parse server_to_proxy message; no "arg" member found. {}'.format(e))
+            return
+
+        self.logger.info('Parsed server->proxy message. SubMessage: {}'.format(server_to_proxy.WhichOneof('arg')))
+        if method == "rpcReply":
+            self._handle_rpc_reply(server_to_proxy.rpcReply)
+        else:
+            try:
+                arg = getattr(server_to_proxy, method)
+                yield from self._event_handlers[method](arg)
+            except:
+                # FIXME
+                self.logger.warning('Could not handle exception')
+                raise
+
+    def _handle_rpc_reply(self, rpc_reply):
         # If we receive rpcReply objects from the server, pass them to this function for processing.
-        logging.info('RpcProxy.deliver()')
+        self.logger.info('RpcProxy.deliver()')
         try:
             request_id = rpc_reply.requestId
             fut = self._requests.pop(request_id)
             fut.set_result( rpc_reply )
         except KeyError:
-            logging.warning('Received spurious rpcReply with id: {}'.format(request_id))
+            self.logger.warning('Received spurious rpcReply with id: {}'.format(request_id))
 
     def serialize(self, method_name, pb_in, request_id):
         '''
@@ -165,28 +187,19 @@ class Daemon(RpcProxy):
                 if msg is None:
                     continue
                 logging.info('Daemon in-pump received message...')
+                daemon_to_client = self._pb_module.DaemonToClient()
+                daemon_to_client.ParseFromString(msg)
+                logging.info('Daemon in-pump received message... delivering...')
+                yield from self.deliver(daemon_to_client)
             except asyncio.CancelledError:
                 logging.warning('Daemon consumer received asyncio.CancelledError')
                 return
             except websockets.exceptions.ConnectionClosed:
                 logging.info('Daemon consumer connection closed.')
                 return
-            daemon_to_client = self._pb_module.DaemonToClient()
-            daemon_to_client.ParseFromString(msg)
-            method = daemon_to_client.WhichOneof('arg')
-            logging.info('Parsed DaemonToClient message. SubMessage: {}'.format(daemon_to_client.WhichOneof('arg')))
-            if method == "rpcReply":
-                logging.info('Daemon in-pump delivering message to RpcProxy...')
-                self.deliver(daemon_to_client.rpcReply)
-                logging.info('Daemon in-pump delivering message to RpcProxy...done')
-            else:
-                try:
-                    arg = getattr(daemon_to_client, method)
-                    yield from self._event_handlers[method](arg)
-                except:
-                    # FIXME
-                    logging.warning('Could not handle exception')
-                    raise
+            except Exception as e:
+                logging.warning('Unhandled exception! {}'.format(e))
+                raise
 
 def config(**kwargs):
     ''' Configure linkbot module settings
@@ -289,20 +302,6 @@ class _AsyncLinkbot(RpcProxy):
         yield from self._linkbot_protocol.close()
         yield from self._daemon_protocol.close()
 
-    @asyncio.coroutine
-    def __linkbot_consumer(self, protocol):
-        logging.info('Linkbot message consumer starting...')
-        while True:
-            try:
-                logging.info('Consuming Linkbot message from WS...')
-                msg = yield from protocol.recv()
-            except asyncio.CancelledError:
-                return
-            except websockets.exceptions.ConnectionClosed:
-                logging.info('Connection Closed.')
-                return
-            yield from self.rb_deliver(msg)
-
     def close(self):
         self._linkbot_protocol.close()
         self.__linkbot_consumer_handle.cancel()
@@ -338,8 +337,10 @@ class _AsyncLinkbot(RpcProxy):
         yield from fut
 
     @asyncio.coroutine
-    def on_receive(self, stuff):
+    def on_receive(self, receive_transmission):
         self.__log('_AsyncLinkbot received data from robot!')
+        if receive_transmission.HasField(payload):
+            yield from self.deliver(receive_transmission.payload)
 
     def __log(self, msg, logtype='info'):
         getattr(logging, logtype)(self._serial_id + ': ' + msg)
