@@ -578,6 +578,7 @@ class Motor:
             fut = yield from self.__get_motor_controller_attribute(
                     'getJointStates' )
             self._state = yield from fut
+            logging.info('Setting joint state: {}'.format(self._state))
 
     @asyncio.coroutine
     def __get_motor_controller_attribute(self, name, conv=lambda x: x):
@@ -597,6 +598,7 @@ class Motor:
             return
         results_obj = fut.result()
         values = []
+        logging.info('motor attribute values: {}'.format(results_obj.values))
         for v in results_obj.values:
             values.append(conv(v))
         user_fut.set_result(values[self._index])
@@ -853,8 +855,9 @@ class Motor:
         yield from self._poll_state()
         fut = asyncio.Future()
         user_fut = asyncio.Future()
-        # If we are aready not moving, just return a completed future
+        # If we are already not moving, just return a completed future
         if not self.is_moving():
+            logging.info('Motor not moving. Returning from move_wait...')
             user_fut.set_result(self.state)
         else:
             self._move_waiters.append(fut)

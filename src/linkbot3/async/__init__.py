@@ -37,7 +37,7 @@ def load_pb2_file(filename):
         return SourceFileLoader(modulename, filepath).load_module()
 
 class RpcProxy():
-    def __init__(self, pb_module):
+    def __init__(self, pb_module, logger_name='RBProxy'):
         self._members = {}
         self._pb_module = pb_module
         for key,value in pb_module.__dict__.items():
@@ -50,7 +50,7 @@ class RpcProxy():
         self._request_id = 0
         # self._event_handlers{ event_name i.e. dongleEvent : coroutine(DongleEvent) }
         self._event_handlers = {}
-        self.logger=logging.getLogger('RBProxy')
+        self.logger=logging.getLogger(logger_name)
 
     # Add a callback handler for Rpc events. For instance, for the daemon, one might do
     #    on("dongleEvent", coro)
@@ -88,11 +88,11 @@ class RpcProxy():
 
         # Serialize and send the message to the RPC server
         #result = yield from self._rpc.fire(procedure_name, pb2_obj.SerializeToString())
+        self.logger.info('Scheduling call to: {}'.format(procedure_name))
         b = self.serialize(procedure_name, pb2_obj, self._request_id)
         yield from self.emit_to_server(b)
         self._request_id += 1
 
-        self.logger.info('Scheduled call to: {}'.format(procedure_name))
         return user_fut
 
     def _convert_rpcReply(self, rpc_name, rpcReply):
@@ -154,7 +154,7 @@ class RpcProxy():
 
 class Daemon(RpcProxy):
     def __init__(self):
-        super().__init__(load_pb2_file('daemon_pb2.py'))
+        super().__init__(load_pb2_file('daemon_pb2.py'), 'DaemonProxy')
 
     def serialize(self, method_name, pb_in, request_id):
         request = self._pb_module.RpcRequest()
@@ -250,7 +250,7 @@ class _AsyncLinkbot(RpcProxy):
 
         logging.info('Creating async Linkbot handle to ID:{}'.format(serial_id))
         logger=logging.getLogger('RBProxy.'+serial_id)
-        self = cls(load_pb2_file('daemon_pb2.py').robot__pb2)
+        self = cls(load_pb2_file('daemon_pb2.py').robot__pb2, 'RobotProxy')
 
         serial_id = serial_id.upper()
         self._serial_id = serial_id
@@ -339,7 +339,7 @@ class _AsyncLinkbot(RpcProxy):
     @asyncio.coroutine
     def on_receive(self, receive_transmission):
         self.__log('_AsyncLinkbot received data from robot!')
-        if receive_transmission.HasField(payload):
+        if receive_transmission.HasField('payload'):
             yield from self.deliver(receive_transmission.payload)
 
     def __log(self, msg, logtype='info'):
@@ -361,6 +361,8 @@ class AsyncLinkbot():
                                                   util.DEFAULT_TIMEOUT )
             form_factor_fut = yield from self._proxy.getFormFactor()
             form_factor = yield from form_factor_fut
+            logging.info('Got form factor: {}'.format(form_factor))
+            self._proxy.form_factor = form_factor
             self.rb_add_broadcast_handler = self._proxy.on
             self.close = self._proxy.close
             self.enableButtonEvent = self._proxy.enableButtonEvent
@@ -376,8 +378,8 @@ class AsyncLinkbot():
 
             # Enable joint events
             yield from self._proxy.enableJointEvent(enable=True)
-            self._proxy.rb_add_broadcast_handler('jointEvent', self.__joint_event)
-            self._proxy.rb_add_broadcast_handler('debugMessageEvent',
+            self._proxy.on('jointEvent', self.__joint_event)
+            self._proxy.on('debugMessageEvent',
                     self.__debug_message_event)
             return self
         except asyncio.TimeoutError:
