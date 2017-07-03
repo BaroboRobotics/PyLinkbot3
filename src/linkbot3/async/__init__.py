@@ -53,6 +53,13 @@ class RpcProxy():
         self._event_handlers = {}
         self.logger=logging.getLogger(logger_name)
 
+        # Add the connectEvent event handler
+        self.on('connectEvent', self._connect_event)
+
+    @asyncio.coroutine
+    def _connect_event(self, payload):
+        self.logger.info('Received connectEvent.')
+
     # Add a callback handler for Rpc events. For instance, for the daemon, one might do
     #    on("dongleEvent", coro)
     def on(self, name, coro):
@@ -134,6 +141,7 @@ class RpcProxy():
             request_id = rpc_reply.requestId
             fut = self._requests.pop(request_id)
             fut.set_result( rpc_reply )
+            self.logger.info('Handled rpc reply: {}'.format(request_id))
         except KeyError:
             self.logger.warning('Received spurious rpcReply with id: {}'.format(request_id))
         except:
