@@ -23,7 +23,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='daemon.proto',
   package='linkbot.daemon',
   syntax='proto2',
-  serialized_pb=_b('\n\x0c\x64\x61\x65mon.proto\x12\x0elinkbot.daemon\x1a\x0cnanopb.proto\x1a\x11\x63ommontypes.proto\x1a\x0brobot.proto\"<\n\x16getDaemonVersionString\x1a\x04\n\x02In\x1a\x1c\n\x03Out\x12\x15\n\x05value\x18\x01 \x01(\tB\x06\x92?\x03\x08\x80\x01\"2\n\x0egetDongleCount\x1a\x04\n\x02In\x1a\x1a\n\x03Out\x12\x13\n\x0b\x64ongleCount\x18\x01 \x01(\r\"p\n\x0c\x61\x64\x64RobotRefs\x1a\x31\n\x02In\x12+\n\tserialIds\x18\x01 \x03(\x0b\x32\x11.linkbot.SerialIdB\x05\x92?\x02\x10\x10\x1a-\n\x03Out\x12&\n\x06status\x18\x01 \x01(\x0e\x32\x16.linkbot.daemon.Status\"t\n\x10releaseRobotRefs\x1a\x31\n\x02In\x12+\n\tserialIds\x18\x01 \x03(\x0b\x32\x11.linkbot.SerialIdB\x05\x92?\x02\x10\x10\x1a-\n\x03Out\x12&\n\x06status\x18\x01 \x01(\x0e\x32\x16.linkbot.daemon.Status\"\xd9\x01\n\x08transmit\x1a\x9d\x01\n\x02In\x12\x38\n\x0f\x62roadcastMethod\x18\x01 \x01(\x0e\x32\x1f.linkbot.daemon.BroadcastMethod\x12.\n\x0c\x64\x65stinations\x18\x02 \x03(\x0b\x32\x11.linkbot.SerialIdB\x05\x92?\x02\x10\x08\x12-\n\x07payload\x18\x04 \x01(\x0b\x32\x1c.linkbot.robot.ClientToRobot\x1a-\n\x03Out\x12&\n\x06status\x18\x01 \x01(\x0e\x32\x16.linkbot.daemon.Status\"\xdb\x02\n\nRpcRequest\x12\x11\n\trequestId\x18\x01 \x01(\r\x12K\n\x16getDaemonVersionString\x18\x02 \x01(\x0b\x32).linkbot.daemon.getDaemonVersionString.InH\x00\x12;\n\x0egetDongleCount\x18\x03 \x01(\x0b\x32!.linkbot.daemon.getDongleCount.InH\x00\x12\x37\n\x0c\x61\x64\x64RobotRefs\x18\x04 \x01(\x0b\x32\x1f.linkbot.daemon.addRobotRefs.InH\x00\x12?\n\x10releaseRobotRefs\x18\x05 \x01(\x0b\x32#.linkbot.daemon.releaseRobotRefs.InH\x00\x12/\n\x08transmit\x18\x06 \x01(\x0b\x32\x1b.linkbot.daemon.transmit.InH\x00\x42\x05\n\x03\x61rg\"\xde\x02\n\x08RpcReply\x12\x11\n\trequestId\x18\x01 \x01(\r\x12L\n\x16getDaemonVersionString\x18\x02 \x01(\x0b\x32*.linkbot.daemon.getDaemonVersionString.OutH\x00\x12<\n\x0egetDongleCount\x18\x03 \x01(\x0b\x32\".linkbot.daemon.getDongleCount.OutH\x00\x12\x38\n\x0c\x61\x64\x64RobotRefs\x18\x04 \x01(\x0b\x32 .linkbot.daemon.addRobotRefs.OutH\x00\x12@\n\x10releaseRobotRefs\x18\x05 \x01(\x0b\x32$.linkbot.daemon.releaseRobotRefs.OutH\x00\x12\x30\n\x08transmit\x18\x06 \x01(\x0b\x32\x1c.linkbot.daemon.transmit.OutH\x00\x42\x05\n\x03\x61rg\"i\n\x13ReceiveTransmission\x12#\n\x08serialId\x18\x01 \x01(\x0b\x32\x11.linkbot.SerialId\x12-\n\x07payload\x18\x02 \x01(\x0b\x32\x1c.linkbot.robot.RobotToClient\"&\n\x0b\x44ongleEvent\x12\x17\n\x0f\x66irmwareVersion\x18\x02 \x01(\t\"I\n\x0e\x43lientToDaemon\x12\x30\n\nrpcRequest\x18\x01 \x01(\x0b\x32\x1a.linkbot.daemon.RpcRequestH\x00\x42\x05\n\x03\x61rg\"\xb1\x01\n\x0e\x44\x61\x65monToClient\x12,\n\x08rpcReply\x18\x01 \x01(\x0b\x32\x18.linkbot.daemon.RpcReplyH\x00\x12\x36\n\x07receive\x18\x02 \x01(\x0b\x32#.linkbot.daemon.ReceiveTransmissionH\x00\x12\x32\n\x0b\x64ongleEvent\x18\x03 \x01(\x0b\x32\x1b.linkbot.daemon.DongleEventH\x00\x42\x05\n\x03\x61rg*\xf3\x01\n\x06Status\x12\x06\n\x02OK\x10\x00\x12\x16\n\x12\x43\x41NNOT_OPEN_DONGLE\x10\x01\x12\x14\n\x10\x44ONGLE_NOT_FOUND\x10\x02\x12\x15\n\x11PORT_OUT_OF_RANGE\x10\x03\x12\x19\n\x15UNREGISTERED_SERIALID\x10\x05\x12\x14\n\x10INVALID_SERIALID\x10\x06\x12\x16\n\x12\x44\x41\x45MON_UNAVAILABLE\x10\x07\x12\x12\n\x0eSTRANGE_DONGLE\x10\x08\x12\x19\n\x15INCOMPATIBLE_FIRMWARE\x10\t\x12\x13\n\x0f\x42UFFER_OVERFLOW\x10\n\x12\x0f\n\x0bOTHER_ERROR\x10\x0b*K\n\x0f\x42roadcastMethod\x12\r\n\tBROADCAST\x10\x00\x12\x13\n\x0fMULTICAST_LOCAL\x10\x01\x12\x14\n\x10MULTICAST_GLOBAL\x10\x02')
+  serialized_pb=_b('\n\x0c\x64\x61\x65mon.proto\x12\x0elinkbot.daemon\x1a\x0cnanopb.proto\x1a\x11\x63ommontypes.proto\x1a\x0brobot.proto\"<\n\x16getDaemonVersionString\x1a\x04\n\x02In\x1a\x1c\n\x03Out\x12\x15\n\x05value\x18\x01 \x01(\tB\x06\x92?\x03\x08\x80\x01\"2\n\x0egetDongleCount\x1a\x04\n\x02In\x1a\x1a\n\x03Out\x12\x13\n\x0b\x64ongleCount\x18\x01 \x01(\r\"p\n\x0c\x61\x64\x64RobotRefs\x1a\x31\n\x02In\x12+\n\tserialIds\x18\x01 \x03(\x0b\x32\x11.linkbot.SerialIdB\x05\x92?\x02\x10\x10\x1a-\n\x03Out\x12&\n\x06status\x18\x01 \x01(\x0e\x32\x16.linkbot.daemon.Status\"t\n\x10releaseRobotRefs\x1a\x31\n\x02In\x12+\n\tserialIds\x18\x01 \x03(\x0b\x32\x11.linkbot.SerialIdB\x05\x92?\x02\x10\x10\x1a-\n\x03Out\x12&\n\x06status\x18\x01 \x01(\x0e\x32\x16.linkbot.daemon.Status\"\x96\x01\n\x08transmit\x1a[\n\x02In\x12&\n\x0b\x64\x65stination\x18\x01 \x01(\x0b\x32\x11.linkbot.SerialId\x12-\n\x07payload\x18\x02 \x01(\x0b\x32\x1c.linkbot.robot.ClientToRobot\x1a-\n\x03Out\x12&\n\x06status\x18\x01 \x01(\x0e\x32\x16.linkbot.daemon.Status\"\xeb\x01\n\x11transmitBroadcast\x1a\xa6\x01\n\x02In\x12\x38\n\x0f\x62roadcastMethod\x18\x01 \x01(\x0e\x32\x1f.linkbot.daemon.BroadcastMethod\x12.\n\x0c\x64\x65stinations\x18\x02 \x03(\x0b\x32\x11.linkbot.SerialIdB\x05\x92?\x02\x10\x08\x12\x36\n\x07payload\x18\x04 \x01(\x0b\x32%.linkbot.robot.ClientToRobotBroadcast\x1a-\n\x03Out\x12&\n\x06status\x18\x01 \x01(\x0e\x32\x16.linkbot.daemon.Status\"\xdb\x02\n\nRpcRequest\x12\x11\n\trequestId\x18\x01 \x01(\r\x12K\n\x16getDaemonVersionString\x18\x02 \x01(\x0b\x32).linkbot.daemon.getDaemonVersionString.InH\x00\x12;\n\x0egetDongleCount\x18\x03 \x01(\x0b\x32!.linkbot.daemon.getDongleCount.InH\x00\x12\x37\n\x0c\x61\x64\x64RobotRefs\x18\x04 \x01(\x0b\x32\x1f.linkbot.daemon.addRobotRefs.InH\x00\x12?\n\x10releaseRobotRefs\x18\x05 \x01(\x0b\x32#.linkbot.daemon.releaseRobotRefs.InH\x00\x12/\n\x08transmit\x18\x06 \x01(\x0b\x32\x1b.linkbot.daemon.transmit.InH\x00\x42\x05\n\x03\x61rg\"\xde\x02\n\x08RpcReply\x12\x11\n\trequestId\x18\x01 \x01(\r\x12L\n\x16getDaemonVersionString\x18\x02 \x01(\x0b\x32*.linkbot.daemon.getDaemonVersionString.OutH\x00\x12<\n\x0egetDongleCount\x18\x03 \x01(\x0b\x32\".linkbot.daemon.getDongleCount.OutH\x00\x12\x38\n\x0c\x61\x64\x64RobotRefs\x18\x04 \x01(\x0b\x32 .linkbot.daemon.addRobotRefs.OutH\x00\x12@\n\x10releaseRobotRefs\x18\x05 \x01(\x0b\x32$.linkbot.daemon.releaseRobotRefs.OutH\x00\x12\x30\n\x08transmit\x18\x06 \x01(\x0b\x32\x1c.linkbot.daemon.transmit.OutH\x00\x42\x05\n\x03\x61rg\"i\n\x13ReceiveTransmission\x12#\n\x08serialId\x18\x01 \x01(\x0b\x32\x11.linkbot.SerialId\x12-\n\x07payload\x18\x02 \x01(\x0b\x32\x1c.linkbot.robot.RobotToClient\".\n\x0b\x44ongleEvent\x12\x1f\n\x0f\x66irmwareVersion\x18\x01 \x01(\tB\x06\x92?\x03\x08\x80\x01\"R\n\nRobotEvent\x12#\n\x08serialId\x18\x01 \x01(\x0b\x32\x11.linkbot.SerialId\x12\x1f\n\x0f\x66irmwareVersion\x18\x02 \x01(\tB\x06\x92?\x03\x08\x80\x01\"I\n\x0e\x43lientToDaemon\x12\x30\n\nrpcRequest\x18\x01 \x01(\x0b\x32\x1a.linkbot.daemon.RpcRequestH\x00\x42\x05\n\x03\x61rg\"\xe3\x01\n\x0e\x44\x61\x65monToClient\x12,\n\x08rpcReply\x18\x01 \x01(\x0b\x32\x18.linkbot.daemon.RpcReplyH\x00\x12\x36\n\x07receive\x18\x02 \x01(\x0b\x32#.linkbot.daemon.ReceiveTransmissionH\x00\x12\x32\n\x0b\x64ongleEvent\x18\x03 \x01(\x0b\x32\x1b.linkbot.daemon.DongleEventH\x00\x12\x30\n\nrobotEvent\x18\x04 \x01(\x0b\x32\x1a.linkbot.daemon.RobotEventH\x00\x42\x05\n\x03\x61rg*\xf3\x01\n\x06Status\x12\x06\n\x02OK\x10\x00\x12\x16\n\x12\x43\x41NNOT_OPEN_DONGLE\x10\x01\x12\x14\n\x10\x44ONGLE_NOT_FOUND\x10\x02\x12\x15\n\x11PORT_OUT_OF_RANGE\x10\x03\x12\x19\n\x15UNREGISTERED_SERIALID\x10\x05\x12\x14\n\x10INVALID_SERIALID\x10\x06\x12\x16\n\x12\x44\x41\x45MON_UNAVAILABLE\x10\x07\x12\x12\n\x0eSTRANGE_DONGLE\x10\x08\x12\x19\n\x15INCOMPATIBLE_FIRMWARE\x10\t\x12\x13\n\x0f\x42UFFER_OVERFLOW\x10\n\x12\x0f\n\x0bOTHER_ERROR\x10\x0b*K\n\x0f\x42roadcastMethod\x12\r\n\tBROADCAST\x10\x00\x12\x13\n\x0fMULTICAST_LOCAL\x10\x01\x12\x14\n\x10MULTICAST_GLOBAL\x10\x02')
   ,
   dependencies=[nanopb__pb2.DESCRIPTOR,commontypes__pb2.DESCRIPTOR,robot__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -81,8 +81,8 @@ _STATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1750,
-  serialized_end=1993,
+  serialized_start=2063,
+  serialized_end=2306,
 )
 _sym_db.RegisterEnumDescriptor(_STATUS)
 
@@ -108,8 +108,8 @@ _BROADCASTMETHOD = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1995,
-  serialized_end=2070,
+  serialized_start=2308,
+  serialized_end=2383,
 )
 _sym_db.RegisterEnumDescriptor(_BROADCASTMETHOD)
 
@@ -461,22 +461,15 @@ _TRANSMIT_IN = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='broadcastMethod', full_name='linkbot.daemon.transmit.In.broadcastMethod', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
+      name='destination', full_name='linkbot.daemon.transmit.In.destination', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='destinations', full_name='linkbot.daemon.transmit.In.destinations', index=1,
-      number=2, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\002\020\010'))),
-    _descriptor.FieldDescriptor(
-      name='payload', full_name='linkbot.daemon.transmit.In.payload', index=2,
-      number=4, type=11, cpp_type=10, label=1,
+      name='payload', full_name='linkbot.daemon.transmit.In.payload', index=1,
+      number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -493,8 +486,8 @@ _TRANSMIT_IN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=438,
-  serialized_end=595,
+  serialized_start=437,
+  serialized_end=528,
 )
 
 _TRANSMIT_OUT = _descriptor.Descriptor(
@@ -547,7 +540,105 @@ _TRANSMIT = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=425,
-  serialized_end=642,
+  serialized_end=575,
+)
+
+
+_TRANSMITBROADCAST_IN = _descriptor.Descriptor(
+  name='In',
+  full_name='linkbot.daemon.transmitBroadcast.In',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='broadcastMethod', full_name='linkbot.daemon.transmitBroadcast.In.broadcastMethod', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='destinations', full_name='linkbot.daemon.transmitBroadcast.In.destinations', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\002\020\010'))),
+    _descriptor.FieldDescriptor(
+      name='payload', full_name='linkbot.daemon.transmitBroadcast.In.payload', index=2,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=600,
+  serialized_end=766,
+)
+
+_TRANSMITBROADCAST_OUT = _descriptor.Descriptor(
+  name='Out',
+  full_name='linkbot.daemon.transmitBroadcast.Out',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='status', full_name='linkbot.daemon.transmitBroadcast.Out.status', index=0,
+      number=1, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=259,
+  serialized_end=304,
+)
+
+_TRANSMITBROADCAST = _descriptor.Descriptor(
+  name='transmitBroadcast',
+  full_name='linkbot.daemon.transmitBroadcast',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[_TRANSMITBROADCAST_IN, _TRANSMITBROADCAST_OUT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=578,
+  serialized_end=813,
 )
 
 
@@ -615,8 +706,8 @@ _RPCREQUEST = _descriptor.Descriptor(
       name='arg', full_name='linkbot.daemon.RpcRequest.arg',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=645,
-  serialized_end=992,
+  serialized_start=816,
+  serialized_end=1163,
 )
 
 
@@ -684,8 +775,8 @@ _RPCREPLY = _descriptor.Descriptor(
       name='arg', full_name='linkbot.daemon.RpcReply.arg',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=995,
-  serialized_end=1345,
+  serialized_start=1166,
+  serialized_end=1516,
 )
 
 
@@ -722,8 +813,8 @@ _RECEIVETRANSMISSION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1347,
-  serialized_end=1452,
+  serialized_start=1518,
+  serialized_end=1623,
 )
 
 
@@ -736,11 +827,11 @@ _DONGLEEVENT = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='firmwareVersion', full_name='linkbot.daemon.DongleEvent.firmwareVersion', index=0,
-      number=2, type=9, cpp_type=9, label=1,
+      number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))),
   ],
   extensions=[
   ],
@@ -753,8 +844,46 @@ _DONGLEEVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1454,
-  serialized_end=1492,
+  serialized_start=1625,
+  serialized_end=1671,
+)
+
+
+_ROBOTEVENT = _descriptor.Descriptor(
+  name='RobotEvent',
+  full_name='linkbot.daemon.RobotEvent',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='serialId', full_name='linkbot.daemon.RobotEvent.serialId', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='firmwareVersion', full_name='linkbot.daemon.RobotEvent.firmwareVersion', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1673,
+  serialized_end=1755,
 )
 
 
@@ -787,8 +916,8 @@ _CLIENTTODAEMON = _descriptor.Descriptor(
       name='arg', full_name='linkbot.daemon.ClientToDaemon.arg',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=1494,
-  serialized_end=1567,
+  serialized_start=1757,
+  serialized_end=1830,
 )
 
 
@@ -820,6 +949,13 @@ _DAEMONTOCLIENT = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='robotEvent', full_name='linkbot.daemon.DaemonToClient.robotEvent', index=3,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -835,8 +971,8 @@ _DAEMONTOCLIENT = _descriptor.Descriptor(
       name='arg', full_name='linkbot.daemon.DaemonToClient.arg',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=1570,
-  serialized_end=1747,
+  serialized_start=1833,
+  serialized_end=2060,
 )
 
 _GETDAEMONVERSIONSTRING_IN.containing_type = _GETDAEMONVERSIONSTRING
@@ -851,12 +987,17 @@ _RELEASEROBOTREFS_IN.fields_by_name['serialIds'].message_type = commontypes__pb2
 _RELEASEROBOTREFS_IN.containing_type = _RELEASEROBOTREFS
 _RELEASEROBOTREFS_OUT.fields_by_name['status'].enum_type = _STATUS
 _RELEASEROBOTREFS_OUT.containing_type = _RELEASEROBOTREFS
-_TRANSMIT_IN.fields_by_name['broadcastMethod'].enum_type = _BROADCASTMETHOD
-_TRANSMIT_IN.fields_by_name['destinations'].message_type = commontypes__pb2._SERIALID
+_TRANSMIT_IN.fields_by_name['destination'].message_type = commontypes__pb2._SERIALID
 _TRANSMIT_IN.fields_by_name['payload'].message_type = robot__pb2._CLIENTTOROBOT
 _TRANSMIT_IN.containing_type = _TRANSMIT
 _TRANSMIT_OUT.fields_by_name['status'].enum_type = _STATUS
 _TRANSMIT_OUT.containing_type = _TRANSMIT
+_TRANSMITBROADCAST_IN.fields_by_name['broadcastMethod'].enum_type = _BROADCASTMETHOD
+_TRANSMITBROADCAST_IN.fields_by_name['destinations'].message_type = commontypes__pb2._SERIALID
+_TRANSMITBROADCAST_IN.fields_by_name['payload'].message_type = robot__pb2._CLIENTTOROBOTBROADCAST
+_TRANSMITBROADCAST_IN.containing_type = _TRANSMITBROADCAST
+_TRANSMITBROADCAST_OUT.fields_by_name['status'].enum_type = _STATUS
+_TRANSMITBROADCAST_OUT.containing_type = _TRANSMITBROADCAST
 _RPCREQUEST.fields_by_name['getDaemonVersionString'].message_type = _GETDAEMONVERSIONSTRING_IN
 _RPCREQUEST.fields_by_name['getDongleCount'].message_type = _GETDONGLECOUNT_IN
 _RPCREQUEST.fields_by_name['addRobotRefs'].message_type = _ADDROBOTREFS_IN
@@ -899,6 +1040,7 @@ _RPCREPLY.oneofs_by_name['arg'].fields.append(
 _RPCREPLY.fields_by_name['transmit'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
 _RECEIVETRANSMISSION.fields_by_name['serialId'].message_type = commontypes__pb2._SERIALID
 _RECEIVETRANSMISSION.fields_by_name['payload'].message_type = robot__pb2._ROBOTTOCLIENT
+_ROBOTEVENT.fields_by_name['serialId'].message_type = commontypes__pb2._SERIALID
 _CLIENTTODAEMON.fields_by_name['rpcRequest'].message_type = _RPCREQUEST
 _CLIENTTODAEMON.oneofs_by_name['arg'].fields.append(
   _CLIENTTODAEMON.fields_by_name['rpcRequest'])
@@ -906,6 +1048,7 @@ _CLIENTTODAEMON.fields_by_name['rpcRequest'].containing_oneof = _CLIENTTODAEMON.
 _DAEMONTOCLIENT.fields_by_name['rpcReply'].message_type = _RPCREPLY
 _DAEMONTOCLIENT.fields_by_name['receive'].message_type = _RECEIVETRANSMISSION
 _DAEMONTOCLIENT.fields_by_name['dongleEvent'].message_type = _DONGLEEVENT
+_DAEMONTOCLIENT.fields_by_name['robotEvent'].message_type = _ROBOTEVENT
 _DAEMONTOCLIENT.oneofs_by_name['arg'].fields.append(
   _DAEMONTOCLIENT.fields_by_name['rpcReply'])
 _DAEMONTOCLIENT.fields_by_name['rpcReply'].containing_oneof = _DAEMONTOCLIENT.oneofs_by_name['arg']
@@ -915,15 +1058,20 @@ _DAEMONTOCLIENT.fields_by_name['receive'].containing_oneof = _DAEMONTOCLIENT.one
 _DAEMONTOCLIENT.oneofs_by_name['arg'].fields.append(
   _DAEMONTOCLIENT.fields_by_name['dongleEvent'])
 _DAEMONTOCLIENT.fields_by_name['dongleEvent'].containing_oneof = _DAEMONTOCLIENT.oneofs_by_name['arg']
+_DAEMONTOCLIENT.oneofs_by_name['arg'].fields.append(
+  _DAEMONTOCLIENT.fields_by_name['robotEvent'])
+_DAEMONTOCLIENT.fields_by_name['robotEvent'].containing_oneof = _DAEMONTOCLIENT.oneofs_by_name['arg']
 DESCRIPTOR.message_types_by_name['getDaemonVersionString'] = _GETDAEMONVERSIONSTRING
 DESCRIPTOR.message_types_by_name['getDongleCount'] = _GETDONGLECOUNT
 DESCRIPTOR.message_types_by_name['addRobotRefs'] = _ADDROBOTREFS
 DESCRIPTOR.message_types_by_name['releaseRobotRefs'] = _RELEASEROBOTREFS
 DESCRIPTOR.message_types_by_name['transmit'] = _TRANSMIT
+DESCRIPTOR.message_types_by_name['transmitBroadcast'] = _TRANSMITBROADCAST
 DESCRIPTOR.message_types_by_name['RpcRequest'] = _RPCREQUEST
 DESCRIPTOR.message_types_by_name['RpcReply'] = _RPCREPLY
 DESCRIPTOR.message_types_by_name['ReceiveTransmission'] = _RECEIVETRANSMISSION
 DESCRIPTOR.message_types_by_name['DongleEvent'] = _DONGLEEVENT
+DESCRIPTOR.message_types_by_name['RobotEvent'] = _ROBOTEVENT
 DESCRIPTOR.message_types_by_name['ClientToDaemon'] = _CLIENTTODAEMON
 DESCRIPTOR.message_types_by_name['DaemonToClient'] = _DAEMONTOCLIENT
 DESCRIPTOR.enum_types_by_name['Status'] = _STATUS
@@ -1044,6 +1192,29 @@ _sym_db.RegisterMessage(transmit)
 _sym_db.RegisterMessage(transmit.In)
 _sym_db.RegisterMessage(transmit.Out)
 
+transmitBroadcast = _reflection.GeneratedProtocolMessageType('transmitBroadcast', (_message.Message,), dict(
+
+  In = _reflection.GeneratedProtocolMessageType('In', (_message.Message,), dict(
+    DESCRIPTOR = _TRANSMITBROADCAST_IN,
+    __module__ = 'daemon_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.daemon.transmitBroadcast.In)
+    ))
+  ,
+
+  Out = _reflection.GeneratedProtocolMessageType('Out', (_message.Message,), dict(
+    DESCRIPTOR = _TRANSMITBROADCAST_OUT,
+    __module__ = 'daemon_pb2'
+    # @@protoc_insertion_point(class_scope:linkbot.daemon.transmitBroadcast.Out)
+    ))
+  ,
+  DESCRIPTOR = _TRANSMITBROADCAST,
+  __module__ = 'daemon_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.daemon.transmitBroadcast)
+  ))
+_sym_db.RegisterMessage(transmitBroadcast)
+_sym_db.RegisterMessage(transmitBroadcast.In)
+_sym_db.RegisterMessage(transmitBroadcast.Out)
+
 RpcRequest = _reflection.GeneratedProtocolMessageType('RpcRequest', (_message.Message,), dict(
   DESCRIPTOR = _RPCREQUEST,
   __module__ = 'daemon_pb2'
@@ -1072,6 +1243,13 @@ DongleEvent = _reflection.GeneratedProtocolMessageType('DongleEvent', (_message.
   ))
 _sym_db.RegisterMessage(DongleEvent)
 
+RobotEvent = _reflection.GeneratedProtocolMessageType('RobotEvent', (_message.Message,), dict(
+  DESCRIPTOR = _ROBOTEVENT,
+  __module__ = 'daemon_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.daemon.RobotEvent)
+  ))
+_sym_db.RegisterMessage(RobotEvent)
+
 ClientToDaemon = _reflection.GeneratedProtocolMessageType('ClientToDaemon', (_message.Message,), dict(
   DESCRIPTOR = _CLIENTTODAEMON,
   __module__ = 'daemon_pb2'
@@ -1093,6 +1271,10 @@ _ADDROBOTREFS_IN.fields_by_name['serialIds'].has_options = True
 _ADDROBOTREFS_IN.fields_by_name['serialIds']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\002\020\020'))
 _RELEASEROBOTREFS_IN.fields_by_name['serialIds'].has_options = True
 _RELEASEROBOTREFS_IN.fields_by_name['serialIds']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\002\020\020'))
-_TRANSMIT_IN.fields_by_name['destinations'].has_options = True
-_TRANSMIT_IN.fields_by_name['destinations']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\002\020\010'))
+_TRANSMITBROADCAST_IN.fields_by_name['destinations'].has_options = True
+_TRANSMITBROADCAST_IN.fields_by_name['destinations']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\002\020\010'))
+_DONGLEEVENT.fields_by_name['firmwareVersion'].has_options = True
+_DONGLEEVENT.fields_by_name['firmwareVersion']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))
+_ROBOTEVENT.fields_by_name['firmwareVersion'].has_options = True
+_ROBOTEVENT.fields_by_name['firmwareVersion']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))
 # @@protoc_insertion_point(module_scope)

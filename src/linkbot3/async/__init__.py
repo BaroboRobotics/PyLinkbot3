@@ -6,6 +6,7 @@ import os
 import ribbonbridge as rb
 import sfp
 import sys
+import traceback
 import websockets
 
 from . import peripherals
@@ -72,28 +73,31 @@ class RpcProxy():
         '''
         Handle a call.
         '''
-        if not pb2_obj:
-            pb2_obj = self._members[procedure_name].In()
-            for k,v in kwargs.items():
-                setattr(pb2_obj, k, v)
-        fut = asyncio.Future()
-        self._requests[self._request_id] = fut
-        
-        user_fut = asyncio.Future()
-        util.chain_futures(fut, user_fut, 
-                functools.partial(
-                    self._convert_rpcReply,
-                    procedure_name)
-                )
+        try:
+            if not pb2_obj:
+                pb2_obj = self._members[procedure_name].In()
+                for k,v in kwargs.items():
+                    setattr(pb2_obj, k, v)
+            fut = asyncio.Future()
+            self._requests[self._request_id] = fut
+            
+            user_fut = asyncio.Future()
+            util.chain_futures(fut, user_fut, 
+                    functools.partial(
+                        self._convert_rpcReply,
+                        procedure_name)
+                    )
 
-        # Serialize and send the message to the RPC server
-        #result = yield from self._rpc.fire(procedure_name, pb2_obj.SerializeToString())
-        self.logger.info('Scheduling call to: {}'.format(procedure_name))
-        b = self.serialize(procedure_name, pb2_obj, self._request_id)
-        yield from self.emit_to_server(b)
-        self._request_id += 1
+            # Serialize and send the message to the RPC server
+            #result = yield from self._rpc.fire(procedure_name, pb2_obj.SerializeToString())
+            self.logger.info('Scheduling call to: {}'.format(procedure_name))
+            b = self.serialize(procedure_name, pb2_obj, self._request_id)
+            yield from self.emit_to_server(b)
+            self._request_id += 1
 
-        return user_fut
+            return user_fut
+        except Exception as e:
+            logging.warning(traceback.format_exc())
 
     def _convert_rpcReply(self, rpc_name, rpcReply):
         # This function should turn rpcReply objects into an instantiation of
@@ -105,7 +109,7 @@ class RpcProxy():
 
     @asyncio.coroutine
     def deliver(self, server_to_proxy):
-        self.logger.warning('moop')
+        self.logger.info('RpcProxy.deliver()')
         try:
             method = server_to_proxy.WhichOneof('arg')
         except Exception as e:
@@ -126,13 +130,14 @@ class RpcProxy():
 
     def _handle_rpc_reply(self, rpc_reply):
         # If we receive rpcReply objects from the server, pass them to this function for processing.
-        self.logger.info('RpcProxy.deliver()')
         try:
             request_id = rpc_reply.requestId
             fut = self._requests.pop(request_id)
             fut.set_result( rpc_reply )
         except KeyError:
             self.logger.warning('Received spurious rpcReply with id: {}'.format(request_id))
+        except:
+            self.logger.warning(traceback.print_exc())
 
     def serialize(self, method_name, pb_in, request_id):
         '''
@@ -329,11 +334,14 @@ class _AsyncLinkbot(RpcProxy):
     def emit_to_server(self, client_to_robot):
         self.__log('emit_to_server')
         transmit = self.__daemon.rb_get_args_obj('transmit')
-        serial_id = transmit.destinations.add()
-        serial_id.value = self._serial_id
+        transmit.destination.value = self._serial_id
         transmit.payload.CopyFrom(client_to_robot)
         self.__log('robot emitting "transmit" message to daemon...')
-        fut = yield from self.__daemon.transmit( transmit )
+        try:
+            fut = yield from self.__daemon.transmit( transmit )
+        except:
+            self.__log(traceback.print_exc())
+        self.__log('robot emitting "transmit" message to daemon...done')
         yield from fut
 
     @asyncio.coroutine

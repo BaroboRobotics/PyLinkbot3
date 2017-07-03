@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='robot.proto',
   package='linkbot.robot',
   syntax='proto2',
-  serialized_pb=_b('\n\x0brobot.proto\x12\rlinkbot.robot\x1a\x0cnanopb.proto\"D\n\x14getAccelerometerData\x1a\x04\n\x02In\x1a&\n\x03Out\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01z\x18\x03 \x01(\x02\"+\n\x11getBatteryVoltage\x1a\x04\n\x02In\x1a\x10\n\x03Out\x12\t\n\x01v\x18\x01 \x01(\x02\"1\n\tgetAdcRaw\x1a\x04\n\x02In\x1a\x1e\n\x03Out\x12\x17\n\x06values\x18\x01 \x03(\rB\x07\x10\x01\x92?\x02\x10 \"+\n\x0egetButtonState\x1a\x04\n\x02In\x1a\x13\n\x03Out\x12\x0c\n\x04mask\x18\x01 \x01(\r\"0\n\x12getBuzzerFrequency\x1a\x04\n\x02In\x1a\x14\n\x03Out\x12\r\n\x05value\x18\x01 \x01(\x02\"K\n\x10getEncoderValues\x1a\x04\n\x02In\x1a\x31\n\x03Out\x12\x11\n\ttimestamp\x18\x01 \x01(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \">\n\x18getFirmwareVersionString\x1a\x04\n\x02In\x1a\x1c\n\x03Out\x12\x15\n\x05value\x18\x01 \x01(\tB\x06\x92?\x03\x08\x80\x01\"F\n\rgetFormFactor\x1a\x04\n\x02In\x1a/\n\x03Out\x12(\n\x05value\x18\x01 \x01(\x0e\x32\x19.linkbot.robot.FormFactor\"d\n\x0egetJointStates\x1a\x04\n\x02In\x1aL\n\x03Out\x12\x11\n\ttimestamp\x18\x01 \x01(\r\x12\x32\n\x06values\x18\x02 \x03(\x0e\x32\x19.linkbot.robot.JointStateB\x07\x10\x01\x92?\x02\x10 \")\n\x0bgetLedColor\x1a\x04\n\x02In\x1a\x14\n\x03Out\x12\r\n\x05value\x18\x01 \x01(\r\"?\n\x17getMotorControllerOmega\x1a\x04\n\x02In\x1a\x1e\n\x03Out\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"@\n\x18getMotorControllerAlphaI\x1a\x04\n\x02In\x1a\x1e\n\x03Out\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"@\n\x18getMotorControllerAlphaF\x1a\x04\n\x02In\x1a\x1e\n\x03Out\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"J\n\"getMotorControllerProportionalGain\x1a\x04\n\x02In\x1a\x1e\n\x03Out\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"H\n getMotorControllerIntegratorGain\x1a\x04\n\x02In\x1a\x1e\n\x03Out\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"H\n getMotorControllerDerivativeGain\x1a\x04\n\x02In\x1a\x1e\n\x03Out\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"I\n!getMotorControllerSafetyThreshold\x1a\x04\n\x02In\x1a\x1e\n\x03Out\x12\x17\n\x06values\x18\x01 \x03(\rB\x07\x10\x01\x92?\x02\x10 \"E\n\x1dgetMotorControllerSafetyAngle\x1a\x04\n\x02In\x1a\x1e\n\x03Out\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"M\n\x17setMotorControllerOmega\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x05\n\x03Out\"N\n\x18setMotorControllerAlphaI\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x05\n\x03Out\"N\n\x18setMotorControllerAlphaF\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x05\n\x03Out\"X\n\"setMotorControllerProportionalGain\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x05\n\x03Out\"V\n setMotorControllerIntegratorGain\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x05\n\x03Out\"V\n setMotorControllerDerivativeGain\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x05\n\x03Out\"W\n!setMotorControllerSafetyThreshold\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x12\x17\n\x06values\x18\x02 \x03(\rB\x07\x10\x01\x92?\x02\x10 \x1a\x05\n\x03Out\"S\n\x1dsetMotorControllerSafetyAngle\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x05\n\x03Out\"N\n\x14setResetOnDisconnect\x1a/\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x12\x1b\n\x13peripheralResetMask\x18\x02 \x01(\r\x1a\x05\n\x03Out\"\x1f\n\x10resetEncoderRevs\x1a\x04\n\x02In\x1a\x05\n\x03Out\"0\n\x12setBuzzerFrequency\x1a\x13\n\x02In\x12\r\n\x05value\x18\x01 \x01(\x02\x1a\x05\n\x03Out\")\n\x0bsetLedColor\x1a\x13\n\x02In\x12\r\n\x05value\x18\x01 \x01(\r\x1a\x05\n\x03Out\"!\n\x04stop\x1a\x12\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x1a\x05\n\x03Out\"\xbe\x02\n\x04Goal\x12&\n\x04type\x18\x01 \x01(\x0e\x32\x18.linkbot.robot.Goal.Type\x12\x0c\n\x04goal\x18\x02 \x01(\x02\x12\x32\n\ncontroller\x18\x03 \x01(\x0e\x32\x1e.linkbot.robot.Goal.Controller\x12\x0f\n\x07timeout\x18\x04 \x01(\x02\x12\x30\n\rmodeOnTimeout\x18\x05 \x01(\x0e\x32\x19.linkbot.robot.JointState\"0\n\x04Type\x12\x0c\n\x08\x41\x42SOLUTE\x10\x01\x12\x0c\n\x08RELATIVE\x10\x02\x12\x0c\n\x08INFINITE\x10\x03\"W\n\nController\x12\x07\n\x03PID\x10\x01\x12\x0c\n\x08\x43ONSTVEL\x10\x02\x12\n\n\x06SMOOTH\x10\x03\x12\t\n\x05\x41\x43\x43\x45L\x10\x04\x12\r\n\tCYCLOIDAL\x10\x05\x12\x0c\n\x08HARMONIC\x10\x06\"\x97\x01\n\x04move\x1a\x87\x01\n\x02In\x12)\n\x0cmotorOneGoal\x18\x01 \x01(\x0b\x32\x13.linkbot.robot.Goal\x12)\n\x0cmotorTwoGoal\x18\x02 \x01(\x0b\x32\x13.linkbot.robot.Goal\x12+\n\x0emotorThreeGoal\x18\x03 \x01(\x0b\x32\x13.linkbot.robot.Goal\x1a\x05\n\x03Out\"L\n\x18\x65nableAccelerometerEvent\x1a)\n\x02In\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\x12\x13\n\x0bgranularity\x18\x02 \x01(\x02\x1a\x05\n\x03Out\"0\n\x11\x65nableButtonEvent\x1a\x14\n\x02In\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\x1a\x05\n\x03Out\"\xaa\x02\n\x12\x65nableEncoderEvent\x1a\x8c\x02\n\x02In\x12\x44\n\nencoderOne\x18\x01 \x01(\x0b\x32\x30.linkbot.robot.enableEncoderEvent.In.SignalState\x12\x44\n\nencoderTwo\x18\x02 \x01(\x0b\x32\x30.linkbot.robot.enableEncoderEvent.In.SignalState\x12\x46\n\x0c\x65ncoderThree\x18\x03 \x01(\x0b\x32\x30.linkbot.robot.enableEncoderEvent.In.SignalState\x1a\x32\n\x0bSignalState\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\x12\x13\n\x0bgranularity\x18\x02 \x01(\x02\x1a\x05\n\x03Out\"/\n\x10\x65nableJointEvent\x1a\x14\n\x02In\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\x1a\x05\n\x03Out\"A\n\x0bwriteEeprom\x1a+\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\r\x12\x14\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x42\x06\x92?\x03\x08\x80\x01\x1a\x05\n\x03Out\"N\n\nreadEeprom\x1a#\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\r\x12\x0c\n\x04size\x18\x02 \x01(\r\x1a\x1b\n\x03Out\x12\x14\n\x04\x64\x61ta\x18\x01 \x01(\x0c\x42\x06\x92?\x03\x08\x80\x01\">\n\x08writeTwi\x1a+\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\r\x12\x14\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x42\x06\x92?\x03\x08\x80\x01\x1a\x05\n\x03Out\"O\n\x07readTwi\x1a\'\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\r\x12\x10\n\x08recvsize\x18\x02 \x01(\r\x1a\x1b\n\x03Out\x12\x14\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x42\x06\x92?\x03\x08\x80\x01\"j\n\x0cwriteReadTwi\x1a=\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\r\x12\x10\n\x08recvsize\x18\x02 \x01(\r\x12\x14\n\x04\x64\x61ta\x18\x03 \x01(\x0c\x42\x06\x92?\x03\x08\x80\x01\x1a\x1b\n\x03Out\x12\x14\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x42\x06\x92?\x03\x08\x80\x01\"\x15\n\x06reboot\x1a\x04\n\x02In\x1a\x05\n\x03Out\"\xce\x17\n\nRpcRequest\x12\x11\n\trequestId\x18\x01 \x01(\r\x12N\n\x18getFirmwareVersionString\x18\x10 \x01(\x0b\x32*.linkbot.robot.getFirmwareVersionString.InH\x00\x12\x38\n\rgetFormFactor\x18\x11 \x01(\x0b\x32\x1f.linkbot.robot.getFormFactor.InH\x00\x12\x30\n\tgetAdcRaw\x18\x12 \x01(\x0b\x32\x1b.linkbot.robot.getAdcRaw.InH\x00\x12@\n\x11getBatteryVoltage\x18\x13 \x01(\x0b\x32#.linkbot.robot.getBatteryVoltage.InH\x00\x12\x46\n\x14getAccelerometerData\x18\x14 \x01(\x0b\x32&.linkbot.robot.getAccelerometerData.InH\x00\x12:\n\x0egetButtonState\x18\x15 \x01(\x0b\x32 .linkbot.robot.getButtonState.InH\x00\x12>\n\x10getEncoderValues\x18\x16 \x01(\x0b\x32\".linkbot.robot.getEncoderValues.InH\x00\x12:\n\x0egetJointStates\x18\x17 \x01(\x0b\x32 .linkbot.robot.getJointStates.InH\x00\x12N\n\x18\x65nableAccelerometerEvent\x18\x18 \x01(\x0b\x32*.linkbot.robot.enableAccelerometerEvent.InH\x00\x12@\n\x11\x65nableButtonEvent\x18\x19 \x01(\x0b\x32#.linkbot.robot.enableButtonEvent.InH\x00\x12\x42\n\x12\x65nableEncoderEvent\x18\x1a \x01(\x0b\x32$.linkbot.robot.enableEncoderEvent.InH\x00\x12>\n\x10\x65nableJointEvent\x18\x1b \x01(\x0b\x32\".linkbot.robot.enableJointEvent.InH\x00\x12\x42\n\x12getBuzzerFrequency\x18\x02 \x01(\x0b\x32$.linkbot.robot.getBuzzerFrequency.InH\x00\x12\x34\n\x0bgetLedColor\x18\x03 \x01(\x0b\x32\x1d.linkbot.robot.getLedColor.InH\x00\x12L\n\x17getMotorControllerOmega\x18\x1c \x01(\x0b\x32).linkbot.robot.getMotorControllerOmega.InH\x00\x12N\n\x18getMotorControllerAlphaI\x18\x1d \x01(\x0b\x32*.linkbot.robot.getMotorControllerAlphaI.InH\x00\x12N\n\x18getMotorControllerAlphaF\x18\x1e \x01(\x0b\x32*.linkbot.robot.getMotorControllerAlphaF.InH\x00\x12\x62\n\"getMotorControllerProportionalGain\x18\x1f \x01(\x0b\x32\x34.linkbot.robot.getMotorControllerProportionalGain.InH\x00\x12^\n getMotorControllerIntegratorGain\x18  \x01(\x0b\x32\x32.linkbot.robot.getMotorControllerIntegratorGain.InH\x00\x12^\n getMotorControllerDerivativeGain\x18! \x01(\x0b\x32\x32.linkbot.robot.getMotorControllerDerivativeGain.InH\x00\x12`\n!getMotorControllerSafetyThreshold\x18\" \x01(\x0b\x32\x33.linkbot.robot.getMotorControllerSafetyThreshold.InH\x00\x12X\n\x1dgetMotorControllerSafetyAngle\x18# \x01(\x0b\x32/.linkbot.robot.getMotorControllerSafetyAngle.InH\x00\x12\x42\n\x12setBuzzerFrequency\x18\x04 \x01(\x0b\x32$.linkbot.robot.setBuzzerFrequency.InH\x00\x12\x34\n\x0bsetLedColor\x18\x05 \x01(\x0b\x32\x1d.linkbot.robot.setLedColor.InH\x00\x12L\n\x17setMotorControllerOmega\x18$ \x01(\x0b\x32).linkbot.robot.setMotorControllerOmega.InH\x00\x12N\n\x18setMotorControllerAlphaI\x18% \x01(\x0b\x32*.linkbot.robot.setMotorControllerAlphaI.InH\x00\x12N\n\x18setMotorControllerAlphaF\x18& \x01(\x0b\x32*.linkbot.robot.setMotorControllerAlphaF.InH\x00\x12\x62\n\"setMotorControllerProportionalGain\x18\' \x01(\x0b\x32\x34.linkbot.robot.setMotorControllerProportionalGain.InH\x00\x12^\n setMotorControllerIntegratorGain\x18( \x01(\x0b\x32\x32.linkbot.robot.setMotorControllerIntegratorGain.InH\x00\x12^\n setMotorControllerDerivativeGain\x18) \x01(\x0b\x32\x32.linkbot.robot.setMotorControllerDerivativeGain.InH\x00\x12`\n!setMotorControllerSafetyThreshold\x18* \x01(\x0b\x32\x33.linkbot.robot.setMotorControllerSafetyThreshold.InH\x00\x12X\n\x1dsetMotorControllerSafetyAngle\x18+ \x01(\x0b\x32/.linkbot.robot.setMotorControllerSafetyAngle.InH\x00\x12\x46\n\x14setResetOnDisconnect\x18\x35 \x01(\x0b\x32&.linkbot.robot.setResetOnDisconnect.InH\x00\x12>\n\x10resetEncoderRevs\x18, \x01(\x0b\x32\".linkbot.robot.resetEncoderRevs.InH\x00\x12&\n\x04move\x18- \x01(\x0b\x32\x16.linkbot.robot.move.InH\x00\x12&\n\x04stop\x18. \x01(\x0b\x32\x16.linkbot.robot.stop.InH\x00\x12*\n\x06reboot\x18/ \x01(\x0b\x32\x18.linkbot.robot.reboot.InH\x00\x12\x34\n\x0bwriteEeprom\x18\x30 \x01(\x0b\x32\x1d.linkbot.robot.writeEeprom.InH\x00\x12\x32\n\nreadEeprom\x18\x31 \x01(\x0b\x32\x1c.linkbot.robot.readEeprom.InH\x00\x12.\n\x08writeTwi\x18\x32 \x01(\x0b\x32\x1a.linkbot.robot.writeTwi.InH\x00\x12,\n\x07readTwi\x18\x33 \x01(\x0b\x32\x19.linkbot.robot.readTwi.InH\x00\x12\x36\n\x0cwriteReadTwi\x18\x34 \x01(\x0b\x32\x1e.linkbot.robot.writeReadTwi.InH\x00\x42\x05\n\x03\x61rg\"\xf6\x17\n\x08RpcReply\x12\x11\n\trequestId\x18\x01 \x01(\r\x12O\n\x18getFirmwareVersionString\x18\x10 \x01(\x0b\x32+.linkbot.robot.getFirmwareVersionString.OutH\x00\x12\x39\n\rgetFormFactor\x18\x11 \x01(\x0b\x32 .linkbot.robot.getFormFactor.OutH\x00\x12\x31\n\tgetAdcRaw\x18\x12 \x01(\x0b\x32\x1c.linkbot.robot.getAdcRaw.OutH\x00\x12\x41\n\x11getBatteryVoltage\x18\x13 \x01(\x0b\x32$.linkbot.robot.getBatteryVoltage.OutH\x00\x12G\n\x14getAccelerometerData\x18\x14 \x01(\x0b\x32\'.linkbot.robot.getAccelerometerData.OutH\x00\x12;\n\x0egetButtonState\x18\x15 \x01(\x0b\x32!.linkbot.robot.getButtonState.OutH\x00\x12?\n\x10getEncoderValues\x18\x16 \x01(\x0b\x32#.linkbot.robot.getEncoderValues.OutH\x00\x12;\n\x0egetJointStates\x18\x17 \x01(\x0b\x32!.linkbot.robot.getJointStates.OutH\x00\x12O\n\x18\x65nableAccelerometerEvent\x18\x18 \x01(\x0b\x32+.linkbot.robot.enableAccelerometerEvent.OutH\x00\x12\x41\n\x11\x65nableButtonEvent\x18\x19 \x01(\x0b\x32$.linkbot.robot.enableButtonEvent.OutH\x00\x12\x43\n\x12\x65nableEncoderEvent\x18\x1a \x01(\x0b\x32%.linkbot.robot.enableEncoderEvent.OutH\x00\x12?\n\x10\x65nableJointEvent\x18\x1b \x01(\x0b\x32#.linkbot.robot.enableJointEvent.OutH\x00\x12\x43\n\x12getBuzzerFrequency\x18\x02 \x01(\x0b\x32%.linkbot.robot.getBuzzerFrequency.OutH\x00\x12\x35\n\x0bgetLedColor\x18\x03 \x01(\x0b\x32\x1e.linkbot.robot.getLedColor.OutH\x00\x12M\n\x17getMotorControllerOmega\x18\x1c \x01(\x0b\x32*.linkbot.robot.getMotorControllerOmega.OutH\x00\x12O\n\x18getMotorControllerAlphaI\x18\x1d \x01(\x0b\x32+.linkbot.robot.getMotorControllerAlphaI.OutH\x00\x12O\n\x18getMotorControllerAlphaF\x18\x1e \x01(\x0b\x32+.linkbot.robot.getMotorControllerAlphaF.OutH\x00\x12\x63\n\"getMotorControllerProportionalGain\x18\x1f \x01(\x0b\x32\x35.linkbot.robot.getMotorControllerProportionalGain.OutH\x00\x12_\n getMotorControllerIntegratorGain\x18  \x01(\x0b\x32\x33.linkbot.robot.getMotorControllerIntegratorGain.OutH\x00\x12_\n getMotorControllerDerivativeGain\x18! \x01(\x0b\x32\x33.linkbot.robot.getMotorControllerDerivativeGain.OutH\x00\x12\x61\n!getMotorControllerSafetyThreshold\x18\" \x01(\x0b\x32\x34.linkbot.robot.getMotorControllerSafetyThreshold.OutH\x00\x12Y\n\x1dgetMotorControllerSafetyAngle\x18# \x01(\x0b\x32\x30.linkbot.robot.getMotorControllerSafetyAngle.OutH\x00\x12\x43\n\x12setBuzzerFrequency\x18\x04 \x01(\x0b\x32%.linkbot.robot.setBuzzerFrequency.OutH\x00\x12\x35\n\x0bsetLedColor\x18\x05 \x01(\x0b\x32\x1e.linkbot.robot.setLedColor.OutH\x00\x12M\n\x17setMotorControllerOmega\x18$ \x01(\x0b\x32*.linkbot.robot.setMotorControllerOmega.OutH\x00\x12O\n\x18setMotorControllerAlphaI\x18% \x01(\x0b\x32+.linkbot.robot.setMotorControllerAlphaI.OutH\x00\x12O\n\x18setMotorControllerAlphaF\x18& \x01(\x0b\x32+.linkbot.robot.setMotorControllerAlphaF.OutH\x00\x12\x63\n\"setMotorControllerProportionalGain\x18\' \x01(\x0b\x32\x35.linkbot.robot.setMotorControllerProportionalGain.OutH\x00\x12_\n setMotorControllerIntegratorGain\x18( \x01(\x0b\x32\x33.linkbot.robot.setMotorControllerIntegratorGain.OutH\x00\x12_\n setMotorControllerDerivativeGain\x18) \x01(\x0b\x32\x33.linkbot.robot.setMotorControllerDerivativeGain.OutH\x00\x12\x61\n!setMotorControllerSafetyThreshold\x18* \x01(\x0b\x32\x34.linkbot.robot.setMotorControllerSafetyThreshold.OutH\x00\x12Y\n\x1dsetMotorControllerSafetyAngle\x18+ \x01(\x0b\x32\x30.linkbot.robot.setMotorControllerSafetyAngle.OutH\x00\x12G\n\x14setResetOnDisconnect\x18\x35 \x01(\x0b\x32\'.linkbot.robot.setResetOnDisconnect.OutH\x00\x12?\n\x10resetEncoderRevs\x18, \x01(\x0b\x32#.linkbot.robot.resetEncoderRevs.OutH\x00\x12\'\n\x04move\x18- \x01(\x0b\x32\x17.linkbot.robot.move.OutH\x00\x12\'\n\x04stop\x18. \x01(\x0b\x32\x17.linkbot.robot.stop.OutH\x00\x12+\n\x06reboot\x18/ \x01(\x0b\x32\x19.linkbot.robot.reboot.OutH\x00\x12\x35\n\x0bwriteEeprom\x18\x30 \x01(\x0b\x32\x1e.linkbot.robot.writeEeprom.OutH\x00\x12\x33\n\nreadEeprom\x18\x31 \x01(\x0b\x32\x1d.linkbot.robot.readEeprom.OutH\x00\x12/\n\x08writeTwi\x18\x32 \x01(\x0b\x32\x1b.linkbot.robot.writeTwi.OutH\x00\x12-\n\x07readTwi\x18\x33 \x01(\x0b\x32\x1a.linkbot.robot.readTwi.OutH\x00\x12\x37\n\x0cwriteReadTwi\x18\x34 \x01(\x0b\x32\x1f.linkbot.robot.writeReadTwi.OutH\x00\x42\x05\n\x03\x61rg\"r\n\x0b\x42uttonEvent\x12\x11\n\ttimestamp\x18\x01 \x01(\r\x12%\n\x06\x62utton\x18\x02 \x01(\x0e\x32\x15.linkbot.robot.Button\x12)\n\x05state\x18\x03 \x01(\x0e\x32\x1a.linkbot.robot.ButtonState\"A\n\x0c\x45ncoderEvent\x12\x11\n\ttimestamp\x18\x01 \x01(\r\x12\x0f\n\x07\x65ncoder\x18\x02 \x01(\r\x12\r\n\x05value\x18\x03 \x01(\x02\"H\n\x12\x41\x63\x63\x65lerometerEvent\x12\x11\n\ttimestamp\x18\x01 \x01(\r\x12\t\n\x01x\x18\x02 \x01(\x02\x12\t\n\x01y\x18\x03 \x01(\x02\x12\t\n\x01z\x18\x04 \x01(\x02\"g\n\nJointEvent\x12\x11\n\ttimestamp\x18\x01 \x01(\r\x12\r\n\x05joint\x18\x02 \x01(\r\x12(\n\x05\x65vent\x18\x03 \x01(\x0e\x32\x19.linkbot.robot.JointState\x12\r\n\x05\x61ngle\x18\x04 \x01(\x02\"B\n\x11\x44\x65\x62ugMessageEvent\x12\x11\n\ttimestamp\x18\x01 \x01(\r\x12\x1a\n\nbytestring\x18\x02 \x01(\tB\x06\x92?\x03\x08\x80\x01\")\n\x14\x43onnectionTerminated\x12\x11\n\ttimestamp\x18\x01 \x01(\r\"\'\n\x0cPowerOnEvent\x12\x17\n\x07version\x18\x01 \x01(\tB\x06\x92?\x03\x08\x80\x01\"#\n\x04Ping\x12\x1b\n\x13peripheralResetMask\x18\x02 \x01(\r\"l\n\rClientToRobot\x12/\n\nrpcRequest\x18\x01 \x01(\x0b\x32\x19.linkbot.robot.RpcRequestH\x00\x12#\n\x04ping\x18\x02 \x01(\x0b\x32\x13.linkbot.robot.PingH\x00\x42\x05\n\x03\x61rg\"\xd6\x03\n\rRobotToClient\x12+\n\x08rpcReply\x18\x01 \x01(\x0b\x32\x17.linkbot.robot.RpcReplyH\x00\x12?\n\x12\x61\x63\x63\x65lerometerEvent\x18\x02 \x01(\x0b\x32!.linkbot.robot.AccelerometerEventH\x00\x12\x31\n\x0b\x62uttonEvent\x18\x03 \x01(\x0b\x32\x1a.linkbot.robot.ButtonEventH\x00\x12\x33\n\x0c\x65ncoderEvent\x18\x04 \x01(\x0b\x32\x1b.linkbot.robot.EncoderEventH\x00\x12/\n\njointEvent\x18\x05 \x01(\x0b\x32\x19.linkbot.robot.JointEventH\x00\x12=\n\x11\x64\x65\x62ugMessageEvent\x18\x06 \x01(\x0b\x32 .linkbot.robot.DebugMessageEventH\x00\x12\x43\n\x14\x63onnectionTerminated\x18\x07 \x01(\x0b\x32#.linkbot.robot.ConnectionTerminatedH\x00\x12\x33\n\x0cpowerOnEvent\x18\x08 \x01(\x0b\x32\x1b.linkbot.robot.PowerOnEventH\x00\x42\x05\n\x03\x61rg*-\n\nFormFactor\x12\x05\n\x01I\x10\x00\x12\x05\n\x01L\x10\x01\x12\x05\n\x01T\x10\x02\x12\n\n\x06\x44ONGLE\x10\x03*8\n\nJointState\x12\t\n\x05\x43OAST\x10\x00\x12\x08\n\x04HOLD\x10\x01\x12\n\n\x06MOVING\x10\x02\x12\t\n\x05\x45RROR\x10\x04*!\n\x06\x42utton\x12\t\n\x05POWER\x10\x00\x12\x05\n\x01\x41\x10\x01\x12\x05\n\x01\x42\x10\x02*\x1f\n\x0b\x42uttonState\x12\x06\n\x02UP\x10\x00\x12\x08\n\x04\x44OWN\x10\x01*E\n\nPeripheral\x12\n\n\x06MOTOR1\x10\x00\x12\n\n\x06MOTOR2\x10\x01\x12\n\n\x06MOTOR3\x10\x02\x12\x07\n\x03LED\x10\x03\x12\n\n\x06\x42UZZER\x10\x04')
+  serialized_pb=_b('\n\x0brobot.proto\x12\rlinkbot.robot\x1a\x0cnanopb.proto\"D\n\x14getAccelerometerData\x1a\x04\n\x02In\x1a&\n\x03Out\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\t\n\x01z\x18\x03 \x01(\x02\"+\n\x11getBatteryVoltage\x1a\x04\n\x02In\x1a\x10\n\x03Out\x12\t\n\x01v\x18\x01 \x01(\x02\"1\n\tgetAdcRaw\x1a\x04\n\x02In\x1a\x1e\n\x03Out\x12\x17\n\x06values\x18\x01 \x03(\rB\x07\x10\x01\x92?\x02\x10 \"+\n\x0egetButtonState\x1a\x04\n\x02In\x1a\x13\n\x03Out\x12\x0c\n\x04mask\x18\x01 \x01(\r\"0\n\x12getBuzzerFrequency\x1a\x04\n\x02In\x1a\x14\n\x03Out\x12\r\n\x05value\x18\x01 \x01(\x02\"K\n\x10getEncoderValues\x1a\x04\n\x02In\x1a\x31\n\x03Out\x12\x11\n\ttimestamp\x18\x01 \x01(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \">\n\x18getFirmwareVersionString\x1a\x04\n\x02In\x1a\x1c\n\x03Out\x12\x15\n\x05value\x18\x01 \x01(\tB\x06\x92?\x03\x08\x80\x01\"F\n\rgetFormFactor\x1a\x04\n\x02In\x1a/\n\x03Out\x12(\n\x05value\x18\x01 \x01(\x0e\x32\x19.linkbot.robot.FormFactor\"d\n\x0egetJointStates\x1a\x04\n\x02In\x1aL\n\x03Out\x12\x11\n\ttimestamp\x18\x01 \x01(\r\x12\x32\n\x06values\x18\x02 \x03(\x0e\x32\x19.linkbot.robot.JointStateB\x07\x10\x01\x92?\x02\x10 \")\n\x0bgetLedColor\x1a\x04\n\x02In\x1a\x14\n\x03Out\x12\r\n\x05value\x18\x01 \x01(\r\"?\n\x17getMotorControllerOmega\x1a\x04\n\x02In\x1a\x1e\n\x03Out\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"@\n\x18getMotorControllerAlphaI\x1a\x04\n\x02In\x1a\x1e\n\x03Out\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"@\n\x18getMotorControllerAlphaF\x1a\x04\n\x02In\x1a\x1e\n\x03Out\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"J\n\"getMotorControllerProportionalGain\x1a\x04\n\x02In\x1a\x1e\n\x03Out\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"H\n getMotorControllerIntegratorGain\x1a\x04\n\x02In\x1a\x1e\n\x03Out\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"H\n getMotorControllerDerivativeGain\x1a\x04\n\x02In\x1a\x1e\n\x03Out\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"I\n!getMotorControllerSafetyThreshold\x1a\x04\n\x02In\x1a\x1e\n\x03Out\x12\x17\n\x06values\x18\x01 \x03(\rB\x07\x10\x01\x92?\x02\x10 \"E\n\x1dgetMotorControllerSafetyAngle\x1a\x04\n\x02In\x1a\x1e\n\x03Out\x12\x17\n\x06values\x18\x01 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \"M\n\x17setMotorControllerOmega\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x05\n\x03Out\"N\n\x18setMotorControllerAlphaI\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x05\n\x03Out\"N\n\x18setMotorControllerAlphaF\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x05\n\x03Out\"X\n\"setMotorControllerProportionalGain\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x05\n\x03Out\"V\n setMotorControllerIntegratorGain\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x05\n\x03Out\"V\n setMotorControllerDerivativeGain\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x05\n\x03Out\"W\n!setMotorControllerSafetyThreshold\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x12\x17\n\x06values\x18\x02 \x03(\rB\x07\x10\x01\x92?\x02\x10 \x1a\x05\n\x03Out\"S\n\x1dsetMotorControllerSafetyAngle\x1a+\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x12\x17\n\x06values\x18\x02 \x03(\x02\x42\x07\x10\x01\x92?\x02\x10 \x1a\x05\n\x03Out\"N\n\x14setResetOnDisconnect\x1a/\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x12\x1b\n\x13peripheralResetMask\x18\x02 \x01(\r\x1a\x05\n\x03Out\"\x1f\n\x10resetEncoderRevs\x1a\x04\n\x02In\x1a\x05\n\x03Out\"0\n\x12setBuzzerFrequency\x1a\x13\n\x02In\x12\r\n\x05value\x18\x01 \x01(\x02\x1a\x05\n\x03Out\")\n\x0bsetLedColor\x1a\x13\n\x02In\x12\r\n\x05value\x18\x01 \x01(\r\x1a\x05\n\x03Out\"!\n\x04stop\x1a\x12\n\x02In\x12\x0c\n\x04mask\x18\x01 \x01(\r\x1a\x05\n\x03Out\"\xbe\x02\n\x04Goal\x12&\n\x04type\x18\x01 \x01(\x0e\x32\x18.linkbot.robot.Goal.Type\x12\x0c\n\x04goal\x18\x02 \x01(\x02\x12\x32\n\ncontroller\x18\x03 \x01(\x0e\x32\x1e.linkbot.robot.Goal.Controller\x12\x0f\n\x07timeout\x18\x04 \x01(\x02\x12\x30\n\rmodeOnTimeout\x18\x05 \x01(\x0e\x32\x19.linkbot.robot.JointState\"0\n\x04Type\x12\x0c\n\x08\x41\x42SOLUTE\x10\x01\x12\x0c\n\x08RELATIVE\x10\x02\x12\x0c\n\x08INFINITE\x10\x03\"W\n\nController\x12\x07\n\x03PID\x10\x01\x12\x0c\n\x08\x43ONSTVEL\x10\x02\x12\n\n\x06SMOOTH\x10\x03\x12\t\n\x05\x41\x43\x43\x45L\x10\x04\x12\r\n\tCYCLOIDAL\x10\x05\x12\x0c\n\x08HARMONIC\x10\x06\"\x97\x01\n\x04move\x1a\x87\x01\n\x02In\x12)\n\x0cmotorOneGoal\x18\x01 \x01(\x0b\x32\x13.linkbot.robot.Goal\x12)\n\x0cmotorTwoGoal\x18\x02 \x01(\x0b\x32\x13.linkbot.robot.Goal\x12+\n\x0emotorThreeGoal\x18\x03 \x01(\x0b\x32\x13.linkbot.robot.Goal\x1a\x05\n\x03Out\"L\n\x18\x65nableAccelerometerEvent\x1a)\n\x02In\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\x12\x13\n\x0bgranularity\x18\x02 \x01(\x02\x1a\x05\n\x03Out\"0\n\x11\x65nableButtonEvent\x1a\x14\n\x02In\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\x1a\x05\n\x03Out\"\xaa\x02\n\x12\x65nableEncoderEvent\x1a\x8c\x02\n\x02In\x12\x44\n\nencoderOne\x18\x01 \x01(\x0b\x32\x30.linkbot.robot.enableEncoderEvent.In.SignalState\x12\x44\n\nencoderTwo\x18\x02 \x01(\x0b\x32\x30.linkbot.robot.enableEncoderEvent.In.SignalState\x12\x46\n\x0c\x65ncoderThree\x18\x03 \x01(\x0b\x32\x30.linkbot.robot.enableEncoderEvent.In.SignalState\x1a\x32\n\x0bSignalState\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\x12\x13\n\x0bgranularity\x18\x02 \x01(\x02\x1a\x05\n\x03Out\"/\n\x10\x65nableJointEvent\x1a\x14\n\x02In\x12\x0e\n\x06\x65nable\x18\x01 \x01(\x08\x1a\x05\n\x03Out\"A\n\x0bwriteEeprom\x1a+\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\r\x12\x14\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x42\x06\x92?\x03\x08\x80\x01\x1a\x05\n\x03Out\"N\n\nreadEeprom\x1a#\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\r\x12\x0c\n\x04size\x18\x02 \x01(\r\x1a\x1b\n\x03Out\x12\x14\n\x04\x64\x61ta\x18\x01 \x01(\x0c\x42\x06\x92?\x03\x08\x80\x01\">\n\x08writeTwi\x1a+\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\r\x12\x14\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x42\x06\x92?\x03\x08\x80\x01\x1a\x05\n\x03Out\"O\n\x07readTwi\x1a\'\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\r\x12\x10\n\x08recvsize\x18\x02 \x01(\r\x1a\x1b\n\x03Out\x12\x14\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x42\x06\x92?\x03\x08\x80\x01\"j\n\x0cwriteReadTwi\x1a=\n\x02In\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\r\x12\x10\n\x08recvsize\x18\x02 \x01(\r\x12\x14\n\x04\x64\x61ta\x18\x03 \x01(\x0c\x42\x06\x92?\x03\x08\x80\x01\x1a\x1b\n\x03Out\x12\x14\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x42\x06\x92?\x03\x08\x80\x01\"\x15\n\x06reboot\x1a\x04\n\x02In\x1a\x05\n\x03Out\"\xce\x17\n\nRpcRequest\x12\x11\n\trequestId\x18\x01 \x01(\r\x12N\n\x18getFirmwareVersionString\x18\x10 \x01(\x0b\x32*.linkbot.robot.getFirmwareVersionString.InH\x00\x12\x38\n\rgetFormFactor\x18\x11 \x01(\x0b\x32\x1f.linkbot.robot.getFormFactor.InH\x00\x12\x30\n\tgetAdcRaw\x18\x12 \x01(\x0b\x32\x1b.linkbot.robot.getAdcRaw.InH\x00\x12@\n\x11getBatteryVoltage\x18\x13 \x01(\x0b\x32#.linkbot.robot.getBatteryVoltage.InH\x00\x12\x46\n\x14getAccelerometerData\x18\x14 \x01(\x0b\x32&.linkbot.robot.getAccelerometerData.InH\x00\x12:\n\x0egetButtonState\x18\x15 \x01(\x0b\x32 .linkbot.robot.getButtonState.InH\x00\x12>\n\x10getEncoderValues\x18\x16 \x01(\x0b\x32\".linkbot.robot.getEncoderValues.InH\x00\x12:\n\x0egetJointStates\x18\x17 \x01(\x0b\x32 .linkbot.robot.getJointStates.InH\x00\x12N\n\x18\x65nableAccelerometerEvent\x18\x18 \x01(\x0b\x32*.linkbot.robot.enableAccelerometerEvent.InH\x00\x12@\n\x11\x65nableButtonEvent\x18\x19 \x01(\x0b\x32#.linkbot.robot.enableButtonEvent.InH\x00\x12\x42\n\x12\x65nableEncoderEvent\x18\x1a \x01(\x0b\x32$.linkbot.robot.enableEncoderEvent.InH\x00\x12>\n\x10\x65nableJointEvent\x18\x1b \x01(\x0b\x32\".linkbot.robot.enableJointEvent.InH\x00\x12\x42\n\x12getBuzzerFrequency\x18\x02 \x01(\x0b\x32$.linkbot.robot.getBuzzerFrequency.InH\x00\x12\x34\n\x0bgetLedColor\x18\x03 \x01(\x0b\x32\x1d.linkbot.robot.getLedColor.InH\x00\x12L\n\x17getMotorControllerOmega\x18\x1c \x01(\x0b\x32).linkbot.robot.getMotorControllerOmega.InH\x00\x12N\n\x18getMotorControllerAlphaI\x18\x1d \x01(\x0b\x32*.linkbot.robot.getMotorControllerAlphaI.InH\x00\x12N\n\x18getMotorControllerAlphaF\x18\x1e \x01(\x0b\x32*.linkbot.robot.getMotorControllerAlphaF.InH\x00\x12\x62\n\"getMotorControllerProportionalGain\x18\x1f \x01(\x0b\x32\x34.linkbot.robot.getMotorControllerProportionalGain.InH\x00\x12^\n getMotorControllerIntegratorGain\x18  \x01(\x0b\x32\x32.linkbot.robot.getMotorControllerIntegratorGain.InH\x00\x12^\n getMotorControllerDerivativeGain\x18! \x01(\x0b\x32\x32.linkbot.robot.getMotorControllerDerivativeGain.InH\x00\x12`\n!getMotorControllerSafetyThreshold\x18\" \x01(\x0b\x32\x33.linkbot.robot.getMotorControllerSafetyThreshold.InH\x00\x12X\n\x1dgetMotorControllerSafetyAngle\x18# \x01(\x0b\x32/.linkbot.robot.getMotorControllerSafetyAngle.InH\x00\x12\x42\n\x12setBuzzerFrequency\x18\x04 \x01(\x0b\x32$.linkbot.robot.setBuzzerFrequency.InH\x00\x12\x34\n\x0bsetLedColor\x18\x05 \x01(\x0b\x32\x1d.linkbot.robot.setLedColor.InH\x00\x12L\n\x17setMotorControllerOmega\x18$ \x01(\x0b\x32).linkbot.robot.setMotorControllerOmega.InH\x00\x12N\n\x18setMotorControllerAlphaI\x18% \x01(\x0b\x32*.linkbot.robot.setMotorControllerAlphaI.InH\x00\x12N\n\x18setMotorControllerAlphaF\x18& \x01(\x0b\x32*.linkbot.robot.setMotorControllerAlphaF.InH\x00\x12\x62\n\"setMotorControllerProportionalGain\x18\' \x01(\x0b\x32\x34.linkbot.robot.setMotorControllerProportionalGain.InH\x00\x12^\n setMotorControllerIntegratorGain\x18( \x01(\x0b\x32\x32.linkbot.robot.setMotorControllerIntegratorGain.InH\x00\x12^\n setMotorControllerDerivativeGain\x18) \x01(\x0b\x32\x32.linkbot.robot.setMotorControllerDerivativeGain.InH\x00\x12`\n!setMotorControllerSafetyThreshold\x18* \x01(\x0b\x32\x33.linkbot.robot.setMotorControllerSafetyThreshold.InH\x00\x12X\n\x1dsetMotorControllerSafetyAngle\x18+ \x01(\x0b\x32/.linkbot.robot.setMotorControllerSafetyAngle.InH\x00\x12\x46\n\x14setResetOnDisconnect\x18\x35 \x01(\x0b\x32&.linkbot.robot.setResetOnDisconnect.InH\x00\x12>\n\x10resetEncoderRevs\x18, \x01(\x0b\x32\".linkbot.robot.resetEncoderRevs.InH\x00\x12&\n\x04move\x18- \x01(\x0b\x32\x16.linkbot.robot.move.InH\x00\x12&\n\x04stop\x18. \x01(\x0b\x32\x16.linkbot.robot.stop.InH\x00\x12*\n\x06reboot\x18/ \x01(\x0b\x32\x18.linkbot.robot.reboot.InH\x00\x12\x34\n\x0bwriteEeprom\x18\x30 \x01(\x0b\x32\x1d.linkbot.robot.writeEeprom.InH\x00\x12\x32\n\nreadEeprom\x18\x31 \x01(\x0b\x32\x1c.linkbot.robot.readEeprom.InH\x00\x12.\n\x08writeTwi\x18\x32 \x01(\x0b\x32\x1a.linkbot.robot.writeTwi.InH\x00\x12,\n\x07readTwi\x18\x33 \x01(\x0b\x32\x19.linkbot.robot.readTwi.InH\x00\x12\x36\n\x0cwriteReadTwi\x18\x34 \x01(\x0b\x32\x1e.linkbot.robot.writeReadTwi.InH\x00\x42\x05\n\x03\x61rg\"\xf6\x17\n\x08RpcReply\x12\x11\n\trequestId\x18\x01 \x01(\r\x12O\n\x18getFirmwareVersionString\x18\x10 \x01(\x0b\x32+.linkbot.robot.getFirmwareVersionString.OutH\x00\x12\x39\n\rgetFormFactor\x18\x11 \x01(\x0b\x32 .linkbot.robot.getFormFactor.OutH\x00\x12\x31\n\tgetAdcRaw\x18\x12 \x01(\x0b\x32\x1c.linkbot.robot.getAdcRaw.OutH\x00\x12\x41\n\x11getBatteryVoltage\x18\x13 \x01(\x0b\x32$.linkbot.robot.getBatteryVoltage.OutH\x00\x12G\n\x14getAccelerometerData\x18\x14 \x01(\x0b\x32\'.linkbot.robot.getAccelerometerData.OutH\x00\x12;\n\x0egetButtonState\x18\x15 \x01(\x0b\x32!.linkbot.robot.getButtonState.OutH\x00\x12?\n\x10getEncoderValues\x18\x16 \x01(\x0b\x32#.linkbot.robot.getEncoderValues.OutH\x00\x12;\n\x0egetJointStates\x18\x17 \x01(\x0b\x32!.linkbot.robot.getJointStates.OutH\x00\x12O\n\x18\x65nableAccelerometerEvent\x18\x18 \x01(\x0b\x32+.linkbot.robot.enableAccelerometerEvent.OutH\x00\x12\x41\n\x11\x65nableButtonEvent\x18\x19 \x01(\x0b\x32$.linkbot.robot.enableButtonEvent.OutH\x00\x12\x43\n\x12\x65nableEncoderEvent\x18\x1a \x01(\x0b\x32%.linkbot.robot.enableEncoderEvent.OutH\x00\x12?\n\x10\x65nableJointEvent\x18\x1b \x01(\x0b\x32#.linkbot.robot.enableJointEvent.OutH\x00\x12\x43\n\x12getBuzzerFrequency\x18\x02 \x01(\x0b\x32%.linkbot.robot.getBuzzerFrequency.OutH\x00\x12\x35\n\x0bgetLedColor\x18\x03 \x01(\x0b\x32\x1e.linkbot.robot.getLedColor.OutH\x00\x12M\n\x17getMotorControllerOmega\x18\x1c \x01(\x0b\x32*.linkbot.robot.getMotorControllerOmega.OutH\x00\x12O\n\x18getMotorControllerAlphaI\x18\x1d \x01(\x0b\x32+.linkbot.robot.getMotorControllerAlphaI.OutH\x00\x12O\n\x18getMotorControllerAlphaF\x18\x1e \x01(\x0b\x32+.linkbot.robot.getMotorControllerAlphaF.OutH\x00\x12\x63\n\"getMotorControllerProportionalGain\x18\x1f \x01(\x0b\x32\x35.linkbot.robot.getMotorControllerProportionalGain.OutH\x00\x12_\n getMotorControllerIntegratorGain\x18  \x01(\x0b\x32\x33.linkbot.robot.getMotorControllerIntegratorGain.OutH\x00\x12_\n getMotorControllerDerivativeGain\x18! \x01(\x0b\x32\x33.linkbot.robot.getMotorControllerDerivativeGain.OutH\x00\x12\x61\n!getMotorControllerSafetyThreshold\x18\" \x01(\x0b\x32\x34.linkbot.robot.getMotorControllerSafetyThreshold.OutH\x00\x12Y\n\x1dgetMotorControllerSafetyAngle\x18# \x01(\x0b\x32\x30.linkbot.robot.getMotorControllerSafetyAngle.OutH\x00\x12\x43\n\x12setBuzzerFrequency\x18\x04 \x01(\x0b\x32%.linkbot.robot.setBuzzerFrequency.OutH\x00\x12\x35\n\x0bsetLedColor\x18\x05 \x01(\x0b\x32\x1e.linkbot.robot.setLedColor.OutH\x00\x12M\n\x17setMotorControllerOmega\x18$ \x01(\x0b\x32*.linkbot.robot.setMotorControllerOmega.OutH\x00\x12O\n\x18setMotorControllerAlphaI\x18% \x01(\x0b\x32+.linkbot.robot.setMotorControllerAlphaI.OutH\x00\x12O\n\x18setMotorControllerAlphaF\x18& \x01(\x0b\x32+.linkbot.robot.setMotorControllerAlphaF.OutH\x00\x12\x63\n\"setMotorControllerProportionalGain\x18\' \x01(\x0b\x32\x35.linkbot.robot.setMotorControllerProportionalGain.OutH\x00\x12_\n setMotorControllerIntegratorGain\x18( \x01(\x0b\x32\x33.linkbot.robot.setMotorControllerIntegratorGain.OutH\x00\x12_\n setMotorControllerDerivativeGain\x18) \x01(\x0b\x32\x33.linkbot.robot.setMotorControllerDerivativeGain.OutH\x00\x12\x61\n!setMotorControllerSafetyThreshold\x18* \x01(\x0b\x32\x34.linkbot.robot.setMotorControllerSafetyThreshold.OutH\x00\x12Y\n\x1dsetMotorControllerSafetyAngle\x18+ \x01(\x0b\x32\x30.linkbot.robot.setMotorControllerSafetyAngle.OutH\x00\x12G\n\x14setResetOnDisconnect\x18\x35 \x01(\x0b\x32\'.linkbot.robot.setResetOnDisconnect.OutH\x00\x12?\n\x10resetEncoderRevs\x18, \x01(\x0b\x32#.linkbot.robot.resetEncoderRevs.OutH\x00\x12\'\n\x04move\x18- \x01(\x0b\x32\x17.linkbot.robot.move.OutH\x00\x12\'\n\x04stop\x18. \x01(\x0b\x32\x17.linkbot.robot.stop.OutH\x00\x12+\n\x06reboot\x18/ \x01(\x0b\x32\x19.linkbot.robot.reboot.OutH\x00\x12\x35\n\x0bwriteEeprom\x18\x30 \x01(\x0b\x32\x1e.linkbot.robot.writeEeprom.OutH\x00\x12\x33\n\nreadEeprom\x18\x31 \x01(\x0b\x32\x1d.linkbot.robot.readEeprom.OutH\x00\x12/\n\x08writeTwi\x18\x32 \x01(\x0b\x32\x1b.linkbot.robot.writeTwi.OutH\x00\x12-\n\x07readTwi\x18\x33 \x01(\x0b\x32\x1a.linkbot.robot.readTwi.OutH\x00\x12\x37\n\x0cwriteReadTwi\x18\x34 \x01(\x0b\x32\x1f.linkbot.robot.writeReadTwi.OutH\x00\x42\x05\n\x03\x61rg\"r\n\x0b\x42uttonEvent\x12\x11\n\ttimestamp\x18\x01 \x01(\r\x12%\n\x06\x62utton\x18\x02 \x01(\x0e\x32\x15.linkbot.robot.Button\x12)\n\x05state\x18\x03 \x01(\x0e\x32\x1a.linkbot.robot.ButtonState\"A\n\x0c\x45ncoderEvent\x12\x11\n\ttimestamp\x18\x01 \x01(\r\x12\x0f\n\x07\x65ncoder\x18\x02 \x01(\r\x12\r\n\x05value\x18\x03 \x01(\x02\"H\n\x12\x41\x63\x63\x65lerometerEvent\x12\x11\n\ttimestamp\x18\x01 \x01(\r\x12\t\n\x01x\x18\x02 \x01(\x02\x12\t\n\x01y\x18\x03 \x01(\x02\x12\t\n\x01z\x18\x04 \x01(\x02\"g\n\nJointEvent\x12\x11\n\ttimestamp\x18\x01 \x01(\r\x12\r\n\x05joint\x18\x02 \x01(\r\x12(\n\x05\x65vent\x18\x03 \x01(\x0e\x32\x19.linkbot.robot.JointState\x12\r\n\x05\x61ngle\x18\x04 \x01(\x02\"B\n\x11\x44\x65\x62ugMessageEvent\x12\x11\n\ttimestamp\x18\x01 \x01(\r\x12\x1a\n\nbytestring\x18\x02 \x01(\tB\x06\x92?\x03\x08\x80\x01\"!\n\x0c\x43onnectEvent\x12\x11\n\ttimestamp\x18\x01 \x01(\r\"$\n\x0f\x44isconnectEvent\x12\x11\n\ttimestamp\x18\x01 \x01(\r\"/\n\x10ResetPeripherals\x12\x1b\n\x13peripheralResetMask\x18\x02 \x01(\r\"G\n\rClientToRobot\x12/\n\nrpcRequest\x18\x01 \x01(\x0b\x32\x19.linkbot.robot.RpcRequestH\x00\x42\x05\n\x03\x61rg\"\\\n\x16\x43lientToRobotBroadcast\x12;\n\x10resetPeripherals\x18\x01 \x01(\x0b\x32\x1f.linkbot.robot.ResetPeripheralsH\x00\x42\x05\n\x03\x61rg\"\xcc\x03\n\rRobotToClient\x12+\n\x08rpcReply\x18\x01 \x01(\x0b\x32\x17.linkbot.robot.RpcReplyH\x00\x12?\n\x12\x61\x63\x63\x65lerometerEvent\x18\x02 \x01(\x0b\x32!.linkbot.robot.AccelerometerEventH\x00\x12\x31\n\x0b\x62uttonEvent\x18\x03 \x01(\x0b\x32\x1a.linkbot.robot.ButtonEventH\x00\x12\x33\n\x0c\x65ncoderEvent\x18\x04 \x01(\x0b\x32\x1b.linkbot.robot.EncoderEventH\x00\x12/\n\njointEvent\x18\x05 \x01(\x0b\x32\x19.linkbot.robot.JointEventH\x00\x12=\n\x11\x64\x65\x62ugMessageEvent\x18\x06 \x01(\x0b\x32 .linkbot.robot.DebugMessageEventH\x00\x12\x33\n\x0c\x63onnectEvent\x18\x07 \x01(\x0b\x32\x1b.linkbot.robot.ConnectEventH\x00\x12\x39\n\x0f\x64isconnectEvent\x18\x08 \x01(\x0b\x32\x1e.linkbot.robot.DisconnectEventH\x00\x42\x05\n\x03\x61rg*-\n\nFormFactor\x12\x05\n\x01I\x10\x00\x12\x05\n\x01L\x10\x01\x12\x05\n\x01T\x10\x02\x12\n\n\x06\x44ONGLE\x10\x03*8\n\nJointState\x12\t\n\x05\x43OAST\x10\x00\x12\x08\n\x04HOLD\x10\x01\x12\n\n\x06MOVING\x10\x02\x12\t\n\x05\x45RROR\x10\x04*!\n\x06\x42utton\x12\t\n\x05POWER\x10\x00\x12\x05\n\x01\x41\x10\x01\x12\x05\n\x01\x42\x10\x02*\x1f\n\x0b\x42uttonState\x12\x06\n\x02UP\x10\x00\x12\x08\n\x04\x44OWN\x10\x01*E\n\nPeripheral\x12\n\n\x06MOTOR1\x10\x00\x12\n\n\x06MOTOR2\x10\x01\x12\n\n\x06MOTOR3\x10\x02\x12\x07\n\x03LED\x10\x03\x12\n\n\x06\x42UZZER\x10\x04')
   ,
   dependencies=[nanopb__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -51,8 +51,8 @@ _FORMFACTOR = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=10750,
-  serialized_end=10795,
+  serialized_start=10798,
+  serialized_end=10843,
 )
 _sym_db.RegisterEnumDescriptor(_FORMFACTOR)
 
@@ -82,8 +82,8 @@ _JOINTSTATE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=10797,
-  serialized_end=10853,
+  serialized_start=10845,
+  serialized_end=10901,
 )
 _sym_db.RegisterEnumDescriptor(_JOINTSTATE)
 
@@ -109,8 +109,8 @@ _BUTTON = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=10855,
-  serialized_end=10888,
+  serialized_start=10903,
+  serialized_end=10936,
 )
 _sym_db.RegisterEnumDescriptor(_BUTTON)
 
@@ -132,8 +132,8 @@ _BUTTONSTATE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=10890,
-  serialized_end=10921,
+  serialized_start=10938,
+  serialized_end=10969,
 )
 _sym_db.RegisterEnumDescriptor(_BUTTONSTATE)
 
@@ -167,8 +167,8 @@ _PERIPHERAL = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=10923,
-  serialized_end=10992,
+  serialized_start=10971,
+  serialized_end=11040,
 )
 _sym_db.RegisterEnumDescriptor(_PERIPHERAL)
 
@@ -4653,15 +4653,15 @@ _DEBUGMESSAGEEVENT = _descriptor.Descriptor(
 )
 
 
-_CONNECTIONTERMINATED = _descriptor.Descriptor(
-  name='ConnectionTerminated',
-  full_name='linkbot.robot.ConnectionTerminated',
+_CONNECTEVENT = _descriptor.Descriptor(
+  name='ConnectEvent',
+  full_name='linkbot.robot.ConnectEvent',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='timestamp', full_name='linkbot.robot.ConnectionTerminated.timestamp', index=0,
+      name='timestamp', full_name='linkbot.robot.ConnectEvent.timestamp', index=0,
       number=1, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -4680,24 +4680,24 @@ _CONNECTIONTERMINATED = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=10046,
-  serialized_end=10087,
+  serialized_end=10079,
 )
 
 
-_POWERONEVENT = _descriptor.Descriptor(
-  name='PowerOnEvent',
-  full_name='linkbot.robot.PowerOnEvent',
+_DISCONNECTEVENT = _descriptor.Descriptor(
+  name='DisconnectEvent',
+  full_name='linkbot.robot.DisconnectEvent',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='version', full_name='linkbot.robot.PowerOnEvent.version', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='timestamp', full_name='linkbot.robot.DisconnectEvent.timestamp', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))),
+      options=None),
   ],
   extensions=[
   ],
@@ -4710,20 +4710,20 @@ _POWERONEVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10089,
-  serialized_end=10128,
+  serialized_start=10081,
+  serialized_end=10117,
 )
 
 
-_PING = _descriptor.Descriptor(
-  name='Ping',
-  full_name='linkbot.robot.Ping',
+_RESETPERIPHERALS = _descriptor.Descriptor(
+  name='ResetPeripherals',
+  full_name='linkbot.robot.ResetPeripherals',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='peripheralResetMask', full_name='linkbot.robot.Ping.peripheralResetMask', index=0,
+      name='peripheralResetMask', full_name='linkbot.robot.ResetPeripherals.peripheralResetMask', index=0,
       number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -4741,8 +4741,8 @@ _PING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10130,
-  serialized_end=10165,
+  serialized_start=10119,
+  serialized_end=10166,
 )
 
 
@@ -4756,13 +4756,6 @@ _CLIENTTOROBOT = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='rpcRequest', full_name='linkbot.robot.ClientToRobot.rpcRequest', index=0,
       number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='ping', full_name='linkbot.robot.ClientToRobot.ping', index=1,
-      number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -4782,8 +4775,42 @@ _CLIENTTOROBOT = _descriptor.Descriptor(
       name='arg', full_name='linkbot.robot.ClientToRobot.arg',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=10167,
-  serialized_end=10275,
+  serialized_start=10168,
+  serialized_end=10239,
+)
+
+
+_CLIENTTOROBOTBROADCAST = _descriptor.Descriptor(
+  name='ClientToRobotBroadcast',
+  full_name='linkbot.robot.ClientToRobotBroadcast',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='resetPeripherals', full_name='linkbot.robot.ClientToRobotBroadcast.resetPeripherals', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='arg', full_name='linkbot.robot.ClientToRobotBroadcast.arg',
+      index=0, containing_type=None, fields=[]),
+  ],
+  serialized_start=10241,
+  serialized_end=10333,
 )
 
 
@@ -4837,14 +4864,14 @@ _ROBOTTOCLIENT = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='connectionTerminated', full_name='linkbot.robot.RobotToClient.connectionTerminated', index=6,
+      name='connectEvent', full_name='linkbot.robot.RobotToClient.connectEvent', index=6,
       number=7, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='powerOnEvent', full_name='linkbot.robot.RobotToClient.powerOnEvent', index=7,
+      name='disconnectEvent', full_name='linkbot.robot.RobotToClient.disconnectEvent', index=7,
       number=8, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -4865,8 +4892,8 @@ _ROBOTTOCLIENT = _descriptor.Descriptor(
       name='arg', full_name='linkbot.robot.RobotToClient.arg',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=10278,
-  serialized_end=10748,
+  serialized_start=10336,
+  serialized_end=10796,
 )
 
 _GETACCELEROMETERDATA_IN.containing_type = _GETACCELEROMETERDATA
@@ -5307,21 +5334,21 @@ _BUTTONEVENT.fields_by_name['button'].enum_type = _BUTTON
 _BUTTONEVENT.fields_by_name['state'].enum_type = _BUTTONSTATE
 _JOINTEVENT.fields_by_name['event'].enum_type = _JOINTSTATE
 _CLIENTTOROBOT.fields_by_name['rpcRequest'].message_type = _RPCREQUEST
-_CLIENTTOROBOT.fields_by_name['ping'].message_type = _PING
 _CLIENTTOROBOT.oneofs_by_name['arg'].fields.append(
   _CLIENTTOROBOT.fields_by_name['rpcRequest'])
 _CLIENTTOROBOT.fields_by_name['rpcRequest'].containing_oneof = _CLIENTTOROBOT.oneofs_by_name['arg']
-_CLIENTTOROBOT.oneofs_by_name['arg'].fields.append(
-  _CLIENTTOROBOT.fields_by_name['ping'])
-_CLIENTTOROBOT.fields_by_name['ping'].containing_oneof = _CLIENTTOROBOT.oneofs_by_name['arg']
+_CLIENTTOROBOTBROADCAST.fields_by_name['resetPeripherals'].message_type = _RESETPERIPHERALS
+_CLIENTTOROBOTBROADCAST.oneofs_by_name['arg'].fields.append(
+  _CLIENTTOROBOTBROADCAST.fields_by_name['resetPeripherals'])
+_CLIENTTOROBOTBROADCAST.fields_by_name['resetPeripherals'].containing_oneof = _CLIENTTOROBOTBROADCAST.oneofs_by_name['arg']
 _ROBOTTOCLIENT.fields_by_name['rpcReply'].message_type = _RPCREPLY
 _ROBOTTOCLIENT.fields_by_name['accelerometerEvent'].message_type = _ACCELEROMETEREVENT
 _ROBOTTOCLIENT.fields_by_name['buttonEvent'].message_type = _BUTTONEVENT
 _ROBOTTOCLIENT.fields_by_name['encoderEvent'].message_type = _ENCODEREVENT
 _ROBOTTOCLIENT.fields_by_name['jointEvent'].message_type = _JOINTEVENT
 _ROBOTTOCLIENT.fields_by_name['debugMessageEvent'].message_type = _DEBUGMESSAGEEVENT
-_ROBOTTOCLIENT.fields_by_name['connectionTerminated'].message_type = _CONNECTIONTERMINATED
-_ROBOTTOCLIENT.fields_by_name['powerOnEvent'].message_type = _POWERONEVENT
+_ROBOTTOCLIENT.fields_by_name['connectEvent'].message_type = _CONNECTEVENT
+_ROBOTTOCLIENT.fields_by_name['disconnectEvent'].message_type = _DISCONNECTEVENT
 _ROBOTTOCLIENT.oneofs_by_name['arg'].fields.append(
   _ROBOTTOCLIENT.fields_by_name['rpcReply'])
 _ROBOTTOCLIENT.fields_by_name['rpcReply'].containing_oneof = _ROBOTTOCLIENT.oneofs_by_name['arg']
@@ -5341,11 +5368,11 @@ _ROBOTTOCLIENT.oneofs_by_name['arg'].fields.append(
   _ROBOTTOCLIENT.fields_by_name['debugMessageEvent'])
 _ROBOTTOCLIENT.fields_by_name['debugMessageEvent'].containing_oneof = _ROBOTTOCLIENT.oneofs_by_name['arg']
 _ROBOTTOCLIENT.oneofs_by_name['arg'].fields.append(
-  _ROBOTTOCLIENT.fields_by_name['connectionTerminated'])
-_ROBOTTOCLIENT.fields_by_name['connectionTerminated'].containing_oneof = _ROBOTTOCLIENT.oneofs_by_name['arg']
+  _ROBOTTOCLIENT.fields_by_name['connectEvent'])
+_ROBOTTOCLIENT.fields_by_name['connectEvent'].containing_oneof = _ROBOTTOCLIENT.oneofs_by_name['arg']
 _ROBOTTOCLIENT.oneofs_by_name['arg'].fields.append(
-  _ROBOTTOCLIENT.fields_by_name['powerOnEvent'])
-_ROBOTTOCLIENT.fields_by_name['powerOnEvent'].containing_oneof = _ROBOTTOCLIENT.oneofs_by_name['arg']
+  _ROBOTTOCLIENT.fields_by_name['disconnectEvent'])
+_ROBOTTOCLIENT.fields_by_name['disconnectEvent'].containing_oneof = _ROBOTTOCLIENT.oneofs_by_name['arg']
 DESCRIPTOR.message_types_by_name['getAccelerometerData'] = _GETACCELEROMETERDATA
 DESCRIPTOR.message_types_by_name['getBatteryVoltage'] = _GETBATTERYVOLTAGE
 DESCRIPTOR.message_types_by_name['getAdcRaw'] = _GETADCRAW
@@ -5396,10 +5423,11 @@ DESCRIPTOR.message_types_by_name['EncoderEvent'] = _ENCODEREVENT
 DESCRIPTOR.message_types_by_name['AccelerometerEvent'] = _ACCELEROMETEREVENT
 DESCRIPTOR.message_types_by_name['JointEvent'] = _JOINTEVENT
 DESCRIPTOR.message_types_by_name['DebugMessageEvent'] = _DEBUGMESSAGEEVENT
-DESCRIPTOR.message_types_by_name['ConnectionTerminated'] = _CONNECTIONTERMINATED
-DESCRIPTOR.message_types_by_name['PowerOnEvent'] = _POWERONEVENT
-DESCRIPTOR.message_types_by_name['Ping'] = _PING
+DESCRIPTOR.message_types_by_name['ConnectEvent'] = _CONNECTEVENT
+DESCRIPTOR.message_types_by_name['DisconnectEvent'] = _DISCONNECTEVENT
+DESCRIPTOR.message_types_by_name['ResetPeripherals'] = _RESETPERIPHERALS
 DESCRIPTOR.message_types_by_name['ClientToRobot'] = _CLIENTTOROBOT
+DESCRIPTOR.message_types_by_name['ClientToRobotBroadcast'] = _CLIENTTOROBOTBROADCAST
 DESCRIPTOR.message_types_by_name['RobotToClient'] = _ROBOTTOCLIENT
 DESCRIPTOR.enum_types_by_name['FormFactor'] = _FORMFACTOR
 DESCRIPTOR.enum_types_by_name['JointState'] = _JOINTSTATE
@@ -6437,26 +6465,26 @@ DebugMessageEvent = _reflection.GeneratedProtocolMessageType('DebugMessageEvent'
   ))
 _sym_db.RegisterMessage(DebugMessageEvent)
 
-ConnectionTerminated = _reflection.GeneratedProtocolMessageType('ConnectionTerminated', (_message.Message,), dict(
-  DESCRIPTOR = _CONNECTIONTERMINATED,
+ConnectEvent = _reflection.GeneratedProtocolMessageType('ConnectEvent', (_message.Message,), dict(
+  DESCRIPTOR = _CONNECTEVENT,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:linkbot.robot.ConnectionTerminated)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.ConnectEvent)
   ))
-_sym_db.RegisterMessage(ConnectionTerminated)
+_sym_db.RegisterMessage(ConnectEvent)
 
-PowerOnEvent = _reflection.GeneratedProtocolMessageType('PowerOnEvent', (_message.Message,), dict(
-  DESCRIPTOR = _POWERONEVENT,
+DisconnectEvent = _reflection.GeneratedProtocolMessageType('DisconnectEvent', (_message.Message,), dict(
+  DESCRIPTOR = _DISCONNECTEVENT,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:linkbot.robot.PowerOnEvent)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.DisconnectEvent)
   ))
-_sym_db.RegisterMessage(PowerOnEvent)
+_sym_db.RegisterMessage(DisconnectEvent)
 
-Ping = _reflection.GeneratedProtocolMessageType('Ping', (_message.Message,), dict(
-  DESCRIPTOR = _PING,
+ResetPeripherals = _reflection.GeneratedProtocolMessageType('ResetPeripherals', (_message.Message,), dict(
+  DESCRIPTOR = _RESETPERIPHERALS,
   __module__ = 'robot_pb2'
-  # @@protoc_insertion_point(class_scope:linkbot.robot.Ping)
+  # @@protoc_insertion_point(class_scope:linkbot.robot.ResetPeripherals)
   ))
-_sym_db.RegisterMessage(Ping)
+_sym_db.RegisterMessage(ResetPeripherals)
 
 ClientToRobot = _reflection.GeneratedProtocolMessageType('ClientToRobot', (_message.Message,), dict(
   DESCRIPTOR = _CLIENTTOROBOT,
@@ -6464,6 +6492,13 @@ ClientToRobot = _reflection.GeneratedProtocolMessageType('ClientToRobot', (_mess
   # @@protoc_insertion_point(class_scope:linkbot.robot.ClientToRobot)
   ))
 _sym_db.RegisterMessage(ClientToRobot)
+
+ClientToRobotBroadcast = _reflection.GeneratedProtocolMessageType('ClientToRobotBroadcast', (_message.Message,), dict(
+  DESCRIPTOR = _CLIENTTOROBOTBROADCAST,
+  __module__ = 'robot_pb2'
+  # @@protoc_insertion_point(class_scope:linkbot.robot.ClientToRobotBroadcast)
+  ))
+_sym_db.RegisterMessage(ClientToRobotBroadcast)
 
 RobotToClient = _reflection.GeneratedProtocolMessageType('RobotToClient', (_message.Message,), dict(
   DESCRIPTOR = _ROBOTTOCLIENT,
@@ -6527,6 +6562,4 @@ _WRITEREADTWI_OUT.fields_by_name['data'].has_options = True
 _WRITEREADTWI_OUT.fields_by_name['data']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))
 _DEBUGMESSAGEEVENT.fields_by_name['bytestring'].has_options = True
 _DEBUGMESSAGEEVENT.fields_by_name['bytestring']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))
-_POWERONEVENT.fields_by_name['version'].has_options = True
-_POWERONEVENT.fields_by_name['version']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\222?\003\010\200\001'))
 # @@protoc_insertion_point(module_scope)

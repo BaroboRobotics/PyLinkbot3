@@ -75,7 +75,7 @@ class Config(metaclass=Singleton):
         try:
             self._daemon_host = os.environ['LINKBOT_DAEMON_HOSTPORT'].split(':')
         except:
-            self._daemon_host = 'localhost:42000'.split(':')
+            self._daemon_host = 'localhost:42001'.split(':')
 
         self._linkbot_ids_index = 0
         try:
