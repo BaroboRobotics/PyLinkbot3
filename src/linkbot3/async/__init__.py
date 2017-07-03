@@ -378,7 +378,15 @@ class AsyncLinkbot():
             form_factor_fut = yield from self._proxy.getFormFactor()
             form_factor = yield from form_factor_fut
             logging.info('Got form factor: {}'.format(form_factor))
-            self._proxy.form_factor = form_factor
+            if form_factor.value == 0:
+                self._motor_mask = 0x05
+            elif form_factor.value == 1:
+                self._motor_mask = 0x03
+            elif form_factor.value == 2:
+                self._motor_mask = 0x07
+            else:
+                raise Exception('Unknown form factor')
+            self._proxy.form_factor = form_factor.value
             self.rb_add_broadcast_handler = self._proxy.on
             self.close = self._proxy.close
             self.enableButtonEvent = self._proxy.enableButtonEvent
