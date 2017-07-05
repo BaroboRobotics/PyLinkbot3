@@ -332,15 +332,15 @@ class Button():
                 fut = yield from self._proxy.enableButtonEvent(
                         enable=False)
                 yield from fut
-                self._proxy.rb_remove_broadcast_handler('buttonEvent')
+                self._proxy.on('buttonEvent')
                 return fut
             except KeyError:
                 # Don't worry if the bcast handler is  not there.
                 pass
 
         else:
-            self._proxy.rb_add_broadcast_handler( 'buttonEvent', 
-                                                  self.__event_handler )
+            self._proxy.on( 'buttonEvent', 
+                            self.__event_handler )
             rc = yield from self._proxy.enableButtonEvent(
                     enable=True)
             return rc
