@@ -6,7 +6,7 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 # My Linkbot's ID is 'ZRG6'
-l = linkbot.Linkbot('X4VZ')
+l = linkbot.Linkbot('ZRG6')
 
 start_time = time.time()
 # Run a loop for 10 seconds

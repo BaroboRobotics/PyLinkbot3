@@ -709,8 +709,8 @@ class Motor:
 
         else:
             self._motors._callback_handler.set_event_handler(self._index, callback)
-            self._proxy.rb_add_broadcast_handler( 'encoderEvent', 
-                                                  self._motors._callback_handler.event_handler)
+            self._proxy.on( 'encoderEvent', 
+                            self._motors._callback_handler.event_handler)
             args = self._proxy.rb_get_args_obj('enableEncoderEvent')
             names = ['encoderOne', 'encoderTwo', 'encoderThree']
             name = names[self._index]
