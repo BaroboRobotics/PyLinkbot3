@@ -62,7 +62,7 @@ class RpcProxy():
 
     # Add a callback handler for Rpc events. For instance, for the daemon, one might do
     #    on("dongleEvent", coro)
-    def on(self, name, coro):
+    def on(self, name, coro = None):
         self._event_handlers[name] = coro
 
     def rb_get_args_obj(self, name):
@@ -130,6 +130,8 @@ class RpcProxy():
             try:
                 arg = getattr(server_to_proxy, method)
                 yield from self._event_handlers[method](arg)
+            except KeyError:
+                self.logger.warning('Unhandled RPC Event: {}'.format(method))
             except:
                 # FIXME
                 self.logger.warning('Could not handle exception')

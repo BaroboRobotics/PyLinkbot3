@@ -129,7 +129,7 @@ class Accelerometer():
                         enable=False,
                         granularity=granularity)
                 yield from fut
-                self._proxy.rb_remove_broadcast_handler('accelerometerEvent')
+                self._proxy.on('accelerometerEvent')
                 self._event_callback = callback
                 return fut
             except KeyError:
@@ -138,8 +138,8 @@ class Accelerometer():
 
         else:
             self._event_callback = callback
-            self._proxy.rb_add_broadcast_handler( 'accelerometerEvent', 
-                                                  self.__event_handler )
+            self._proxy.on( 'accelerometerEvent', 
+                            self.__event_handler )
             rc = yield from self._proxy.enableAccelerometerEvent(
                     enable=True,
                     granularity=granularity )
