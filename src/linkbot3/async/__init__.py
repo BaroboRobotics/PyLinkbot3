@@ -213,7 +213,7 @@ class Daemon(RpcProxy):
                 logging.info('Daemon consumer connection closed.')
                 return
             except Exception as e:
-                logging.warning('Unhandled exception! {}'.format(e))
+                logging.warning('Unhandled exception! {}'.format(traceback.format_exc()))
                 raise
 
 def config(**kwargs):

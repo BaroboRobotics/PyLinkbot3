@@ -1,4 +1,7 @@
 import linkbot3 as linkbot
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 def cb(*args, **kwargs):
     print('Callback!')

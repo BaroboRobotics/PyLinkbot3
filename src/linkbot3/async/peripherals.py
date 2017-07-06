@@ -899,20 +899,24 @@ class Motors:
         
         @asyncio.coroutine
         def event_handler(self, payload):
-            joint = payload.encoder
-            value = payload.value
-            timestamp = payload.timestamp
-            try:
-                yield from self._handlers[joint](util.rad2deg(value), timestamp)
-            except IndexError as e:
-                # Don't care if the callback doesn't exist
-                pass
-            except TypeError as e:
-                pass
-            except Exception as e:
-                logging.warning('Could not run encoder event handler: {}'
-                        .format(str(e)) )
-                raise
+            for i in range(3):
+                if not (payload.mask & (1<<i)):
+                    continue
+                joint = i
+                logging.warning(i)
+                value = payload.values[i]
+                timestamp = payload.timestamp
+                try:
+                    yield from self._handlers[joint](util.rad2deg(value), timestamp)
+                except IndexError as e:
+                    # Don't care if the callback doesn't exist
+                    pass
+                except TypeError as e:
+                    pass
+                except Exception as e:
+                    logging.warning('Could not run encoder event handler: {}'
+                            .format(str(e)) )
+                    raise
 
         def set_event_handler(self, index, callback):
             assert(index >= 0 and index < 3)
