@@ -965,8 +965,8 @@ class Motors:
             for i in range(3):
                 self._callback_handler.set_event_handler(i, functools.partial(callback, i))
 
-            self._proxy.rb_add_broadcast_handler( 'encoderEvent', 
-                                                  self._callback_handler.event_handler)
+            self._proxy.on( 'encoderEvent', 
+                            self._callback_handler.event_handler)
             args = self._proxy.rb_get_args_obj('enableEncoderEvent')
             names = ['encoderOne', 'encoderTwo', 'encoderThree']
             for name in names:
