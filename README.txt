@@ -46,6 +46,10 @@ LINKBOT_DAEMON_HOSTPORT="hostname:port" # Makes PyLinkbot use the specified
 CHANGES
 =======
 
+Version 3.1.17
+--------------
+* Removed PySfp requirement.
+
 Version 3.1.16
 --------------
 * Added CLinkbot.turn_left_nb() and CLinkbot.turn_right_nb()
