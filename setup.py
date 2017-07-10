@@ -21,7 +21,6 @@ setup (name = 'PyLinkbot3',
        url = 'http://github.com/BaroboRobotics/PyLinkbot3',
        install_requires=[
            'PyRibbonBridge>=0.0.8', 
-           'PySfp>=0.1.1', 
            'websockets>=3.0',],
        classifiers=[
            'Development Status :: 3 - Alpha',
