@@ -23,7 +23,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='daemon.proto',
   package='linkbot.daemon',
   syntax='proto2',
-  serialized_pb=_b('\n\x0c\x64\x61\x65mon.proto\x12\x0elinkbot.daemon\x1a\x0cnanopb.proto\x1a\x11\x63ommontypes.proto\x1a\x0brobot.proto\"<\n\x16getDaemonVersionString\x1a\x04\n\x02In\x1a\x1c\n\x03Out\x12\x15\n\x05value\x18\x01 \x01(\tB\x06\x92?\x03\x08\x80\x01\"2\n\x0egetDongleCount\x1a\x04\n\x02In\x1a\x1a\n\x03Out\x12\x13\n\x0b\x64ongleCount\x18\x01 \x01(\r\"p\n\x0c\x61\x64\x64RobotRefs\x1a\x31\n\x02In\x12+\n\tserialIds\x18\x01 \x03(\x0b\x32\x11.linkbot.SerialIdB\x05\x92?\x02\x10\x10\x1a-\n\x03Out\x12&\n\x06status\x18\x01 \x01(\x0e\x32\x16.linkbot.daemon.Status\"t\n\x10releaseRobotRefs\x1a\x31\n\x02In\x12+\n\tserialIds\x18\x01 \x03(\x0b\x32\x11.linkbot.SerialIdB\x05\x92?\x02\x10\x10\x1a-\n\x03Out\x12&\n\x06status\x18\x01 \x01(\x0e\x32\x16.linkbot.daemon.Status\"\x96\x01\n\x08transmit\x1a[\n\x02In\x12&\n\x0b\x64\x65stination\x18\x01 \x01(\x0b\x32\x11.linkbot.SerialId\x12-\n\x07payload\x18\x02 \x01(\x0b\x32\x1c.linkbot.robot.ClientToRobot\x1a-\n\x03Out\x12&\n\x06status\x18\x01 \x01(\x0e\x32\x16.linkbot.daemon.Status\"\xeb\x01\n\x11transmitBroadcast\x1a\xa6\x01\n\x02In\x12\x38\n\x0f\x62roadcastMethod\x18\x01 \x01(\x0e\x32\x1f.linkbot.daemon.BroadcastMethod\x12.\n\x0c\x64\x65stinations\x18\x02 \x03(\x0b\x32\x11.linkbot.SerialIdB\x05\x92?\x02\x10\x08\x12\x36\n\x07payload\x18\x04 \x01(\x0b\x32%.linkbot.robot.ClientToRobotBroadcast\x1a-\n\x03Out\x12&\n\x06status\x18\x01 \x01(\x0e\x32\x16.linkbot.daemon.Status\"\xdb\x02\n\nRpcRequest\x12\x11\n\trequestId\x18\x01 \x01(\r\x12K\n\x16getDaemonVersionString\x18\x02 \x01(\x0b\x32).linkbot.daemon.getDaemonVersionString.InH\x00\x12;\n\x0egetDongleCount\x18\x03 \x01(\x0b\x32!.linkbot.daemon.getDongleCount.InH\x00\x12\x37\n\x0c\x61\x64\x64RobotRefs\x18\x04 \x01(\x0b\x32\x1f.linkbot.daemon.addRobotRefs.InH\x00\x12?\n\x10releaseRobotRefs\x18\x05 \x01(\x0b\x32#.linkbot.daemon.releaseRobotRefs.InH\x00\x12/\n\x08transmit\x18\x06 \x01(\x0b\x32\x1b.linkbot.daemon.transmit.InH\x00\x42\x05\n\x03\x61rg\"\xde\x02\n\x08RpcReply\x12\x11\n\trequestId\x18\x01 \x01(\r\x12L\n\x16getDaemonVersionString\x18\x02 \x01(\x0b\x32*.linkbot.daemon.getDaemonVersionString.OutH\x00\x12<\n\x0egetDongleCount\x18\x03 \x01(\x0b\x32\".linkbot.daemon.getDongleCount.OutH\x00\x12\x38\n\x0c\x61\x64\x64RobotRefs\x18\x04 \x01(\x0b\x32 .linkbot.daemon.addRobotRefs.OutH\x00\x12@\n\x10releaseRobotRefs\x18\x05 \x01(\x0b\x32$.linkbot.daemon.releaseRobotRefs.OutH\x00\x12\x30\n\x08transmit\x18\x06 \x01(\x0b\x32\x1c.linkbot.daemon.transmit.OutH\x00\x42\x05\n\x03\x61rg\"i\n\x13ReceiveTransmission\x12#\n\x08serialId\x18\x01 \x01(\x0b\x32\x11.linkbot.SerialId\x12-\n\x07payload\x18\x02 \x01(\x0b\x32\x1c.linkbot.robot.RobotToClient\".\n\x0b\x44ongleEvent\x12\x1f\n\x0f\x66irmwareVersion\x18\x01 \x01(\tB\x06\x92?\x03\x08\x80\x01\"R\n\nRobotEvent\x12#\n\x08serialId\x18\x01 \x01(\x0b\x32\x11.linkbot.SerialId\x12\x1f\n\x0f\x66irmwareVersion\x18\x02 \x01(\tB\x06\x92?\x03\x08\x80\x01\"I\n\x0e\x43lientToDaemon\x12\x30\n\nrpcRequest\x18\x01 \x01(\x0b\x32\x1a.linkbot.daemon.RpcRequestH\x00\x42\x05\n\x03\x61rg\"\xe3\x01\n\x0e\x44\x61\x65monToClient\x12,\n\x08rpcReply\x18\x01 \x01(\x0b\x32\x18.linkbot.daemon.RpcReplyH\x00\x12\x36\n\x07receive\x18\x02 \x01(\x0b\x32#.linkbot.daemon.ReceiveTransmissionH\x00\x12\x32\n\x0b\x64ongleEvent\x18\x03 \x01(\x0b\x32\x1b.linkbot.daemon.DongleEventH\x00\x12\x30\n\nrobotEvent\x18\x04 \x01(\x0b\x32\x1a.linkbot.daemon.RobotEventH\x00\x42\x05\n\x03\x61rg*\xf3\x01\n\x06Status\x12\x06\n\x02OK\x10\x00\x12\x16\n\x12\x43\x41NNOT_OPEN_DONGLE\x10\x01\x12\x14\n\x10\x44ONGLE_NOT_FOUND\x10\x02\x12\x15\n\x11PORT_OUT_OF_RANGE\x10\x03\x12\x19\n\x15UNREGISTERED_SERIALID\x10\x05\x12\x14\n\x10INVALID_SERIALID\x10\x06\x12\x16\n\x12\x44\x41\x45MON_UNAVAILABLE\x10\x07\x12\x12\n\x0eSTRANGE_DONGLE\x10\x08\x12\x19\n\x15INCOMPATIBLE_FIRMWARE\x10\t\x12\x13\n\x0f\x42UFFER_OVERFLOW\x10\n\x12\x0f\n\x0bOTHER_ERROR\x10\x0b*K\n\x0f\x42roadcastMethod\x12\r\n\tBROADCAST\x10\x00\x12\x13\n\x0fMULTICAST_LOCAL\x10\x01\x12\x14\n\x10MULTICAST_GLOBAL\x10\x02')
+  serialized_pb=_b('\n\x0c\x64\x61\x65mon.proto\x12\x0elinkbot.daemon\x1a\x0cnanopb.proto\x1a\x11\x63ommontypes.proto\x1a\x0brobot.proto\"<\n\x16getDaemonVersionString\x1a\x04\n\x02In\x1a\x1c\n\x03Out\x12\x15\n\x05value\x18\x01 \x01(\tB\x06\x92?\x03\x08\x80\x01\"2\n\x0egetDongleCount\x1a\x04\n\x02In\x1a\x1a\n\x03Out\x12\x13\n\x0b\x64ongleCount\x18\x01 \x01(\r\"p\n\x0c\x61\x64\x64RobotRefs\x1a\x31\n\x02In\x12+\n\tserialIds\x18\x01 \x03(\x0b\x32\x11.linkbot.SerialIdB\x05\x92?\x02\x10\x10\x1a-\n\x03Out\x12&\n\x06status\x18\x01 \x01(\x0e\x32\x16.linkbot.daemon.Status\"t\n\x10releaseRobotRefs\x1a\x31\n\x02In\x12+\n\tserialIds\x18\x01 \x03(\x0b\x32\x11.linkbot.SerialIdB\x05\x92?\x02\x10\x10\x1a-\n\x03Out\x12&\n\x06status\x18\x01 \x01(\x0e\x32\x16.linkbot.daemon.Status\"\x96\x01\n\x08transmit\x1a[\n\x02In\x12&\n\x0b\x64\x65stination\x18\x01 \x01(\x0b\x32\x11.linkbot.SerialId\x12-\n\x07payload\x18\x02 \x01(\x0b\x32\x1c.linkbot.robot.ClientToRobot\x1a-\n\x03Out\x12&\n\x06status\x18\x01 \x01(\x0e\x32\x16.linkbot.daemon.Status\"\xeb\x01\n\x11transmitBroadcast\x1a\xa6\x01\n\x02In\x12\x38\n\x0f\x62roadcastMethod\x18\x01 \x01(\x0e\x32\x1f.linkbot.daemon.BroadcastMethod\x12.\n\x0c\x64\x65stinations\x18\x02 \x03(\x0b\x32\x11.linkbot.SerialIdB\x05\x92?\x02\x10\x08\x12\x36\n\x07payload\x18\x04 \x01(\x0b\x32%.linkbot.robot.ClientToRobotBroadcast\x1a-\n\x03Out\x12&\n\x06status\x18\x01 \x01(\x0e\x32\x16.linkbot.daemon.Status\"\x9e\x03\n\nRpcRequest\x12\x11\n\trequestId\x18\x01 \x01(\r\x12K\n\x16getDaemonVersionString\x18\x02 \x01(\x0b\x32).linkbot.daemon.getDaemonVersionString.InH\x00\x12;\n\x0egetDongleCount\x18\x03 \x01(\x0b\x32!.linkbot.daemon.getDongleCount.InH\x00\x12\x37\n\x0c\x61\x64\x64RobotRefs\x18\x04 \x01(\x0b\x32\x1f.linkbot.daemon.addRobotRefs.InH\x00\x12?\n\x10releaseRobotRefs\x18\x05 \x01(\x0b\x32#.linkbot.daemon.releaseRobotRefs.InH\x00\x12/\n\x08transmit\x18\x06 \x01(\x0b\x32\x1b.linkbot.daemon.transmit.InH\x00\x12\x41\n\x11transmitBroadcast\x18\x07 \x01(\x0b\x32$.linkbot.daemon.transmitBroadcast.InH\x00\x42\x05\n\x03\x61rg\"\xa2\x03\n\x08RpcReply\x12\x11\n\trequestId\x18\x01 \x01(\r\x12L\n\x16getDaemonVersionString\x18\x02 \x01(\x0b\x32*.linkbot.daemon.getDaemonVersionString.OutH\x00\x12<\n\x0egetDongleCount\x18\x03 \x01(\x0b\x32\".linkbot.daemon.getDongleCount.OutH\x00\x12\x38\n\x0c\x61\x64\x64RobotRefs\x18\x04 \x01(\x0b\x32 .linkbot.daemon.addRobotRefs.OutH\x00\x12@\n\x10releaseRobotRefs\x18\x05 \x01(\x0b\x32$.linkbot.daemon.releaseRobotRefs.OutH\x00\x12\x30\n\x08transmit\x18\x06 \x01(\x0b\x32\x1c.linkbot.daemon.transmit.OutH\x00\x12\x42\n\x11transmitBroadcast\x18\x07 \x01(\x0b\x32%.linkbot.daemon.transmitBroadcast.OutH\x00\x42\x05\n\x03\x61rg\"i\n\x13ReceiveTransmission\x12#\n\x08serialId\x18\x01 \x01(\x0b\x32\x11.linkbot.SerialId\x12-\n\x07payload\x18\x02 \x01(\x0b\x32\x1c.linkbot.robot.RobotToClient\".\n\x0b\x44ongleEvent\x12\x1f\n\x0f\x66irmwareVersion\x18\x01 \x01(\tB\x06\x92?\x03\x08\x80\x01\"R\n\nRobotEvent\x12#\n\x08serialId\x18\x01 \x01(\x0b\x32\x11.linkbot.SerialId\x12\x1f\n\x0f\x66irmwareVersion\x18\x02 \x01(\tB\x06\x92?\x03\x08\x80\x01\"I\n\x0e\x43lientToDaemon\x12\x30\n\nrpcRequest\x18\x01 \x01(\x0b\x32\x1a.linkbot.daemon.RpcRequestH\x00\x42\x05\n\x03\x61rg\"\xe3\x01\n\x0e\x44\x61\x65monToClient\x12,\n\x08rpcReply\x18\x01 \x01(\x0b\x32\x18.linkbot.daemon.RpcReplyH\x00\x12\x36\n\x07receive\x18\x02 \x01(\x0b\x32#.linkbot.daemon.ReceiveTransmissionH\x00\x12\x32\n\x0b\x64ongleEvent\x18\x03 \x01(\x0b\x32\x1b.linkbot.daemon.DongleEventH\x00\x12\x30\n\nrobotEvent\x18\x04 \x01(\x0b\x32\x1a.linkbot.daemon.RobotEventH\x00\x42\x05\n\x03\x61rg*\xf3\x01\n\x06Status\x12\x06\n\x02OK\x10\x00\x12\x16\n\x12\x43\x41NNOT_OPEN_DONGLE\x10\x01\x12\x14\n\x10\x44ONGLE_NOT_FOUND\x10\x02\x12\x15\n\x11PORT_OUT_OF_RANGE\x10\x03\x12\x19\n\x15UNREGISTERED_SERIALID\x10\x05\x12\x14\n\x10INVALID_SERIALID\x10\x06\x12\x16\n\x12\x44\x41\x45MON_UNAVAILABLE\x10\x07\x12\x12\n\x0eSTRANGE_DONGLE\x10\x08\x12\x19\n\x15INCOMPATIBLE_FIRMWARE\x10\t\x12\x13\n\x0f\x42UFFER_OVERFLOW\x10\n\x12\x0f\n\x0bOTHER_ERROR\x10\x0b*K\n\x0f\x42roadcastMethod\x12\r\n\tBROADCAST\x10\x00\x12\x13\n\x0fMULTICAST_LOCAL\x10\x01\x12\x14\n\x10MULTICAST_GLOBAL\x10\x02')
   ,
   dependencies=[nanopb__pb2.DESCRIPTOR,commontypes__pb2.DESCRIPTOR,robot__pb2.DESCRIPTOR,])
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -81,8 +81,8 @@ _STATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=2063,
-  serialized_end=2306,
+  serialized_start=2198,
+  serialized_end=2441,
 )
 _sym_db.RegisterEnumDescriptor(_STATUS)
 
@@ -108,8 +108,8 @@ _BROADCASTMETHOD = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=2308,
-  serialized_end=2383,
+  serialized_start=2443,
+  serialized_end=2518,
 )
 _sym_db.RegisterEnumDescriptor(_BROADCASTMETHOD)
 
@@ -691,6 +691,13 @@ _RPCREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='transmitBroadcast', full_name='linkbot.daemon.RpcRequest.transmitBroadcast', index=6,
+      number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -707,7 +714,7 @@ _RPCREQUEST = _descriptor.Descriptor(
       index=0, containing_type=None, fields=[]),
   ],
   serialized_start=816,
-  serialized_end=1163,
+  serialized_end=1230,
 )
 
 
@@ -760,6 +767,13 @@ _RPCREPLY = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
+    _descriptor.FieldDescriptor(
+      name='transmitBroadcast', full_name='linkbot.daemon.RpcReply.transmitBroadcast', index=6,
+      number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
   ],
   extensions=[
   ],
@@ -775,8 +789,8 @@ _RPCREPLY = _descriptor.Descriptor(
       name='arg', full_name='linkbot.daemon.RpcReply.arg',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=1166,
-  serialized_end=1516,
+  serialized_start=1233,
+  serialized_end=1651,
 )
 
 
@@ -813,8 +827,8 @@ _RECEIVETRANSMISSION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1518,
-  serialized_end=1623,
+  serialized_start=1653,
+  serialized_end=1758,
 )
 
 
@@ -844,8 +858,8 @@ _DONGLEEVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1625,
-  serialized_end=1671,
+  serialized_start=1760,
+  serialized_end=1806,
 )
 
 
@@ -882,8 +896,8 @@ _ROBOTEVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1673,
-  serialized_end=1755,
+  serialized_start=1808,
+  serialized_end=1890,
 )
 
 
@@ -916,8 +930,8 @@ _CLIENTTODAEMON = _descriptor.Descriptor(
       name='arg', full_name='linkbot.daemon.ClientToDaemon.arg',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=1757,
-  serialized_end=1830,
+  serialized_start=1892,
+  serialized_end=1965,
 )
 
 
@@ -971,8 +985,8 @@ _DAEMONTOCLIENT = _descriptor.Descriptor(
       name='arg', full_name='linkbot.daemon.DaemonToClient.arg',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=1833,
-  serialized_end=2060,
+  serialized_start=1968,
+  serialized_end=2195,
 )
 
 _GETDAEMONVERSIONSTRING_IN.containing_type = _GETDAEMONVERSIONSTRING
@@ -1003,6 +1017,7 @@ _RPCREQUEST.fields_by_name['getDongleCount'].message_type = _GETDONGLECOUNT_IN
 _RPCREQUEST.fields_by_name['addRobotRefs'].message_type = _ADDROBOTREFS_IN
 _RPCREQUEST.fields_by_name['releaseRobotRefs'].message_type = _RELEASEROBOTREFS_IN
 _RPCREQUEST.fields_by_name['transmit'].message_type = _TRANSMIT_IN
+_RPCREQUEST.fields_by_name['transmitBroadcast'].message_type = _TRANSMITBROADCAST_IN
 _RPCREQUEST.oneofs_by_name['arg'].fields.append(
   _RPCREQUEST.fields_by_name['getDaemonVersionString'])
 _RPCREQUEST.fields_by_name['getDaemonVersionString'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
@@ -1018,11 +1033,15 @@ _RPCREQUEST.fields_by_name['releaseRobotRefs'].containing_oneof = _RPCREQUEST.on
 _RPCREQUEST.oneofs_by_name['arg'].fields.append(
   _RPCREQUEST.fields_by_name['transmit'])
 _RPCREQUEST.fields_by_name['transmit'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
+_RPCREQUEST.oneofs_by_name['arg'].fields.append(
+  _RPCREQUEST.fields_by_name['transmitBroadcast'])
+_RPCREQUEST.fields_by_name['transmitBroadcast'].containing_oneof = _RPCREQUEST.oneofs_by_name['arg']
 _RPCREPLY.fields_by_name['getDaemonVersionString'].message_type = _GETDAEMONVERSIONSTRING_OUT
 _RPCREPLY.fields_by_name['getDongleCount'].message_type = _GETDONGLECOUNT_OUT
 _RPCREPLY.fields_by_name['addRobotRefs'].message_type = _ADDROBOTREFS_OUT
 _RPCREPLY.fields_by_name['releaseRobotRefs'].message_type = _RELEASEROBOTREFS_OUT
 _RPCREPLY.fields_by_name['transmit'].message_type = _TRANSMIT_OUT
+_RPCREPLY.fields_by_name['transmitBroadcast'].message_type = _TRANSMITBROADCAST_OUT
 _RPCREPLY.oneofs_by_name['arg'].fields.append(
   _RPCREPLY.fields_by_name['getDaemonVersionString'])
 _RPCREPLY.fields_by_name['getDaemonVersionString'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
@@ -1038,6 +1057,9 @@ _RPCREPLY.fields_by_name['releaseRobotRefs'].containing_oneof = _RPCREPLY.oneofs
 _RPCREPLY.oneofs_by_name['arg'].fields.append(
   _RPCREPLY.fields_by_name['transmit'])
 _RPCREPLY.fields_by_name['transmit'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
+_RPCREPLY.oneofs_by_name['arg'].fields.append(
+  _RPCREPLY.fields_by_name['transmitBroadcast'])
+_RPCREPLY.fields_by_name['transmitBroadcast'].containing_oneof = _RPCREPLY.oneofs_by_name['arg']
 _RECEIVETRANSMISSION.fields_by_name['serialId'].message_type = commontypes__pb2._SERIALID
 _RECEIVETRANSMISSION.fields_by_name['payload'].message_type = robot__pb2._ROBOTTOCLIENT
 _ROBOTEVENT.fields_by_name['serialId'].message_type = commontypes__pb2._SERIALID

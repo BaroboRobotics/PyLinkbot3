@@ -296,7 +296,7 @@ class _AsyncLinkbot(RpcProxy):
         self.__log('Daemon handshake finished.')
         '''
 
-        yield from asyncio.sleep(0.5)
+        #yield from asyncio.sleep(0.5)
         self.__log('Resolving serial id: ' + serial_id)
         args = self.__daemon._pb_module.addRobotRefs.In()
         _serial_id = args.serialIds.add()
