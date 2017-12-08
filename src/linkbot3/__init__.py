@@ -43,7 +43,7 @@ class FormFactor():
     T = 2
     DONGLE = 3
 
-class Linkbot():
+class LinkbotInner():
     MOTOR1 = 0
     MOTOR2 = 1
     MOTOR3 = 2
@@ -207,7 +207,7 @@ class Linkbot():
                 self._proxy.version(),
                 self._loop)
 
-class CLinkbot(Linkbot):
+class Linkbot(LinkbotInner):
     class FormFactor:
         I = 0
         L = 1
@@ -968,6 +968,10 @@ class CLinkbot(Linkbot):
 
     def disable_encoder_events(self):
         self.motors.set_event_handler(None)
+
+class CLinkbot(Linkbot):
+    def __init__(self, serial_id):
+        super().__init__(serial_id)
 
 class ArduinoLinkbot(Linkbot):
     TWI_ADDR = 0x02
