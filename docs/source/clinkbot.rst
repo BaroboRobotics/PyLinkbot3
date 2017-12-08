@@ -3,6 +3,8 @@ The CLinkbot Class
 ==================
 ( since version 3.1.0 )
 
+( As of version 3.1.17, the Linkbot class is identical to the CLinkbot class )
+
 .. toctree::
    :maxdepth: 2
    
@@ -53,4 +55,5 @@ CLinkbot API Documentation
 
 .. autoclass:: linkbot3.CLinkbot
    :members:
+   :inherited-members:
 
