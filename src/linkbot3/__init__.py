@@ -324,10 +324,14 @@ class Linkbot(LinkbotInner):
 
     # SETTERS
     def reset_to_zero(self):
+        '''
+        Reset the Linkbot's motor positions to zero position.
+        '''
         self.motors.reset()
         self.motors.move([0, 0, 0], relative=False)
 
     def reset_to_zero_nb(self):
+        '''Non blocking version of :func:`linkbot3.Linkbot.reset_to_zero`.'''
         self.motors.reset()
         self.motors.move([0, 0, 0], relative=False, wait=False)
 
@@ -345,7 +349,7 @@ class Linkbot(LinkbotInner):
         ''' Set a single joint's acceleration value.
 
         See :func:`Linkbot.set_joint_accelerations` and 
-        :func:`CLinkbot.move_smooth` .
+        :func:`Linkbot.move_smooth` .
         '''
         self.motors[joint-1].set_accel(alpha)
 
@@ -415,6 +419,16 @@ class Linkbot(LinkbotInner):
         '''
         self.led.set_color(r, g, b)
 
+    def set_led_color_rgb(self, color_code):
+        ''' Set the LED color on the robot.
+
+        :type color_code: A string in RGB color code format. e.g. '#0088FF'
+        '''
+        r = int(color_code[1:3], 16)
+        g = int(color_code[3:5], 16)
+        b = int(color_code[5:7], 16)
+        return self.set_led_color(r, g, b)
+
     def set_motor_power(self, joint, power):
         """Apply a direct power setting to a motor
         
@@ -442,6 +456,25 @@ class Linkbot(LinkbotInner):
         for m in self.motors:
             m.set_controller(value)
 
+    def begin_move(self, *args, **kwargs):
+        ''' Begin moving motors at constant velocity
+
+        The joint will begin moving at a constant velocity previously set by
+        :func:`linkbot3.async.peripherals.Motor.set_omega`. 
+
+        :param timeout: After ```timeout``` seconds, the motor will transition
+            states to the state specified by the parameter
+            ```state_on_timeout```.
+        :type timeout: (float, float, float)
+        :param forward: Whether to move the joint in the positive direction
+            (True) or negative direction (False).
+        :type forward: (bool, bool, bool)
+        :param state_on_timeout: State to transition to after the motion
+            times out.
+        :type state_on_timeout: (:class:`linkbot3.peripherals.Motor.State`,)*3
+        '''
+        return self.motors.begin_move(*args, **kwargs)
+
     def drive(self, j1, j2, j3, mask=0x07):
         """Move a robot's motors using the on-board PID controller. 
 
@@ -463,7 +496,7 @@ class Linkbot(LinkbotInner):
         self.motors.move([j1, j2, j3], mask=mask)
 
     def drive_nb(self, j1, j2, j3, mask=0x07):
-        """Non blocking version of :func:`CLinkbot.drive`."""
+        """Non blocking version of :func:`Linkbot.drive`."""
         self.__set_controller(Motor.Controller.PID)
         self.motors.move([j1, j2, j3], mask=mask, wait=False)
 
@@ -472,7 +505,7 @@ class Linkbot(LinkbotInner):
 
         This is the fastest way to drive a single joint to a desired position.
         The "speed" setting of the joint is ignored during the motion. See also:
-        :func:`CLinkbot.drive`
+        :func:`Linkbot.drive`
 
         :type joint: int
         :param joint: The joint to move.
@@ -492,7 +525,7 @@ class Linkbot(LinkbotInner):
 
         This is the fastest way to drive a single joint to a desired position.
         The "speed" setting of the joint is ignored during the motion. See also:
-        :func:`CLinkbot.drive`
+        :func:`Linkbot.drive`
 
         :type joint: int
         :param joint: The joint to move.
@@ -511,7 +544,7 @@ class Linkbot(LinkbotInner):
         self.motors[joint-1].move(angle, relative=False)
         
     def drive_joint_to_nb(self, joint, angle):
-        """Non-blocking version of :func:`CLinkbot.drive_joint_to`"""
+        """Non-blocking version of :func:`Linkbot.drive_joint_to`"""
         self.motors[joint-1].set_controller(Motor.Controller.PID)
         self.motors[joint-1].move(angle, relative=False, wait=False)
 
@@ -537,7 +570,7 @@ class Linkbot(LinkbotInner):
         self.motors.move([j1, j2, j3], mask=mask, relative=False)
 
     def drive_to_nb(self, j1, j2, j3, mask=0x07):
-        """Non-blocking version of :func:`linkbot3.CLinkbot.drive_to`"""
+        """Non-blocking version of :func:`linkbot3.Linkbot.drive_to`"""
         self.__set_controller(Motor.Controller.PID)
         self.motors.move([j1, j2, j3], mask=mask, wait=False, relative=False)
 
@@ -557,7 +590,7 @@ class Linkbot(LinkbotInner):
 
         (Since v3.1.11)
 
-        This is the non-blocking version of :func:`linkbot3.CLinkbot.drive_angle`.
+        This is the non-blocking version of :func:`linkbot3.Linkbot.drive_angle`.
 
         :type angle: float
         :param angle: An angle in degrees.
@@ -580,7 +613,7 @@ class Linkbot(LinkbotInner):
 
         (Since v3.1.11)
 
-        This is the non-blocking version of :func:`linkbot3.CLinkbot.drive_backward`.
+        This is the non-blocking version of :func:`linkbot3.Linkbot.drive_backward`.
 
         :type angle: float
         :param angle: An angle in degrees.
@@ -608,7 +641,7 @@ class Linkbot(LinkbotInner):
 
         (Since v3.1.11)
 
-        This is the non-blocking version of :func:`linkbot3.CLinkbot.drive_distance`.
+        This is the non-blocking version of :func:`linkbot3.Linkbot.drive_distance`.
 
         :type distance: float
         :param distance: A distance. The units used here can be any unit of
@@ -654,7 +687,7 @@ class Linkbot(LinkbotInner):
 
         (Since v3.1.11)
 
-        This is the non-blocking version of :func:`linkbot3.CLinkbot.drive_forward`.
+        This is the non-blocking version of :func:`linkbot3.Linkbot.drive_forward`.
 
         :type angle: float
         :param angle: An angle in degrees.
@@ -677,7 +710,7 @@ class Linkbot(LinkbotInner):
 
         (Since v3.1.11)
 
-        This is the non-blocking version of :func:`linkbot3.CLinkbot.drive_time`.
+        This is the non-blocking version of :func:`linkbot3.Linkbot.drive_time`.
 
         :type seconds: float
         :param seconds: The number of seconds to drive the motors.
@@ -689,12 +722,11 @@ class Linkbot(LinkbotInner):
             states_on_timeout = (peripherals.Motor.State.HOLD,)*3,
             wait=False)
 
-
     def move(self, j1, j2, j3, mask=0x07):
         '''Move the joints on a robot and wait until all movements are finished.
 
         Move a robot's joints at the constant velocity previously set by a call
-        to :func:`CLinkbot.set_joint_speed` or similar functions.
+        to :func:`Linkbot.set_joint_speed` or similar functions.
 
         :type j1: float
         :param j1: An angle in degrees. The joint moves this amount from wherever the joints are currently positioned.
@@ -723,7 +755,6 @@ class Linkbot(LinkbotInner):
         self.__set_controller(Motor.Controller.CONST_VEL)
         self.motors.move([j1, j2, j3], mask=mask, wait=False)
 
-
     def move_continuous(self, mask=0x07):
         '''
         This function makes the joints on a robot begin moving continuously,
@@ -739,8 +770,8 @@ class Linkbot(LinkbotInner):
         """Move a single motor using the on-board constant velocity controller.
 
         Move a single joint at the velocity last set by
-        :func:`CLinkbot.set_joint_speed` or other speed setting functions.
-        See also: :func:`CLinkbot.move`
+        :func:`Linkbot.set_joint_speed` or other speed setting functions.
+        See also: :func:`Linkbot.move`
 
         :type joint: int
         :param joint: The joint to move.
@@ -758,7 +789,7 @@ class Linkbot(LinkbotInner):
         self.motors[joint-1].move(angle)
 
     def move_joint_nb(self, joint, angle):
-        '''Non-blocking version of :func:`CLinkbot.move_joint`
+        '''Non-blocking version of :func:`Linkbot.move_joint`
         '''
         self.motors[joint-1].set_controller(Motor.Controller.CONST_VEL)
         self.motors[joint-1].move(angle, wait=False)
@@ -767,10 +798,10 @@ class Linkbot(LinkbotInner):
         """Move a single motor using the on-board constant velocity controller.
 
         Move a single joint at the velocity last set by
-        :func:`CLinkbot.set_joint_speed` or other speed setting functions. The 
+        :func:`Linkbot.set_joint_speed` or other speed setting functions. The 
         'angle' parameter is the absolute position you want the motor to move
         to.
-        See also: :func:`CLinkbot.move`
+        See also: :func:`Linkbot.move`
 
         :type joint: int
         :param joint: The joint to move.
@@ -809,7 +840,7 @@ class Linkbot(LinkbotInner):
     def move_joint_smooth(self, joint, angle):
         ''' Move a single joint using the "Smooth" motor controller.
 
-        See :func:`CLinkbot.move_smooth` 
+        See :func:`Linkbot.move_smooth` 
         '''
         self.motors[joint-1].set_controller(Motor.Controller.SMOOTH)
         self.motors[joint-1].move(angle)
@@ -873,7 +904,7 @@ class Linkbot(LinkbotInner):
         self.motors.move([j1, j2, j3], mask=mask, relative=False)
 
     def move_to_nb(self, j1, j2, j3, mask=0x07):
-        ''' Non-blocking version of :func:`CLinkbot.move_to` '''
+        ''' Non-blocking version of :func:`Linkbot.move_to` '''
         self.__set_controller(Motor.Controller.CONST_VEL)
         self.motors.move([j1, j2, j3], mask=mask, relative=False, wait=False)
 
@@ -908,7 +939,7 @@ class Linkbot(LinkbotInner):
 
     def turn_left_nb(self, angle, radius=1.75, track_length=3.7):
         '''
-        Non-blocking version of :func:`CLinkbot.turn_left`.
+        Non-blocking version of :func:`Linkbot.turn_left`.
 
         :param angle: The number of degrees you want to turn a two-wheeled Linkbot to the left
         :param radius: The radius of the wheels
@@ -937,7 +968,7 @@ class Linkbot(LinkbotInner):
 
     def turn_right_nb(self, angle, radius=1.75, track_length=3.7):
         '''
-        Non-blocking version of :func:`CLinkbot.turn_right`.
+        Non-blocking version of :func:`Linkbot.turn_right`.
 
         :param angle: The number of degrees you want to turn a two-wheeled Linkbot to the right
         :param radius: The radius of the wheels
