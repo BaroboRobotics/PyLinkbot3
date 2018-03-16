@@ -4,7 +4,6 @@ import importlib.util
 import logging
 import os
 import ribbonbridge as rb
-import sfp
 import sys
 import traceback
 import websockets
@@ -280,6 +279,7 @@ class _AsyncLinkbot(RpcProxy):
             protocol = yield from websockets.connect(
                     'ws://'+my_config.daemon_host[0]+':'+my_config.daemon_host[1], loop=self._loop)
         else:
+            import sfp
             self.__log('Creating tcp connection to daemon...')
             (transport, protocol) = yield from sfp.client.connect(
                     my_config.daemon_host[0], my_config.daemon_host[1], loop=self._loop)
