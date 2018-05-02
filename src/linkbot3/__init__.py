@@ -3,16 +3,16 @@
 import asyncio
 from . import _util as util
 
-from .async import *
-from .async import message_pb2 as prex_pb
+from . import async
+from . import async_legacy
 from .peripherals import *
 
+import concurrent
 import math
 import os
 import websockets
 
 __all__ = ['FormFactor', 'Linkbot', 'Daemon', 'CLinkbot', 'ArduinoLinkbot']
-__all__ += async.__all__
 
 class Daemon():
     def __init__(self):
@@ -61,10 +61,18 @@ class LinkbotInner():
         '''
         self.__io_core = util.IoCore()
         self._loop = self.__io_core.get_event_loop()
-    
-        fut = util.run_coroutine_threadsafe(
-                AsyncLinkbot.create(serial_id), self._loop)
-        self._proxy = fut.result()
+   
+        config = util.Config()
+        fut = async.AsyncLinkbot.create(serial_id)
+        fut2 = async_legacy.AsyncLinkbot.create(serial_id)
+        coro = asyncio.wait([fut, fut2], timeout=config.timeout, return_when=concurrent.futures.FIRST_COMPLETED)
+        fut = util.run_coroutine_threadsafe(coro, self._loop)
+        done, pending = fut.result()
+        if len(done) < 1:
+            raise Exception('Timed out connecting to robot: {}'.format(serial_id))
+
+        print(done)
+        self._proxy = list(done)[0].result()
        
         self._accelerometer = Accelerometer(self)
         self._battery = Battery(self)

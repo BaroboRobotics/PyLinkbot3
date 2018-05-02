@@ -8,7 +8,7 @@ import threading
 import sys
 import time
 
-DEFAULT_TIMEOUT=30
+DEFAULT_TIMEOUT=10
 
 if sys.version_info >= (3, 4, 4):
     run_coroutine_threadsafe = asyncio.run_coroutine_threadsafe
