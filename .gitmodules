@@ -10,3 +10,6 @@
 [submodule "python-prex"]
 	path = python-prex
 	url = https://github.com/davidko/python-prex
+[submodule "linkbot-interfaces-legacy"]
+	path = linkbot-interfaces-legacy
+	url = https://github.com/BaroboRobotics/linkbot-interfaces

@@ -56,6 +56,23 @@ class NanoPbResource(ExternalResource):
                 '--python_out='+os.path.join('src', 'linkbot3', 'async'),
                 f ])
 
+        pb_files = [
+            os.path.join('linkbot-interfaces-legacy', 'robot_legacy.proto'),
+            os.path.join('linkbot-interfaces-legacy', 'daemon_legacy.proto'),
+            os.path.join('linkbot-interfaces-legacy', 'commontypes_legacy.proto'),
+            os.path.join('python-prex', 'proto', 'message.proto'),
+        ]
+        for f in pb_files:
+            subprocess.check_call([
+                #os.path.join(self.getdir(), 'generator-bin', 'protoc'),
+                'protoc',
+                '--proto_path='+os.path.join(self.getdir(), 'generator', 'proto'),
+                '--proto_path=linkbot-interfaces-legacy',
+                '--proto_path='+os.path.join('ribbon-bridge', 'proto'),
+                '--proto_path='+os.path.join('python-prex', 'proto'),
+                '--python_out='+os.path.join('src', 'linkbot3', 'async_legacy'),
+                f ])
+
 nanopb = NanoPbResource()
 if not nanopb.exists():
     nanopb.fetch()

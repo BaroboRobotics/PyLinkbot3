@@ -8,7 +8,7 @@ import websockets
 from . import peripherals
 from .. import _util as util
 
-from . import commontypes_pb2_legacy as rbcommon
+from . import commontypes_legacy_pb2 as rbcommon
 
 if sys.version_info < (3,4,4):
     asyncio.ensure_future = asyncio.async
@@ -74,14 +74,14 @@ class _AsyncLinkbot(rb.Proxy):
 
         logging.info('Creating async Linkbot handle to ID:{}'.format(serial_id))
         logger=logging.getLogger('RBProxy.'+serial_id)
-        self = cls( os.path.join(_dirname, 'robot_pb2_legacy.py'), logger=logger)
+        self = cls( os.path.join(_dirname, 'robot_legacy_pb2.py'), logger=logger)
 
         serial_id = serial_id.upper()
         self._serial_id = serial_id
         self._loop = asyncio.get_event_loop()
 
         self.__daemon = _DaemonProxy(
-                os.path.join(_dirname, 'daemon_pb2_legacy.py'))
+                os.path.join(_dirname, 'daemon_legacy_pb2.py'))
 
         if my_config.use_websockets:
             self.__log('Creating Websocket connection to daemon...')
@@ -407,7 +407,7 @@ class AsyncDaemon(_DaemonProxy):
     def create(cls):
         my_config = util.Config()
 
-        self = cls(os.path.join(_dirname, 'daemon_pb2_legacy.py'))
+        self = cls(os.path.join(_dirname, 'daemon_legacy_pb2.py'))
 
         if my_config.use_websockets:
             #self.__log('Creating Websocket connection to daemon...')
