@@ -70,8 +70,9 @@ class LinkbotInner():
         done, pending = fut.result()
         if len(done) < 1:
             raise Exception('Timed out connecting to robot: {}'.format(serial_id))
+        for f in pending:
+            f.cancel()
 
-        print(done)
         self._proxy = list(done)[0].result()
        
         self._accelerometer = Accelerometer(self)
